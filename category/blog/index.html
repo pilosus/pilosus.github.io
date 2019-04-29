@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Vitaly Samigullin's blog - Blog</title>
+        <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/main.css" />
+        <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h1>
+                <nav><ul>
+                    <li><a href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+                    <li class="active"><a href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/04/28/bound-class-method/">Method vs. Class Method Quirks in Python&nbsp;3</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2019-04-28T16:30:00+03:00">
+                Published: 28-04-2019 16:30
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+        </address>
+<p>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</p>
+<p>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> </p>
+</footer><!-- /.post-info --><p>A code snippet in Python 3 below has been discussed recently on the&nbsp;internet:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="k">pass</span>
+   <span class="o">...</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span> <span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="nd">@classmethod</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="k">pass</span>
+
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="bp">True</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="bp">False</span>
+</pre></div>
+<p>The question is why <tt class="docutils literal">A.method</tt> returns the same object on each call
+while <tt class="docutils literal">B.method</tt> returns the new&nbsp;one?</p>
+<p>Let&#8217;s explore first what <tt class="docutils literal">A.method</tt> really&nbsp;is:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">&gt;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">function</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">inspect</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="bp">False</span>
+</pre></div>
+<p>Essentially, what that means is that <tt class="docutils literal">A.method</tt> is a <em>function</em>,
+i.e. <tt class="docutils literal">unbound method</tt> of the <tt class="docutils literal">class A</tt>. A great way to check if a
+method is indeed unbound is to check if its function object and a
+class instance&nbsp;exist:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="bp">False</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__self__&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="bp">False</span>
+</pre></div>
+<p>See Python documentation for more details, specifically an <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#index-32">instance
+method</a> subsection of the <tt class="docutils literal">Data model</tt> section.</p>
+<p>On the other hand, <tt class="docutils literal">B.method</tt> is a <tt class="docutils literal">class method</tt>. It returns an
+<em>instance of the bound method object</em>. Let&#8217;s check&nbsp;it:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span> <span class="n">of</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="sa">B</span><span class="s1">&#39;&gt;&gt;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">method</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="bp">True</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="bp">True</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__self__&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="bp">True</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="vm">__self__</span> <span class="ow">is</span> <span class="n">B</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="bp">True</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="vm">__func__</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+<p>That means on each <tt class="docutils literal">B.method</tt> invocation a new object is
+created. You can achieve the same behaviour with <tt class="docutils literal">A.method</tt> once the
+method gets&nbsp;bound:</p>
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="mi">140613204502216</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="mi">140613210350280</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="mi">140613209057096</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">a</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">a</span><span class="o">.</span><span class="n">method</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="bp">False</span>
+</pre></div>
+<p>Again, every time you call <tt class="docutils literal">a.method</tt> a new bound method object is&nbsp;created.</p>
+<p>The example above doesn&#8217;t apply to Python 2.7 though. It seems that
+Python 2.7 had different implementation, so that <tt class="docutils literal">A.method</tt> would
+return different objects every time it&#8217;s&nbsp;called.</p>
+<p>There are <a href="https://blog.pilosus.org/posts/2019/04/28/bound-class-method/#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="https://blog.pilosus.org/posts/2019/04/28/intro/" rel="bookmark"
+                           title="Permalink to Let’s get started!">Let&#8217;s get&nbsp;started!</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-04-28T16:30:00+03:00">
+                Published: 28-04-2019 16:30
+        </abbr>
+		<br />
+        <abbr class="modified" title="2019-04-28T16:45:00+03:00">
+                Updated: 28-04-2019 16:45
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+        </address>
+<p>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</p>
+<p>tags: <a href="https://blog.pilosus.org/tag/intro/">intro</a> </p>
+</footer><!-- /.post-info -->                <p class="first last">Why I started&nbsp;blogging</p>
+
+                <a class="readmore" href="https://blog.pilosus.org/posts/2019/04/28/intro/">read more</a>
+<p>There are <a href="https://blog.pilosus.org/posts/2019/04/28/intro/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://pilosus.org/">Home Page</a></li>
+                            <li><a href="https://keybase.io/pilosus">Keybase</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="https://github.com/pilosus">GitHub</a></li>
+                            <li><a href="https://www.linkedin.com/in/vitaly-samigullin-05027233/">LinkedIn</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'https-blog-pilosus-org';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>
