@@ -1,34 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <title>Vitaly Samigullin's blog - Blog</title>
-        <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/main.css" />
-        <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Vitaly Samigullin's blog - Blog</title>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h1>
-                <nav><ul>
-                    <li><a href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
-                    <li class="active"><a href="https://blog.pilosus.org/category/blog/">Blog</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+    <!-- Mobile Specific Metas
+         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/04/28/bound-class-method/">Method vs. Class Method Quirks in Python&nbsp;3</a></h1>
+    <!-- FONT
+         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+         –––––––––––––––––––––––––––––––––––––––––––––––––– -->	
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon
+         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds
+         –––––––––––––––––––––––––––––––––––––––––––––––––– -->	
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout
+       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+	    
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="content">
+
+<aside id="featured" class="body">
+  <article>
+    <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/">Method vs. Class Method Quirks in Python&nbsp;3</a></h4>
 <footer class="post-info">
-        <abbr class="published" title="2019-04-28T16:30:00+03:00">
-                Published: 28-04-2019 16:30
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
-        </address>
-<p>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</p>
-<p>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> </p>
+  <span class="published" title="2019-04-29T17:30:00+03:00">
+    Published: 29-04-2019 17:30
+  </span>
+  <br />
+  <span class="vcard author">
+    By     <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+  </span>
+  <br />
+  <span>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</spap>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> </span>  
 </footer><!-- /.post-info --><p>A code snippet in Python 3 below has been discussed recently on the&nbsp;internet:</p>
 <div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
    <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -116,67 +151,72 @@ method gets&nbsp;bound:</p>
 <p>The example above doesn&#8217;t apply to Python 2.7 though. It seems that
 Python 2.7 had different implementation, so that <tt class="docutils literal">A.method</tt> would
 return different objects every time it&#8217;s&nbsp;called.</p>
-<p>There are <a href="https://blog.pilosus.org/posts/2019/04/28/bound-class-method/#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>There are <a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/#disqus_thread">comments</a>.</p>  </article>
+</aside><!-- /#featured -->
 
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://blog.pilosus.org/posts/2019/04/28/intro/" rel="bookmark"
-                           title="Permalink to Let’s get started!">Let&#8217;s get&nbsp;started!</a></h1>
-                </header>
+<section class="other-posts">
+  <h3>Other articles</h3>
+  <ul class="post-list">
 
-                <div class="entry-content">
+        <li><article class="hentry">
+            <header>
+              <h5><a href="https://blog.pilosus.org/posts/2019/04/28/intro/" rel="bookmark"
+                     title="Permalink to Let’s get started!">Let&#8217;s get&nbsp;started!</a></h5>
+            </header>
+
+            <div class="entry-content">
+	      <small>
 <footer class="post-info">
-        <abbr class="published" title="2019-04-28T16:30:00+03:00">
-                Published: 28-04-2019 16:30
-        </abbr>
-		<br />
-        <abbr class="modified" title="2019-04-28T16:45:00+03:00">
-                Updated: 28-04-2019 16:45
-        </abbr>
+  <span class="published" title="2019-04-28T16:30:00+03:00">
+    Published: 28-04-2019 16:30
+  </span>
+  <br />
+  <span class="modified" title="2019-04-28T16:45:00+03:00">
+    Updated: 28-04-2019 16:45
+  </span>
+  <br />
+  <span class="vcard author">
+    By     <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+  </span>
+  <br />
+  <span>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</spap>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/intro/">intro</a> </span>  
+</footer><!-- /.post-info -->	      </small>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
-        </address>
-<p>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</p>
-<p>tags: <a href="https://blog.pilosus.org/tag/intro/">intro</a> </p>
-</footer><!-- /.post-info -->                <p class="first last">Why I started&nbsp;blogging</p>
+	      <img alt="Vitaly" class="align-left" src="https://blog.pilosus.org/images/me.jpg" style="height: 150px;" />
+<p>My name is Vitaly R. Samigullin. I&#8217;m a software developer, a team
+leader, and a person who enjoys thinking about how and why things work
+the way they work. Having lived in Austria and Spain, I got some
+interesting immigration experience. I&#8217;ve also started a small
+publishing company …</p>
+	      
+              <a class="readmore" href="https://blog.pilosus.org/posts/2019/04/28/intro/">read more</a>
+<p>There are <a href="https://blog.pilosus.org/posts/2019/04/28/intro/#disqus_thread">comments</a>.</p>            </div><!-- /.entry-content -->
+        </article></li>
+      </ul><!-- /#posts-list -->
+    </section><!-- /#content -->
+      </div>
 
-                <a class="readmore" href="https://blog.pilosus.org/posts/2019/04/28/intro/">read more</a>
-<p>There are <a href="https://blog.pilosus.org/posts/2019/04/28/intro/#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="https://pilosus.org/">Home Page</a></li>
-                            <li><a href="https://keybase.io/pilosus">Keybase</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://keybase.io/pilosus">Keybase</a></li>
+        </ul>
 
-                            <li><a href="https://github.com/pilosus">GitHub</a></li>
-                            <li><a href="https://www.linkedin.com/in/vitaly-samigullin-05027233/">LinkedIn</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin-05027233/">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+      <footer class="pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
 
 <script type="text/javascript">
     var disqus_shortname = 'https-blog-pilosus-org';
@@ -187,5 +227,6 @@ return different objects every time it&#8217;s&nbsp;called.</p>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
-</body>
+    </div>
+  </body>
 </html>
