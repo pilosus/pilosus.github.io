@@ -49,7 +49,233 @@
 
 <aside id="featured" class="body">
   <article>
-    <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/">Method vs. Class Method Quirks in Python&nbsp;3</a></h4>
+    <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/">Pelican blog: up and&nbsp;running</a></h4>
+<footer class="post-info">
+  <span class="published" title="2019-05-01T11:30:00+03:00">
+    Published: 01-05-2019 11:30
+  </span>
+  <br />
+  <span class="vcard author">
+    By     <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+  </span>
+  <br />
+  <span>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/pelican/">pelican</a> <a href="https://blog.pilosus.org/tag/blog/">blog</a> <a href="https://blog.pilosus.org/tag/python/">python</a> </span>  
+</footer><!-- /.post-info --><p><a class="reference external" href="https://docs.getpelican.com/en/stable/">Pelican</a> is a static site generator written in Python. I use it for
+<a class="reference external" href="https://blog.pilosus.org">my personal blog</a>. Pelican is easy to install, configure and
+customize with themes and plugins. I was able to set up the blog with
+my own <a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme">custom theme</a> and an <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og">Open Graph plugin</a> in a few&nbsp;hours.</p>
+<p>Before Pelican I also used <a class="reference external" href="https://jekyllrb.com/">Jekyll</a> and <a class="reference external" href="http://octopress.org/">Octopress</a>. But since my
+first language is Python and Ruby ecosystem seems to be in a decline,
+I deciced to stick to a framework where I can express myself as
+idiomatic as I can. Last but not least, having to write documentation
+for Python code with <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> I also got used to <a class="reference external" href="https://docutils.readthedocs.io/en/sphinx-docs/user/rst/quickstart.html">ReStructuredText</a>
+format, which is supported by Pelican out of the&nbsp;box.</p>
+<p>In this post I&#8217;m not going repeat the Pelican&#8217;s great
+documentation. Instead I will focus on the step that allows you&nbsp;to:</p>
+<ul class="simple">
+<li>Set up your blog&nbsp;quickly</li>
+<li>Add your own theme to&nbsp;it</li>
+<li>Extend Pelican&#8217;s basic functionality with a&nbsp;plugin</li>
+<li>Automate build and deploy process,&nbsp;and</li>
+<li>Host your static site with <a class="reference external" href="https://pages.github.com/">GitHub Pages</a> under your custom&nbsp;domain</li>
+</ul>
+<p>I use Pelican verion 4.0.1, invoke 1.2.0 and ghp-import 0.5.5 in this&nbsp;post.</p>
+<div class="section" id="install-pelican">
+<h2>Install&nbsp;Pelican</h2>
+<p>Personally I use <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a> for Python version management. I also use
+<a class="reference external" href="https://github.com/pyenv/pyenv-virtualenv">pyenv-virtualenv</a> plugin to incorporate <tt class="docutils literal">virtualenv</tt> into it. So
+my workflow for the Python projects that do not require
+containerization is the&nbsp;following:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Create directory for the project, cd to it</span>
+$ mkdir my-project <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my-project
+
+<span class="c1"># Set up virtual env with Python version needed</span>
+$ pyenv virtualenv <span class="m">3</span>.7.2 venv
+
+<span class="c1"># Activate virtualenv</span>
+$ pyenv activate venv
+
+<span class="c1"># Initialize git reposotory, add README and basic .gitignore</span>
+$ git init
+$ touch README.md
+$ <span class="nb">echo</span> <span class="s1">&#39;*~&#39;</span> &gt; .gitignore
+$ git commit -m <span class="s1">&#39;Initial commit&#39;</span>
+</pre></div>
+<p>Now that a repository for your project is ready, install <tt class="docutils literal">pelican</tt>
+package, fix its version and initialize the&nbsp;app:</p>
+<div class="highlight"><pre><span></span>$ pip install pelican
+$ pip freeze <span class="p">|</span> grep pelican &gt; requirements.txt
+$ git commit -a -m <span class="s1">&#39;Fix pelican version&#39;</span>
+$ pelican-quickstart
+</pre></div>
+<p>All the questions are pretty straightforward. One thing I would advise
+though is to confirm that you do want to <strong>automate site generation and
+publication</strong>. This step will create a <tt class="docutils literal">Makefile</tt> and invoke&#8217;s
+<tt class="docutils literal">tasks.py</tt></p>
+</div>
+<div class="section" id="custom-theme">
+<h2>Custom&nbsp;Theme</h2>
+<p>You can find a ton of Pelican themes in the wild. It&#8217;s so
+overwhelmingly huge amount of custom themes that I had just given up
+on finding a theme that&#8217;s just right for me. Instead I&#8217;ve build my own
+<a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme">custom theme</a>. It&#8217;s responsive, lightweight and clean. For rapid
+development I used <a class="reference external" href="http://getskeleton.com/">Skeleton</a>, which is a modern <span class="caps">CSS</span>&nbsp;boilerplate.</p>
+<p>Although it&#8217;s recommended to install your theme either by copying it
+to the Pelican&#8217;s theme path or by creating a symlink, I used <tt class="docutils literal">git
+submodule</tt> add theme in my blog repo directory. Then I added a path
+to the theme under <tt class="docutils literal"><span class="caps">THEME</span></tt> variable in <tt class="docutils literal">pelicanconf.py</tt>:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
+$ git submodule add https://github.com/pilosus/pilosus-pelican-theme.git themes/pilosus-pelican-theme
+$ <span class="nb">echo</span> <span class="s2">&quot;THEME = &#39;themes/pilosus-pelican-theme&#39;&quot;</span> &gt;&gt; pelicanconf.py
+</pre></div>
+<p>Now my custom theme is versioned and can be easily developed
+separately from the blog. The blog may be generated with whatever
+theme version I like. I will only need to checkout my submodule to the
+version I&nbsp;need.</p>
+</div>
+<div class="section" id="plugins">
+<h2>Plugins</h2>
+<p>The first thing I was disappointed in Pelican&#8217;s default theme is a
+lack of <a class="reference external" href="http://ogp.me/">Open Graph</a> tags. You cannot just add custom metadata to
+your content files and use it in the theme. The easiest way to tackle
+this problem is <a class="reference external" href="https://docs.getpelican.com/en/stable/plugins.html">plugins</a>.</p>
+<p>I derived my <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og">Open Graph plugin</a> from <a class="reference external" href="https://github.com/whiskyechobravo/pelican-open_graph">this one</a> by tweaking the
+things I didn&#8217;t like. Say, the original plugin gets <tt class="docutils literal">og:image</tt> by
+parsing images from the rendered <tt class="docutils literal"><span class="caps">HTML</span></tt> content, which is strange,
+ineffective and will certainly produce low-quality results in many
+cases. That&#8217;s why I decided to develop my own&nbsp;plugin.</p>
+<p>Again, I find installing plugin as a <tt class="docutils literal">git submodule</tt> a great way to
+keep the code versioned, site deployments deterministic and
+maintanence predictable and&nbsp;easy.</p>
+<p>I place plugins under <tt class="docutils literal">plugins</tt> directory in my blog repo, then
+define <tt class="docutils literal">PLUGIN_PATHS</tt> and <tt class="docutils literal"><span class="caps">PLUGINS</span></tt> variables in the&nbsp;settings:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
+$ git submodule add https://github.com/pilosus/pilosus_pelican_og plugins/pilosus_pelican_og
+$ <span class="nb">echo</span> <span class="s2">&quot;PLUGIN_PATHS = [&#39;plugins&#39;]&quot;</span> &gt;&gt; pelicanconf.py
+$ <span class="nb">echo</span> <span class="s2">&quot;PLUGINS = [&#39;pilosus_pelican_og&#39;,]&quot;</span> &gt;&gt; pelicanconf.py
+</pre></div>
+</div>
+<div class="section" id="build-and-deploy-automation">
+<h2>Build and Deploy&nbsp;Automation</h2>
+<p>Our goal is to generate a static site, that can be pushed and served
+by the GitHub Pages with custom domain support. To make this process
+less tedious some automation is&nbsp;essential.</p>
+<p>If you have followed an advice in the <a class="reference internal" href="#install-pelican">Install Pelican</a> section to
+opt for automation, then you&#8217;ve got <tt class="docutils literal">tasks.py</tt> and <tt class="docutils literal">Makefile</tt>
+installed. Although I do use <tt class="docutils literal">Makefile</tt> in some of my projects I
+decided to give <tt class="docutils literal">invoke</tt> a try. So the following recipe is all about
+<tt class="docutils literal">tasks.py</tt> that <tt class="docutils literal">invoke</tt> uses.</p>
+<p>We need to install <tt class="docutils literal">invoke</tt> package in your virtualenv, as well as
+<tt class="docutils literal"><span class="pre">ghp-import</span></tt> for GitHub Page push. Don&#8217;t forget to fix all
+dependencies in the <tt class="docutils literal">requirements.txt</tt>:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
+$ pyenv activate venv
+$ pip install invoke
+$ pip freeze <span class="p">|</span> grep invoke &gt;&gt; requirements.txt
+$ pip install ghp-import
+$ pip freeze <span class="p">|</span> grep invoke &gt;&gt; requirements.txt
+</pre></div>
+<p>Now that we have all dependencies installed let&#8217;s add a new task for
+GitHub Pages&nbsp;deployment:</p>
+<div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">github</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
+  <span class="n">preview</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+  <span class="n">cname</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ghp-import -b {github_pages_branch} &#39;</span>
+        <span class="s1">&#39;-m {commit_message} &#39;</span>
+        <span class="s1">&#39;{deploy_path} -p&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push --force {github_repo} &#39;</span>
+        <span class="s1">&#39;{github_pages_branch}:{github_repo_target_branch}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
+</pre></div>
+<p><tt class="docutils literal">preview(c)</tt> is a predefined <tt class="docutils literal">invoke</tt> task that generates static
+files for production environment (i.e. with <tt class="docutils literal">publishconf.py</tt>
+settings&nbsp;file).</p>
+<p><tt class="docutils literal">cname(c)</tt> is a task that generates a file called <tt class="docutils literal"><span class="caps">CNAME</span></tt> with a
+hostname of your custom&nbsp;domain:</p>
+<div class="highlight"><pre><span></span><span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">cname</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Generate CNAME file with you custom domain name</span>
+
+<span class="sd">  Its used in GitHub Pages. Otherwise custom domain name setting</span>
+<span class="sd">  gets reset on each git push to GH Page repo.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;echo {custom_domain_name} &gt; {deploy_path}/CNAME&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
+</pre></div>
+<p><tt class="docutils literal">cname</tt> docstring says it all. You really need this&nbsp;file!</p>
+<p><tt class="docutils literal"><span class="pre">ghp-import</span></tt> command checks out you output directory (i.e. the one
+used for generated static files) to the GitHub Pages branch of your
+project. Then <tt class="docutils literal">git push <span class="pre">--force</span></tt> pushes this branch to the
+repository for static GitHub Pages (it should be named as
+<tt class="docutils literal"><span class="pre">your-github-login.github.io</span></tt>).</p>
+<p>Configuration you use throughout the invoke&#8217;s <tt class="docutils literal">tasks.py</tt> may look like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><span class="n">CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Local path to content directory</span>
+    <span class="s1">&#39;content_path&#39;</span><span class="p">:</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span>
+    <span class="c1"># Local path configuration (can be absolute or relative to tasks.py)</span>
+    <span class="s1">&#39;deploy_path&#39;</span><span class="p">:</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span>
+    <span class="c1"># Github Pages configuration</span>
+    <span class="s1">&#39;github_pages_branch&#39;</span><span class="p">:</span> <span class="s1">&#39;gh-pages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;github_repo_target_branch&#39;</span><span class="p">:</span> <span class="s1">&#39;master&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;github_repo&#39;</span><span class="p">:</span> <span class="s1">&#39;git@github.com:pilosus/pilosus.github.io.git&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;custom_domain_name&#39;</span><span class="p">:</span> <span class="s1">&#39;blog.pilosus.org&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;commit_message&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;Publish site on {}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()),</span>
+    <span class="c1"># Port for `serve`</span>
+    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+<p>Keeping two separate repositories (one for the blog and another one
+for the static files it generates) allows you to make your blog
+repository private. You can keep some secrets or some code you don&#8217;t
+want to share. But still your generated files will be accessible to
+others in the second&nbsp;repository.</p>
+</div>
+<div class="section" id="pelican-workflow">
+<h2>Pelican&nbsp;Workflow</h2>
+<p>Now that we have defined all the <tt class="docutils literal">invoke</tt> tasks, we can discuss
+Pelican&#8217;s workflow. It&#8217;s very straight&nbsp;forward:</p>
+<ol class="arabic simple">
+<li>Write your <a class="reference external" href="https://docs.getpelican.com/en/stable/content.html">content</a></li>
+<li>Rebuild the site with development settings: <tt class="docutils literal">invoke rebuild</tt></li>
+<li>Serve website at localhost: <tt class="docutils literal">invoke serve</tt></li>
+<li>Go to <tt class="docutils literal"><span class="pre">http://localhost:8000</span></tt> check if everything is&nbsp;okay</li>
+<li>Clean output directory: <tt class="docutils literal">invoke clean</tt></li>
+<li>Build website with production settings and upload to the GitHub Pages: <tt class="docutils literal">invoke github</tt></li>
+<li>Enjoy your&nbsp;blog!</li>
+</ol>
+</div>
+<div class="section" id="custom-domain">
+<h2>Custom&nbsp;Domain</h2>
+<p>By now you already have your static site live on
+<tt class="docutils literal"><span class="pre">your-github-login.github.io</span></tt>. In order to serve it under custom
+domain you need to add a <tt class="docutils literal"><span class="caps">CNAME</span></tt> record in your <tt class="docutils literal"><span class="caps">DNS</span></tt> and set
+custom domain in the settings of <tt class="docutils literal"><span class="pre">your-github-login.github.io</span></tt>
+repository on GitHub. <tt class="docutils literal">Enforce <span class="caps">HTTPS</span></tt> is also a great option to turn&nbsp;on.</p>
+</div>
+<div class="section" id="what-s-next">
+<h2>What&#8217;s&nbsp;next?</h2>
+<p>Althouh the set up and automation I described here are pretty
+convenient, one thing could still be improved. We could use <a class="reference external" href="https://travis-ci.org/">Travis <span class="caps">CI</span></a>
+or <a class="reference external" href="https://circleci.com/">Circle <span class="caps">CI</span></a> to generate static files and push to the proper
+repository. <span class="caps">CI</span> pipeline should be triggered on each push to the remote
+blog&nbsp;repository.</p>
+</div>
+<p>There are <a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/#disqus_thread">comments</a>.</p>  </article>
+</aside><!-- /#featured -->
+
+<section class="other-posts">
+  <h3>Other articles</h3>
+  <ul class="post-list">
+
+        <li><article class="hentry">
+            <header>
+              <h5><a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/" rel="bookmark"
+                     title="Permalink to Method vs. Class Method Quirks in Python 3">Method vs. Class Method Quirks in Python&nbsp;3</a></h5>
+            </header>
+
+            <div class="entry-content">
+	      <small>
 <footer class="post-info">
   <span class="published" title="2019-04-29T17:30:00+03:00">
     Published: 29-04-2019 17:30
@@ -61,96 +287,16 @@
   <br />
   <span>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> </span>  
-</footer><!-- /.post-info --><p>A code snippet in Python 3 below has been discussed recently on the&nbsp;internet:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="k">pass</span>
-   <span class="o">...</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span> <span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="nd">@classmethod</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="k">pass</span>
+</footer><!-- /.post-info -->	      </small>
 
+	      <p class="first last">A little example of how bound/unbound methods behave in Python&nbsp;3</p>
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="bp">True</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="bp">False</span>
-</pre></div>
-<p>The question is why <tt class="docutils literal">A.method</tt> returns the same object on each call
-while <tt class="docutils literal">B.method</tt> returns the new&nbsp;one?</p>
-<p>Let&#8217;s explore first what <tt class="docutils literal">A.method</tt> really&nbsp;is:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">&gt;</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">function</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">inspect</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="bp">False</span>
-</pre></div>
-<p>Essentially, what that means is that <tt class="docutils literal">A.method</tt> is a <em>function</em>,
-i.e. <tt class="docutils literal">unbound method</tt> of the <tt class="docutils literal">class A</tt>. A great way to check if a
-method is indeed unbound is to check if its function object and a
-class instance&nbsp;exist:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="bp">False</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__self__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="bp">False</span>
-</pre></div>
-<p>See Python documentation for more details, specifically an <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#index-32">instance
-method</a> subsection of the <tt class="docutils literal">Data model</tt> section.</p>
-<p>On the other hand, <tt class="docutils literal">B.method</tt> is a <tt class="docutils literal">class method</tt>. It returns an
-<em>instance of the bound method object</em>. Let&#8217;s check&nbsp;it:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span> <span class="n">of</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="sa">B</span><span class="s1">&#39;&gt;&gt;</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">method</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="bp">True</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="bp">True</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__self__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="bp">True</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="vm">__self__</span> <span class="ow">is</span> <span class="n">B</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="bp">True</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="vm">__func__</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span><span class="o">&gt;</span>
-</pre></div>
-<p>That means on each <tt class="docutils literal">B.method</tt> invocation a new object is
-created. You can achieve the same behaviour with <tt class="docutils literal">A.method</tt> once the
-method gets&nbsp;bound:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="mi">140613204502216</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="mi">140613210350280</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="mi">140613209057096</span>
-
-<span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">a</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">a</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="bp">False</span>
-</pre></div>
-<p>Again, every time you call <tt class="docutils literal">a.method</tt> a new bound method object is&nbsp;created.</p>
-<p>The example above doesn&#8217;t apply to Python 2.7 though. It seems that
-Python 2.7 had different implementation, so that <tt class="docutils literal">A.method</tt> would
-return different objects every time it&#8217;s&nbsp;called.</p>
-<p>There are <a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/#disqus_thread">comments</a>.</p>  </article>
-</aside><!-- /#featured -->
-
+	      
+              <a class="readmore" href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/">read more</a>
+<p>There are <a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/#disqus_thread">comments</a>.</p>            </div><!-- /.entry-content -->
+        </article></li>
+      </ul><!-- /#posts-list -->
+    </section><!-- /#content -->
       </div>
 
       <div class="navbar-spacer"></div>
