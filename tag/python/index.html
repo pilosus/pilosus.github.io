@@ -49,7 +49,202 @@
 
 <aside id="featured" class="body">
   <article>
-    <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/">Pelican blog: up and&nbsp;running</a></h4>
+    <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/05/02/python-mro/">Python Method Resolution Order and C3 linearization&nbsp;algoritm</a></h4>
+<footer class="post-info">
+  <span class="published" title="2019-05-02T12:10:00+03:00">
+    Published: 02-05-2019 12:10
+  </span>
+  <br />
+  <span class="vcard author">
+    By     <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+  </span>
+  <br />
+  <span>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> <a href="https://blog.pilosus.org/tag/mro/">mro</a> <a href="https://blog.pilosus.org/tag/algorithms/">algorithms</a> </span>  
+</footer><!-- /.post-info --><p>Method Resolution Order (<span class="caps">MRO</span>) is a order in which methods should be
+inherited in the case of multiple iheritance. <a class="reference external" href="https://en.wikipedia.org/wiki/C3_linearization">C3 linearization
+algorithm</a> is how <span class="caps">MRO</span> works under the hood since <a class="reference external" href="https://www.python.org/download/releases/2.3/mro/">version 2.3</a>.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/C3_linearization">Wikipedia</a> does a great job explaining the algorithm. It can be
+reduced to the following&nbsp;steps:</p>
+<ol class="arabic simple">
+<li>Linearization (i.e. resolution order) is a <em>class itself</em> and a
+<em>merge</em> of the linearizations of its parents and a list of the
+parents&nbsp;itself</li>
+<li>Linearization of the class with no parents equals to the class&nbsp;itself.</li>
+<li>Merge process is done by selecting the first head of the lists
+which does not appear in the tail of any of the lists. Where <em>head</em>
+is the first element of the list, and <em>tail</em> is all but first
+elements of the list. The heads are repeatedly selected and added
+to the resulting <span class="caps">MRO</span> until all the lists are&nbsp;exhausted.</li>
+<li>If a head cannot be selected while not all the lists are exhausted
+merge is impossible to compute due to inconsistent orderings of
+dependencies in the inheritance hierarchy and no linearization of
+the original class&nbsp;exists.</li>
+</ol>
+<div class="figure">
+<img alt="Multiple Inheritance Example" src="images/c3_linearization.png" style="width: 800px;" />
+<p class="caption">Complex multiple inheritance example, courtesy <a class="reference external" href="https://commons.wikimedia.org/wiki/File:C3_linearization_example.svg">H2power</a></p>
+</div>
+<p>Consider linearization process for a class <tt class="docutils literal">K1</tt>:</p>
+<div class="highlight"><pre><span></span>// first, find the linearizations of K1&#39;s parents, L(A), L(B), and L(C),
+// and merge them with the parent list [A, B, C]
+L(K1) := [K1] + merge(L(A), L(B), L(C), [A, B, C])
+// class A is a good candidate for the first merge step, because it only
+// appears as the head of the first and last lists
+       = [K1] + merge([A, O], [B, O], [C, O], [A, B, C])
+// class O is not a good candidate for the next merge step, because it also
+// appears in the tails of list 2 and 3; but class B is a good candidate
+       = [K1, A] + merge([O], [B, O], [C, O], [B, C])
+// class C is a good candidate; class O still appears in the tail of list 3
+       = [K1, A, B] + merge([O], [O], [C, O], [C])
+// finally, class O is a valid candidate, which also exhausts all remaining lists
+       = [K1, A, B, C] + merge([O], [O], [O])
+       = [K1, A, B, C, O]
+</pre></div>
+<p>So at the higher level a naive implementation of the C3 linearization
+algorith can be expressed as a simple&nbsp;recursion:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mro</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Return a list of classes in order corresponding to Python&#39;s MRO.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="p">]</span>
+
+  <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">result</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">result</span> <span class="o">+</span> <span class="n">_merge</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">mro</span><span class="p">(</span><span class="n">kls</span><span class="p">)</span> <span class="k">for</span> <span class="n">kls</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">],</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">)</span>
+</pre></div>
+<p>Then <tt class="docutils literal">_merge</tt> repeatedly checks if its lists are exhausted and
+append appropriate heads to the resulting <span class="caps">MRO</span>:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_merge</span><span class="p">(</span><span class="o">*</span><span class="n">lists</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+  <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">linearizations</span> <span class="o">=</span> <span class="n">DependencyList</span><span class="p">(</span><span class="o">*</span><span class="n">lists</span><span class="p">)</span>
+
+  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">linearizations</span><span class="o">.</span><span class="n">exhausted</span><span class="p">:</span>
+          <span class="k">return</span> <span class="n">result</span>
+
+      <span class="k">for</span> <span class="n">head</span> <span class="ow">in</span> <span class="n">linearizations</span><span class="o">.</span><span class="n">heads</span><span class="p">:</span>
+          <span class="k">if</span> <span class="n">head</span> <span class="ow">and</span> <span class="p">(</span><span class="n">head</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">linearizations</span><span class="o">.</span><span class="n">tails</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+              <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+              <span class="n">linearizations</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+
+              <span class="c1"># Once candidate is found, continue iteration</span>
+              <span class="c1"># from the first element of the list</span>
+              <span class="k">break</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="c1"># Loop never broke, no linearization could possibly be found</span>
+          <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Cannot compute linearization, a cycle found&#39;</span><span class="p">)</span>
+</pre></div>
+<p>In order to hide some lists internals <tt class="docutils literal">Dependency</tt> and
+<tt class="docutils literal">DependencyList</tt> abstractions are&nbsp;used:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+
+<span class="k">class</span> <span class="nc">Dependency</span><span class="p">(</span><span class="n">deque</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tail</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">islice</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return islice object, which is suffice for iteration or calling `in`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">islice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">islice</span><span class="p">([],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">DependencyList</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class represents list of linearizations (dependencies)</span>
+
+<span class="sd">    The last element of DependencyList is a list of parents.</span>
+<span class="sd">    It&#39;s needed  to the merge process preserves the local</span>
+<span class="sd">    precedence order of direct parent classes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lists</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dependency</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if any linearization&#39;s tail contains an item</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">([</span><span class="n">item</span> <span class="ow">in</span> <span class="n">l</span><span class="o">.</span><span class="n">tail</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">size</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">heads</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">h</span><span class="o">.</span><span class="n">head</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tails</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DependencyList&#39;</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return self so that __contains__ could be called</span>
+
+<span class="sd">        Used for readability reasons only</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">exhausted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if all elements of the lists are exhausted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove an item from the lists</span>
+
+<span class="sd">        Once an item removed from heads, the leftmost elements of the tails</span>
+<span class="sd">        get promoted to become the new heads.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">i</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">i</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+</pre></div>
+<p>The whole codebase can be found in my <a class="reference external" href="https://github.com/pilosus/c3linear">c3linear repository</a>. You can
+install it from the source code or via&nbsp;PyPI:</p>
+<div class="highlight"><pre><span></span>python setup.py install  <span class="c1"># from the source code</span>
+pip install c3linear  <span class="c1"># from the Cheese Shop</span>
+</pre></div>
+<p>Then just import it and check against Python&#8217;s object&#8217;s <tt class="docutils literal">mro</tt> method:</p>
+<div class="highlight"><pre><span></span>from c3linear.mro import mro
+
+class A: pass
+class B<span class="o">(</span>A<span class="o">)</span>: pass
+mro<span class="o">(</span>B<span class="o">)</span> <span class="o">==</span> B.mro<span class="o">()</span>
+</pre></div>
+<p>Take a look at the <a class="reference external" href="https://github.com/pilosus/c3linear/blob/master/tests/test_mro.py">tests</a> to dive into more complex multiple inheritance&nbsp;examples.</p>
+<p>There are <a href="https://blog.pilosus.org/posts/2019/05/02/python-mro/#disqus_thread">comments</a>.</p>  </article>
+</aside><!-- /#featured -->
+
+<section class="other-posts">
+  <h3>Other articles</h3>
+  <ul class="post-list">
+
+        <li><article class="hentry">
+            <header>
+              <h5><a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/" rel="bookmark"
+                     title="Permalink to Pelican blog: up and running">Pelican blog: up and&nbsp;running</a></h5>
+            </header>
+
+            <div class="entry-content">
+	      <small>
 <footer class="post-info">
   <span class="published" title="2019-05-01T11:30:00+03:00">
     Published: 01-05-2019 11:30
@@ -61,212 +256,16 @@
   <br />
   <span>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/pelican/">pelican</a> <a href="https://blog.pilosus.org/tag/blog/">blog</a> <a href="https://blog.pilosus.org/tag/python/">python</a> </span>  
-</footer><!-- /.post-info --><p><a class="reference external" href="https://docs.getpelican.com/en/stable/">Pelican</a> is a static site generator written in Python. I use it for
+</footer><!-- /.post-info -->	      </small>
+
+	      <p><a class="reference external" href="https://docs.getpelican.com/en/stable/">Pelican</a> is a static site generator written in Python. I use it for
 <a class="reference external" href="https://blog.pilosus.org">my personal blog</a>. Pelican is easy to install, configure and
 customize with themes and plugins. I was able to set up the blog with
-my own <a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme">custom theme</a> and an <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og">Open Graph plugin</a> in a few&nbsp;hours.</p>
-<p>Before Pelican I also used <a class="reference external" href="https://jekyllrb.com/">Jekyll</a> and <a class="reference external" href="http://octopress.org/">Octopress</a>. But since my
-first language is Python and Ruby ecosystem seems to be in a decline,
-I deciced to stick to a framework where I can express myself as
-idiomatic as I can. Last but not least, having to write documentation
-for Python code with <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> I also got used to <a class="reference external" href="https://docutils.readthedocs.io/en/sphinx-docs/user/rst/quickstart.html">ReStructuredText</a>
-format, which is supported by Pelican out of the&nbsp;box.</p>
-<p>In this post I&#8217;m not going repeat the Pelican&#8217;s great
-documentation. Instead I will focus on the step that allows you&nbsp;to:</p>
-<ul class="simple">
-<li>Set up your blog&nbsp;quickly</li>
-<li>Add your own theme to&nbsp;it</li>
-<li>Extend Pelican&#8217;s basic functionality with a&nbsp;plugin</li>
-<li>Automate build and deploy process,&nbsp;and</li>
-<li>Host your static site with <a class="reference external" href="https://pages.github.com/">GitHub Pages</a> under your custom&nbsp;domain</li>
-</ul>
-<p>I use Pelican verion 4.0.1, invoke 1.2.0 and ghp-import 0.5.5 in this&nbsp;post.</p>
-<div class="section" id="install-pelican">
-<h2>Install&nbsp;Pelican</h2>
-<p>Personally I use <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a> for Python version management. I also use
-<a class="reference external" href="https://github.com/pyenv/pyenv-virtualenv">pyenv-virtualenv</a> plugin to incorporate <tt class="docutils literal">virtualenv</tt> into it. So
-my workflow for the Python projects that do not require
-containerization is the&nbsp;following:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Create directory for the project, cd to it</span>
-$ mkdir my-project <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my-project
-
-<span class="c1"># Set up virtual env with Python version needed</span>
-$ pyenv virtualenv <span class="m">3</span>.7.2 venv
-
-<span class="c1"># Activate virtualenv</span>
-$ pyenv activate venv
-
-<span class="c1"># Initialize git reposotory, add README and basic .gitignore</span>
-$ git init
-$ touch README.md
-$ <span class="nb">echo</span> <span class="s1">&#39;*~&#39;</span> &gt; .gitignore
-$ git commit -m <span class="s1">&#39;Initial commit&#39;</span>
-</pre></div>
-<p>Now that a repository for your project is ready, install <tt class="docutils literal">pelican</tt>
-package, fix its version and initialize the&nbsp;app:</p>
-<div class="highlight"><pre><span></span>$ pip install pelican
-$ pip freeze <span class="p">|</span> grep pelican &gt; requirements.txt
-$ git commit -a -m <span class="s1">&#39;Fix pelican version&#39;</span>
-$ pelican-quickstart
-</pre></div>
-<p>All the questions are pretty straightforward. One thing I would advise
-though is to confirm that you do want to <strong>automate site generation and
-publication</strong>. This step will create a <tt class="docutils literal">Makefile</tt> and invoke&#8217;s
-<tt class="docutils literal">tasks.py</tt></p>
-</div>
-<div class="section" id="custom-theme">
-<h2>Custom&nbsp;Theme</h2>
-<p>You can find a ton of Pelican themes in the wild. It&#8217;s so
-overwhelmingly huge amount of custom themes that I had just given up
-on finding a theme that&#8217;s just right for me. Instead I&#8217;ve build my own
-<a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme">custom theme</a>. It&#8217;s responsive, lightweight and clean. For rapid
-development I used <a class="reference external" href="http://getskeleton.com/">Skeleton</a>, which is a modern <span class="caps">CSS</span>&nbsp;boilerplate.</p>
-<p>Although it&#8217;s recommended to install your theme either by copying it
-to the Pelican&#8217;s theme path or by creating a symlink, I used <tt class="docutils literal">git
-submodule</tt> add theme in my blog repo directory. Then I added a path
-to the theme under <tt class="docutils literal"><span class="caps">THEME</span></tt> variable in <tt class="docutils literal">pelicanconf.py</tt>:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
-$ git submodule add https://github.com/pilosus/pilosus-pelican-theme.git themes/pilosus-pelican-theme
-$ <span class="nb">echo</span> <span class="s2">&quot;THEME = &#39;themes/pilosus-pelican-theme&#39;&quot;</span> &gt;&gt; pelicanconf.py
-</pre></div>
-<p>Now my custom theme is versioned and can be easily developed
-separately from the blog. The blog may be generated with whatever
-theme version I like. I will only need to checkout my submodule to the
-version I&nbsp;need.</p>
-</div>
-<div class="section" id="plugins">
-<h2>Plugins</h2>
-<p>The first thing I was disappointed in Pelican&#8217;s default theme is a
-lack of <a class="reference external" href="http://ogp.me/">Open Graph</a> tags. You cannot just add custom metadata to
-your content files and use it in the theme. The easiest way to tackle
-this problem is <a class="reference external" href="https://docs.getpelican.com/en/stable/plugins.html">plugins</a>.</p>
-<p>I derived my <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og">Open Graph plugin</a> from <a class="reference external" href="https://github.com/whiskyechobravo/pelican-open_graph">this one</a> by tweaking the
-things I didn&#8217;t like. Say, the original plugin gets <tt class="docutils literal">og:image</tt> by
-parsing images from the rendered <tt class="docutils literal"><span class="caps">HTML</span></tt> content, which is strange,
-ineffective and will certainly produce low-quality results in many
-cases. That&#8217;s why I decided to develop my own&nbsp;plugin.</p>
-<p>Again, I find installing plugin as a <tt class="docutils literal">git submodule</tt> a great way to
-keep the code versioned, site deployments deterministic and
-maintanence predictable and&nbsp;easy.</p>
-<p>I place plugins under <tt class="docutils literal">plugins</tt> directory in my blog repo, then
-define <tt class="docutils literal">PLUGIN_PATHS</tt> and <tt class="docutils literal"><span class="caps">PLUGINS</span></tt> variables in the&nbsp;settings:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
-$ git submodule add https://github.com/pilosus/pilosus_pelican_og plugins/pilosus_pelican_og
-$ <span class="nb">echo</span> <span class="s2">&quot;PLUGIN_PATHS = [&#39;plugins&#39;]&quot;</span> &gt;&gt; pelicanconf.py
-$ <span class="nb">echo</span> <span class="s2">&quot;PLUGINS = [&#39;pilosus_pelican_og&#39;,]&quot;</span> &gt;&gt; pelicanconf.py
-</pre></div>
-</div>
-<div class="section" id="build-and-deploy-automation">
-<h2>Build and Deploy&nbsp;Automation</h2>
-<p>Our goal is to generate a static site, that can be pushed and served
-by the GitHub Pages with custom domain support. To make this process
-less tedious some automation is&nbsp;essential.</p>
-<p>If you have followed an advice in the <a class="reference internal" href="#install-pelican">Install Pelican</a> section to
-opt for automation, then you&#8217;ve got <tt class="docutils literal">tasks.py</tt> and <tt class="docutils literal">Makefile</tt>
-installed. Although I do use <tt class="docutils literal">Makefile</tt> in some of my projects I
-decided to give <tt class="docutils literal">invoke</tt> a try. So the following recipe is all about
-<tt class="docutils literal">tasks.py</tt> that <tt class="docutils literal">invoke</tt> uses.</p>
-<p>We need to install <tt class="docutils literal">invoke</tt> package in your virtualenv, as well as
-<tt class="docutils literal"><span class="pre">ghp-import</span></tt> for GitHub Page push. Don&#8217;t forget to fix all
-dependencies in the <tt class="docutils literal">requirements.txt</tt>:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
-$ pyenv activate venv
-$ pip install invoke
-$ pip freeze <span class="p">|</span> grep invoke &gt;&gt; requirements.txt
-$ pip install ghp-import
-$ pip freeze <span class="p">|</span> grep invoke &gt;&gt; requirements.txt
-</pre></div>
-<p>Now that we have all dependencies installed let&#8217;s add a new task for
-GitHub Pages&nbsp;deployment:</p>
-<div class="highlight"><pre><span></span><span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">github</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
-  <span class="n">preview</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-  <span class="n">cname</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ghp-import -b {github_pages_branch} &#39;</span>
-        <span class="s1">&#39;-m {commit_message} &#39;</span>
-        <span class="s1">&#39;{deploy_path} -p&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push --force {github_repo} &#39;</span>
-        <span class="s1">&#39;{github_pages_branch}:{github_repo_target_branch}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
-</pre></div>
-<p><tt class="docutils literal">preview(c)</tt> is a predefined <tt class="docutils literal">invoke</tt> task that generates static
-files for production environment (i.e. with <tt class="docutils literal">publishconf.py</tt>
-settings&nbsp;file).</p>
-<p><tt class="docutils literal">cname(c)</tt> is a task that generates a file called <tt class="docutils literal"><span class="caps">CNAME</span></tt> with a
-hostname of your custom&nbsp;domain:</p>
-<div class="highlight"><pre><span></span><span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">cname</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Generate CNAME file with you custom domain name</span>
-
-<span class="sd">  Its used in GitHub Pages. Otherwise custom domain name setting</span>
-<span class="sd">  gets reset on each git push to GH Page repo.</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;echo {custom_domain_name} &gt; {deploy_path}/CNAME&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
-</pre></div>
-<p><tt class="docutils literal">cname</tt> docstring says it all. You really need this&nbsp;file!</p>
-<p><tt class="docutils literal"><span class="pre">ghp-import</span></tt> command checks out you output directory (i.e. the one
-used for generated static files) to the GitHub Pages branch of your
-project. Then <tt class="docutils literal">git push <span class="pre">--force</span></tt> pushes this branch to the
-repository for static GitHub Pages (it should be named as
-<tt class="docutils literal"><span class="pre">your-github-login.github.io</span></tt>).</p>
-<p>Configuration you use throughout the invoke&#8217;s <tt class="docutils literal">tasks.py</tt> may look like&nbsp;this:</p>
-<div class="highlight"><pre><span></span><span class="n">CONFIG</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># Local path to content directory</span>
-    <span class="s1">&#39;content_path&#39;</span><span class="p">:</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span>
-    <span class="c1"># Local path configuration (can be absolute or relative to tasks.py)</span>
-    <span class="s1">&#39;deploy_path&#39;</span><span class="p">:</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span>
-    <span class="c1"># Github Pages configuration</span>
-    <span class="s1">&#39;github_pages_branch&#39;</span><span class="p">:</span> <span class="s1">&#39;gh-pages&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;github_repo_target_branch&#39;</span><span class="p">:</span> <span class="s1">&#39;master&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;github_repo&#39;</span><span class="p">:</span> <span class="s1">&#39;git@github.com:pilosus/pilosus.github.io.git&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;custom_domain_name&#39;</span><span class="p">:</span> <span class="s1">&#39;blog.pilosus.org&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;commit_message&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;Publish site on {}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()),</span>
-    <span class="c1"># Port for `serve`</span>
-    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
-<span class="p">}</span>
-</pre></div>
-<p>Keeping two separate repositories (one for the blog and another one
-for the static files it generates) allows you to make your blog
-repository private. You can keep some secrets or some code you don&#8217;t
-want to share. But still your generated files will be accessible to
-others in the second&nbsp;repository.</p>
-</div>
-<div class="section" id="pelican-workflow">
-<h2>Pelican&nbsp;Workflow</h2>
-<p>Now that we have defined all the <tt class="docutils literal">invoke</tt> tasks, we can discuss
-Pelican&#8217;s workflow. It&#8217;s very straight&nbsp;forward:</p>
-<ol class="arabic simple">
-<li>Write your <a class="reference external" href="https://docs.getpelican.com/en/stable/content.html">content</a></li>
-<li>Rebuild the site with development settings: <tt class="docutils literal">invoke rebuild</tt></li>
-<li>Serve website at localhost: <tt class="docutils literal">invoke serve</tt></li>
-<li>Go to <tt class="docutils literal"><span class="pre">http://localhost:8000</span></tt> check if everything is&nbsp;okay</li>
-<li>Clean output directory: <tt class="docutils literal">invoke clean</tt></li>
-<li>Build website with production settings and upload to the GitHub Pages: <tt class="docutils literal">invoke github</tt></li>
-<li>Enjoy your&nbsp;blog!</li>
-</ol>
-</div>
-<div class="section" id="custom-domain">
-<h2>Custom&nbsp;Domain</h2>
-<p>By now you already have your static site live on
-<tt class="docutils literal"><span class="pre">your-github-login.github.io</span></tt>. In order to serve it under custom
-domain you need to add a <tt class="docutils literal"><span class="caps">CNAME</span></tt> record in your <tt class="docutils literal"><span class="caps">DNS</span></tt> and set
-custom domain in the settings of <tt class="docutils literal"><span class="pre">your-github-login.github.io</span></tt>
-repository on GitHub. <tt class="docutils literal">Enforce <span class="caps">HTTPS</span></tt> is also a great option to turn&nbsp;on.</p>
-</div>
-<div class="section" id="what-s-next">
-<h2>What&#8217;s&nbsp;next?</h2>
-<p>Althouh the set up and automation I described here are pretty
-convenient, one thing could still be improved. We could use <a class="reference external" href="https://travis-ci.org/">Travis <span class="caps">CI</span></a>
-or <a class="reference external" href="https://circleci.com/">Circle <span class="caps">CI</span></a> to generate static files and push to the proper
-repository. <span class="caps">CI</span> pipeline should be triggered on each push to the remote
-blog&nbsp;repository.</p>
-</div>
-<p>There are <a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/#disqus_thread">comments</a>.</p>  </article>
-</aside><!-- /#featured -->
-
-<section class="other-posts">
-  <h3>Other articles</h3>
-  <ul class="post-list">
+my own <a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme">custom theme</a> and an <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og">Open Graph plugin</a> in a few&nbsp;hours …</p>
+	      
+              <a class="readmore" href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/">read more</a>
+<p>There are <a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/#disqus_thread">comments</a>.</p>            </div><!-- /.entry-content -->
+        </article></li>
 
         <li><article class="hentry">
             <header>
