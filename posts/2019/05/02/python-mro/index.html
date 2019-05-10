@@ -59,27 +59,27 @@
       </nav>
 
       <div class="content">
-<section id="content" class="body">
-  <article>
-    <header>
-      <h4 class="entry-title">
-        <a href="https://blog.pilosus.org/posts/2019/05/02/python-mro/" rel="bookmark"
-           title="Permalink to Python Method Resolution Order and C3 linearization algoritm">Python Method Resolution Order and C3 linearization&nbsp;algoritm</a></h4>
-    </header>
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h4 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/05/02/python-mro/" rel="bookmark"
+                   title="Permalink to Python Method Resolution Order and C3 linearization algoritm">Python Method Resolution Order and C3 linearization&nbsp;algoritm</a></h4>
+            </header>
 
-    <div class="entry-content">
-<footer class="post-info">
-  <span class="published" title="2019-05-02T12:10:00+03:00">
-    Published: 02-05-2019 12:10
-  </span>
-  <br />
-  <span class="vcard author">
-    By     <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
-  </span>
-  <br />
-  <span>In <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</span>
-<br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> <a href="https://blog.pilosus.org/tag/mro/">mro</a> <a href="https://blog.pilosus.org/tag/algorithms/">algorithms</a> </span>  
-</footer><!-- /.post-info -->      <p>Method Resolution Order (<span class="caps">MRO</span>) is a order in which methods should be
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-05-02T12:10:00+03:00">
+                  Published: 02-05-2019 12:10
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> <a href="https://blog.pilosus.org/tag/mro/">mro</a> <a href="https://blog.pilosus.org/tag/algorithms/">algorithms</a> </span>                
+              </div><!-- /.post-info -->              <p>Method Resolution Order (<span class="caps">MRO</span>) is a order in which methods should be
 inherited in the case of multiple iheritance. <a class="reference external" href="https://en.wikipedia.org/wiki/C3_linearization">C3 linearization
 algorithm</a> is how <span class="caps">MRO</span> works under the hood since <a class="reference external" href="https://www.python.org/download/releases/2.3/mro/">version 2.3</a>.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/C3_linearization">Wikipedia</a> does a great job explaining the algorithm. It can be
@@ -241,33 +241,33 @@ install it from the source code or via&nbsp;PyPI:</p>
 pip install c3linear  <span class="c1"># from the Cheese Shop</span>
 </pre></div>
 <p>Then just import it and check against Python&#8217;s object&#8217;s <tt class="docutils literal">mro</tt> method:</p>
-<div class="highlight"><pre><span></span>from c3linear.mro import mro
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">c3linear.mro</span> <span class="kn">import</span> <span class="n">mro</span>
 
-class A: pass
-class B<span class="o">(</span>A<span class="o">)</span>: pass
-mro<span class="o">(</span>B<span class="o">)</span> <span class="o">==</span> B.mro<span class="o">()</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">mro</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">==</span> <span class="n">B</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
 </pre></div>
 <p>Take a look at the <a class="reference external" href="https://github.com/pilosus/c3linear/blob/master/tests/test_mro.py">tests</a> to dive into more complex multiple inheritance&nbsp;examples.</p>
 
-    </div><!-- /.entry-content -->
-    <div class="comments">
-      <h3>Comments !</h3>
-      <div id="disqus_thread"></div>
-      <script type="text/javascript">
-        var disqus_shortname = 'https-blog-pilosus-org';
-        var disqus_identifier = 'posts/2019/05/02/python-mro/';
-        var disqus_url = 'https://blog.pilosus.org/posts/2019/05/02/python-mro/';
-        (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the comments.</noscript>
-    </div>
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h3>Comments !</h3>
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+                var disqus_shortname = 'https-blog-pilosus-org';
+                var disqus_identifier = 'posts/2019/05/02/python-mro/';
+                var disqus_url = 'https://blog.pilosus.org/posts/2019/05/02/python-mro/';
+                (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+              </script>
+              <noscript>Please enable JavaScript to view the comments.</noscript>
+            </div>
 
-  </article>
-</section>
+          </article>
+        </section>
       </div>
 
       <div class="navbar-spacer"></div>
@@ -285,9 +285,9 @@ mro<span class="o">(</span>B<span class="o">)</span> <span class="o">==</span> B
         </ul>
       </section><!-- /#extras -->
 
-      <footer class="pelican">
+      <footer class="footer-pelican">
         <address id="about" class="vcard body">
-          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 

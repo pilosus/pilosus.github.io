@@ -309,11 +309,11 @@ install it from the source code or via&amp;nbsp;PyPI:&lt;/p&gt;
 pip install c3linear  &lt;span class="c1"&gt;# from the Cheese Shop&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then just import it and check against Python&amp;#8217;s object&amp;#8217;s &lt;tt class="docutils literal"&gt;mro&lt;/tt&gt; method:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from c3linear.mro import mro
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;c3linear.mro&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;mro&lt;/span&gt;
 
-class A: pass
-class B&lt;span class="o"&gt;(&lt;/span&gt;A&lt;span class="o"&gt;)&lt;/span&gt;: pass
-mro&lt;span class="o"&gt;(&lt;/span&gt;B&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; B.mro&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;A&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;B&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;span class="n"&gt;mro&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mro&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Take a look at the &lt;a class="reference external" href="https://github.com/pilosus/c3linear/blob/master/tests/test_mro.py"&gt;tests&lt;/a&gt; to dive into more complex multiple inheritance&amp;nbsp;examples.&lt;/p&gt;
 </content><category term="python"></category><category term="cpython"></category><category term="mro"></category><category term="algorithms"></category></entry><entry><title>Pelican blog: up and running</title><link href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/" rel="alternate"></link><published>2019-05-01T11:30:00+03:00</published><updated>2019-05-01T11:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-01:/posts/2019/05/01/pelican-blog-up-and-running/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; is a static site generator written in Python. I use it for
