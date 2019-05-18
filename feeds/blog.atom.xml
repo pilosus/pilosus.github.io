@@ -31,9 +31,10 @@ $ minikube addons configure --help
 &lt;/div&gt;
 &lt;div class="section" id="minikube-shell-completion"&gt;
 &lt;h2&gt;Minikube Shell&amp;nbsp;Completion&lt;/h2&gt;
-&lt;p&gt;Minikube has great &lt;span class="caps"&gt;CLI&lt;/span&gt;. You can&amp;#8217;t really enjoy a &lt;span class="caps"&gt;CLI&lt;/span&gt; without shell
-commands completion. That&amp;#8217;s why Minikube supports commands completion
-for &lt;tt class="docutils literal"&gt;bash&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;zsh&lt;/tt&gt; shells. Again, everything you need is in help&amp;nbsp;already:&lt;/p&gt;
+&lt;p&gt;Minikube has a great &lt;span class="caps"&gt;CLI&lt;/span&gt;. But you can&amp;#8217;t really enjoy a &lt;span class="caps"&gt;CLI&lt;/span&gt; without
+&lt;a class="reference external" href="https://github.com/scop/bash-completion"&gt;shell commands completion&lt;/a&gt;. That&amp;#8217;s why Minikube supports commands
+completion for &lt;tt class="docutils literal"&gt;bash&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;zsh&lt;/tt&gt; shells. Again, everything you need
+is in help&amp;nbsp;already:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ minikube completion --help
 &lt;/pre&gt;
@@ -98,7 +99,7 @@ $ minikube dashboard
 $ minikube addons enable heapster
 $ minikube addons open heapster
 &lt;/pre&gt;
-&lt;p&gt;Sign in with &lt;tt class="docutils literal"&gt;admin/admin&lt;/tt&gt; credential and go over &lt;tt class="docutils literal"&gt;Pods&lt;/tt&gt; or
+&lt;p&gt;Sign in with &lt;tt class="docutils literal"&gt;admin/admin&lt;/tt&gt; credentials and go over &lt;tt class="docutils literal"&gt;Pods&lt;/tt&gt; or
 &lt;tt class="docutils literal"&gt;Cluster&lt;/tt&gt; dashboards for super cool statistics&amp;nbsp;charts!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ssh"&gt;
