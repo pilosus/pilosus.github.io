@@ -29,6 +29,13 @@ processes, filter and sort quickly, see processes and threads in a
 flat and a tree&amp;nbsp;modes.&lt;/p&gt;
 &lt;img alt="htop tool" src="https://blog.pilosus.org/images/htop-minikube.png" style="width: 800px;" /&gt;
 &lt;p&gt;On &lt;span class="caps"&gt;GNU&lt;/span&gt;/Linux you most likely want to track &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/QEMU"&gt;&lt;span class="caps"&gt;QEMU&lt;/span&gt; processes&lt;/a&gt; resource&amp;nbsp;usage.&lt;/p&gt;
+&lt;p&gt;Minikube&amp;#8217;s &lt;tt class="docutils literal"&gt;dashboard&lt;/tt&gt; plugin is also a great tool for monitoing
+resources &amp;#8212; per pod (Overview section) or for the whole cluster
+(Cluster section). To use dashboard, enable the addon and open&amp;nbsp;it:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+minikube addons enable dashboard
+minikube dashboard
+&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="use-recommended-virtual-machine-drivers"&gt;
 &lt;h2&gt;Use recommended Virtual Machine&amp;nbsp;drivers&lt;/h2&gt;
