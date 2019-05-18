@@ -1,5 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-28T11:00:00+03:00</updated><entry><title>Minikube high CPU usage even with no workload on Linux machine</title><link href="https://blog.pilosus.org/posts/2019/05/28/minikube-hight-cpu-usage-linux/" rel="alternate"></link><published>2019-05-28T11:00:00+03:00</published><updated>2019-05-28T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/minikube-hight-cpu-usage-linux/</id><summary type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-18T19:00:00+03:00</updated><entry><title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" rel="alternate"></link><published>2019-05-18T19:00:00+03:00</published><updated>2019-05-18T19:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-cheat-sheet/</id><summary type="html">&lt;p class="first last"&gt;My personal top of Minikube&amp;#8217;s features that can save you&amp;nbsp;time&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Minikube is a tool for running Kubernetes cluster on your local
+machine. Recently I&amp;#8217;ve posted about Minikube&amp;#8217;s &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/"&gt;ugly parts&lt;/a&gt;. Now
+it&amp;#8217;s time for the good&amp;nbsp;parts!&lt;/p&gt;
+&lt;div class="section" id="disclaimer"&gt;
+&lt;h2&gt;Disclaimer&lt;/h2&gt;
+&lt;p&gt;At the time of writing I used Minikube version&amp;nbsp;1.0.0&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ minikube version
+minikube version: v1.0.0
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It seems that Minikube is still under active development. So some
+things may break for your version. You may also want to check every
+now and then that you are using the latest version&amp;nbsp;available:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube update-check
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="help"&gt;
+&lt;h2&gt;Help&lt;/h2&gt;
+&lt;p&gt;Minikube&amp;#8217;s online presence is strange. You can find some mentions in
+&lt;a class="reference external" href="https://kubernetes.io/docs/home/"&gt;Kubernetes Documentation&lt;/a&gt;. You can find a bunch of markdown files
+with &lt;a class="reference external" href="https://github.com/kubernetes/minikube/blob/master/docs/README.md"&gt;Advanced Topics&lt;/a&gt; in Minikube&amp;#8217;s GitHub repo. And that&amp;#8217;s it about
+documentation. But Minikube&amp;#8217;s help is a great source of
+knowledge. It&amp;#8217;s consistently written for every command and&amp;nbsp;subcommand:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube --help
+$ minikube start --help
+$ minikube addons configure --help
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="minikube-shell-completion"&gt;
+&lt;h2&gt;Minikube Shell&amp;nbsp;Completion&lt;/h2&gt;
+&lt;p&gt;Minikube has great &lt;span class="caps"&gt;CLI&lt;/span&gt;. You can&amp;#8217;t really enjoy a &lt;span class="caps"&gt;CLI&lt;/span&gt; without shell
+commands completion. That&amp;#8217;s why Minikube supports commands completion
+for &lt;tt class="docutils literal"&gt;bash&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;zsh&lt;/tt&gt; shells. Again, everything you need is in help&amp;nbsp;already:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube completion --help
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="resources"&gt;
+&lt;h2&gt;Resources&lt;/h2&gt;
+&lt;p&gt;By default you have got 2 &lt;span class="caps"&gt;CPU&lt;/span&gt;, 2048M &lt;span class="caps"&gt;RAM&lt;/span&gt;, 20G disk allocated for your
+k8s cluster. It&amp;#8217;s okay for the most cases. Still you may need to tweak
+it depending on what are you doing. Use &lt;tt class="docutils literal"&gt;start&lt;/tt&gt; arguments to get
+what you&amp;nbsp;want:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube start --cpus 4 --memory 4096 --vm-driver kvm2
+&lt;/pre&gt;
+&lt;p&gt;By now you&amp;#8217;ve already got used to using &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--help&lt;/span&gt;&lt;/tt&gt;, haven&amp;#8217;t&amp;nbsp;you?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configuration"&gt;
+&lt;h2&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;If you experiment with your local k8s cluster a lot, deleting it and
+starting all over with new settings, you may want to make some
+settings permanent. They are saved under
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.minikube/config/config.json&lt;/span&gt;&lt;/tt&gt;. You can edit it manually, but &lt;span class="caps"&gt;CLI&lt;/span&gt;
+provides a better&amp;nbsp;alternative:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# get list of settings
+$ minikube config view
+
+# set cpus; changes will take effect upon cluster delete and start
+$ minikube config set cpus 4
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="services"&gt;
+&lt;h2&gt;Services&lt;/h2&gt;
+&lt;p&gt;Your Kubernetes &lt;tt class="docutils literal"&gt;Service&lt;/tt&gt; that&amp;#8217;s provisioned to be available outside
+of the cluster&amp;#8217;s network can be opened in your default browser from
+the command&amp;nbsp;line:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube service &amp;lt;your-service-name&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;To see the full list of services&amp;nbsp;do:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube service list
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="monitoring"&gt;
+&lt;h2&gt;Monitoring&lt;/h2&gt;
+&lt;p&gt;Minikube&amp;#8217;s shipped with a bunch of great addons. You can list them,
+configure, enable, disable and open&amp;nbsp;up:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube addons list
+$ minikube addons --help
+&lt;/pre&gt;
+&lt;p&gt;The most helpful addons I use daily to look up cluster&amp;#8217;s status are
+&lt;tt class="docutils literal"&gt;dashboard&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;heapster&lt;/tt&gt;. Dashboard is a web &lt;span class="caps"&gt;UI&lt;/span&gt; enabled by
+default. It&amp;#8217;s a great tool for monitoring both your pods
+(&lt;tt class="docutils literal"&gt;Workloads&lt;/tt&gt; section) and the whole cluster (&lt;tt class="docutils literal"&gt;Cluster&lt;/tt&gt;
+section). Fire up you dashboard&amp;nbsp;with:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube dashboard
+&lt;/pre&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;Heapster&lt;/tt&gt; is Grafana-based monitoring tool. Enable and open it&amp;nbsp;with:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ minikube addons enable heapster
+$ minikube addons open heapster
+&lt;/pre&gt;
+&lt;p&gt;Sign in with &lt;tt class="docutils literal"&gt;admin/admin&lt;/tt&gt; credential and go over &lt;tt class="docutils literal"&gt;Pods&lt;/tt&gt; or
+&lt;tt class="docutils literal"&gt;Cluster&lt;/tt&gt; dashboards for super cool statistics&amp;nbsp;charts!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ssh"&gt;
+&lt;h2&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;When working with &lt;a class="reference external" href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/"&gt;Persistent Volumes&lt;/a&gt; you may need to do some ops on
+your cluster&amp;#8217;s file system. Use secure shell to do&amp;nbsp;it:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# log in `remotely`
+$ minikube ssh
+
+# set `docker` user password
+&amp;gt; sudo passwd docker
+&amp;gt; exit
+&lt;/pre&gt;
+&lt;p&gt;Now that you have logged in &amp;#8220;remotely&amp;#8221; you can create directories to
+mount your Persistent Volume, copy files,&amp;nbsp;etc.:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# copy directory recursively from minikube cluster to the host machine
+$ scp -i $(minikube ssh-key) -r docker&amp;#64;$(minikube ip):/mnt/data/ .
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="afterword"&gt;
+&lt;h2&gt;Afterword&lt;/h2&gt;
+&lt;p&gt;As with every complex piece of software in active development
+Minikube&amp;#8217;s experience may be &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/"&gt;frustrating&lt;/a&gt;. Still
+Minikube is a great tool with a bunch of cool features. I wish I&amp;#8217;d
+read an overview like this one when I first launched Minikube. Hope it
+will help&amp;nbsp;someone.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Minikube high CPU usage even with no workload on Linux machine</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/" rel="alternate"></link><published>2019-05-18T11:00:00+03:00</published><updated>2019-05-18T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-hight-cpu-usage-linux/</id><summary type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
 development. It&amp;#8217;s adviced to run all over the &lt;a class="reference external" href="https://kubernetes.io/docs/setup/minikube/"&gt;k8s documentation&lt;/a&gt;, in
 the tech blogs. Still Minikube looks like a piece of software that is
 not quite ready for a smooth development experience. At the time of
@@ -102,9 +231,10 @@ cluster on you laptop instead of setting it up in a cloud service for
 testing. But all the abstractions that Kubernetes introduces,
 virtualisation with &lt;span class="caps"&gt;KVM&lt;/span&gt; and &lt;span class="caps"&gt;QEMU&lt;/span&gt; on &lt;span class="caps"&gt;GNU&lt;/span&gt;/Linux make Minikube
 complex. Minikube&amp;#8217;s niche (a developer&amp;#8217;s local machine) prevents it
-from being quickly fixed and as reliable as, say, cloud
-production-ready solutions that earn their owners piles of money. So
-let&amp;#8217;s hope that magic I&amp;#8217;ve posted here will work out for you&amp;nbsp;too!&lt;/p&gt;
+from being quickly fixed as, say, cloud production-ready solutions
+that earn their owners piles of money. So let&amp;#8217;s hope that magic I&amp;#8217;ve
+posted here will work out for you too. I also hope the issue with high
+&lt;span class="caps"&gt;CPU&lt;/span&gt; usage will be fixed by someone with proper&amp;nbsp;skills.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Разница между нами и западными культурами: отказ и разрешение потенциально конфликтных ситуаций</title><link href="https://blog.pilosus.org/posts/2019/05/12/yes-means-yes-ru/" rel="alternate"></link><published>2019-05-12T11:00:00+03:00</published><updated>2019-05-12T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-12:/posts/2019/05/12/yes-means-yes-ru/</id><summary type="html">&lt;p&gt;Все видели эту смешную картинку про оценку &amp;#8220;хорошо/плохо&amp;#8221; в западной
 культуре и восточно европейской. На самом деле смешного в ней мало,

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" />
+    <meta property="og:description" content="My personal top of Minikube’s features that can save you time" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2019-05-18" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="k8s" />
+    <meta property="article:tag" content="minikube" />
+
+
+    <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic" rel="stylesheet" type="text/css">
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+	    
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h4 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" rel="bookmark"
+                   title="Permalink to Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start">Minikube Cheat Sheet: most helpful commands and features I wish I knew from the&nbsp;start</a></h4>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-05-18T19:00:00+03:00">
+                  Published: 18-05-2019 19:00
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a>.</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/k8s/">k8s</a> <a href="https://blog.pilosus.org/tag/minikube/">minikube</a> </span>                
+              </div><!-- /.post-info -->              <p>Minikube is a tool for running Kubernetes cluster on your local
+machine. Recently I&#8217;ve posted about Minikube&#8217;s <a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/">ugly parts</a>. Now
+it&#8217;s time for the good&nbsp;parts!</p>
+<div class="section" id="disclaimer">
+<h2>Disclaimer</h2>
+<p>At the time of writing I used Minikube version&nbsp;1.0.0</p>
+<div class="highlight"><pre><span></span>$ minikube version
+minikube version: v1.0.0
+</pre></div>
+<p>It seems that Minikube is still under active development. So some
+things may break for your version. You may also want to check every
+now and then that you are using the latest version&nbsp;available:</p>
+<pre class="literal-block">
+$ minikube update-check
+</pre>
+</div>
+<div class="section" id="help">
+<h2>Help</h2>
+<p>Minikube&#8217;s online presence is strange. You can find some mentions in
+<a class="reference external" href="https://kubernetes.io/docs/home/">Kubernetes Documentation</a>. You can find a bunch of markdown files
+with <a class="reference external" href="https://github.com/kubernetes/minikube/blob/master/docs/README.md">Advanced Topics</a> in Minikube&#8217;s GitHub repo. And that&#8217;s it about
+documentation. But Minikube&#8217;s help is a great source of
+knowledge. It&#8217;s consistently written for every command and&nbsp;subcommand:</p>
+<pre class="literal-block">
+$ minikube --help
+$ minikube start --help
+$ minikube addons configure --help
+</pre>
+</div>
+<div class="section" id="minikube-shell-completion">
+<h2>Minikube Shell&nbsp;Completion</h2>
+<p>Minikube has great <span class="caps">CLI</span>. You can&#8217;t really enjoy a <span class="caps">CLI</span> without shell
+commands completion. That&#8217;s why Minikube supports commands completion
+for <tt class="docutils literal">bash</tt> and <tt class="docutils literal">zsh</tt> shells. Again, everything you need is in help&nbsp;already:</p>
+<pre class="literal-block">
+$ minikube completion --help
+</pre>
+</div>
+<div class="section" id="resources">
+<h2>Resources</h2>
+<p>By default you have got 2 <span class="caps">CPU</span>, 2048M <span class="caps">RAM</span>, 20G disk allocated for your
+k8s cluster. It&#8217;s okay for the most cases. Still you may need to tweak
+it depending on what are you doing. Use <tt class="docutils literal">start</tt> arguments to get
+what you&nbsp;want:</p>
+<pre class="literal-block">
+$ minikube start --cpus 4 --memory 4096 --vm-driver kvm2
+</pre>
+<p>By now you&#8217;ve already got used to using <tt class="docutils literal"><span class="pre">--help</span></tt>, haven&#8217;t&nbsp;you?</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration</h2>
+<p>If you experiment with your local k8s cluster a lot, deleting it and
+starting all over with new settings, you may want to make some
+settings permanent. They are saved under
+<tt class="docutils literal"><span class="pre">~/.minikube/config/config.json</span></tt>. You can edit it manually, but <span class="caps">CLI</span>
+provides a better&nbsp;alternative:</p>
+<pre class="literal-block">
+# get list of settings
+$ minikube config view
+
+# set cpus; changes will take effect upon cluster delete and start
+$ minikube config set cpus 4
+</pre>
+</div>
+<div class="section" id="services">
+<h2>Services</h2>
+<p>Your Kubernetes <tt class="docutils literal">Service</tt> that&#8217;s provisioned to be available outside
+of the cluster&#8217;s network can be opened in your default browser from
+the command&nbsp;line:</p>
+<pre class="literal-block">
+$ minikube service &lt;your-service-name&gt;
+</pre>
+<p>To see the full list of services&nbsp;do:</p>
+<pre class="literal-block">
+$ minikube service list
+</pre>
+</div>
+<div class="section" id="monitoring">
+<h2>Monitoring</h2>
+<p>Minikube&#8217;s shipped with a bunch of great addons. You can list them,
+configure, enable, disable and open&nbsp;up:</p>
+<pre class="literal-block">
+$ minikube addons list
+$ minikube addons --help
+</pre>
+<p>The most helpful addons I use daily to look up cluster&#8217;s status are
+<tt class="docutils literal">dashboard</tt> and <tt class="docutils literal">heapster</tt>. Dashboard is a web <span class="caps">UI</span> enabled by
+default. It&#8217;s a great tool for monitoring both your pods
+(<tt class="docutils literal">Workloads</tt> section) and the whole cluster (<tt class="docutils literal">Cluster</tt>
+section). Fire up you dashboard&nbsp;with:</p>
+<pre class="literal-block">
+$ minikube dashboard
+</pre>
+<p><tt class="docutils literal">Heapster</tt> is Grafana-based monitoring tool. Enable and open it&nbsp;with:</p>
+<pre class="literal-block">
+$ minikube addons enable heapster
+$ minikube addons open heapster
+</pre>
+<p>Sign in with <tt class="docutils literal">admin/admin</tt> credential and go over <tt class="docutils literal">Pods</tt> or
+<tt class="docutils literal">Cluster</tt> dashboards for super cool statistics&nbsp;charts!</p>
+</div>
+<div class="section" id="ssh">
+<h2><span class="caps">SSH</span></h2>
+<p>When working with <a class="reference external" href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a> you may need to do some ops on
+your cluster&#8217;s file system. Use secure shell to do&nbsp;it:</p>
+<pre class="literal-block">
+# log in `remotely`
+$ minikube ssh
+
+# set `docker` user password
+&gt; sudo passwd docker
+&gt; exit
+</pre>
+<p>Now that you have logged in &#8220;remotely&#8221; you can create directories to
+mount your Persistent Volume, copy files,&nbsp;etc.:</p>
+<pre class="literal-block">
+# copy directory recursively from minikube cluster to the host machine
+$ scp -i $(minikube ssh-key) -r docker&#64;$(minikube ip):/mnt/data/ .
+</pre>
+</div>
+<div class="section" id="afterword">
+<h2>Afterword</h2>
+<p>As with every complex piece of software in active development
+Minikube&#8217;s experience may be <a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/">frustrating</a>. Still
+Minikube is a great tool with a bunch of cool features. I wish I&#8217;d
+read an overview like this one when I first launched Minikube. Hope it
+will help&nbsp;someone.</p>
+</div>
+
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h5>Comments</h5>
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+                var disqus_shortname = 'https-blog-pilosus-org';
+                var disqus_identifier = 'posts/2019/05/18/minikube-cheat-sheet/';
+                var disqus_url = 'https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/';
+                (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+              </script>
+              <noscript>Please enable JavaScript to view the comments.</noscript>
+            </div>
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://keybase.io/pilosus">Keybase</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin-05027233/">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'https-blog-pilosus-org';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+    </div>
+  </body>
+</html>
