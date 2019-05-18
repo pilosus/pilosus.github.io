@@ -1,5 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-12T11:00:00+03:00</updated><entry><title>Разница между нами и западными культурами: отказ и разрешение потенциально конфликтных ситуаций</title><link href="https://blog.pilosus.org/posts/2019/05/12/yes-means-yes-ru/" rel="alternate"></link><published>2019-05-12T11:00:00+03:00</published><updated>2019-05-12T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-12:/posts/2019/05/12/yes-means-yes-ru/</id><summary type="html">&lt;p&gt;Все видели эту смешную картинку про оценку &amp;#8220;хорошо/плохо&amp;#8221; в западной
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-28T11:00:00+03:00</updated><entry><title>Minikube high CPU usage even with no workload on Linux machine</title><link href="https://blog.pilosus.org/posts/2019/05/28/minikube-hight-cpu-usage-linux/" rel="alternate"></link><published>2019-05-28T11:00:00+03:00</published><updated>2019-05-28T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/minikube-hight-cpu-usage-linux/</id><summary type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
+development. It&amp;#8217;s adviced to run all over the &lt;a class="reference external" href="https://kubernetes.io/docs/setup/minikube/"&gt;k8s documentation&lt;/a&gt;, in
+the tech blogs. Still Minikube looks like a piece of software that is
+not quite ready for a smooth development experience. At the time of
+writing …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
+development. It&amp;#8217;s adviced to run all over the &lt;a class="reference external" href="https://kubernetes.io/docs/setup/minikube/"&gt;k8s documentation&lt;/a&gt;, in
+the tech blogs. Still Minikube looks like a piece of software that is
+not quite ready for a smooth development experience. At the time of
+writing minikube&amp;#8217;s got a bunch of &lt;a class="reference external" href="https://github.com/kubernetes/minikube/issues"&gt;issues&lt;/a&gt;. Some of them are open for
+a long time, hardly reproducible and quite frustrating. &lt;span class="caps"&gt;CPU&lt;/span&gt; usage with
+no workload to services is one of&amp;nbsp;them.&lt;/p&gt;
+&lt;p&gt;Recently I&amp;#8217;ve bumped into a problem when an idle minikube process
+consumes up to 100% of &lt;span class="caps"&gt;CPU&lt;/span&gt;. After a while &lt;tt class="docutils literal"&gt;apiserver&lt;/tt&gt; stops
+responding making your cluster not really functioning. It turned out
+I&amp;#8217;m &lt;a class="reference external" href="https://github.com/kubernetes/minikube/issues/3207"&gt;not alone&lt;/a&gt;. I run minikube on my Lenovo Thinkpad X1 Carbon
+machine with 16G &lt;span class="caps"&gt;RAM&lt;/span&gt; and 8 cores (i7 8th gen) on board. I use Ubuntu
+18.04 with &lt;tt class="docutils literal"&gt;kvm2&lt;/tt&gt; &lt;span class="caps"&gt;VM&lt;/span&gt; driver. So I found this high &lt;span class="caps"&gt;CPU&lt;/span&gt; consumption as
+quite unexpected and annoying. I&amp;#8217;ve solved this problem. But as it
+sometimes happens in the software development, I&amp;#8217;m still not sure what
+exactly helped. So taking into account some black magic, let&amp;#8217;s see
+what witch brew&amp;#8217;s ingredients &lt;em&gt;may&lt;/em&gt;&amp;nbsp;help.&lt;/p&gt;
+&lt;div class="section" id="before-you-begin-monitoring"&gt;
+&lt;h2&gt;Before you begin:&amp;nbsp;monitoring&lt;/h2&gt;
+&lt;p&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;If you can&amp;#8217;t measure it, you can&amp;#8217;t improve it&amp;#8221;. Before making any
+tweaks start measuring &lt;span class="caps"&gt;CPU&lt;/span&gt; usage. Altough &lt;tt class="docutils literal"&gt;top&lt;/tt&gt; tool is cool, it
+just cannot beat its successor &lt;tt class="docutils literal"&gt;htop&lt;/tt&gt;. It allows you to tag
+processes, filter and sort quickly, see processes and threads in a
+flat and a tree&amp;nbsp;modes.&lt;/p&gt;
+&lt;img alt="htop tool" src="https://blog.pilosus.org/images/htop-minikube.png" style="width: 800px;" /&gt;
+&lt;p&gt;On &lt;span class="caps"&gt;GNU&lt;/span&gt;/Linux you most likely want to track &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/QEMU"&gt;&lt;span class="caps"&gt;QEMU&lt;/span&gt; processes&lt;/a&gt; resource&amp;nbsp;usage.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="use-recommended-virtual-machine-drivers"&gt;
+&lt;h2&gt;Use recommended Virtual Machine&amp;nbsp;drivers&lt;/h2&gt;
+&lt;p&gt;Since I&amp;#8217;m on Ubuntu &lt;span class="caps"&gt;GNU&lt;/span&gt;/Linux I went for a &lt;tt class="docutils literal"&gt;kvm2&lt;/tt&gt; driver. Get the
+recommended &lt;a class="reference external" href="https://github.com/kubernetes/minikube/blob/master/docs/drivers.md"&gt;&lt;span class="caps"&gt;VM&lt;/span&gt; driver&lt;/a&gt; for your specific&amp;nbsp;platform.&lt;/p&gt;
+&lt;p&gt;Follow excellent Arch Linux Wiki &lt;a class="reference external" href="https://wiki.archlinux.org/index.php/KVM"&gt;&lt;span class="caps"&gt;KVM&lt;/span&gt; article&lt;/a&gt; to make sure you have
+&lt;strong&gt;hardware and Linux kernel support for &lt;span class="caps"&gt;KVM&lt;/span&gt;&lt;/strong&gt;. You may enable
+virtualisation support in your &lt;span class="caps"&gt;BIOS&lt;/span&gt; and/or load &lt;span class="caps"&gt;KVM&lt;/span&gt; kernel modules&amp;nbsp;needed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="use-latest-os-virtualisation-libraries-qemu-tools-vm-drivers"&gt;
+&lt;h2&gt;Use latest &lt;span class="caps"&gt;OS&lt;/span&gt; virtualisation libraries, &lt;span class="caps"&gt;QEMU&lt;/span&gt; tools, &lt;span class="caps"&gt;VM&lt;/span&gt;&amp;nbsp;drivers&lt;/h2&gt;
+&lt;p&gt;This is what I believe really fixed my problem. Make sure&amp;nbsp;you:&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Update your &lt;span class="caps"&gt;OS&lt;/span&gt; package&amp;nbsp;information:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# in my case of Ubuntu 18.04 I use
+sudo apt update
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Install the &lt;strong&gt;latest&lt;/strong&gt; libs and tools (like &lt;tt class="docutils literal"&gt;libvirt&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;qemu&lt;/tt&gt;),
+enable &lt;tt class="docutils literal"&gt;systemD&lt;/tt&gt; services needed as per &lt;a class="reference external" href="https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#kvm2-driver"&gt;&lt;span class="caps"&gt;KVM&lt;/span&gt; drivers&amp;nbsp;guide&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Install the &lt;strong&gt;latest&lt;/strong&gt;&amp;nbsp;driver&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="run-minikube-with-correct-vm-drivers-and-resources"&gt;
+&lt;h2&gt;Run Minikube with correct &lt;span class="caps"&gt;VM&lt;/span&gt; drivers and&amp;nbsp;resources&lt;/h2&gt;
+&lt;p&gt;If you had already run minikube with the default &lt;tt class="docutils literal"&gt;virtualbox&lt;/tt&gt;
+drivers, remove your cluster&amp;nbsp;with:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# don't forget ``--p &amp;lt;your-profile-name&amp;gt;``
+# if you had started minikube with custom profile name
+minikube delete
+&lt;/pre&gt;
+&lt;p&gt;Make sure you start your new cluster with drivers needed and resources
+allocation that meets your services requirements. In my case I used
+more &lt;tt class="docutils literal"&gt;memory&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;cpus&lt;/tt&gt; than it&amp;#8217;s set by&amp;nbsp;default:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+minikube start --vm-driver kvm2 --memory 4096 --cpus 4
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="use-only-the-addons-you-really-need"&gt;
+&lt;h2&gt;Use only the addons you really&amp;nbsp;need&lt;/h2&gt;
+&lt;p&gt;Minikube&amp;#8217;s shipped with a dozen of addons like &lt;tt class="docutils literal"&gt;dashboard&lt;/tt&gt; for web
+&lt;span class="caps"&gt;UI&lt;/span&gt; or &lt;tt class="docutils literal"&gt;heapster&lt;/tt&gt; for Grafana-based monitoring. They may be cool and
+useful, but don&amp;#8217;t try to enable them all at&amp;nbsp;once.&lt;/p&gt;
+&lt;p&gt;In my case enabling &lt;tt class="docutils literal"&gt;efk&lt;/tt&gt; addons has led to a high &lt;span class="caps"&gt;CPU&lt;/span&gt; usage, so
+that I have to disable&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Make sure you enabled only the addons you really&amp;nbsp;need:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# get list of addons
+minikube addons list
+
+# check for addons in the global config too
+# for the case of recreating your cluster
+minikube config view
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Minikube&amp;#8217;s idea is cool. You can really save some money by running k8s
+cluster on you laptop instead of setting it up in a cloud service for
+testing. But all the abstractions that Kubernetes introduces,
+virtualisation with &lt;span class="caps"&gt;KVM&lt;/span&gt; and &lt;span class="caps"&gt;QEMU&lt;/span&gt; on &lt;span class="caps"&gt;GNU&lt;/span&gt;/Linux make Minikube
+complex. Minikube&amp;#8217;s niche (a developer&amp;#8217;s local machine) prevents it
+from being quickly fixed and as reliable as, say, cloud
+production-ready solutions that earn their owners piles of money. So
+let&amp;#8217;s hope that magic I&amp;#8217;ve posted here will work out for you&amp;nbsp;too!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Разница между нами и западными культурами: отказ и разрешение потенциально конфликтных ситуаций</title><link href="https://blog.pilosus.org/posts/2019/05/12/yes-means-yes-ru/" rel="alternate"></link><published>2019-05-12T11:00:00+03:00</published><updated>2019-05-12T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-12:/posts/2019/05/12/yes-means-yes-ru/</id><summary type="html">&lt;p&gt;Все видели эту смешную картинку про оценку &amp;#8220;хорошо/плохо&amp;#8221; в западной
 культуре и восточно европейской. На самом деле смешного в ней мало,
 когда сталкиваешься с этой разницей культур в реальной жизни. Особенно
 если это связано с чем-то важным: здоровьем, отношениями, карьерой. У
