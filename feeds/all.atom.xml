@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-20T15:50:00+03:00</updated><entry><title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" rel="alternate"></link><published>2019-05-20T11:12:00+03:00</published><updated>2019-05-20T15:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-cheat-sheet-little-known-commands/</id><summary type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-20T19:20:00+03:00</updated><entry><title>Helm stable/redis chart: slave unable to connect to master</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/" rel="alternate"></link><published>2019-05-20T19:20:00+03:00</published><updated>2019-05-20T19:20:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/</id><summary type="html">&lt;p class="first last"&gt;Things to take care of when installing Helm&amp;#8217;s stable/redis
+chart with master-slave topology&amp;nbsp;enabled&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve tried to install &lt;a class="reference external" href="https://github.com/helm/charts/tree/master/stable/redis"&gt;stable/redis&lt;/a&gt; Helm chart version
+8.0.1. I used production-ready values taken from the &lt;a class="reference external" href="https://github.com/helm/charts/blob/master/stable/redis/values-production.yaml"&gt;repo&lt;/a&gt; and
+slightly modified for needs. I used enabled by default clusterisation,
+but with only one slave node instead of&amp;nbsp;two.&lt;/p&gt;
+&lt;p&gt;The release deployed sucessfully, but the slave node kept having
+problem with liveness probe that eventually led to a
+CrashLoopBackoff. The logs showed that my slave node is &amp;#8220;Unable to
+connect to &lt;span class="caps"&gt;MASTER&lt;/span&gt;&amp;#8221;, although I could easily connect to the master from
+the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;redis-client&lt;/span&gt;&lt;/tt&gt; node with &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;redis-cli&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ kubectl run --namespace default redis-client --rm --tty -i --restart='Never' \
+  --env REDIS_PASSWORD=my-redis-password \
+ --image docker.io/bitnami/redis:5.0.5 -- bash
+
+# redis-cli -h redis-master -a my-redis-password
+redis-master:6379&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;It turned out that a &lt;tt class="docutils literal"&gt;networkPolicy&lt;/tt&gt; section in
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;values-production.yaml&lt;/span&gt;&lt;/tt&gt; was a culprit. &lt;tt class="docutils literal"&gt;networkPolicy.enable&lt;/tt&gt; is
+set to &lt;tt class="docutils literal"&gt;true&lt;/tt&gt;, but &lt;tt class="docutils literal"&gt;networkPolicy.allowExternal: true&lt;/tt&gt; is
+commented evaluating to &lt;tt class="docutils literal"&gt;false&lt;/tt&gt; by default. That makes redis nodes
+only accessible from the pods with a label &lt;tt class="docutils literal"&gt;{{ template
+&amp;quot;redis.fullname&amp;quot; . &lt;span class="pre"&gt;}}-client:&lt;/span&gt; &amp;quot;true&amp;quot;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;So make master accessible to slave you&amp;nbsp;either:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;set &lt;tt class="docutils literal"&gt;networkPolicy.enable: false&lt;/tt&gt; to turn off &lt;a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/"&gt;NetworkPolicy&lt;/a&gt;,&amp;nbsp;or&lt;/li&gt;
+&lt;li&gt;set &lt;tt class="docutils literal"&gt;networkPolicy.allowExternal: true&lt;/tt&gt; (i.e. by commenting it out
+in the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;values-production.yaml&lt;/span&gt;&lt;/tt&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That&amp;#8217;s it. No more failed liveness probes or CrashLoopBackoff. It&amp;nbsp;works.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;P.S.&lt;/span&gt; I think that production values example in &lt;tt class="docutils literal"&gt;stable&lt;/tt&gt; should
+probably be consistent. For example,
+&lt;a class="reference external" href="https://github.com/helm/charts/blob/master/stable/postgresql/values-production.yaml"&gt;stable/postgresql production values file&lt;/a&gt;&amp;nbsp;contains:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;networkPolicy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;enabled&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;false&lt;/span&gt;
+  &lt;span class="nt"&gt;allowExternal&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;while &lt;a class="reference external" href="https://github.com/helm/charts/blob/master/stable/redis/values-production.yaml"&gt;stable/redis production values file&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;networkPolicy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;enabled&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="c1"&gt;#allowExternal: true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</content><category term="k8s"></category><category term="helm"></category><category term="chart"></category><category term="redis"></category></entry><entry><title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" rel="alternate"></link><published>2019-05-20T11:12:00+03:00</published><updated>2019-05-20T15:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-cheat-sheet-little-known-commands/</id><summary type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
 &lt;a class="reference external" href="https://helm.sh/"&gt;official documentation&lt;/a&gt; and tons of tutorials on the
 internet. Nonetheless Helm has some helpful commands and features that
 are easily overlooked when reading the documentation. I won&amp;#8217;t even try
