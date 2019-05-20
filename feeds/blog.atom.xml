@@ -1,5 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-18T19:00:00+03:00</updated><entry><title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" rel="alternate"></link><published>2019-05-18T19:00:00+03:00</published><updated>2019-05-18T19:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-cheat-sheet/</id><summary type="html">&lt;p class="first last"&gt;My personal top of Minikube&amp;#8217;s features that can save you&amp;nbsp;time&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-20T15:50:00+03:00</updated><entry><title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" rel="alternate"></link><published>2019-05-20T11:12:00+03:00</published><updated>2019-05-20T15:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-cheat-sheet-little-known-commands/</id><summary type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
+&lt;a class="reference external" href="https://helm.sh/"&gt;official documentation&lt;/a&gt; and tons of tutorials on the
+internet. Nonetheless Helm has some helpful commands and features that
+are easily overlooked when reading the documentation. I won&amp;#8217;t even try
+to cover them all, as it&amp;#8217;s quite …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
+&lt;a class="reference external" href="https://helm.sh/"&gt;official documentation&lt;/a&gt; and tons of tutorials on the
+internet. Nonetheless Helm has some helpful commands and features that
+are easily overlooked when reading the documentation. I won&amp;#8217;t even try
+to cover them all, as it&amp;#8217;s quite subjective what to count as
+&amp;#8220;helpful&amp;#8221;. What I will try to do though is to give a direction on how
+to find such features by&amp;nbsp;yourself.&lt;/p&gt;
+&lt;div class="section" id="cli-help"&gt;
+&lt;h2&gt;&lt;span class="caps"&gt;CLI&lt;/span&gt;&amp;nbsp;Help&lt;/h2&gt;
+&lt;p&gt;Just like &lt;tt class="docutils literal"&gt;kubectl&lt;/tt&gt; and &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/"&gt;minikube&lt;/a&gt; Helm&amp;#8217;s &lt;span class="caps"&gt;CLI&lt;/span&gt; tool follows
+the same help patterns for commands and&amp;nbsp;subcommands:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm --help
+$ helm get --help
+$ helm get values --help
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="shell-completion"&gt;
+&lt;h2&gt;Shell&amp;nbsp;Completion&lt;/h2&gt;
+&lt;p&gt;Again, just like &lt;tt class="docutils literal"&gt;kubectl&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;minikube&lt;/tt&gt; Helm provides shell
+commands completion for &lt;tt class="docutils literal"&gt;bash&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;zsh&lt;/tt&gt;. See more in&amp;nbsp;help:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm completion --help
+&lt;/pre&gt;
+&lt;p&gt;Completion helps a lot both everyday interaction with Helm and its &lt;span class="caps"&gt;CLI&lt;/span&gt;&amp;nbsp;exploration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="commands-aliases"&gt;
+&lt;h2&gt;Commands&amp;nbsp;Aliases&lt;/h2&gt;
+&lt;p&gt;Some Helm commands have aliases. You can see then in the corresponding
+section in help. As an example these two commands are the&amp;nbsp;same:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm list
+$ helm ls
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="chart-values"&gt;
+&lt;h2&gt;Chart&amp;nbsp;Values&lt;/h2&gt;
+&lt;p&gt;Helm charts usually get initialized with some default values. It&amp;#8217;s
+worth inspect them before&amp;nbsp;installation:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm inspect values stable/postgresql
+&lt;/pre&gt;
+&lt;p&gt;Sometimes it&amp;#8217;s also very helpful to get values from the deployed
+release, both explicitly set by user and taken from the&amp;nbsp;defaults:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm get values --all &amp;lt;your-release-name&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="chart-versions"&gt;
+&lt;h2&gt;Chart&amp;nbsp;Versions&lt;/h2&gt;
+&lt;p&gt;Every chart must have a &lt;a class="reference external" href="https://helm.sh/docs/charts/#charts-and-versioning"&gt;version number&lt;/a&gt;. Charts are versioned under
+version control systems (&lt;span class="caps"&gt;VSC&lt;/span&gt;) and installed from the &lt;a class="reference external" href="https://helm.sh/docs/chart_repository/#the-chart-repository-guide"&gt;chart
+repositories&lt;/a&gt;. You can list existing repos&amp;nbsp;with:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm repo list
+&lt;/pre&gt;
+&lt;p&gt;Don&amp;#8217;t forget to update packages information for your repos&amp;nbsp;with:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm repo update
+&lt;/pre&gt;
+&lt;p&gt;Sometimes you may want to install specific version of chart. List versions&amp;nbsp;first:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm search --versions stable/postgresql
+&lt;/pre&gt;
+&lt;p&gt;Now install the chart with a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--version&lt;/span&gt;&lt;/tt&gt; argument:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm intall --version 3.17.0 stable/postgresql
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="chart-deletion"&gt;
+&lt;h2&gt;Chart&amp;nbsp;deletion&lt;/h2&gt;
+&lt;p&gt;If you ommit &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--name&lt;/span&gt; &lt;span class="pre"&gt;&amp;lt;your-release-name&amp;gt;&lt;/span&gt;&lt;/tt&gt; argument when doing &lt;tt class="docutils literal"&gt;helm
+install&lt;/tt&gt; you get a random release name. Release names are reserved
+even after your release is deleted, so that you can do a&amp;nbsp;rollback.&lt;/p&gt;
+&lt;p&gt;If you are using a your own release name you can get into trouble when
+reinstalling chart with the same name. In order to avoid name clash
+delete your release like&amp;nbsp;so:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm delete --purge &amp;lt;your-release-name&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;In this case you won&amp;#8217;t be able to do a rollback&amp;nbsp;though.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="emulate-installation"&gt;
+&lt;h2&gt;Emulate&amp;nbsp;Installation&lt;/h2&gt;
+&lt;p&gt;We&amp;#8217;ve already covered &lt;tt class="docutils literal"&gt;inspect&lt;/tt&gt; a little bit. It allows you to see
+chart&amp;#8217;s info, values and a &lt;span class="caps"&gt;README&lt;/span&gt; file. But sometimes you may want to
+get dirty in chart&amp;#8217;s guts (actually, I always do as I don&amp;#8217;t really
+like the idea of installing something I don&amp;#8217;t understand in my k8s
+cluster). In this case you may want to emulate installation with
+verbose&amp;nbsp;output:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ helm install --dry-run --debug --version 3.17.0 stable/postgresql
+&lt;/pre&gt;
+&lt;p&gt;Having chart manifests at your fingertips is a great way to save time
+and effort browsing for the source&amp;nbsp;code.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Helm&amp;#8217;s got almost everything needed to start working with it in its
+help. It&amp;#8217;s consistent and mimics other k8s &lt;span class="caps"&gt;CLI&lt;/span&gt; tools like &lt;tt class="docutils literal"&gt;kubectl&lt;/tt&gt;
+and &lt;tt class="docutils literal"&gt;minikube&lt;/tt&gt;. Take your time to explore the help! I didn&amp;#8217;t really
+try to cover everything here. I just scratched the surface with less
+known things that you actually could found out by exploring the&amp;nbsp;help.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m going to update this post as I find new features worth&amp;nbsp;sharing.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="k8s"></category><category term="helm"></category></entry><entry><title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" rel="alternate"></link><published>2019-05-18T19:00:00+03:00</published><updated>2019-05-18T19:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-cheat-sheet/</id><summary type="html">&lt;p class="first last"&gt;My personal top of Minikube&amp;#8217;s features that can save you&amp;nbsp;time&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Minikube is a tool for running Kubernetes cluster on your local
 machine. Recently I&amp;#8217;ve posted about Minikube&amp;#8217;s &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/"&gt;ugly parts&lt;/a&gt;. Now
 it&amp;#8217;s time for the good&amp;nbsp;parts!&lt;/p&gt;
