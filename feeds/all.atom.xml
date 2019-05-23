@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-20T19:20:00+03:00</updated><entry><title>Helm stable/redis chart: slave unable to connect to master</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/" rel="alternate"></link><published>2019-05-20T19:20:00+03:00</published><updated>2019-05-20T19:20:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/</id><summary type="html">&lt;p class="first last"&gt;Things to take care of when installing Helm&amp;#8217;s stable/redis
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-24T20:15:00+03:00</updated><entry><title>Kubernetes Persistent Volumes: How to List and Copy Files and Directories</title><link href="https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/" rel="alternate"></link><published>2019-05-24T20:15:00+03:00</published><updated>2019-05-24T20:15:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-24:/posts/2019/05/24/k8s-volumes-list-copy/</id><summary type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
+a &lt;tt class="docutils literal"&gt;PersistentVolume&lt;/tt&gt; and a &lt;tt class="docutils literal"&gt;PersistentVolumeClaim&lt;/tt&gt;. It&amp;#8217;s
+provisioned by your cloud platform, say, DigitalOcean. You want to
+know what space is available to you, you want to browse files and
+directories on your Volume, and you want to copy …&lt;/p&gt;</summary><content type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
+a &lt;tt class="docutils literal"&gt;PersistentVolume&lt;/tt&gt; and a &lt;tt class="docutils literal"&gt;PersistentVolumeClaim&lt;/tt&gt;. It&amp;#8217;s
+provisioned by your cloud platform, say, DigitalOcean. You want to
+know what space is available to you, you want to browse files and
+directories on your Volume, and you want to copy something from the
+Volume to your host machine. How do you do&amp;nbsp;it?&lt;/p&gt;
+&lt;p&gt;First, find out your pvc&amp;#8217;s &lt;tt class="docutils literal"&gt;mountPath&lt;/tt&gt;. Your data sits
+there. Second, you can access it from the pod that uses the
+&lt;tt class="docutils literal"&gt;PersistentVolumeClaim&lt;/tt&gt;. Fire up a terminal on the pod and use your
+favourite tools like &lt;tt class="docutils literal"&gt;ls&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;df&lt;/tt&gt; to list files or see stats of
+the volume usage. Just make sure that an image your pod container is
+using has all the tools you&amp;nbsp;need.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# open bash on the pod&lt;/span&gt;
+$ kubectl &lt;span class="nb"&gt;exec&lt;/span&gt; -it redis-master-0 bash
+
+&lt;span class="c1"&gt;# see disk usage stats&lt;/span&gt;
+&lt;span class="c1"&gt;# volume is mounted under /data&lt;/span&gt;
+I have no name!@redis-master-0:/$ df -h
+Filesystem                                                                Size  Used Avail Use% Mounted on
+overlay                                                                   158G  &lt;span class="m"&gt;6&lt;/span&gt;.5G  145G   &lt;span class="m"&gt;5&lt;/span&gt;% /
+tmpfs                                                                      64M     &lt;span class="m"&gt;0&lt;/span&gt;   64M   &lt;span class="m"&gt;0&lt;/span&gt;% /dev
+tmpfs                                                                     &lt;span class="m"&gt;3&lt;/span&gt;.9G     &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="m"&gt;3&lt;/span&gt;.9G   &lt;span class="m"&gt;0&lt;/span&gt;% /sys/fs/cgroup
+/dev/vda1                                                                 158G  &lt;span class="m"&gt;6&lt;/span&gt;.5G  145G   &lt;span class="m"&gt;5&lt;/span&gt;% /health
+/dev/disk/by-id/scsi-0DO_Volume_pvc-ae31a80d-7b23-11e9-bffb-0ab3124b7b1c  &lt;span class="m"&gt;7&lt;/span&gt;.9G   36M  &lt;span class="m"&gt;7&lt;/span&gt;.4G   &lt;span class="m"&gt;1&lt;/span&gt;% /data
+shm                                                                        64M     &lt;span class="m"&gt;0&lt;/span&gt;   64M   &lt;span class="m"&gt;0&lt;/span&gt;% /dev/shm
+tmpfs                                                                     &lt;span class="m"&gt;3&lt;/span&gt;.9G   12K  &lt;span class="m"&gt;3&lt;/span&gt;.9G   &lt;span class="m"&gt;1&lt;/span&gt;% /run/secrets/kubernetes.io/serviceaccount
+tmpfs                                                                     &lt;span class="m"&gt;3&lt;/span&gt;.9G     &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="m"&gt;3&lt;/span&gt;.9G   &lt;span class="m"&gt;0&lt;/span&gt;% /proc/acpi
+tmpfs                                                                     &lt;span class="m"&gt;3&lt;/span&gt;.9G     &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="m"&gt;3&lt;/span&gt;.9G   &lt;span class="m"&gt;0&lt;/span&gt;% /sys/firmware
+
+&lt;span class="c1"&gt;# list files&lt;/span&gt;
+$ ls -l /data
+total &lt;span class="m"&gt;24&lt;/span&gt;
+-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;1001&lt;/span&gt; &lt;span class="m"&gt;1001&lt;/span&gt;   &lt;span class="m"&gt;130&lt;/span&gt; May &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;18&lt;/span&gt;:23 appendonly.aof
+-rw-r--r-- &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;1001&lt;/span&gt; &lt;span class="m"&gt;1001&lt;/span&gt;   &lt;span class="m"&gt;175&lt;/span&gt; May &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;17&lt;/span&gt;:22 dump.rdb
+drwxrws--- &lt;span class="m"&gt;2&lt;/span&gt; root &lt;span class="m"&gt;1001&lt;/span&gt; &lt;span class="m"&gt;16384&lt;/span&gt; May &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;17&lt;/span&gt;:22 lost+found
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Third, you can copy files or directories from or to a Kubernetes pod using &lt;tt class="docutils literal"&gt;kubectl cp&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;kubectl cp default/redis-master-0:/data/dump.rdb /home/vitaly/Downloads/dump.rdb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See &lt;tt class="docutils literal"&gt;kubectl cp &lt;span class="pre"&gt;--help&lt;/span&gt;&lt;/tt&gt; for more&amp;nbsp;details.&lt;/p&gt;
+</content><category term="k8s"></category><category term="kubectl"></category><category term="digitalocean"></category></entry><entry><title>Helm stable/redis chart: slave unable to connect to master</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/" rel="alternate"></link><published>2019-05-20T19:20:00+03:00</published><updated>2019-05-20T19:20:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/</id><summary type="html">&lt;p class="first last"&gt;Things to take care of when installing Helm&amp;#8217;s stable/redis
 chart with master-slave topology&amp;nbsp;enabled&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve tried to install &lt;a class="reference external" href="https://github.com/helm/charts/tree/master/stable/redis"&gt;stable/redis&lt;/a&gt; Helm chart version
 8.0.1. I used production-ready values taken from the &lt;a class="reference external" href="https://github.com/helm/charts/blob/master/stable/redis/values-production.yaml"&gt;repo&lt;/a&gt; and
