@@ -454,7 +454,7 @@ posted here will work out for you too. I also hope the issue with high
 американцем, но труднее с немцем или&amp;nbsp;испанцем.&lt;/p&gt;
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;Пример&lt;/h2&gt;
-&lt;img alt="Хорошо и плохо в разных культурах" class="align-left" src="https://blog.pilosus.org/images/yes-means-yes.jpg" style="width: 400px;" /&gt;
+&lt;img alt="Хорошо и плохо в разных культурах" class="responsive align-left" src="https://blog.pilosus.org/images/yes-means-yes.jpg" style="width: 400px;" /&gt;
 &lt;p&gt;Я участвовал в разработке open source библиотеки валидации данных
 &lt;a class="reference external" href="https://github.com/samuelcolvin/pydantic"&gt;pydantic&lt;/a&gt;. До описанного
 случая в библиотеку было вмерджено 12 моих правок &amp;#8212; новые фичи,
@@ -503,7 +503,7 @@ review&lt;/strong&gt;.&lt;/p&gt;
 ответ &amp;#8220;Отлично! Это именно то, на что я надеялся&amp;#8221; я продолжаю работу
 над тем, чему уже на тот момент уготовано быть&amp;nbsp;выброшенным.&lt;/p&gt;
 &lt;p&gt;Я утверждаю, что это очень типичный&amp;nbsp;паттерн:&lt;/p&gt;
-&lt;img alt="Monty Python's Argument Clinic Sketch, courtesy wikipedia.org" class="align-left" src="https://blog.pilosus.org/images/argument-clinic.png" /&gt;
+&lt;img alt="Monty Python's Argument Clinic Sketch, courtesy wikipedia.org" class="responsive align-left" src="https://blog.pilosus.org/images/argument-clinic.png" /&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;Собеседник дает положительный ответ с небольшим замечанием (&amp;#8220;не
 хотел бы тебя утруждать&amp;#8221;, &amp;#8220;если тебя это обременит, буду рад
@@ -760,7 +760,7 @@ dependencies in the inheritance hierarchy and no linearization of
 the original class&amp;nbsp;exists.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="Multiple Inheritance Example" src="https://blog.pilosus.org/images/c3_linearization.png" style="width: 800px;" /&gt;
+&lt;img alt="Multiple Inheritance Example" class="responsive" src="https://blog.pilosus.org/images/c3_linearization.png" /&gt;
 &lt;p class="caption"&gt;Complex multiple inheritance example, courtesy &lt;a class="reference external" href="https://commons.wikimedia.org/wiki/File:C3_linearization_example.svg"&gt;H2power&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Consider linearization process for a class &lt;tt class="docutils literal"&gt;K1&lt;/tt&gt;:&lt;/p&gt;
