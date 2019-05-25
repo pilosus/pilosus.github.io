@@ -42,8 +42,14 @@
     <div class="container">
 
       <section class="header">
-	<img class="header-img" alt="Vitaly Samigullin" src="/images/avatar.png">
-	<h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly's Technical Blog </a></h2>
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.png">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly's Technical Blog </a></h2>
+	  </div>
+	</div>
       </section>
 
       <div class="navbar-spacer"></div>
@@ -58,7 +64,7 @@
       </nav>
 
       <div class="search">
-        <form id="search-google" name="searchForm" action="http://google.com/search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
           <div class="row">
             <div class="ten columns">
 	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
@@ -222,6 +228,15 @@ return different objects every time it&#8217;s&nbsp;called.</p>
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-140765245-1', 'auto');
+    ga('send', 'pageview');
+    </script>
 <script type="text/javascript">
     var disqus_shortname = 'https-blog-pilosus-org';
     (function () {
