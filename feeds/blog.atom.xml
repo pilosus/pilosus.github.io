@@ -1,5 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-24T20:15:00+03:00</updated><entry><title>Kubernetes Persistent Volumes: How to List and Copy Files and Directories</title><link href="https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/" rel="alternate"></link><published>2019-05-24T20:15:00+03:00</published><updated>2019-05-24T20:15:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-24:/posts/2019/05/24/k8s-volumes-list-copy/</id><summary type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-26T12:00:00+03:00</updated><entry><title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title><link href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" rel="alternate"></link><published>2019-05-26T12:00:00+03:00</published><updated>2019-05-26T12:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-26:/posts/2019/05/26/k8s-ingress-troubleshooting/</id><summary type="html">&lt;p class="first last"&gt;Kubernetes introduces a bunch of abstractions. It&amp;#8217;s easy to
+mess up with them in your manifest files. Yet Kubernetes
+provides great tools for troubleshooting. Here is how you
+can tackle problems with Ingress and Service&amp;nbsp;resources.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve set up an &lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes"&gt;Nginx Ingress Controller&lt;/a&gt; on my DigitalOcean
+Kubernetes cluster. It&amp;#8217;s make up of a replica set of pods that run an
+Nginx web server and watch for &lt;tt class="docutils literal"&gt;Ingress&lt;/tt&gt; resource
+deployment. Controller also fires up a &lt;tt class="docutils literal"&gt;LoadBalancer&lt;/tt&gt; service that
+routes and balances external traffic to the Nginx pods. In turn Nginx
+pods route traffic to your app pods in accordance with rules from
+app&amp;#8217;s Ingress manifest. All in all, the whole topology is the&amp;nbsp;following:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://blog.pilosus.org/images/ingress.png"&gt;&lt;img alt="Kubernetes cluster with Nginx Ingress Controller" class="responsive" src="https://blog.pilosus.org/images/ingress.png" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;The problem is Kubernetes uses quite a few abstractions (Pods,
+Deployments, Services, Ingress, Roles, etc.) so that it&amp;#8217;s easy to make
+a mistake. The good news is Kubernetes gives you great tools to
+troubleshoot problems you have bumped into. In my case the first
+response I&amp;#8217;ve got after I set up an Ingress Controller was Nginx&amp;#8217;s 503
+error code (service temporarily unavailable). Here is how I&amp;#8217;ve fixed&amp;nbsp;it.&lt;/p&gt;
+&lt;div class="section" id="kubernetes-nginx-ingress-controller-troubleshooting"&gt;
+&lt;h2&gt;Kubernetes Nginx Ingress Controller&amp;nbsp;Troubleshooting&lt;/h2&gt;
+&lt;p&gt;Let&amp;#8217;s assume we are using &lt;a class="reference external" href="https://github.com/kubernetes/ingress-nginx"&gt;Kubernetes Nginx Ingress Controller&lt;/a&gt; as
+there are other implementations too. Its components get deployed into
+their own &lt;tt class="docutils literal"&gt;Namespace&lt;/tt&gt; called &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;ingress-nginx&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;The first thing you are going to see to find out why a service
+responds with 503 status code is Nginx logs. Let&amp;#8217;s see a list of pods
+with&amp;nbsp;Nginx:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ ~ kubectl get pods --namespace ingress-nginx
+NAME                                        READY   STATUS    RESTARTS   AGE
+nginx-ingress-controller-5694ccb578-l82hc   1/1     Running   0          21h
+&lt;/pre&gt;
+&lt;p&gt;Having only a signle pod it&amp;#8217;s easier to skim through the logs with
+&lt;tt class="docutils literal"&gt;kubectl logs&lt;/tt&gt;. If there were multiple pods it would be much more
+convenient to have &lt;span class="caps"&gt;ELK&lt;/span&gt; (or &lt;a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-kubernetes"&gt;&lt;span class="caps"&gt;EFK&lt;/span&gt;&lt;/a&gt;) stack running in the&amp;nbsp;cluster.&lt;/p&gt;
+&lt;p&gt;Looking up the log we&amp;nbsp;see:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ kubectl logs -f nginx-ingress-controller-5694ccb578-l82hc --namespace ingress-nginx
+...
+Error obtaining Endpoints for Service &amp;quot;&amp;lt;namespace&amp;gt;/&amp;lt;your-app-service&amp;gt;&amp;quot;:
+no object matching key &amp;quot;&amp;lt;namespace&amp;gt;/&amp;lt;your-app-service&amp;gt;&amp;quot; in local store
+...
+&lt;/pre&gt;
+&lt;p&gt;Let&amp;#8217;s see what endpoints we&amp;nbsp;have:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ kubectl get endpoints --namespace &amp;lt;namespace&amp;gt;
+...
+&amp;lt;namespace&amp;gt; &amp;lt;your-app-service&amp;gt;  &amp;lt;none&amp;gt; 21h
+...
+&lt;/pre&gt;
+&lt;p&gt;Indeed, our service have no endpoints. That means that a &lt;a class="reference external" href="https://kubernetes.io/docs/concepts/services-networking/service/"&gt;Service&lt;/a&gt;
+deployed to expose your app&amp;#8217;s pods doesn&amp;#8217;t actually have a virtual &lt;span class="caps"&gt;IP&lt;/span&gt;
+address. There are two cases when a service doesn&amp;#8217;t have an &lt;span class="caps"&gt;IP&lt;/span&gt;: it&amp;#8217;s
+either &lt;a class="reference external" href="https://kubernetes.io/docs/concepts/services-networking/service/#headless-services"&gt;headless&lt;/a&gt; or you have messed up with &lt;a class="reference external" href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors"&gt;label selectors&lt;/a&gt;.
+&lt;strong&gt;Check your label selectors carefully!&lt;/strong&gt; You know what you&amp;#8217;re doing
+when using headless services. So most likely it&amp;#8217;s a wrong label name
+or value that doesn&amp;#8217;t match your app&amp;#8217;s pods! So was in my own case, by
+the&amp;nbsp;way.&lt;/p&gt;
+&lt;p&gt;Once you fixed your labels reapply your app&amp;#8217;s service and check
+endpoints once&amp;nbsp;again:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ kubectl get endpoints --namespace &amp;lt;namespace&amp;gt;
+...
+&amp;lt;namespace&amp;gt;  &amp;lt;your-app-service&amp;gt;  10.244.0.136:8080,10.244.0.144:8080,10.244.0.185:8080  21h
+...
+&lt;/pre&gt;
+&lt;p&gt;Now our service exposes three local &lt;span class="caps"&gt;IP&lt;/span&gt;:port pairs of type
+&lt;tt class="docutils literal"&gt;ClusterIP&lt;/tt&gt;! &lt;tt class="docutils literal"&gt;ClusterIP&lt;/tt&gt; is a &lt;a class="reference external" href="https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types"&gt;service type&lt;/a&gt; that fits best to
+the setup with an Ingress Controller and a Load Balancer routing
+external traffic to&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Request to a service now returns 200 &lt;span class="caps"&gt;OK&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="k8s"></category><category term="ingress"></category><category term="digitalocean"></category></entry><entry><title>Kubernetes Persistent Volumes: How to List and Copy Files and Directories</title><link href="https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/" rel="alternate"></link><published>2019-05-24T20:15:00+03:00</published><updated>2019-05-24T20:15:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-24:/posts/2019/05/24/k8s-volumes-list-copy/</id><summary type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
 a &lt;tt class="docutils literal"&gt;PersistentVolume&lt;/tt&gt; and a &lt;tt class="docutils literal"&gt;PersistentVolumeClaim&lt;/tt&gt;. It&amp;#8217;s
 provisioned by your cloud platform, say, DigitalOcean. You want to
 know what space is available to you, you want to browse files and

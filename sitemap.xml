@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2019-05-25T12:30:50-00:00</lastmod>
+<lastmod>2019-05-26T19:39:46-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2019-05-25T12:30:50-00:00</lastmod>
+<lastmod>2019-05-26T19:39:46-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2019-05-25T12:30:50-00:00</lastmod>
+<lastmod>2019-05-26T19:39:46-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2019-05-25T12:30:50-00:00</lastmod>
+<lastmod>2019-05-26T19:39:46-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -36,6 +36,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-04-28T16:45:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/</loc>
+<lastmod>2019-05-26T12:00:00+03:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -117,27 +124,34 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2019-05-24T20:15:00+02:30</lastmod>
+<lastmod>2019-05-26T12:00:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/k8s/</loc>
-<lastmod>2019-05-24T20:15:00+02:30</lastmod>
+<lastmod>2019-05-26T12:00:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://blog.pilosus.org/tag/kubectl/</loc>
-<lastmod>2019-05-24T20:15:00+02:30</lastmod>
+<loc>https://blog.pilosus.org/tag/ingress/</loc>
+<lastmod>2019-05-26T12:00:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/digitalocean/</loc>
+<lastmod>2019-05-26T12:00:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/kubectl/</loc>
 <lastmod>2019-05-24T20:15:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
