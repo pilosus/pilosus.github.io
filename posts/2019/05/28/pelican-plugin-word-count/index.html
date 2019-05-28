@@ -2,12 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Vitaly's Technical Blog</title>
+    <title>Pelican plugin: word count and reading time statistics</title>
 
     <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Pelican plugin: word count and reading time statistics" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" />
+    <meta property="og:description" content="An open-source plugin for Python Pelican blog platform. It extends blog posts with reading statistics: number of words and reading time in minutes." />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly&#39;s Technical Blog" />
+    <meta property="article:published_time" content="2019-05-28" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="pelican" />
+    <meta property="article:tag" content="blog" />
+    <meta property="article:tag" content="python" />
+    <meta property="article:tag" content="plugin" />
 
 
     <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -47,7 +60,7 @@
           <ul class="navbar-list">
 	    
             <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
-            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
           </ul>
 	</div>
       </nav>
@@ -67,62 +80,19 @@
       </div>
       
       <div class="content">
-        <section class="body">
+        <section id="content" class="body">
           <article class="post-entry">
-            <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/">Pelican blog: up and&nbsp;running</a></h4>
-              <div class="post-info">
-                <span class="published" title="2019-05-01T11:30:00+03:00">
-                  01-05-2019 11:30
-                </span>
-                |
-                <span class="vcard author">
-                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
-                </span>
-                |
-                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
-		|
-		<span class="word-count">1272 words</span>
-		|
-		<span class="word-count">6 min to read</span>
-<br/><span>tags: <a href="https://blog.pilosus.org/tag/pelican/">pelican</a> <a href="https://blog.pilosus.org/tag/blog/">blog</a> <a href="https://blog.pilosus.org/tag/python/">python</a> </span>                
-              </div><!-- /.post-info -->            <div class="post-summary">
-              <p><a class="reference external" href="https://docs.getpelican.com/en/stable/">Pelican</a> is a static site generator written in Python. I use it for
-<a class="reference external" href="https://blog.pilosus.org">my personal blog</a>. Pelican is easy to install, configure and
-customize with themes and plugins. I was able to set up the blog with
-my own <a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme">custom theme</a> and an <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og">Open Graph plugin</a> in a few&nbsp;hours …</p>
-            </div>
-            <a class="post-readmore" href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/">Read more</a>
-          </article>
-          <article class="post-entry">
-            <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/">Method vs. Class Method Quirks in Python&nbsp;3</a></h4>
-              <div class="post-info">
-                <span class="published" title="2019-04-29T17:30:00+03:00">
-                  29-04-2019 17:30
-                </span>
-                |
-                <span class="vcard author">
-                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
-                </span>
-                |
-                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
-		|
-		<span class="word-count">319 words</span>
-		|
-		<span class="word-count">2 min to read</span>
-<br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> </span>                
-              </div><!-- /.post-info -->            <div class="post-summary">
-              <p class="first last">A little example of how bound/unbound methods behave in Python&nbsp;3</p>
+            <header class="post-header">
+              <h4 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="bookmark"
+                   title="Permalink to Pelican plugin: word count and reading time statistics">Pelican plugin: word count and reading time&nbsp;statistics</a></h4>
+            </header>
 
-            </div>
-            <a class="post-readmore" href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/">Read more</a>
-          </article>
-          <article class="post-entry">
-            <h4 class="entry-title"><a href="https://blog.pilosus.org/posts/2019/04/28/intro/">Let&#8217;s get&nbsp;started!</a></h4>
+            <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-04-28T16:30:00+03:00">
-                  28-04-2019 16:30
+                <span class="published" title="2019-05-28T12:03:00+03:00">
+                  28-05-2019 12:03
                 </span>
-                | upd. <span class="modified" title="2019-04-28T16:45:00+03:00">28-04-2019 16:45</span>
                 |
                 <span class="vcard author">
                   by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
@@ -130,25 +100,52 @@ my own <a class="reference external" href="https://github.com/pilosus/pilosus-pe
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">341 words</span>
+		<span class="word-count">215 words</span>
 		|
-		<span class="word-count">2 min to read</span>
-<br/><span>tags: <a href="https://blog.pilosus.org/tag/intro/">intro</a> </span>                
-              </div><!-- /.post-info -->            <div class="post-summary">
-              <p>My name is Vitaly R. Samigullin. I&#8217;m a software developer, a team
-leader, and a person who enjoys thinking about how and why things work
-the way they work. Having lived in Austria and Spain, I got some
-interesting immigration experience. I&#8217;ve also started a small
-publishing company …</p>
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/pelican/">pelican</a> <a href="https://blog.pilosus.org/tag/blog/">blog</a> <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/plugin/">plugin</a> </span>                
+              </div><!-- /.post-info -->              <p>I&#8217;ve just released a tiny library for <a class="reference external" href="https://docs.getpelican.com/en/stable/index.html">Pelican</a> blog platform called
+<a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/">word count</a>. It&#8217;s a plugin that extends articles and pages with the
+basic text statistics: number of words and approximate reading time in
+minutes. You can use it then in your <tt class="docutils literal"><span class="caps">HTML</span></tt> template. My own
+<a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme/">theme</a> supports it&nbsp;too.</p>
+<p>It turned out that there is another plugin called <a class="reference external" href="https://github.com/getpelican/pelican-plugins/tree/master/post_stats">post_stats</a>. It
+provides even more extensive stats. But I think it&#8217;s an overkill for
+my purposes: I don&#8217;t need text readability features, they won&#8217;t work
+for non-English text, they slow down site generation. I also suspect
+that <tt class="docutils literal">post_stats</tt> is run against all the contents, including
+non-text ones, which is also not so good for plugin&nbsp;performance.</p>
+<p>My <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/">word count</a> plugin explicitly runs against text entities
+(articles, pages, drafts and translations). It calculates basic
+statistics I need for my blog. And that&#8217;s&nbsp;it.</p>
+<p>I prefer to add Pelican plugins as <tt class="docutils literal">git submodule</tt>. It makes it
+easier to <tt class="docutils literal">git clone</tt> the entire blog with all its themes and
+plugins on the new machine. It&#8217;s also make it easier to version
+plugins and themes you use. Just check out your submodule to the
+version needed. Check out my article <a class="reference external" href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/">Pelican blog: up and running</a> for more&nbsp;details.</p>
+<p>You can donwload (or better <tt class="docutils literal">git clone</tt>) <tt class="docutils literal">word_count</tt> plugin on
+the <a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/">GitHub</a>.</p>
+
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h5>Comments</h5>
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+                var disqus_shortname = 'https-blog-pilosus-org';
+                var disqus_identifier = 'posts/2019/05/28/pelican-plugin-word-count/';
+                var disqus_url = 'https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/';
+                (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+              </script>
+              <noscript>Please enable JavaScript to view the comments.</noscript>
             </div>
-            <a class="post-readmore" href="https://blog.pilosus.org/posts/2019/04/28/intro/">Read more</a>
+
           </article>
         </section>
-	<section class="pagination">
-	        <a class="prev-page" href="https://blog.pilosus.org/index.html"><<</a>
-	    Page 2 of 2
-	</section>
-	      </div>
+      </div>
 
       <div class="navbar-spacer"></div>
       <section class="extras">

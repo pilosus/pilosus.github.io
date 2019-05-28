@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2019-05-27T13:38:41-00:00</lastmod>
+<lastmod>2019-05-28T13:07:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2019-05-27T13:38:41-00:00</lastmod>
+<lastmod>2019-05-28T13:07:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2019-05-27T13:38:41-00:00</lastmod>
+<lastmod>2019-05-28T13:07:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2019-05-27T13:38:41-00:00</lastmod>
+<lastmod>2019-05-28T13:07:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -36,6 +36,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-04-28T16:45:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/</loc>
+<lastmod>2019-05-28T12:03:00+03:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -124,7 +131,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2019-05-26T12:00:00+02:30</lastmod>
+<lastmod>2019-05-28T12:03:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/pelican/</loc>
+<lastmod>2019-05-28T12:03:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/blog/</loc>
+<lastmod>2019-05-28T12:03:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/python/</loc>
+<lastmod>2019-05-28T12:03:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/plugin/</loc>
+<lastmod>2019-05-28T12:03:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -200,13 +235,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://blog.pilosus.org/tag/python/</loc>
-<lastmod>2019-05-02T13:50:00+02:30</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://blog.pilosus.org/tag/mro/</loc>
 <lastmod>2019-05-02T13:50:00+02:30</lastmod>
 <changefreq>daily</changefreq>
@@ -230,20 +258,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://blog.pilosus.org/tag/algorithms/</loc>
 <lastmod>2019-05-02T12:10:00+02:30</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/tag/pelican/</loc>
-<lastmod>2019-05-01T11:30:00+02:30</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/tag/blog/</loc>
-<lastmod>2019-05-01T11:30:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

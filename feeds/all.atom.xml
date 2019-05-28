@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-26T12:00:00+03:00</updated><entry><title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title><link href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" rel="alternate"></link><published>2019-05-26T12:00:00+03:00</published><updated>2019-05-26T12:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-26:/posts/2019/05/26/k8s-ingress-troubleshooting/</id><summary type="html">&lt;p class="first last"&gt;Kubernetes introduces a bunch of abstractions. It&amp;#8217;s easy to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-28T12:03:00+03:00</updated><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+03:00</published><updated>2019-05-28T12:03:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
+extends blog posts with reading statistics: number of words
+and reading time in&amp;nbsp;minutes.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I&amp;#8217;ve just released a tiny library for &lt;a class="reference external" href="https://docs.getpelican.com/en/stable/index.html"&gt;Pelican&lt;/a&gt; blog platform called
+&lt;a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/"&gt;word count&lt;/a&gt;. It&amp;#8217;s a plugin that extends articles and pages with the
+basic text statistics: number of words and approximate reading time in
+minutes. You can use it then in your &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;HTML&lt;/span&gt;&lt;/tt&gt; template. My own
+&lt;a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme/"&gt;theme&lt;/a&gt; supports it&amp;nbsp;too.&lt;/p&gt;
+&lt;p&gt;It turned out that there is another plugin called &lt;a class="reference external" href="https://github.com/getpelican/pelican-plugins/tree/master/post_stats"&gt;post_stats&lt;/a&gt;. It
+provides even more extensive stats. But I think it&amp;#8217;s an overkill for
+my purposes: I don&amp;#8217;t need text readability features, they won&amp;#8217;t work
+for non-English text, they slow down site generation. I also suspect
+that &lt;tt class="docutils literal"&gt;post_stats&lt;/tt&gt; is run against all the contents, including
+non-text ones, which is also not so good for plugin&amp;nbsp;performance.&lt;/p&gt;
+&lt;p&gt;My &lt;a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/"&gt;word count&lt;/a&gt; plugin explicitly runs against text entities
+(articles, pages, drafts and translations). It calculates basic
+statistics I need for my blog. And that&amp;#8217;s&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;I prefer to add Pelican plugins as &lt;tt class="docutils literal"&gt;git submodule&lt;/tt&gt;. It makes it
+easier to &lt;tt class="docutils literal"&gt;git clone&lt;/tt&gt; the entire blog with all its themes and
+plugins on the new machine. It&amp;#8217;s also make it easier to version
+plugins and themes you use. Just check out your submodule to the
+version needed. Check out my article &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/"&gt;Pelican blog: up and running&lt;/a&gt; for more&amp;nbsp;details.&lt;/p&gt;
+&lt;p&gt;You can donwload (or better &lt;tt class="docutils literal"&gt;git clone&lt;/tt&gt;) &lt;tt class="docutils literal"&gt;word_count&lt;/tt&gt; plugin on
+the &lt;a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</content><category term="pelican"></category><category term="blog"></category><category term="python"></category><category term="plugin"></category></entry><entry><title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title><link href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" rel="alternate"></link><published>2019-05-26T12:00:00+03:00</published><updated>2019-05-26T12:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-26:/posts/2019/05/26/k8s-ingress-troubleshooting/</id><summary type="html">&lt;p class="first last"&gt;Kubernetes introduces a bunch of abstractions. It&amp;#8217;s easy to
 mess up with them in your manifest files. Yet Kubernetes
 provides great tools for troubleshooting. Here is how you
 can tackle problems with Ingress and Service&amp;nbsp;resources.&lt;/p&gt;
