@@ -115,6 +115,7 @@ rewrote my &lt;tt class="docutils literal"&gt;Service&lt;/tt&gt; manifest:&lt;/p
 target port&amp;#8217;s name. &lt;tt class="docutils literal"&gt;ServiceMonitor&lt;/tt&gt; understands only explicitly
 named &lt;tt class="docutils literal"&gt;Service&lt;/tt&gt; ports, although other entities, e.g. an &lt;tt class="docutils literal"&gt;Ingress&lt;/tt&gt;,
 work well without explicit naming.&amp;nbsp;Beware!&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;P.S.&lt;/span&gt; At the time of writing I used &lt;tt class="docutils literal"&gt;kubectl v1.14.2&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;helm v2.14.0&lt;/tt&gt;.&lt;/p&gt;
 </content><category term="k8s"></category><category term="helm"></category><category term="prometheus"></category><category term="kubernetes-operator"></category><category term="til"></category></entry><entry><title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title><link href="https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/" rel="alternate"></link><published>2019-06-01T11:00:00+03:00</published><updated>2019-06-01T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/grafana-dashboard-flask-app/</id><summary type="html">&lt;p class="first last"&gt;A dashboard with 12 panels showing &lt;span class="caps"&gt;RPS&lt;/span&gt;, latency, errors for
 web app&amp;#8217;s endpoints as well as host and app&amp;#8217;s resource usage
 and some extra&amp;nbsp;details.&lt;/p&gt;
