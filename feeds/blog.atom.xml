@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-05-28T12:03:00+03:00</updated><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+03:00</published><updated>2019-05-28T12:03:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-06-01T11:00:00+03:00</updated><entry><title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title><link href="https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/" rel="alternate"></link><published>2019-06-01T11:00:00+03:00</published><updated>2019-06-01T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/grafana-dashboard-flask-app/</id><summary type="html">&lt;p class="first last"&gt;A dashboard with 12 panels showing &lt;span class="caps"&gt;RPS&lt;/span&gt;, latency, errors for
+web app&amp;#8217;s endpoints as well as host and app&amp;#8217;s resource usage
+and some extra&amp;nbsp;details.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I&amp;#8217;ve just &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard"&gt;open-sourced&lt;/a&gt; my Grafana dashboard for a Flask web
+application. It used metrics you get out of the box when using
+official Prometheus &lt;a class="reference external" href="https://github.com/prometheus/client_python"&gt;Python client&lt;/a&gt; assumed to be deployed with
+Kubernetes. It also uses additional metrics from my &lt;a class="reference external" href="https://github.com/pilosus/pili"&gt;Pili&lt;/a&gt;&amp;nbsp;project.&lt;/p&gt;
+&lt;a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png"&gt;&lt;img alt="Grfana dashboard: RPS and latency panels" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png" /&gt;&lt;/a&gt;
+&lt;p&gt;12 dasboard&amp;#8217;s panels covers the following&amp;nbsp;metrics:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Requests per second per host, endpoint, &lt;span class="caps"&gt;HTTP&lt;/span&gt; method&amp;nbsp;etc.&lt;/li&gt;
+&lt;li&gt;Latency&lt;/li&gt;
+&lt;li&gt;Percentiles (latency within which certain percent of requests&amp;nbsp;served)&lt;/li&gt;
+&lt;li&gt;Number of 4xx, 5xx errors per&amp;nbsp;second&lt;/li&gt;
+&lt;li&gt;Error count by&amp;nbsp;endpoint&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;CPU&lt;/span&gt; usage per&amp;nbsp;host&lt;/li&gt;
+&lt;li&gt;Memory usage per&amp;nbsp;host&lt;/li&gt;
+&lt;li&gt;Open file descriptors per&amp;nbsp;host&lt;/li&gt;
+&lt;li&gt;App&amp;#8217;s uptime per&amp;nbsp;host&lt;/li&gt;
+&lt;li&gt;App&amp;#8217;s version per&amp;nbsp;host&lt;/li&gt;
+&lt;li&gt;App&amp;#8217;s deployment environment (e.g. development, staging, production) per&amp;nbsp;host&lt;/li&gt;
+&lt;li&gt;Python interpretor version per&amp;nbsp;host&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-2.png"&gt;&lt;img alt="Grfana dashboard: errors and resource usage" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-2.png" /&gt;&lt;/a&gt;
+&lt;p&gt;Dashboard also provides&amp;nbsp;variables:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Prometheus&amp;nbsp;datasource&lt;/li&gt;
+&lt;li&gt;Time&amp;nbsp;interval&lt;/li&gt;
+&lt;li&gt;Kubernetes pod&amp;nbsp;name&lt;/li&gt;
+&lt;li&gt;App&amp;#8217;s&amp;nbsp;endpoint&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;HTTP&lt;/span&gt;&amp;nbsp;method&lt;/li&gt;
+&lt;li&gt;Percentile&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;HTTP&lt;/span&gt; status code for&amp;nbsp;errors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-3.png"&gt;&lt;img alt="Grfana dashboard: app's information" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-3.png" /&gt;&lt;/a&gt;
+&lt;p&gt;The variables allow to change some panels charts grouing, intervals,
+labels&amp;nbsp;selection.&lt;/p&gt;
+&lt;p&gt;Usage is&amp;nbsp;easy:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Download &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json"&gt;dashboard &lt;span class="caps"&gt;JSON&lt;/span&gt;&amp;nbsp;file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Tweak dashboard &lt;span class="caps"&gt;JSON&lt;/span&gt; file &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;flask-web-app.json&lt;/span&gt;&lt;/tt&gt; to fit your metrics and needs (take a look at the original app&amp;#8217;s metrics &lt;a class="reference external" href="https://github.com/pilosus/pili/blob/master/pili/app.py"&gt;here&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Import &lt;span class="caps"&gt;JSON&lt;/span&gt; at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;https://&amp;lt;your-grafana-path&amp;gt;/dashboard/import&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+</content><category term="prometheus"></category><category term="grafana"></category><category term="visualization"></category><category term="metrics"></category></entry><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+03:00</published><updated>2019-05-28T12:03:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
 extends blog posts with reading statistics: number of words
 and reading time in&amp;nbsp;minutes.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I&amp;#8217;ve just released a tiny library for &lt;a class="reference external" href="https://docs.getpelican.com/en/stable/index.html"&gt;Pelican&lt;/a&gt; blog platform called
@@ -833,7 +882,7 @@ checks are needed though, we use the &lt;tt class="docutils literal"&gt;Bottom&l
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;See more about the inner workings of the &lt;span class="caps"&gt;MRO&lt;/span&gt; in my article about &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/02/python-mro/"&gt;C3
 linearisation algorithm&lt;/a&gt;.&lt;/p&gt;
-</content><category term="python"></category><category term="mro"></category><category term="mixin"></category></entry><entry><title>Python Method Resolution Order and C3 linearization algoritm</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mro/" rel="alternate"></link><published>2019-05-02T12:10:00+03:00</published><updated>2019-05-02T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mro/</id><summary type="html">&lt;p class="first last"&gt;A naïve implementation of C3 linearization algorithm that
+</content><category term="python"></category><category term="mro"></category><category term="mixin"></category></entry><entry><title>Python Method Resolution Order and C3 linearization algorithm</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mro/" rel="alternate"></link><published>2019-05-02T12:10:00+03:00</published><updated>2019-05-02T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mro/</id><summary type="html">&lt;p class="first last"&gt;A naïve implementation of C3 linearization algorithm that
 lies under the hood of Python&amp;#8217;s Method Resolution Order
 (&lt;span class="caps"&gt;MRO&lt;/span&gt;)&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Method Resolution Order (&lt;span class="caps"&gt;MRO&lt;/span&gt;) is a order in which methods should be
