@@ -119,10 +119,11 @@ work well without explicit naming.&amp;nbsp;Beware!&lt;/p&gt;
 </content><category term="k8s"></category><category term="helm"></category><category term="prometheus"></category><category term="kubernetes-operator"></category><category term="til"></category></entry><entry><title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title><link href="https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/" rel="alternate"></link><published>2019-06-01T11:00:00+03:00</published><updated>2019-06-01T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/grafana-dashboard-flask-app/</id><summary type="html">&lt;p class="first last"&gt;A dashboard with 12 panels showing &lt;span class="caps"&gt;RPS&lt;/span&gt;, latency, errors for
 web app&amp;#8217;s endpoints as well as host and app&amp;#8217;s resource usage
 and some extra&amp;nbsp;details.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;I&amp;#8217;ve just &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard"&gt;open-sourced&lt;/a&gt; my Grafana dashboard for a Flask web
-application. It used metrics you get out of the box when using
-official Prometheus &lt;a class="reference external" href="https://github.com/prometheus/client_python"&gt;Python client&lt;/a&gt; assumed to be deployed with
-Kubernetes. It also uses additional metrics from my &lt;a class="reference external" href="https://github.com/pilosus/pili"&gt;Pili&lt;/a&gt;&amp;nbsp;project.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I&amp;#8217;ve just &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard"&gt;open-sourced&lt;/a&gt; my Grafana dashboard. The dashboard designed
+for a Flask web application that exposes metrics with
+my &lt;a class="reference external" href="https://github.com/pilosus/flask_prometheus_metrics"&gt;flask_prometheus_metrics&lt;/a&gt; Flask&amp;nbsp;extension.&lt;/p&gt;
+&lt;p&gt;Dashboard aimed at the apps deployed with Kubernetes, although it can
+be easily tweaked to be&amp;nbsp;infrastructure-agnostic.&lt;/p&gt;
 &lt;a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png"&gt;&lt;img alt="Grfana dashboard: RPS and latency panels" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png" /&gt;&lt;/a&gt;
 &lt;p&gt;12 dasboard&amp;#8217;s panels covers the following&amp;nbsp;metrics:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -158,13 +159,15 @@ Kubernetes. It also uses additional metrics from my &lt;a class="reference exter
 &lt;p&gt;The variables allow to change some panels charts grouing, intervals,
 labels&amp;nbsp;selection.&lt;/p&gt;
 &lt;p&gt;Usage is&amp;nbsp;easy:&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;ol class="arabic simple"&gt;
-&lt;li&gt;Download &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json"&gt;dashboard &lt;span class="caps"&gt;JSON&lt;/span&gt;&amp;nbsp;file&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Tweak dashboard &lt;span class="caps"&gt;JSON&lt;/span&gt; file &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;flask-web-app.json&lt;/span&gt;&lt;/tt&gt; to fit your metrics and needs (take a look at the original app&amp;#8217;s metrics &lt;a class="reference external" href="https://github.com/pilosus/pili/blob/master/pili/app.py"&gt;here&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Import &lt;span class="caps"&gt;JSON&lt;/span&gt; at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;https://&amp;lt;your-grafana-path&amp;gt;/dashboard/import&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;li&gt;Install &lt;a class="reference external" href="https://github.com/pilosus/flask_prometheus_metrics"&gt;flask_prometheus_metrics&lt;/a&gt; exporter to your Flask&amp;nbsp;application&lt;/li&gt;
+&lt;li&gt;Make Prometheus scraping your app&amp;#8217;s &lt;tt class="docutils literal"&gt;/metrics&lt;/tt&gt; endpoint&lt;/li&gt;
+&lt;li&gt;Import &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json"&gt;flask-web-app.json&lt;/a&gt; at &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;https://&amp;lt;your-grafana-domain&amp;gt;.tld/dashboard/import&lt;/span&gt;&lt;/tt&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;If you do not deploy your app in Kubernetes you may need to tweak
+&lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json"&gt;flask-web-app.json&lt;/a&gt; &lt;tt class="docutils literal"&gt;pod&lt;/tt&gt; labels to meet your needs. Instead of
+&lt;tt class="docutils literal"&gt;pod&lt;/tt&gt; you may use &lt;tt class="docutils literal"&gt;instance&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;hostname&lt;/tt&gt; or other label name
+depending on how your Prometheus handle your app&amp;#8217;s&amp;nbsp;hostname.&lt;/p&gt;
 </content><category term="prometheus"></category><category term="grafana"></category><category term="visualization"></category><category term="metrics"></category></entry><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+03:00</published><updated>2019-05-28T12:03:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
 extends blog posts with reading statistics: number of words
 and reading time in&amp;nbsp;minutes.&lt;/p&gt;

@@ -100,14 +100,15 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">177 words</span>
+		<span class="word-count">208 words</span>
 		|
 		<span class="word-count">1 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/prometheus/">prometheus</a> <a href="https://blog.pilosus.org/tag/grafana/">grafana</a> <a href="https://blog.pilosus.org/tag/visualization/">visualization</a> <a href="https://blog.pilosus.org/tag/metrics/">metrics</a> </span>                
-              </div><!-- /.post-info -->              <p>I&#8217;ve just <a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard">open-sourced</a> my Grafana dashboard for a Flask web
-application. It used metrics you get out of the box when using
-official Prometheus <a class="reference external" href="https://github.com/prometheus/client_python">Python client</a> assumed to be deployed with
-Kubernetes. It also uses additional metrics from my <a class="reference external" href="https://github.com/pilosus/pili">Pili</a>&nbsp;project.</p>
+              </div><!-- /.post-info -->              <p>I&#8217;ve just <a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard">open-sourced</a> my Grafana dashboard. The dashboard designed
+for a Flask web application that exposes metrics with
+my <a class="reference external" href="https://github.com/pilosus/flask_prometheus_metrics">flask_prometheus_metrics</a> Flask&nbsp;extension.</p>
+<p>Dashboard aimed at the apps deployed with Kubernetes, although it can
+be easily tweaked to be&nbsp;infrastructure-agnostic.</p>
 <a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png"><img alt="Grfana dashboard: RPS and latency panels" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png" /></a>
 <p>12 dasboard&#8217;s panels covers the following&nbsp;metrics:</p>
 <blockquote>
@@ -143,13 +144,15 @@ Kubernetes. It also uses additional metrics from my <a class="reference external
 <p>The variables allow to change some panels charts grouing, intervals,
 labels&nbsp;selection.</p>
 <p>Usage is&nbsp;easy:</p>
-<blockquote>
 <ol class="arabic simple">
-<li>Download <a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json">dashboard <span class="caps">JSON</span>&nbsp;file</a></li>
-<li>Tweak dashboard <span class="caps">JSON</span> file <tt class="docutils literal"><span class="pre">flask-web-app.json</span></tt> to fit your metrics and needs (take a look at the original app&#8217;s metrics <a class="reference external" href="https://github.com/pilosus/pili/blob/master/pili/app.py">here</a>)</li>
-<li>Import <span class="caps">JSON</span> at <tt class="docutils literal"><span class="pre">https://&lt;your-grafana-path&gt;/dashboard/import</span></tt></li>
+<li>Install <a class="reference external" href="https://github.com/pilosus/flask_prometheus_metrics">flask_prometheus_metrics</a> exporter to your Flask&nbsp;application</li>
+<li>Make Prometheus scraping your app&#8217;s <tt class="docutils literal">/metrics</tt> endpoint</li>
+<li>Import <a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json">flask-web-app.json</a> at <tt class="docutils literal"><span class="pre">https://&lt;your-grafana-domain&gt;.tld/dashboard/import</span></tt></li>
 </ol>
-</blockquote>
+<p>If you do not deploy your app in Kubernetes you may need to tweak
+<a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json">flask-web-app.json</a> <tt class="docutils literal">pod</tt> labels to meet your needs. Instead of
+<tt class="docutils literal">pod</tt> you may use <tt class="docutils literal">instance</tt> or <tt class="docutils literal">hostname</tt> or other label name
+depending on how your Prometheus handle your app&#8217;s&nbsp;hostname.</p>
 
             </div><!-- /.entry-content -->
             <div class="comments">
