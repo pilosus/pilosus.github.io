@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2019-06-01T20:57:57-00:00</lastmod>
+<lastmod>2019-06-01T21:00:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2019-06-01T20:57:57-00:00</lastmod>
+<lastmod>2019-06-01T21:00:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2019-06-01T20:57:57-00:00</lastmod>
+<lastmod>2019-06-01T21:00:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2019-06-01T20:57:57-00:00</lastmod>
+<lastmod>2019-06-01T21:00:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -47,7 +47,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/</loc>
-<lastmod>2019-06-01T11:00:00+03:00</lastmod>
+<lastmod>2019-06-01T20:50:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
@@ -145,7 +145,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2019-06-01T14:12:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -166,7 +166,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/tag/prometheus/</loc>
-<lastmod>2019-06-01T14:12:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -187,21 +187,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/tag/grafana/</loc>
-<lastmod>2019-06-01T11:00:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/visualization/</loc>
-<lastmod>2019-06-01T11:00:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/metrics/</loc>
-<lastmod>2019-06-01T11:00:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
