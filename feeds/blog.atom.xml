@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-06-01T14:12:00+03:00</updated><entry><title>Helm stable/prometheus-operator: adding new scraping targets and troubleshooting</title><link href="https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/" rel="alternate"></link><published>2019-06-01T14:12:00+03:00</published><updated>2019-06-01T14:12:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/prometheus-operator-no-active-targets/</id><summary type="html">&lt;p class="first last"&gt;How to add new services for Prometheus to scrape and what to
-do if no active targets&amp;nbsp;found&lt;/p&gt;
+do if no active targets found. Post covers Prometheus
+deployed in Kubernetes cluster using Helm
+stable/prometheus-operator&amp;nbsp;chart.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Today I Learned (&lt;span class="caps"&gt;TIL&lt;/span&gt;) that Kubernetes named ports usage may be quite&amp;nbsp;frustrating.&lt;/p&gt;
 &lt;p&gt;Recently I&amp;#8217;ve deployed monitoring stack (Prometheus, Grafana) in
 Kubernetes using Helm &lt;a class="reference external" href="https://github.com/helm/charts/tree/master/stable/prometheus-operator"&gt;stable/prometheus-operator&lt;/a&gt;. Setting up
