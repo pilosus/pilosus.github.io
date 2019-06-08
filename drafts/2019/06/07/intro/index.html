@@ -2,12 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Vitaly's Technical Blog</title>
+    <title>Registry</title>
 
     <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Registry" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/drafts/2019/06/07/intro/" />
+    <meta property="og:description" content="export REGISTRY_LOGIN=pilosus export REGISTRY_PASSWORD=$(pass pilosus/registry) export REGISTRY_URL=docker-registry.pilosus.org export REGISTRY_HEADER=”Accept: application/vnd.docker.distribution.manifest.v2+json” # Get list of tags for repository &#34;pilosus/pili&#34; curl -sSL -H &#34;$REGISTRY_HEADER&#34; --user pilosus:$REGISTRY_PASSWORD \ &#34;${REGISTRY_URL}/v2/pilosus/pili/tags/list&#34; | jq &#39;.tags&#39; # Get digest of &#34;pilosus …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly&#39;s Technical Blog" />
+    <meta property="article:published_time" content="2019-06-07" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="docker" />
+    <meta property="article:tag" content="registry" />
 
 
     <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -47,7 +58,7 @@
           <ul class="navbar-list">
 	    
             <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
-            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
           </ul>
 	</div>
       </nav>
@@ -67,46 +78,59 @@
       </div>
       
       <div class="content">
-<section id="content" class="body">
-<h3>Archives for Vitaly's Technical Blog</h3>
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h4 class="post-title">
+                <a href="https://blog.pilosus.org/drafts/2019/06/07/intro/" rel="bookmark"
+                   title="Permalink to Registry">Registry</a></h4>
+            </header>
 
-<dl>
-    <dt>07-06-2019 20:30</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/">Application configs: files or environment variables? Actually&nbsp;both!</a></dd>
-    <dt>Вс 02 июня 2019</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/06/02/mass-media-fast-track-success-ru/">Побочные эффекты масс-медиа: культ быстрого&nbsp;успеха</a></dd>
-    <dt>01-06-2019 14:12</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/">Helm stable/prometheus-operator: adding new scraping targets and&nbsp;troubleshooting</a></dd>
-    <dt>01-06-2019 11:00</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/">Grafana Dashboard for Prometheus official Python client with Flask App&nbsp;metrics</a></dd>
-    <dt>28-05-2019 12:03</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/">Pelican plugin: word count and reading time&nbsp;statistics</a></dd>
-    <dt>26-05-2019 12:00</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/">Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for&nbsp;Service</a></dd>
-    <dt>24-05-2019 20:15</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/">Kubernetes Persistent Volumes: How to List and Copy Files and&nbsp;Directories</a></dd>
-    <dt>20-05-2019 19:20</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/">Helm stable/redis chart: slave unable to connect to&nbsp;master</a></dd>
-    <dt>20-05-2019 11:12</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/">Helm Cheat Sheet: Personal Top of the Little Known Commands and&nbsp;Features</a></dd>
-    <dt>18-05-2019 19:00</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/">Minikube Cheat Sheet: most helpful commands and features I wish I knew from the&nbsp;start</a></dd>
-    <dt>18-05-2019 11:00</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/">Minikube high <span class="caps">CPU</span> usage even with no workload on Linux&nbsp;machine</a></dd>
-    <dt>Вс 12 мая 2019</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/12/yes-means-yes-ru/">Разница между нами и западными культурами: отказ и разрешение потенциально конфликтных&nbsp;ситуаций</a></dd>
-    <dt>02-05-2019 13:50</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/02/python-mixin/">Python <span class="caps">MRO</span> and Mixin&nbsp;Classes</a></dd>
-    <dt>02-05-2019 12:10</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/02/python-mro/">Python Method Resolution Order and C3 linearization&nbsp;algorithm</a></dd>
-    <dt>01-05-2019 11:30</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/">Pelican blog: up and&nbsp;running</a></dd>
-    <dt>29-04-2019 17:30</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/">Method vs. Class Method Quirks in Python&nbsp;3</a></dd>
-    <dt>28-04-2019 16:30</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2019/04/28/intro/">Let&#8217;s get&nbsp;started!</a></dd>
-</dl>
-</section>
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-06-07T10:30:00+03:00">
+                  07-06-2019 10:30
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">86 words</span>
+		|
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/docker/">docker</a> <a href="https://blog.pilosus.org/tag/registry/">registry</a> </span>                
+              </div><!-- /.post-info -->              <p>export REGISTRY_LOGIN=pilosus
+export REGISTRY_PASSWORD=$(pass pilosus/registry)
+export REGISTRY_URL=docker-registry.pilosus.org
+export REGISTRY_HEADER=&#8221;Accept:&nbsp;application/vnd.docker.distribution.manifest.v2+json&#8221;</p>
+<div class="highlight"><pre><span></span><span class="c1"># Get list of tags for repository &quot;pilosus/pili&quot;</span>
+curl -sSL -H <span class="s2">&quot;</span><span class="nv">$REGISTRY_HEADER</span><span class="s2">&quot;</span> --user pilosus:<span class="nv">$REGISTRY_PASSWORD</span> <span class="se">\</span>
+<span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRY_URL</span><span class="si">}</span><span class="s2">/v2/pilosus/pili/tags/list&quot;</span> <span class="p">|</span> jq <span class="s1">&#39;.tags&#39;</span>
+
+<span class="c1"># Get digest of &quot;pilosus/pili:pyup-scheduled-update-2019-06-03&quot;</span>
+<span class="nv">DIGEST</span><span class="o">=</span><span class="k">$(</span>curl -sSL -I -H <span class="s2">&quot;</span><span class="nv">$REGISTRY_HEADER</span><span class="s2">&quot;</span> --user pilosus:<span class="nv">$REGISTRY_PASSWORD</span> <span class="se">\</span>
+<span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRY_URL</span><span class="si">}</span><span class="s2">/v2/pilosus/pili/manifests/pyup-scheduled-update-2019-06-03&quot;</span> <span class="se">\</span>
+<span class="p">|</span> awk <span class="s1">&#39;$1 == &quot;docker-content-digest:&quot; { print $2 }&#39;</span> <span class="p">|</span> tr -d <span class="s1">$&#39;\r&#39;</span><span class="k">)</span>
+
+<span class="c1"># Delete image &quot;pilosus/pili:pyup-scheduled-update-2019-06-03&quot;</span>
+curl -v -sSL -X DELETE --user pilosus:<span class="nv">$REGISTRY_PASSWORD</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRY_URL</span><span class="si">}</span><span class="s2">/v2/pilosus/pili/manifests/</span><span class="si">${</span><span class="nv">DIGEST</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># garbage collect</span>
+kubectl <span class="nb">exec</span> -it --namespace &lt;your-registry-ns&gt; &lt;your-docker-registry-pod&gt; <span class="se">\</span>
+/bin/registry garbage-collect /etc/docker/registry/config.yml
+</pre></div>
+<p><a class="reference external" href="https://gist.github.com/jaytaylor/86d5efaddda926a25fa68c263830dac1">https://gist.github.com/jaytaylor/86d5efaddda926a25fa68c263830dac1</a></p>
+<p><a class="reference external" href="https://stackoverflow.com/questions/25436742/how-to-delete-images-from-a-private-docker-registry">https://stackoverflow.com/questions/25436742/how-to-delete-images-from-a-private-docker-registry</a></p>
+<p><a class="reference external" href="https://github.com/docker/distribution/issues/2553">https://github.com/docker/distribution/issues/2553</a>
+<a class="reference external" href="https://github.com/docker/distribution/pull/2879">https://github.com/docker/distribution/pull/2879</a></p>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
       </div>
 
       <div class="navbar-spacer"></div>

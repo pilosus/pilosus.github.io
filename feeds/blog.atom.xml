@@ -1,5 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-06-02T12:30:00+03:00</updated><entry><title>Побочные эффекты масс-медиа: культ быстрого успеха</title><link href="https://blog.pilosus.org/posts/2019/06/02/mass-media-fast-track-success-ru/" rel="alternate"></link><published>2019-06-02T12:30:00+03:00</published><updated>2019-06-02T12:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-02:/posts/2019/06/02/mass-media-fast-track-success-ru/</id><summary type="html">&lt;p&gt;Массовые медиа имеют много побочных эффектов. Один из них &amp;#8212;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-06-07T20:30:00+03:00</updated><entry><title>Application configs: files or environment variables? Actually both!</title><link href="https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/" rel="alternate"></link><published>2019-06-07T20:30:00+03:00</published><updated>2019-06-07T20:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-07:/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/</id><summary type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
+and infrastructure-dependent. When it comes to configs there are a few
+parties with a possible conflict of interests. Software developers
+want an easy access to app&amp;#8217;s configuration, versioning, readability,
+language support for the config format. Security guys want security …&lt;/p&gt;</summary><content type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
+and infrastructure-dependent. When it comes to configs there are a few
+parties with a possible conflict of interests. Software developers
+want an easy access to app&amp;#8217;s configuration, versioning, readability,
+language support for the config format. Security guys want security!
+&lt;span class="caps"&gt;SRE&lt;/span&gt;/Administrators want an easy deployment and scaling as well as
+infrastructure native support for configuration format of
+choice. Managers, well, they probably want to smile at conferences and
+don&amp;#8217;t want you all to spend too much time on such a miserable question
+like configuration&amp;nbsp;architecture!&lt;/p&gt;
+&lt;p&gt;In software development some things change rapidly. Ideas, manifests
+and frameworks rise and fall. So lets review what&amp;#8217;s application
+configuration today and what it could&amp;nbsp;be.&lt;/p&gt;
+&lt;div class="section" id="environment-variables-good-and-bad-parts"&gt;
+&lt;h2&gt;Environment variables: good and bad&amp;nbsp;parts&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Environment_variable"&gt;Environment variables&lt;/a&gt; (&lt;em&gt;env vars&lt;/em&gt; or &lt;em&gt;env&lt;/em&gt;) are often recommended
+as the only way to store application configs (see &lt;a class="reference external" href="https://12factor.net/config"&gt;The Twelve-Factor
+App&lt;/a&gt; rule &lt;span class="caps"&gt;III&lt;/span&gt;). Envs are &lt;strong&gt;good&lt;/strong&gt; bacause they&amp;nbsp;are:&lt;/p&gt;
+&lt;div class="section" id="secure"&gt;
+&lt;h3&gt;Secure&lt;/h3&gt;
+&lt;p&gt;Environment variables are set by who&amp;#8217;s responsible for the deployment
+environment: by developer on local machines, by
+&lt;span class="caps"&gt;SRE&lt;/span&gt;/Administrator/DevOps in production. With env you won&amp;#8217;t compromise
+your production credentials even if your code&amp;#8217;s leaked to the
+public. It&amp;#8217;s also harder for developers to break something in
+production, because they simply don&amp;#8217;t have access to production&amp;nbsp;credentials.&lt;/p&gt;
+&lt;p&gt;Messing up with envs in the runtime may also be tricky, as you cannot
+change environment variables for the parent process in *nix&amp;nbsp;systems.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="universal"&gt;
+&lt;h3&gt;Universal&lt;/h3&gt;
+&lt;p&gt;Environment variables are everywhere! On &lt;span class="caps"&gt;GNU&lt;/span&gt;/Linux, MacOS,
+Windows. Every production-ready programming language supports envs out
+of&amp;nbsp;box.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="easy-to-use"&gt;
+&lt;h3&gt;Easy to&amp;nbsp;use&lt;/h3&gt;
+&lt;p&gt;Env is flat. Basically it&amp;#8217;s a key-value pair with string value. So
+loading envs is&amp;nbsp;easy.&lt;/p&gt;
+&lt;p&gt;There are some &lt;strong&gt;bad&lt;/strong&gt; things about envs too. Envs&amp;nbsp;are:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="unexpressive"&gt;
+&lt;h3&gt;Unexpressive&lt;/h3&gt;
+&lt;p&gt;The flip side of the &amp;#8220;easy&amp;#8221; coin is unexpressiveness. Envs are flat
+key-value strings. You cannot store the whole config as en env. So you
+need to read envs in your code and then construct some sort of the
+final configuration, possible overly&amp;nbsp;complex.&lt;/p&gt;
+&lt;p&gt;Flat env structure also get you into a grey area of bad variable
+names. Consider the following &lt;span class="caps"&gt;YAML&lt;/span&gt;&amp;nbsp;config:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+cluster:
+  host_weight:
+    node00.example.com: 0.8
+    node01.example.com: 0.8
+    node02.example.com: 1.0
+    node03.example.com: 0.5
+db: 1
+user: app
+password: my_password
+&lt;/pre&gt;
+&lt;p&gt;It may translate to the following envs to substitute values in the
+config&amp;nbsp;above:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+CLUSTER_HOST_NODE_00=0.8
+CLUSTER_HOST_NODE_01=0.8
+CLUSTER_HOST_NODE_02=1.0
+CLUSTER_HOST_NODE_03=0.5
+CLUSTER_DB=1
+CLUSTER_USER=app
+CLUSTER_PASSWORD=my_password
+&lt;/pre&gt;
+&lt;p&gt;So, you still store some kind of configuration file in your app&amp;#8217;s
+version control system (&lt;span class="caps"&gt;VCS&lt;/span&gt;). Usually it&amp;#8217;s a module in you programming
+language (e.g. &lt;tt class="docutils literal"&gt;config.py&lt;/tt&gt; in Python) with some language-specific
+data structures and even some logic. Values (at least some of them)
+are stored as envs with quite awkward names. These configs are much
+less readable as the &lt;span class="caps"&gt;YAML&lt;/span&gt;&amp;nbsp;above.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="need-to-be-stored-somewhere-eventually"&gt;
+&lt;h3&gt;Need to be stored somewhere&amp;nbsp;eventually&lt;/h3&gt;
+&lt;p&gt;Envrironment variables are stored somewhere eventually: in your admins
+repository, orchestration system&amp;#8217;s manifest files that also checked in
+the &lt;span class="caps"&gt;VCS&lt;/span&gt;. So even separated from the app&amp;#8217;s code repo, envs are still
+stored in files that potentially could be accessed by more people than
+they&amp;nbsp;should.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="may-break-release-determinism"&gt;
+&lt;h3&gt;May break release&amp;nbsp;determinism&lt;/h3&gt;
+&lt;p&gt;If you use config files checked into your app&amp;#8217;s repository, your
+config is also a part of the app&amp;#8217;s releases. You can effectively
+rollback to a stable release whenever&amp;nbsp;needed.&lt;/p&gt;
+&lt;p&gt;In the case of envs your app&amp;#8217;s releases are separated from the
+configs. Ideally environment variables should be versioned too. Both
+app&amp;#8217;s and config&amp;#8217;s releases should be synchornized somehow. Otherwise
+your release determinism may break, rollback to previous versions with
+zero downtime may become&amp;nbsp;difficult.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configuration-files-good-and-bad-parts"&gt;
+&lt;h2&gt;Configuration files: good and bad&amp;nbsp;parts&lt;/h2&gt;
+&lt;p&gt;Configuration files have their strengths and weakness too. First, the
+&lt;strong&gt;good&lt;/strong&gt; things. Files&amp;nbsp;are:&lt;/p&gt;
+&lt;div class="section" id="readable"&gt;
+&lt;h3&gt;Readable&lt;/h3&gt;
+&lt;p&gt;You don&amp;#8217;t write config files as program&amp;#8217;s module (e.g. &lt;tt class="docutils literal"&gt;config.py&lt;/tt&gt;
+in Python). Instead you use some language-agnostic format for humans
+like &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;YAML&lt;/span&gt;&lt;/tt&gt;. Then you have both readability and (to some extent)
+separation code and&amp;nbsp;configs.&lt;/p&gt;
+&lt;p&gt;You write clean, self-sufficient configs. No more ugly things&amp;nbsp;like:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+HOSTNAME = os.environ.get('DB_HOSTNAME', 'db.example.com')
+&lt;/pre&gt;
+&lt;p&gt;Developers often group config files by deployment enviroment:
+&lt;tt class="docutils literal"&gt;testing.yaml&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;development.yaml&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;production.yaml&lt;/tt&gt;. Sometimes
+you cannot reach 100% &lt;a class="reference external" href="https://12factor.net/dev-prod-parity"&gt;deploy environments parity&lt;/a&gt;. So having all
+configs at hand may help when fixing a&amp;nbsp;bug.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="part-of-release"&gt;
+&lt;h3&gt;Part of&amp;nbsp;release&lt;/h3&gt;
+&lt;p&gt;As I said earlier, if a config is checked into app&amp;#8217;s repository it a
+part of app release history. It makes your app releases more
+deterministic allowing to rollback to earlier releases if necessary
+with no extra&amp;nbsp;efforts.&lt;/p&gt;
+&lt;p&gt;There are &lt;strong&gt;bad&lt;/strong&gt; things about files&amp;nbsp;too:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="formats-hell"&gt;
+&lt;h3&gt;Formats&amp;nbsp;hell&lt;/h3&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;XML&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;YAML&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;ini&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;TOML&lt;/span&gt;&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;JSON&lt;/span&gt;&lt;/tt&gt;, you name it! Probably
+you don&amp;#8217;t have a luxuary of having the only one way to do it in your
+language. Even in &lt;tt class="docutils literal"&gt;JavaScript&lt;/tt&gt; &lt;span class="caps"&gt;JSON&lt;/span&gt; is not the only configuration
+format in use. But in popular general-purpose languages like
+&lt;tt class="docutils literal"&gt;Python&lt;/tt&gt; it&amp;#8217;s even&amp;nbsp;worse.&lt;/p&gt;
+&lt;p&gt;In a complex project with legacy components you may find all sorts of
+configuration file formats. It&amp;#8217;s&amp;nbsp;annoying.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="insecure"&gt;
+&lt;h3&gt;Insecure&lt;/h3&gt;
+&lt;p&gt;Junior developers, people on probation period, QAs, admins, maybe even
+developers from other teams and departments may have access to your
+app&amp;#8217;s secrets when they are in the config files checked into a
+&lt;span class="caps"&gt;VCS&lt;/span&gt;. That&amp;#8217;s a huge security problem, even if your network operation
+center engineers, admins and devops do a great job isolating
+production services and&amp;nbsp;networks.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="taking-good-parts-from-both-envs-and-files"&gt;
+&lt;h2&gt;Taking good parts from both envs and&amp;nbsp;files&lt;/h2&gt;
+&lt;p&gt;But what if we take the good parts from both enrionment variables and
+config files, combine them and throw away the bad parts? Sounds great,
+doesn&amp;#8217;t&amp;nbsp;it?&lt;/p&gt;
+&lt;p&gt;First, we need to take a closer look at what&amp;#8217;s really important when
+it comes to &lt;em&gt;security&lt;/em&gt;. Actually, it&amp;#8217;s credentials (login/password,
+private &lt;span class="caps"&gt;API&lt;/span&gt; keys, cryptographic certificates, etc.) that if kept in
+secret solve most of the problems that your config files stored in the
+&lt;span class="caps"&gt;VCS&lt;/span&gt; have. If your production database hostname leaks but username and
+password are kept in secret you are probably okay. Brutforce attacks,
+unpatched software vulnerabilities are still real. But your customer
+database isn&amp;#8217;t leaked immediately even if bad guys know your database
+&lt;span class="caps"&gt;URL&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Second, we really want to have nice language-agnostic non-flat file
+format for our configs. It&amp;#8217;s opinionated, but I personally think that
+&lt;a class="reference external" href="https://yaml.org/"&gt;&lt;span class="caps"&gt;YAML&lt;/span&gt;&lt;/a&gt; is superior to all other formats. It&amp;#8217;s&amp;nbsp;beautiful!&lt;/p&gt;
+&lt;p&gt;So what if we use a &lt;span class="caps"&gt;YAML&lt;/span&gt; file and substitute our secrets with
+environment variables&amp;nbsp;tokens?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;db&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;login&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;user&lt;/span&gt;
+  &lt;span class="nt"&gt;password&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;${DB_PASSWORD}&lt;/span&gt;
+&lt;span class="nt"&gt;mail&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;login&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;user&lt;/span&gt;
+  &lt;span class="nt"&gt;password&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;${MAIL_PASSWORD:-my_default_password}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then our app loads the &lt;span class="caps"&gt;YAML&lt;/span&gt; and &lt;strong&gt;interpolates environment variables&lt;/strong&gt;
+in&amp;nbsp;it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;db&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;password&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;my_db_password&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;mail&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;password&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;my_default_password&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the above snippet a database password has been loaded from the
+&lt;tt class="docutils literal"&gt;$DB_PASSWORD&lt;/tt&gt; environment variable. Email password had to be loaded
+from &lt;tt class="docutils literal"&gt;$MAIL_PASSWORD&lt;/tt&gt;. It&amp;#8217;s defined as Bash-style env with default
+value. It seems that at the time of config loading the
+&lt;tt class="docutils literal"&gt;$MAIL_PASSWORD&lt;/tt&gt; wasn&amp;#8217;t set so a default value
+&lt;tt class="docutils literal"&gt;'my_default_password'&lt;/tt&gt; is&amp;nbsp;used.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="proof-of-concept"&gt;
+&lt;h2&gt;Proof of&amp;nbsp;concept&lt;/h2&gt;
+&lt;p&gt;As a proof of concept I&amp;#8217;ve just released a Python library called
+&lt;a class="reference external" href="https://github.com/pilosus/piny"&gt;Piny&lt;/a&gt;. It does exactly&amp;nbsp;this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Reads your &lt;span class="caps"&gt;YAML&lt;/span&gt;-config file marked up with environments&amp;nbsp;variables&lt;/li&gt;
+&lt;li&gt;Interpolates environment variables with their&amp;nbsp;values&lt;/li&gt;
+&lt;li&gt;Creates a Python object with configuration ready for use in your&amp;nbsp;app&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;When using &lt;a class="reference external" href="https://github.com/pilosus/piny"&gt;Piny&lt;/a&gt; consider best practices for your configuration&amp;nbsp;files:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Maintain healthy security/convenience balance for your&amp;nbsp;config&lt;/li&gt;
+&lt;li&gt;Mark up entity as an environment variable in your &lt;span class="caps"&gt;YAML&lt;/span&gt; if and only
+if it really is a &lt;em&gt;secret&lt;/em&gt; (login/passwords, private &lt;span class="caps"&gt;API&lt;/span&gt; keys,
+crypto keys, certificates, or maybe &lt;span class="caps"&gt;DB&lt;/span&gt; hostname too? You&amp;nbsp;decide)&lt;/li&gt;
+&lt;li&gt;Once config loaded by Piny, validate it using your favourite
+validation tool (some integrations are coming in the future&amp;nbsp;releases)&lt;/li&gt;
+&lt;li&gt;Store your config files in the version control systems along with
+you app&amp;#8217;s&amp;nbsp;code.&lt;/li&gt;
+&lt;li&gt;Environment variables are set by whomever is responsible for the
+deployment. Modern orchestration systems like &lt;a class="reference external" href="https://kubernetes.io/"&gt;Kubernetes&lt;/a&gt; make
+it easy to keep envs secure (see &lt;a class="reference external" href="https://kubernetes.io/docs/concepts/configuration/secret/"&gt;Secrets&lt;/a&gt; and &lt;a class="reference external" href="https://www.vaultproject.io/"&gt;Vault&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Piny stands for &lt;em&gt;Piny is not &lt;span class="caps"&gt;YAML&lt;/span&gt;&lt;/em&gt;. It&amp;#8217;s not only a library name, but
+also a name for &lt;span class="caps"&gt;YAML&lt;/span&gt; marked up with environment&amp;nbsp;variables.&lt;/p&gt;
+&lt;p&gt;You can download Piny at &lt;a class="reference external" href="https://pypi.org/project/piny/"&gt;PyPi&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="architecture"></category><category term="config"></category><category term="k8s"></category></entry><entry><title>Побочные эффекты масс-медиа: культ быстрого успеха</title><link href="https://blog.pilosus.org/posts/2019/06/02/mass-media-fast-track-success-ru/" rel="alternate"></link><published>2019-06-02T12:30:00+03:00</published><updated>2019-06-02T12:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-02:/posts/2019/06/02/mass-media-fast-track-success-ru/</id><summary type="html">&lt;p&gt;Массовые медиа имеют много побочных эффектов. Один из них &amp;#8212;
 раскручивание &amp;#8220;историй успеха&amp;#8221; как нормы для всех. Очень часто этот
 побочный эффект накладывается на культурные тренды вроде одержимости
 молодостью и подростковостью, когда дядя с проседью в хорошо сидящем
