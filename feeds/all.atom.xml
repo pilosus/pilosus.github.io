@@ -1,5 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-06-07T20:30:00+03:00</updated><entry><title>Application configs: files or environment variables? Actually both!</title><link href="https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/" rel="alternate"></link><published>2019-06-07T20:30:00+03:00</published><updated>2019-06-07T20:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-07:/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/</id><summary type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-09-28T14:12:00+03:00</updated><entry><title>Switching between Kubernetes clusters and namespaces: kubectx and kubens</title><link href="https://blog.pilosus.org/posts/2019/09/28/kubernetes-context-switch/" rel="alternate"></link><published>2019-09-28T14:12:00+03:00</published><updated>2019-09-28T14:12:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-09-28:/posts/2019/09/28/kubernetes-context-switch/</id><summary type="html">&lt;p class="first last"&gt;Save your time by using command line tools kubectx and
+kubens in multi-cluster environment with more than one
+default namespace&amp;nbsp;each.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Having more than one Kubernetes cluster is a common pattern. You may
+have one cluster dedicated to production environment, another one for
+staging and the third one for testing&amp;nbsp;environment.&lt;/p&gt;
+&lt;p&gt;The same thing with Kubernetes namespaces: it&amp;#8217;s great abstraction
+allowing you to separate workloads by their purpose. You may have
+multiple namespaces for different test environments or a dedicated
+namespace for app-related pods and another namespace for logging and
+monitoring&amp;nbsp;services.&lt;/p&gt;
+&lt;p&gt;Configuring access to multiple Kubernetes clusters is well documented
+in official &lt;a class="reference external" href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/"&gt;k8s documentation&lt;/a&gt;. Still switching context and
+specifying namespace for each &lt;tt class="docutils literal"&gt;kubectl&lt;/tt&gt; invocation is tedious. This
+is where &lt;a class="reference external" href="https://github.com/ahmetb/kubectx/"&gt;kubectx and kubens&lt;/a&gt; come into play. But let&amp;#8217;s configure
+multiple clusters&amp;nbsp;first.&lt;/p&gt;
+&lt;div class="section" id="kubernetes-configuration-file-multiple-clusters"&gt;
+&lt;h2&gt;Kubernetes configuration file: multiple&amp;nbsp;clusters&lt;/h2&gt;
+&lt;p&gt;You find an extensive guide in the &lt;a class="reference external" href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/"&gt;k8s documentation&lt;/a&gt;. All in all,
+your &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.kube/config&lt;/span&gt;&lt;/tt&gt; should include three&amp;nbsp;lists:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Clusters&lt;/li&gt;
+&lt;li&gt;Users&lt;/li&gt;
+&lt;li&gt;Contexts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Context defines a cluster, it&amp;#8217;s namespace and a user. When the user
+switches to the context, he or she is working with the cluster and the
+namespaces of the&amp;nbsp;context.&lt;/p&gt;
+&lt;p&gt;Each cluster may define master node&amp;#8217;s server hostname and optionaly
+other entities like base64-encoded&amp;nbsp;certificates.&lt;/p&gt;
+&lt;p&gt;Users may also be defined by autherntication options that covered in
+&lt;a class="reference external" href="https://kubernetes.io/docs/reference/access-authn-authz/authentication/"&gt;Kubernetes authentication guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;An example configuration file for two Kubernetes clusters and two
+users with different authentication types may look like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;apiVersion&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;v1&lt;/span&gt;
+&lt;span class="nt"&gt;clusters&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;certificate-authority-data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;YOUR-CERT-AUTHORITY-DATA-CLUSTER-1&lt;/span&gt;
+    &lt;span class="nt"&gt;server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://YOUR-SERVER-ADDRESS-1&lt;/span&gt;
+  &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cluster1&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;certificate-authority-data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;YOUR-CERT-AUTHORITY-DATA-CLUSTER-2&lt;/span&gt;
+    &lt;span class="nt"&gt;server&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;https://YOUR-SERVER-ADDRESS-2&lt;/span&gt;
+  &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cluster2&lt;/span&gt;
+&lt;span class="nt"&gt;contexts&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;context&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cluster1&lt;/span&gt;
+    &lt;span class="nt"&gt;namespace&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;production&lt;/span&gt;
+    &lt;span class="nt"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;user1&lt;/span&gt;
+  &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;context1&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;context&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;cluster&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cluster2&lt;/span&gt;
+    &lt;span class="nt"&gt;namespace&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;test&lt;/span&gt;
+    &lt;span class="nt"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;user2&lt;/span&gt;
+  &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;context2&lt;/span&gt;
+&lt;span class="nt"&gt;current-context&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;context1&lt;/span&gt;
+&lt;span class="nt"&gt;kind&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Config&lt;/span&gt;
+&lt;span class="nt"&gt;preferences&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;{}&lt;/span&gt;
+&lt;span class="nt"&gt;users&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;user1&lt;/span&gt;
+  &lt;span class="nt"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;client-certificate-data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;YOUR-CLIENT-CERT-DATA-1&lt;/span&gt;
+    &lt;span class="nt"&gt;client-key-data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;YOUR-CLIENT-KEY-DATA-1&lt;/span&gt;
+&lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;user2&lt;/span&gt;
+  &lt;span class="nt"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;auth-provider&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="nt"&gt;config&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nt"&gt;access-token&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;YOUR-ACCESS-TOKEN&lt;/span&gt;
+        &lt;span class="nt"&gt;cmd-args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;config config-helper --format=json&lt;/span&gt;
+        &lt;span class="nt"&gt;cmd-path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;/PATH/TO/google-cloud-sdk/bin/gcloud&lt;/span&gt;
+        &lt;span class="nt"&gt;expiry&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2019-09-28T00:00:00Z&amp;quot;&lt;/span&gt;
+        &lt;span class="nt"&gt;expiry-key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{.credential.token_expiry}&amp;#39;&lt;/span&gt;
+        &lt;span class="nt"&gt;token-key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;{.credential.access_token}&amp;#39;&lt;/span&gt;
+      &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;gcp&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="kubectx-and-kubens"&gt;
+&lt;h2&gt;kubectx and&amp;nbsp;kubens&lt;/h2&gt;
+&lt;p&gt;Although switching context is easy with &lt;tt class="docutils literal"&gt;kubectl config &lt;span class="pre"&gt;use-context&lt;/span&gt;&lt;/tt&gt;,
+working with both contexts and namespaces require way too many key strokes!
+&lt;a class="reference external" href="https://github.com/ahmetb/kubectx/"&gt;kubectx and kubens&lt;/a&gt; command line tools allow you to switch context this&amp;nbsp;easy:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ kubectx context2  # the same as kubectl config use-context context2
+&lt;/pre&gt;
+&lt;p&gt;Chaning context with &lt;tt class="docutils literal"&gt;kubectx&lt;/tt&gt; changes your config file&amp;#8217;s
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;current-context&lt;/span&gt;&lt;/tt&gt; field the same way the &lt;tt class="docutils literal"&gt;kubectl config
+&lt;span class="pre"&gt;use-context&lt;/span&gt;&lt;/tt&gt; does.&lt;/p&gt;
+&lt;p&gt;Now, instead of typing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--namespace&lt;/span&gt; &lt;span class="pre"&gt;your-namespace&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-n&lt;/span&gt;
+&lt;span class="pre"&gt;your-namespace&lt;/span&gt;&lt;/tt&gt; in every &lt;tt class="docutils literal"&gt;kubectl&lt;/tt&gt; invokation, change namespace
+once with &lt;tt class="docutils literal"&gt;kubens&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ kubens test2     # your current k8s namespace is test2 now
+$ kubectl get po   # the same as invoking with --namespace test2
+# kubens test1     # your current k8s namespace is test1 now
+&lt;/pre&gt;
+&lt;p&gt;Using &lt;tt class="docutils literal"&gt;kubectx&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;kubens&lt;/tt&gt; allow you to save some key strokes
+and really come in handy when you switch over multiple Kubernetes
+clusters with more than one default&amp;nbsp;namespace.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="k8s"></category><category term="kubectx"></category><category term="kubens"></category></entry><entry><title>Application configs: files or environment variables? Actually both!</title><link href="https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/" rel="alternate"></link><published>2019-06-07T20:30:00+03:00</published><updated>2019-06-07T20:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-07:/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/</id><summary type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
 and infrastructure-dependent. When it comes to configs there are a few
 parties with a possible conflict of interests. Software developers
 want an easy access to app&amp;#8217;s configuration, versioning, readability,
