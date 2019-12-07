@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2019-11-03T17:19:03-00:00</lastmod>
+<lastmod>2019-12-07T15:03:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2019-11-03T17:19:03-00:00</lastmod>
+<lastmod>2019-12-07T15:03:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2019-11-03T17:19:03-00:00</lastmod>
+<lastmod>2019-12-07T15:03:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2019-11-03T17:19:03-00:00</lastmod>
+<lastmod>2019-12-07T15:03:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -36,6 +36,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-04-28T16:45:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/</loc>
+<lastmod>2019-12-07T14:58:00+03:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -152,7 +159,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2019-09-28T14:12:00+02:30</lastmod>
+<lastmod>2019-12-07T14:58:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/sql/</loc>
+<lastmod>2019-12-07T14:58:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/postgres/</loc>
+<lastmod>2019-12-07T14:58:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/python/</loc>
+<lastmod>2019-12-07T14:58:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -250,13 +278,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/tag/blog/</loc>
-<lastmod>2019-05-28T12:03:00+02:30</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/tag/python/</loc>
 <lastmod>2019-05-28T12:03:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>

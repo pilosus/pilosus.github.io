@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PostgreSQL: update by spliting result set into evenly sized chunks using window function</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="PostgreSQL: update by spliting result set into evenly sized chunks using window function" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/" />
+    <meta property="og:description" content="How do you update result set by spliting it into evenly sized chunks using window function row_number()" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly&#39;s Technical Blog" />
+    <meta property="article:published_time" content="2019-12-07" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="sql" />
+    <meta property="article:tag" content="postgres" />
+    <meta property="article:tag" content="python" />
+
+
+    <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic" rel="stylesheet" type="text/css">
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly's Technical Blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.png">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly's Technical Blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+	    
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h4 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/" rel="bookmark"
+                   title="Permalink to PostgreSQL: update by spliting result set into evenly sized chunks using window function">PostgreSQL: update by spliting result set into evenly sized chunks using window&nbsp;function</a></h4>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-12-07T14:58:00+03:00">
+                  07-12-2019 14:58
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">844 words</span>
+		|
+		<span class="word-count">4 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/sql/">sql</a> <a href="https://blog.pilosus.org/tag/postgres/">postgres</a> <a href="https://blog.pilosus.org/tag/python/">python</a> </span>                
+              </div><!-- /.post-info -->              <p>Sometimes you need to process your database data in batches. It may be
+absolutely necessary to retrieve the rows from the database in your
+application first, and then process it in the code iterating over the
+results. In this case you split the result set from the database query
+into chunks in you code like in the following Python&nbsp;snippet:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Iterator</span>
+
+<span class="k">def</span> <span class="nf">get_chunks</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">),</span> <span class="n">chunk_size</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">chunk_size</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ids_chunk</span> <span class="ow">in</span> <span class="n">get_chunks</span><span class="p">(</span><span class="n">sequence</span><span class="o">=</span><span class="n">account_ids_from_db</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># do something with a chunk here</span>
+    <span class="k">for</span> <span class="n">account_id</span> <span class="ow">in</span> <span class="n">ids_chunk</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+<p>Depending on the number of rows to be retrieved from the database, the
+<span class="caps">SQL</span> query plan and some other factors, you may need to use <cite><span class="caps">LIMIT</span></cite> and
+<cite><span class="caps">OFFSET</span></cite> clauses in your <span class="caps">SQL</span> and make multiple queries, instead of
+selecting all the rows at once. It saves you some memory in the&nbsp;application.</p>
+<p>But sometimes you may fully rely on the <span class="caps">DBMS</span> features to process data
+in batches. Let&#8217;s take a look at the&nbsp;example.</p>
+<div class="section" id="problem-update-blacklist-expiration-timestamps-in-chunks">
+<h2>Problem: update blacklist expiration timestamps in&nbsp;chunks</h2>
+<p>We&#8217;ve got a black list of customers. Each item in the blacklist table
+in the database may have an optional value in expiration timestamp
+column. If the value is <cite><span class="caps">NULL</span></cite> then a client considered permanentely
+blacklisted. Otherwise a row will be removed from the blacklist table
+(possibly by a cronjob task), once an expiration timestamp is less
+than current&nbsp;time.</p>
+<p><strong>Problem:</strong> we want to set an expiration date to all permanently
+blacklisted customers so that they get removed from the list in
+batches of size 10 a day. When splitting into chunks, we want to order
+the rows so that the customers with the most recent suspicious
+activity come first. The activity log defined in another database&nbsp;table.</p>
+<p>In other words we want to update all rows in the table where some
+conditions met (<cite>expiry</cite> value equals to <cite><span class="caps">NULL</span></cite> in this case). But we
+have to do it in chunks of the constant&nbsp;size.</p>
+<p>We can do it like in the example above: select all the rows that
+satisfy the condition, then iterate over batches of size 10 and
+update. But in this case there&#8217;s nothing that a modern <span class="caps">RDBMS</span> couldn&#8217;t
+achieve by itself, without writing any extra code. So let&#8217;s see how to
+do it using pure PostgreSQL 9+&nbsp;query.</p>
+</div>
+<div class="section" id="solution-postgresql-query-for-updating-rows-in-chunks-using-row-number-function">
+<h2>Solution: PostgreSQL query for updating rows in chunks using row_number()&nbsp;function</h2>
+<p>First, let&#8217;s see how the table&#8217;s schema may look&nbsp;like.</p>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">balcklist</span><span class="p">(</span>
+  <span class="n">customer_id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="n">expiry</span> <span class="k">TIMESTAMP</span> <span class="k">WITHOUT</span> <span class="n">TIME</span> <span class="k">ZONE</span> <span class="k">default</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">timestamp</span> <span class="k">TIMESTAMP</span> <span class="k">WITHOUT</span> <span class="n">TIME</span> <span class="k">ZONE</span> <span class="k">default</span> <span class="p">(</span><span class="n">now</span><span class="p">()</span> <span class="k">at</span> <span class="n">time</span> <span class="k">zone</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+<p>A log of suspicious activity is stored in <cite>suspicious_activity</cite>
+database table that we can join using <cite>customer_id</cite> column.</p>
+<p>The algorithm we are going to use when writing final <span class="caps">SQL</span> query is the&nbsp;following:</p>
+<ol class="arabic simple">
+<li>Join activity table, filter and select the data to be&nbsp;updated</li>
+<li>Get row numbers using PostgreSQL&#8217;s window function <a class="reference external" href="http://www.postgresqltutorial.com/postgresql-row_number/">row_number()</a></li>
+<li>Get batch numbers using simple arithmetic operations (row number
+integer division by chunk&nbsp;size)</li>
+<li>Get new expiry timestamps using current batch number and
+PostgreSQL&#8217;s <a class="reference external" href="http://www.postgresqltutorial.com/postgresql-interval/">interval type</a> arithmetic&nbsp;operations</li>
+<li>Wrap up all previous steps into a subquery; update <cite>expiry</cite> column
+for customers selected in the&nbsp;subquery.</li>
+</ol>
+<p>The final <span class="caps">SQL</span> query then is the&nbsp;following:</p>
+<div class="highlight"><pre><span></span><span class="c1">-- main: update expiry timestamp column in chunks</span>
+<span class="k">UPDATE</span> <span class="n">blacklist</span>
+<span class="k">SET</span> <span class="n">expiry</span> <span class="o">=</span> <span class="n">subquery</span><span class="p">.</span><span class="n">new_expiry_timestamp</span>
+<span class="k">FROM</span> <span class="p">(</span>
+  <span class="c1">-- subquery 3: get new expiration timestamps based on a chunk number</span>
+  <span class="k">SELECT</span>
+    <span class="n">row_num</span><span class="p">,</span>
+    <span class="n">row_batched</span><span class="p">,</span>
+    <span class="n">customer_id</span><span class="p">,</span>
+    <span class="n">NOW</span><span class="p">()::</span><span class="k">TIMESTAMP</span> <span class="o">+</span> <span class="n">row_batched</span> <span class="o">*</span> <span class="nb">INTERVAL</span> <span class="s1">&#39;1 day&#39;</span> <span class="k">AS</span> <span class="n">new_expiry_timestamp</span><span class="p">,</span>
+    <span class="n">latest_suspicious_activity</span><span class="p">,</span>
+    <span class="n">blacklist_timestamp</span>
+  <span class="k">FROM</span> <span class="p">(</span>
+    <span class="c1">-- subquery 2: get chunk numbers based on a row number</span>
+    <span class="k">SELECT</span>
+      <span class="n">row_num</span><span class="p">,</span>
+      <span class="p">((</span><span class="n">row_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">AS</span> <span class="n">row_batched</span><span class="p">,</span>
+      <span class="n">customer_id</span><span class="p">,</span>
+      <span class="n">latest_suspicious_activity</span><span class="p">,</span>
+      <span class="n">blacklist_timestamp</span>
+    <span class="k">FROM</span> <span class="p">(</span>
+      <span class="c1">-- subquery 1: get row numbers</span>
+      <span class="k">SELECT</span>
+        <span class="n">row_number</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">latest_suspicious_activity</span> <span class="k">DESC</span> <span class="n">NULLS</span> <span class="k">LAST</span><span class="p">)</span> <span class="k">AS</span> <span class="n">row_num</span><span class="p">,</span>
+        <span class="n">customer_id</span><span class="p">,</span>
+        <span class="n">latest_suspicious_activity</span><span class="p">,</span>
+        <span class="n">blacklist_timestamp</span>
+      <span class="k">FROM</span> <span class="p">(</span>
+        <span class="c1">-- subquery 0: order blacklist</span>
+        <span class="k">SELECT</span>
+          <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span> <span class="k">AS</span> <span class="n">customer_id</span><span class="p">,</span>
+          <span class="k">MAX</span><span class="p">(</span><span class="n">suspicious_activity</span><span class="p">.</span><span class="n">created</span><span class="p">)</span> <span class="k">AS</span> <span class="n">latest_suspicious_activity</span><span class="p">,</span>
+          <span class="n">blacklist</span><span class="p">.</span><span class="k">timestamp</span> <span class="k">AS</span> <span class="n">blacklist_timestamp</span>
+        <span class="k">FROM</span> <span class="n">blacklist</span>
+        <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">suspicious_activity</span> <span class="k">ON</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">suspicious_activity</span><span class="p">.</span><span class="n">customer_id</span>
+        <span class="k">WHERE</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">expiry_timestamp</span> <span class="k">is</span> <span class="k">NULL</span>
+        <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span>
+        <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">latest_suspicious_activity</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">blacklist_timestamp</span> <span class="k">DESC</span>
+       <span class="p">)</span> <span class="k">AS</span> <span class="n">ordered</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">numbered</span>
+  <span class="p">)</span> <span class="k">AS</span> <span class="n">offsetted</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">subquery</span>
+<span class="k">WHERE</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">subquery</span><span class="p">.</span><span class="n">customer_id</span>
+</pre></div>
+<p>The <span class="caps">SQL</span> above may not be <span class="caps">SQL</span>-standard compatible and is guaranteed to
+work on PostgreSQL 9.6 or&nbsp;later.</p>
+<p>Comments, labels and the algorithm above should make the query
+self-explanatory, although some basic knowledge of <span class="caps">SQL</span> is needed to
+understand what the query really&nbsp;does.</p>
+<p>Basically, we need only <cite>new_expiry_timestamp</cite> and <cite>customer_id</cite>
+columns from the subquery. But some extra columns are passed from the
+deepest subquery all the way to the top
+(e.g. <cite>latest_suspicious_activity</cite>, <cite>row_num</cite>, etc), so that you can
+run the subquery only and see how new expiry timestamps are calculated
+before doing any updates to the data. <cite><span class="caps">BEGIN</span>/<span class="caps">ROLLBACK</span></cite> may also be of
+great help&nbsp;here.</p>
+<p>All in all, the query&nbsp;above:</p>
+<ul class="simple">
+<li>Easy to&nbsp;read</li>
+<li>Requires no extra code and does all the batch processing using PostgreSQL query&nbsp;language</li>
+<li>Executed much faster than when doing extra processing in your app&#8217;s&nbsp;code</li>
+<li>Can easily take advantage of PostgreSQL transaction and <a class="reference external" href="https://www.2ndquadrant.com/en/blog/postgresql-anti-patterns-read-modify-write-cycles/">atomic&nbsp;updates</a></li>
+</ul>
+</div>
+
+            </div><!-- /.entry-content -->
+            <div class="comments">
+              <h5>Comments</h5>
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+                var disqus_shortname = 'https-blog-pilosus-org';
+                var disqus_identifier = 'posts/2019/12/07/postgresql-update-rows-in-chunks/';
+                var disqus_url = 'https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/';
+                (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+              </script>
+              <noscript>Please enable JavaScript to view the comments.</noscript>
+            </div>
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://keybase.io/pilosus">Keybase</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/sitemap.xml">Sitemap</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin-05027233/">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-140765245-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'https-blog-pilosus-org';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+    </div>
+  </body>
+</html>

@@ -1,5 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-09-28T14:12:00+03:00</updated><entry><title>Switching between Kubernetes clusters and namespaces: kubectx and kubens</title><link href="https://blog.pilosus.org/posts/2019/09/28/kubernetes-context-switch/" rel="alternate"></link><published>2019-09-28T14:12:00+03:00</published><updated>2019-09-28T14:12:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-09-28:/posts/2019/09/28/kubernetes-context-switch/</id><summary type="html">&lt;p class="first last"&gt;Save your time by using command line tools kubectx and
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-07T14:58:00+03:00</updated><entry><title>PostgreSQL: update by spliting result set into evenly sized chunks using window function</title><link href="https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/" rel="alternate"></link><published>2019-12-07T14:58:00+03:00</published><updated>2019-12-07T14:58:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-07:/posts/2019/12/07/postgresql-update-rows-in-chunks/</id><summary type="html">&lt;p class="first last"&gt;How do you update result set by spliting it into evenly
+sized chunks using window function&amp;nbsp;row_number()&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Sometimes you need to process your database data in batches. It may be
+absolutely necessary to retrieve the rows from the database in your
+application first, and then process it in the code iterating over the
+results. In this case you split the result set from the database query
+into chunks in you code like in the following Python&amp;nbsp;snippet:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Any&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Iterator&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_chunks&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Any&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;chunk_size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Iterator&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Any&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;chunk_size&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;chunk_size&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;ids_chunk&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;get_chunks&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;account_ids_from_db&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;chunk_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# do something with a chunk here&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;account_id&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;ids_chunk&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Depending on the number of rows to be retrieved from the database, the
+&lt;span class="caps"&gt;SQL&lt;/span&gt; query plan and some other factors, you may need to use &lt;cite&gt;&lt;span class="caps"&gt;LIMIT&lt;/span&gt;&lt;/cite&gt; and
+&lt;cite&gt;&lt;span class="caps"&gt;OFFSET&lt;/span&gt;&lt;/cite&gt; clauses in your &lt;span class="caps"&gt;SQL&lt;/span&gt; and make multiple queries, instead of
+selecting all the rows at once. It saves you some memory in the&amp;nbsp;application.&lt;/p&gt;
+&lt;p&gt;But sometimes you may fully rely on the &lt;span class="caps"&gt;DBMS&lt;/span&gt; features to process data
+in batches. Let&amp;#8217;s take a look at the&amp;nbsp;example.&lt;/p&gt;
+&lt;div class="section" id="problem-update-blacklist-expiration-timestamps-in-chunks"&gt;
+&lt;h2&gt;Problem: update blacklist expiration timestamps in&amp;nbsp;chunks&lt;/h2&gt;
+&lt;p&gt;We&amp;#8217;ve got a black list of customers. Each item in the blacklist table
+in the database may have an optional value in expiration timestamp
+column. If the value is &lt;cite&gt;&lt;span class="caps"&gt;NULL&lt;/span&gt;&lt;/cite&gt; then a client considered permanentely
+blacklisted. Otherwise a row will be removed from the blacklist table
+(possibly by a cronjob task), once an expiration timestamp is less
+than current&amp;nbsp;time.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; we want to set an expiration date to all permanently
+blacklisted customers so that they get removed from the list in
+batches of size 10 a day. When splitting into chunks, we want to order
+the rows so that the customers with the most recent suspicious
+activity come first. The activity log defined in another database&amp;nbsp;table.&lt;/p&gt;
+&lt;p&gt;In other words we want to update all rows in the table where some
+conditions met (&lt;cite&gt;expiry&lt;/cite&gt; value equals to &lt;cite&gt;&lt;span class="caps"&gt;NULL&lt;/span&gt;&lt;/cite&gt; in this case). But we
+have to do it in chunks of the constant&amp;nbsp;size.&lt;/p&gt;
+&lt;p&gt;We can do it like in the example above: select all the rows that
+satisfy the condition, then iterate over batches of size 10 and
+update. But in this case there&amp;#8217;s nothing that a modern &lt;span class="caps"&gt;RDBMS&lt;/span&gt; couldn&amp;#8217;t
+achieve by itself, without writing any extra code. So let&amp;#8217;s see how to
+do it using pure PostgreSQL 9+&amp;nbsp;query.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="solution-postgresql-query-for-updating-rows-in-chunks-using-row-number-function"&gt;
+&lt;h2&gt;Solution: PostgreSQL query for updating rows in chunks using row_number()&amp;nbsp;function&lt;/h2&gt;
+&lt;p&gt;First, let&amp;#8217;s see how the table&amp;#8217;s schema may look&amp;nbsp;like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;balcklist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="n"&gt;customer_id&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt; &lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;expiry&lt;/span&gt; &lt;span class="k"&gt;TIMESTAMP&lt;/span&gt; &lt;span class="k"&gt;WITHOUT&lt;/span&gt; &lt;span class="n"&gt;TIME&lt;/span&gt; &lt;span class="k"&gt;ZONE&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="k"&gt;timestamp&lt;/span&gt; &lt;span class="k"&gt;TIMESTAMP&lt;/span&gt; &lt;span class="k"&gt;WITHOUT&lt;/span&gt; &lt;span class="n"&gt;TIME&lt;/span&gt; &lt;span class="k"&gt;ZONE&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;at&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="k"&gt;zone&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;utc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A log of suspicious activity is stored in &lt;cite&gt;suspicious_activity&lt;/cite&gt;
+database table that we can join using &lt;cite&gt;customer_id&lt;/cite&gt; column.&lt;/p&gt;
+&lt;p&gt;The algorithm we are going to use when writing final &lt;span class="caps"&gt;SQL&lt;/span&gt; query is the&amp;nbsp;following:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Join activity table, filter and select the data to be&amp;nbsp;updated&lt;/li&gt;
+&lt;li&gt;Get row numbers using PostgreSQL&amp;#8217;s window function &lt;a class="reference external" href="http://www.postgresqltutorial.com/postgresql-row_number/"&gt;row_number()&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Get batch numbers using simple arithmetic operations (row number
+integer division by chunk&amp;nbsp;size)&lt;/li&gt;
+&lt;li&gt;Get new expiry timestamps using current batch number and
+PostgreSQL&amp;#8217;s &lt;a class="reference external" href="http://www.postgresqltutorial.com/postgresql-interval/"&gt;interval type&lt;/a&gt; arithmetic&amp;nbsp;operations&lt;/li&gt;
+&lt;li&gt;Wrap up all previous steps into a subquery; update &lt;cite&gt;expiry&lt;/cite&gt; column
+for customers selected in the&amp;nbsp;subquery.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The final &lt;span class="caps"&gt;SQL&lt;/span&gt; query then is the&amp;nbsp;following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;-- main: update expiry timestamp column in chunks&lt;/span&gt;
+&lt;span class="k"&gt;UPDATE&lt;/span&gt; &lt;span class="n"&gt;blacklist&lt;/span&gt;
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;expiry&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subquery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;new_expiry_timestamp&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="c1"&gt;-- subquery 3: get new expiration timestamps based on a chunk number&lt;/span&gt;
+  &lt;span class="k"&gt;SELECT&lt;/span&gt;
+    &lt;span class="n"&gt;row_num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;row_batched&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;customer_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;NOW&lt;/span&gt;&lt;span class="p"&gt;()::&lt;/span&gt;&lt;span class="k"&gt;TIMESTAMP&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;row_batched&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nb"&gt;INTERVAL&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;1 day&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;new_expiry_timestamp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;latest_suspicious_activity&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;blacklist_timestamp&lt;/span&gt;
+  &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="c1"&gt;-- subquery 2: get chunk numbers based on a row number&lt;/span&gt;
+    &lt;span class="k"&gt;SELECT&lt;/span&gt;
+      &lt;span class="n"&gt;row_num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;row_num&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;row_batched&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="n"&gt;customer_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="n"&gt;latest_suspicious_activity&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="n"&gt;blacklist_timestamp&lt;/span&gt;
+    &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+      &lt;span class="c1"&gt;-- subquery 1: get row numbers&lt;/span&gt;
+      &lt;span class="k"&gt;SELECT&lt;/span&gt;
+        &lt;span class="n"&gt;row_number&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;latest_suspicious_activity&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt; &lt;span class="n"&gt;NULLS&lt;/span&gt; &lt;span class="k"&gt;LAST&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;row_num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;customer_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;latest_suspicious_activity&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;blacklist_timestamp&lt;/span&gt;
+      &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="c1"&gt;-- subquery 0: order blacklist&lt;/span&gt;
+        &lt;span class="k"&gt;SELECT&lt;/span&gt;
+          &lt;span class="n"&gt;blacklist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;customer_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="k"&gt;MAX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;suspicious_activity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;created&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;latest_suspicious_activity&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="n"&gt;blacklist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;timestamp&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;blacklist_timestamp&lt;/span&gt;
+        &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;blacklist&lt;/span&gt;
+        &lt;span class="k"&gt;INNER&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;suspicious_activity&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;blacklist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;suspicious_activity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;
+        &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;blacklist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expiry_timestamp&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+        &lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;blacklist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;
+        &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;latest_suspicious_activity&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blacklist_timestamp&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt;
+       &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;ordered&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;numbered&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;offsetted&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;subquery&lt;/span&gt;
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;blacklist&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subquery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;span class="caps"&gt;SQL&lt;/span&gt; above may not be &lt;span class="caps"&gt;SQL&lt;/span&gt;-standard compatible and is guaranteed to
+work on PostgreSQL 9.6 or&amp;nbsp;later.&lt;/p&gt;
+&lt;p&gt;Comments, labels and the algorithm above should make the query
+self-explanatory, although some basic knowledge of &lt;span class="caps"&gt;SQL&lt;/span&gt; is needed to
+understand what the query really&amp;nbsp;does.&lt;/p&gt;
+&lt;p&gt;Basically, we need only &lt;cite&gt;new_expiry_timestamp&lt;/cite&gt; and &lt;cite&gt;customer_id&lt;/cite&gt;
+columns from the subquery. But some extra columns are passed from the
+deepest subquery all the way to the top
+(e.g. &lt;cite&gt;latest_suspicious_activity&lt;/cite&gt;, &lt;cite&gt;row_num&lt;/cite&gt;, etc), so that you can
+run the subquery only and see how new expiry timestamps are calculated
+before doing any updates to the data. &lt;cite&gt;&lt;span class="caps"&gt;BEGIN&lt;/span&gt;/&lt;span class="caps"&gt;ROLLBACK&lt;/span&gt;&lt;/cite&gt; may also be of
+great help&amp;nbsp;here.&lt;/p&gt;
+&lt;p&gt;All in all, the query&amp;nbsp;above:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Easy to&amp;nbsp;read&lt;/li&gt;
+&lt;li&gt;Requires no extra code and does all the batch processing using PostgreSQL query&amp;nbsp;language&lt;/li&gt;
+&lt;li&gt;Executed much faster than when doing extra processing in your app&amp;#8217;s&amp;nbsp;code&lt;/li&gt;
+&lt;li&gt;Can easily take advantage of PostgreSQL transaction and &lt;a class="reference external" href="https://www.2ndquadrant.com/en/blog/postgresql-anti-patterns-read-modify-write-cycles/"&gt;atomic&amp;nbsp;updates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="sql"></category><category term="postgres"></category><category term="python"></category></entry><entry><title>Switching between Kubernetes clusters and namespaces: kubectx and kubens</title><link href="https://blog.pilosus.org/posts/2019/09/28/kubernetes-context-switch/" rel="alternate"></link><published>2019-09-28T14:12:00+03:00</published><updated>2019-09-28T14:12:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-09-28:/posts/2019/09/28/kubernetes-context-switch/</id><summary type="html">&lt;p class="first last"&gt;Save your time by using command line tools kubectx and
 kubens in multi-cluster environment with more than one
 default namespace&amp;nbsp;each.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Having more than one Kubernetes cluster is a common pattern. You may
@@ -98,7 +231,7 @@ $ kubectl get po   # the same as invoking with --namespace test2
 and really come in handy when you switch over multiple Kubernetes
 clusters with more than one default&amp;nbsp;namespace.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="k8s"></category><category term="kubectx"></category><category term="kubens"></category></entry><entry><title>Application configs: files or environment variables? Actually both!</title><link href="https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/" rel="alternate"></link><published>2019-06-07T20:30:00+03:00</published><updated>2019-06-07T20:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-07:/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/</id><summary type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
+</content><category term="Blog"></category><category term="k8s"></category><category term="kubectx"></category><category term="kubens"></category></entry><entry><title>Application configs: files or environment variables? Actually both!</title><link href="https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/" rel="alternate"></link><published>2019-06-07T20:30:00+03:00</published><updated>2019-06-07T20:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-07:/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/</id><summary type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
 and infrastructure-dependent. When it comes to configs there are a few
 parties with a possible conflict of interests. Software developers
 want an easy access to app&amp;#8217;s configuration, versioning, readability,
@@ -316,7 +449,7 @@ it easy to keep envs secure (see &lt;a class="reference external" href="https://
 also a name for &lt;span class="caps"&gt;YAML&lt;/span&gt; marked up with environment&amp;nbsp;variables.&lt;/p&gt;
 &lt;p&gt;You can download Piny at &lt;a class="reference external" href="https://pypi.org/project/piny/"&gt;PyPi&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="architecture"></category><category term="config"></category><category term="k8s"></category></entry><entry><title>Helm stable/prometheus-operator: adding new scraping targets and troubleshooting</title><link href="https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/" rel="alternate"></link><published>2019-06-01T14:12:00+03:00</published><updated>2019-06-01T14:12:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/prometheus-operator-no-active-targets/</id><summary type="html">&lt;p class="first last"&gt;How to add new services for Prometheus to scrape and what to
+</content><category term="Blog"></category><category term="architecture"></category><category term="config"></category><category term="k8s"></category></entry><entry><title>Helm stable/prometheus-operator: adding new scraping targets and troubleshooting</title><link href="https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/" rel="alternate"></link><published>2019-06-01T14:12:00+03:00</published><updated>2019-06-01T14:12:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/prometheus-operator-no-active-targets/</id><summary type="html">&lt;p class="first last"&gt;How to add new services for Prometheus to scrape and what to
 do if no active targets found. Post covers Prometheus
 deployed in Kubernetes cluster using Helm
 stable/prometheus-operator&amp;nbsp;chart.&lt;/p&gt;
@@ -433,7 +566,7 @@ target port&amp;#8217;s name. &lt;tt class="docutils literal"&gt;ServiceMonitor&
 named &lt;tt class="docutils literal"&gt;Service&lt;/tt&gt; ports, although other entities, e.g. an &lt;tt class="docutils literal"&gt;Ingress&lt;/tt&gt;,
 work well without explicit naming.&amp;nbsp;Beware!&lt;/p&gt;
 &lt;p&gt;&lt;span class="caps"&gt;P.S.&lt;/span&gt; At the time of writing I used &lt;tt class="docutils literal"&gt;kubectl v1.14.2&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;helm v2.14.0&lt;/tt&gt;.&lt;/p&gt;
-</content><category term="k8s"></category><category term="helm"></category><category term="prometheus"></category><category term="kubernetes-operator"></category><category term="til"></category></entry><entry><title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title><link href="https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/" rel="alternate"></link><published>2019-06-01T11:00:00+03:00</published><updated>2019-06-01T20:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/grafana-dashboard-flask-app/</id><summary type="html">&lt;p class="first last"&gt;A dashboard with 12 panels showing &lt;span class="caps"&gt;RPS&lt;/span&gt;, latency, errors for
+</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category><category term="prometheus"></category><category term="kubernetes-operator"></category><category term="til"></category></entry><entry><title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title><link href="https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/" rel="alternate"></link><published>2019-06-01T11:00:00+03:00</published><updated>2019-06-01T20:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/grafana-dashboard-flask-app/</id><summary type="html">&lt;p class="first last"&gt;A dashboard with 12 panels showing &lt;span class="caps"&gt;RPS&lt;/span&gt;, latency, errors for
 web app&amp;#8217;s endpoints as well as host and app&amp;#8217;s resource usage
 and some extra&amp;nbsp;details.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I&amp;#8217;ve just &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard"&gt;open-sourced&lt;/a&gt; my Grafana dashboard. The dashboard designed
@@ -485,7 +618,7 @@ labels&amp;nbsp;selection.&lt;/p&gt;
 &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json"&gt;flask-web-app.json&lt;/a&gt; &lt;tt class="docutils literal"&gt;pod&lt;/tt&gt; labels to meet your needs. Instead of
 &lt;tt class="docutils literal"&gt;pod&lt;/tt&gt; you may use &lt;tt class="docutils literal"&gt;instance&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;hostname&lt;/tt&gt; or other label name
 depending on how your Prometheus handle your app&amp;#8217;s&amp;nbsp;hostname.&lt;/p&gt;
-</content><category term="prometheus"></category><category term="grafana"></category><category term="visualization"></category><category term="metrics"></category></entry><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+03:00</published><updated>2019-05-28T12:03:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
+</content><category term="Blog"></category><category term="prometheus"></category><category term="grafana"></category><category term="visualization"></category><category term="metrics"></category></entry><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+03:00</published><updated>2019-05-28T12:03:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
 extends blog posts with reading statistics: number of words
 and reading time in&amp;nbsp;minutes.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I&amp;#8217;ve just released a tiny library for &lt;a class="reference external" href="https://docs.getpelican.com/en/stable/index.html"&gt;Pelican&lt;/a&gt; blog platform called
@@ -509,7 +642,7 @@ plugins and themes you use. Just check out your submodule to the
 version needed. Check out my article &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/"&gt;Pelican blog: up and running&lt;/a&gt; for more&amp;nbsp;details.&lt;/p&gt;
 &lt;p&gt;You can donwload (or better &lt;tt class="docutils literal"&gt;git clone&lt;/tt&gt;) &lt;tt class="docutils literal"&gt;word_count&lt;/tt&gt; plugin on
 the &lt;a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</content><category term="pelican"></category><category term="blog"></category><category term="python"></category><category term="plugin"></category></entry><entry><title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title><link href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" rel="alternate"></link><published>2019-05-26T12:00:00+03:00</published><updated>2019-05-26T12:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-26:/posts/2019/05/26/k8s-ingress-troubleshooting/</id><summary type="html">&lt;p class="first last"&gt;Kubernetes introduces a bunch of abstractions. It&amp;#8217;s easy to
+</content><category term="Blog"></category><category term="pelican"></category><category term="blog"></category><category term="python"></category><category term="plugin"></category></entry><entry><title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title><link href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" rel="alternate"></link><published>2019-05-26T12:00:00+03:00</published><updated>2019-05-26T12:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-26:/posts/2019/05/26/k8s-ingress-troubleshooting/</id><summary type="html">&lt;p class="first last"&gt;Kubernetes introduces a bunch of abstractions. It&amp;#8217;s easy to
 mess up with them in your manifest files. Yet Kubernetes
 provides great tools for troubleshooting. Here is how you
 can tackle problems with Ingress and Service&amp;nbsp;resources.&lt;/p&gt;
@@ -582,7 +715,7 @@ the setup with an Ingress Controller and a Load Balancer routing
 external traffic to&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;Request to a service now returns 200 &lt;span class="caps"&gt;OK&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="k8s"></category><category term="ingress"></category><category term="digitalocean"></category></entry><entry><title>Kubernetes Persistent Volumes: How to List and Copy Files and Directories</title><link href="https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/" rel="alternate"></link><published>2019-05-24T20:15:00+03:00</published><updated>2019-05-24T20:15:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-24:/posts/2019/05/24/k8s-volumes-list-copy/</id><summary type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
+</content><category term="Blog"></category><category term="k8s"></category><category term="ingress"></category><category term="digitalocean"></category></entry><entry><title>Kubernetes Persistent Volumes: How to List and Copy Files and Directories</title><link href="https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/" rel="alternate"></link><published>2019-05-24T20:15:00+03:00</published><updated>2019-05-24T20:15:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-24:/posts/2019/05/24/k8s-volumes-list-copy/</id><summary type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
 a &lt;tt class="docutils literal"&gt;PersistentVolume&lt;/tt&gt; and a &lt;tt class="docutils literal"&gt;PersistentVolumeClaim&lt;/tt&gt;. It&amp;#8217;s
 provisioned by your cloud platform, say, DigitalOcean. You want to
 know what space is available to you, you want to browse files and
@@ -626,7 +759,7 @@ drwxrws--- &lt;span class="m"&gt;2&lt;/span&gt; root &lt;span class="m"&gt;1001&
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;kubectl cp default/redis-master-0:/data/dump.rdb /home/vitaly/Downloads/dump.rdb
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;See &lt;tt class="docutils literal"&gt;kubectl cp &lt;span class="pre"&gt;--help&lt;/span&gt;&lt;/tt&gt; for more&amp;nbsp;details.&lt;/p&gt;
-</content><category term="k8s"></category><category term="kubectl"></category><category term="digitalocean"></category></entry><entry><title>Helm stable/redis chart: slave unable to connect to master</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/" rel="alternate"></link><published>2019-05-20T19:20:00+03:00</published><updated>2019-05-20T19:20:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/</id><summary type="html">&lt;p class="first last"&gt;Things to take care of when installing Helm&amp;#8217;s stable/redis
+</content><category term="Blog"></category><category term="k8s"></category><category term="kubectl"></category><category term="digitalocean"></category></entry><entry><title>Helm stable/redis chart: slave unable to connect to master</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/" rel="alternate"></link><published>2019-05-20T19:20:00+03:00</published><updated>2019-05-20T19:20:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/</id><summary type="html">&lt;p class="first last"&gt;Things to take care of when installing Helm&amp;#8217;s stable/redis
 chart with master-slave topology&amp;nbsp;enabled&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve tried to install &lt;a class="reference external" href="https://github.com/helm/charts/tree/master/stable/redis"&gt;stable/redis&lt;/a&gt; Helm chart version
 8.0.1. I used production-ready values taken from the &lt;a class="reference external" href="https://github.com/helm/charts/blob/master/stable/redis/values-production.yaml"&gt;repo&lt;/a&gt; and
@@ -670,7 +803,7 @@ probably be consistent. For example,
   &lt;span class="nt"&gt;enabled&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
   &lt;span class="c1"&gt;#allowExternal: true&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><category term="k8s"></category><category term="helm"></category><category term="chart"></category><category term="redis"></category></entry><entry><title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" rel="alternate"></link><published>2019-05-20T11:12:00+03:00</published><updated>2019-05-20T15:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-cheat-sheet-little-known-commands/</id><summary type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
+</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category><category term="chart"></category><category term="redis"></category></entry><entry><title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" rel="alternate"></link><published>2019-05-20T11:12:00+03:00</published><updated>2019-05-20T15:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-cheat-sheet-little-known-commands/</id><summary type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
 &lt;a class="reference external" href="https://helm.sh/"&gt;official documentation&lt;/a&gt; and tons of tutorials on the
 internet. Nonetheless Helm has some helpful commands and features that
 are easily overlooked when reading the documentation. I won&amp;#8217;t even try
@@ -779,7 +912,7 @@ try to cover everything here. I just scratched the surface with less
 known things that you actually could found out by exploring the&amp;nbsp;help.&lt;/p&gt;
 &lt;p&gt;I&amp;#8217;m going to update this post as I find new features worth&amp;nbsp;sharing.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="k8s"></category><category term="helm"></category></entry><entry><title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" rel="alternate"></link><published>2019-05-18T19:00:00+03:00</published><updated>2019-05-18T19:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-cheat-sheet/</id><summary type="html">&lt;p class="first last"&gt;My personal top of Minikube&amp;#8217;s features that can save you&amp;nbsp;time&lt;/p&gt;
+</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category></entry><entry><title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" rel="alternate"></link><published>2019-05-18T19:00:00+03:00</published><updated>2019-05-18T19:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-cheat-sheet/</id><summary type="html">&lt;p class="first last"&gt;My personal top of Minikube&amp;#8217;s features that can save you&amp;nbsp;time&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Minikube is a tool for running Kubernetes cluster on your local
 machine. Recently I&amp;#8217;ve posted about Minikube&amp;#8217;s &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/"&gt;ugly parts&lt;/a&gt;. Now
 it&amp;#8217;s time for the good&amp;nbsp;parts!&lt;/p&gt;
@@ -909,7 +1042,7 @@ Minikube is a great tool with a bunch of cool features. I wish I&amp;#8217;d
 read an overview like this one when I first launched Minikube. Hope it
 will help&amp;nbsp;someone.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Minikube high CPU usage even with no workload on Linux machine</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/" rel="alternate"></link><published>2019-05-18T11:00:00+03:00</published><updated>2019-05-18T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-hight-cpu-usage-linux/</id><summary type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
+</content><category term="Blog"></category><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Minikube high CPU usage even with no workload on Linux machine</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/" rel="alternate"></link><published>2019-05-18T11:00:00+03:00</published><updated>2019-05-18T11:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-hight-cpu-usage-linux/</id><summary type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
 development. It&amp;#8217;s adviced to run all over the &lt;a class="reference external" href="https://kubernetes.io/docs/setup/minikube/"&gt;k8s documentation&lt;/a&gt;, in
 the tech blogs. Still Minikube looks like a piece of software that is
 not quite ready for a smooth development experience. At the time of
@@ -1017,7 +1150,7 @@ that earn their owners piles of money. So let&amp;#8217;s hope that magic I&amp;
 posted here will work out for you too. I also hope the issue with high
 &lt;span class="caps"&gt;CPU&lt;/span&gt; usage will be fixed by someone with proper&amp;nbsp;skills.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Python MRO and Mixin Classes</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mixin/" rel="alternate"></link><published>2019-05-02T13:50:00+03:00</published><updated>2019-05-02T13:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mixin/</id><summary type="html">&lt;p class="first last"&gt;Understanding Python&amp;#8217;s Method Resolution Order may be
+</content><category term="Blog"></category><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Python MRO and Mixin Classes</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mixin/" rel="alternate"></link><published>2019-05-02T13:50:00+03:00</published><updated>2019-05-02T13:50:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mixin/</id><summary type="html">&lt;p class="first last"&gt;Understanding Python&amp;#8217;s Method Resolution Order may be
 helpful when using mixin&amp;nbsp;classes&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;In practice we don&amp;#8217;t usually think about how Python&amp;#8217;s &lt;span class="caps"&gt;MRO&lt;/span&gt;
 works. Complex multiple inheritance legitemately considered to be a
@@ -1162,7 +1295,7 @@ checks are needed though, we use the &lt;tt class="docutils literal"&gt;Bottom&l
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;See more about the inner workings of the &lt;span class="caps"&gt;MRO&lt;/span&gt; in my article about &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/02/python-mro/"&gt;C3
 linearisation algorithm&lt;/a&gt;.&lt;/p&gt;
-</content><category term="python"></category><category term="mro"></category><category term="mixin"></category></entry><entry><title>Python Method Resolution Order and C3 linearization algorithm</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mro/" rel="alternate"></link><published>2019-05-02T12:10:00+03:00</published><updated>2019-05-02T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mro/</id><summary type="html">&lt;p class="first last"&gt;A naïve implementation of C3 linearization algorithm that
+</content><category term="Blog"></category><category term="python"></category><category term="mro"></category><category term="mixin"></category></entry><entry><title>Python Method Resolution Order and C3 linearization algorithm</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mro/" rel="alternate"></link><published>2019-05-02T12:10:00+03:00</published><updated>2019-05-02T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mro/</id><summary type="html">&lt;p class="first last"&gt;A naïve implementation of C3 linearization algorithm that
 lies under the hood of Python&amp;#8217;s Method Resolution Order
 (&lt;span class="caps"&gt;MRO&lt;/span&gt;)&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Method Resolution Order (&lt;span class="caps"&gt;MRO&lt;/span&gt;) is a order in which methods should be
@@ -1334,7 +1467,7 @@ pip install c3linear  &lt;span class="c1"&gt;# from the Cheese Shop&lt;/span&gt;
 &lt;span class="n"&gt;mro&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mro&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Take a look at the &lt;a class="reference external" href="https://github.com/pilosus/c3linear/blob/master/tests/test_mro.py"&gt;tests&lt;/a&gt; to dive into more complex multiple inheritance&amp;nbsp;examples.&lt;/p&gt;
-</content><category term="python"></category><category term="cpython"></category><category term="mro"></category><category term="algorithms"></category></entry><entry><title>Pelican blog: up and running</title><link href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/" rel="alternate"></link><published>2019-05-01T11:30:00+03:00</published><updated>2019-05-01T11:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-01:/posts/2019/05/01/pelican-blog-up-and-running/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; is a static site generator written in Python. I use it for
+</content><category term="Blog"></category><category term="python"></category><category term="cpython"></category><category term="mro"></category><category term="algorithms"></category></entry><entry><title>Pelican blog: up and running</title><link href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/" rel="alternate"></link><published>2019-05-01T11:30:00+03:00</published><updated>2019-05-01T11:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-01:/posts/2019/05/01/pelican-blog-up-and-running/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; is a static site generator written in Python. I use it for
 &lt;a class="reference external" href="https://blog.pilosus.org"&gt;my personal blog&lt;/a&gt;. Pelican is easy to install, configure and
 customize with themes and plugins. I was able to set up the blog with
 my own &lt;a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme"&gt;custom theme&lt;/a&gt; and an &lt;a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og"&gt;Open Graph plugin&lt;/a&gt; in a few&amp;nbsp;hours …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; is a static site generator written in Python. I use it for
@@ -1537,7 +1670,7 @@ or &lt;a class="reference external" href="https://circleci.com/"&gt;Circle &lt;s
 repository. &lt;span class="caps"&gt;CI&lt;/span&gt; pipeline should be triggered on each push to the remote
 blog&amp;nbsp;repository.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="pelican"></category><category term="blog"></category><category term="python"></category></entry><entry><title>Method vs. Class Method Quirks in Python 3</title><link href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/" rel="alternate"></link><published>2019-04-29T17:30:00+03:00</published><updated>2019-04-29T17:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-29:/posts/2019/04/29/bound-class-method/</id><summary type="html">&lt;p class="first last"&gt;A little example of how bound/unbound methods behave in Python&amp;nbsp;3&lt;/p&gt;
+</content><category term="Blog"></category><category term="pelican"></category><category term="blog"></category><category term="python"></category></entry><entry><title>Method vs. Class Method Quirks in Python 3</title><link href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/" rel="alternate"></link><published>2019-04-29T17:30:00+03:00</published><updated>2019-04-29T17:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-29:/posts/2019/04/29/bound-class-method/</id><summary type="html">&lt;p class="first last"&gt;A little example of how bound/unbound methods behave in Python&amp;nbsp;3&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;A code snippet in Python 3 below has been discussed recently on the&amp;nbsp;internet:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;A&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
    &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1625,7 +1758,7 @@ method gets&amp;nbsp;bound:&lt;/p&gt;
 &lt;p&gt;The example above doesn&amp;#8217;t apply to Python 2.7 though. It seems that
 Python 2.7 had different implementation, so that &lt;tt class="docutils literal"&gt;A.method&lt;/tt&gt; would
 return different objects every time it&amp;#8217;s&amp;nbsp;called.&lt;/p&gt;
-</content><category term="python"></category><category term="cpython"></category></entry><entry><title>Let’s get started!</title><link href="https://blog.pilosus.org/posts/2019/04/28/intro/" rel="alternate"></link><published>2019-04-28T16:30:00+03:00</published><updated>2019-04-28T16:45:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-28:/posts/2019/04/28/intro/</id><summary type="html">&lt;p&gt;My name is Vitaly R. Samigullin. I&amp;#8217;m a software developer, a team
+</content><category term="Blog"></category><category term="python"></category><category term="cpython"></category></entry><entry><title>Let’s get started!</title><link href="https://blog.pilosus.org/posts/2019/04/28/intro/" rel="alternate"></link><published>2019-04-28T16:30:00+03:00</published><updated>2019-04-28T16:45:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-28:/posts/2019/04/28/intro/</id><summary type="html">&lt;p&gt;My name is Vitaly R. Samigullin. I&amp;#8217;m a software developer, a team
 leader, and a person who enjoys thinking about how and why things work
 the way they work. Having lived in Austria and Spain, I got some
 interesting immigration experience. I&amp;#8217;ve also started a small
@@ -1663,4 +1796,4 @@ Babylon-flavoured&amp;nbsp;mélange.&lt;/p&gt;
 abandoned in a couple of years? I have no idea. But I do know that
 quality is over&amp;nbsp;quantity.&lt;/p&gt;
 &lt;p&gt;So let&amp;#8217;s get&amp;nbsp;started!&lt;/p&gt;
-</content><category term="intro"></category></entry></feed>
+</content><category term="Blog"></category><category term="intro"></category></entry></feed>
