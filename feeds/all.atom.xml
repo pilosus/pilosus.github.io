@@ -1,5 +1,893 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-07T14:58:00+03:00</updated><entry><title>PostgreSQL: update by spliting result set into evenly sized chunks using window function</title><link href="https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/" rel="alternate"></link><published>2019-12-07T14:58:00+03:00</published><updated>2019-12-07T14:58:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-07:/posts/2019/12/07/postgresql-update-rows-in-chunks/</id><summary type="html">&lt;p class="first last"&gt;How do you update result set by spliting it into evenly
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-08T14:57:00+03:00</updated><entry><title>Вопросы для собеседования веб-разработчика на Python</title><link href="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" rel="alternate"></link><published>2019-12-08T14:57:00+03:00</published><updated>2019-12-08T14:57:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-08:/posts/2019/12/08/python-interview-questions-ru/</id><summary type="html">&lt;p class="first last"&gt;Вопросы для собеседования&amp;nbsp;Python-разработчика&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Ниже вы найдете принципы проведения и вопросы для технического
+собеседования на позицию Python-разработчика. Хотя вопросы довольно
+универсальны, больше всего они подойдут для области&amp;nbsp;веб-разработки.&lt;/p&gt;
+&lt;p&gt;Вопросы прошли испытания боем: с их помощью было прособеседовано
+больше 35 кандидатов. Из них 3 (2 экс-Яндекс) стали частью моей
+команды в 2018 году, и еще 1 кандидат вышел в параллельную&amp;nbsp;команду.&lt;/p&gt;
+&lt;p&gt;Вопросы получили положительный отклик коллег: люди используют их в
+каком-то объеме для собеседований в своих компаниях. Я также
+использую эти вопросы для консультации людей, которые готовятся к
+прохождению технического&amp;nbsp;собеседования.&lt;/p&gt;
+&lt;p&gt;В то же время вопросы едва ли можно считать уникальными. Здесь нет
+никаких профессиональных тайн. На мой взгляд, основное преимущество
+вопросов &amp;#8212; их система и принципы. На их основе можно составлять свои
+интересные и полезные вопросы для проведения собеседования, скроенные
+для ваших нужд. Или готовиться к техническому интервью в качестве&amp;nbsp;кандидата.&lt;/p&gt;
+&lt;div class="contents topic" id="id1"&gt;
+&lt;p class="topic-title first"&gt;Содержание&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id36"&gt;Введение&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id3" id="id37"&gt;Предпосылки&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id4" id="id38"&gt;Отбор&amp;nbsp;кандидатов&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id5" id="id39"&gt;Гуманитарные&amp;nbsp;вопросы&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id6" id="id40"&gt;Python&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id7" id="id41"&gt;Проверка знаний, как развивается&amp;nbsp;язык&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id8" id="id42"&gt;Основные типы и структуры данных в&amp;nbsp;Python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id9" id="id43"&gt;Порядок вычисления дефолтных аргументов&amp;nbsp;функций&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id10" id="id44"&gt;Что такое&amp;nbsp;декоратор?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#stdout" id="id45"&gt;Декоратор, выводящий в stdout время выполнения&amp;nbsp;функции&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id11" id="id46"&gt;Применение&amp;nbsp;декоратора&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id12" id="id47"&gt;Имя декорированной&amp;nbsp;функции&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id13" id="id48"&gt;Декоратор для&amp;nbsp;генераторов&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id14" id="id49"&gt;Декоратор с&amp;nbsp;аргументами&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id15" id="id50"&gt;Переменные&amp;nbsp;класса&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id16" id="id51"&gt;Слайсы в&amp;nbsp;списках&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#list-dict-comprehensions" id="id52"&gt;Что такое list/dict&amp;nbsp;comprehensions?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#generator-expressions" id="id53"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#functools" id="id54"&gt;Какие полезные функции из модуля functools ты&amp;nbsp;знаешь?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#asyncio-multithreading-multiprocessing" id="id55"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id17" id="id56"&gt;Экосистема&amp;nbsp;языка&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id18" id="id57"&gt;Алгоритмы&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id19" id="id58"&gt;Временная&amp;nbsp;сложность&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#lisp" id="id59"&gt;Проверка сбалансированности скобок в&amp;nbsp;Lisp-программе&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id20" id="id60"&gt;Базы данных&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#rdbms" id="id61"&gt;Зачем нужна &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mysql-postgresql" id="id62"&gt;Запросы в&amp;nbsp;MySQL/PostgreSQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#nosql" id="id63"&gt;Общие представления о&amp;nbsp;NoSQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#redis" id="id64"&gt;Общие представления о&amp;nbsp;Redis&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id21" id="id65"&gt;Тестирование&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unit" id="id66"&gt;Общие представления о&amp;nbsp;unit-тестировании&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mysql" id="id67"&gt;Как протестировать функцию, которая изменяет запись в&amp;nbsp;MySQL?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#devops" id="id68"&gt;DevOps/Администрирование&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#google-com" id="id69"&gt;Проблема с нечитаемым ответом&amp;nbsp;google.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#ip-nginx" id="id70"&gt;Топ &lt;span class="caps"&gt;IP&lt;/span&gt; адресов из лога &lt;span class="caps"&gt;NGINX&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#docker" id="id71"&gt;Docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id22" id="id72"&gt;Архитектура&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#pastebin" id="id73"&gt;Проектирование сервиса копипасты pastebin&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id23" id="id74"&gt;Бизнес-описание&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id24" id="id75"&gt;Ограничения и&amp;nbsp;допущения&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id25" id="id76"&gt;Ответить соискателю, если&amp;nbsp;спросит&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id26" id="id77"&gt;Крупноблочная схема&amp;nbsp;архитектуры&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api" id="id78"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id27" id="id79"&gt;Создание уникального&amp;nbsp;урла&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id28" id="id80"&gt;Запрос к Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id29" id="id81"&gt;Ответ Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#read-api" id="id82"&gt;Запрос к Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id30" id="id83"&gt;Ответ Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id31" id="id84"&gt;Аналитика&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id32" id="id85"&gt;Полезные&amp;nbsp;ссылки&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id36"&gt;Введение&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id37"&gt;Предпосылки&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Разработка софта больше не искусство, не дело жизни, а обычная, хотя
+и высококвалифицированная офисная работа. Поэтому особенно ценно в
+кандидате то, как он работает в команде, как справляется с
+повседневной работой. Как бы банально и избито это ни звучало. А вот
+гениальные технические озарения и хитрые алгоритмы, на втором
+плане. Те, для кого на первом, сами знают, каким должно быть
+техническое&amp;nbsp;собеседование.&lt;/li&gt;
+&lt;li&gt;Алгоритмическое собеседование это аналог &lt;span class="caps"&gt;IQ&lt;/span&gt;-тестов, изобретенных
+американскими учеными в начале &lt;span class="caps"&gt;XX&lt;/span&gt; века для быстрой категоризации
+больших масс призывников по родам войск. &lt;span class="caps"&gt;IQ&lt;/span&gt; дает представление об
+интеллекте человека, но не исключает ошибок. Умение решать
+алгоритмические задачи тоже дает представление об интеллекте
+человека, но не лишено недостатков. Алгоритмические собеседования
+нужны крупным компаниям, которым требуется быстро отобрать нужных
+людей из огромных масс кандидатов и установить на входе грейд и
+зарплату. Они могут позволить себе ошибку ненайма, потому что
+кандидаты конкурируют за позиции в этих компаниях, а не наоборот,
+как большинстве других случаев. Не стройте из себя Google, если вы
+им не&amp;nbsp;являетесь.&lt;/li&gt;
+&lt;li&gt;Интеллект человека это не бинарное &amp;#8220;есть/нет&amp;#8221; и не
+диапазон. Интеллект &amp;#8212; это что-то вроде швейцарского армейского
+ножа-мультитула. В нем может быть острое и практичное лезвие для
+повседневного использования, не слишком удобный штопор, которым все
+же можно пользоваться, и бесполезная отвертка, которой не сделаешь
+ничего. Можно ли дать интегральную оценку такому мультитулу?
+Наверное, можно. Но непонятно, зачем. Если вы не Google,
+конечно. Подбирайте нож под свои задачи и исходя из своих&amp;nbsp;возможностей.&lt;/li&gt;
+&lt;li&gt;Собеседование нужно, чтобы понять, почему человек ушел (или готов
+уйти) с текущего места работы, что он ищет на новом месте и что он
+может предложить&amp;nbsp;команде.&lt;/li&gt;
+&lt;li&gt;Ошибка найма обычно компенсируется испытательным сроком. Нужно
+отнестись к нему серьезно и выдать задание на этот
+период. Аналогично со стороны сотрудника. И все-таки ошибка найма &amp;#8212;
+это ошибка, которая стоит вам времени и денег. Лучшее ее не
+совершать. Аналогично для сотрудника. Поэтому врать про проект не
+стоит. Но уметь его красиво преподнести нисколько не
+зазорно. Напротив, в условиях конкуренции компаний за кандидатов,
+это ваша прямая&amp;nbsp;обязанность.&lt;/li&gt;
+&lt;li&gt;Не бывает двух одинаковых собеседований даже для кандидатов одного
+уровня. Техническое собеседование это всегда импровизация, попытка
+найти границы компетентности и сильные стороны кандидата за короткий
+промежуток&amp;nbsp;времени.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id38"&gt;Отбор&amp;nbsp;кандидатов&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Не все люди умеют составлять&amp;nbsp;резюме.&lt;/li&gt;
+&lt;li&gt;Слишком высокие зарплатные ожидания у интересного кандидата – не
+повод отказываться от собеседования. Всегда можно позадавать
+вопросы, которые снизят неоправданные зарплатные ожидания. Или
+подтвердят, что перед вами&amp;nbsp;гений.&lt;/li&gt;
+&lt;li&gt;Интевьюер, несомненно, самый умный и замечательный. Но это не повод
+забраковывать резюме с грамматическими ошибками (как учат вас горе
+HRы), смешными формулировками с проявлениями юношеской неопытности и
+всяким таким прочим. Задавать неоправданно сложные вопросы тоже не
+стоит. Оставьте высокомерие при&amp;nbsp;себе.&lt;/li&gt;
+&lt;li&gt;Не нужно бояться звать на собеседование человека, который раньше
+работал дизайнером/юристом/прорабом на заводе, но переучился на
+разработчика. Будем же честны, разрабатывать вашу скучную &lt;span class="caps"&gt;REST&lt;/span&gt; &lt;span class="caps"&gt;API&lt;/span&gt;
+много ума не надо, а профильное образование нужно далеко не&amp;nbsp;везде.&lt;/li&gt;
+&lt;li&gt;У кандидата может не быть 100% попадания в ваш технологический стэк,
+что не помешает ему в нем очень быстро разобраться. Скорее всего,
+неразумно отвергать кандидата с опытом работы с Flask 3 года, но без
+опыта работы с Django, на ваш заурядный Django-проект. Ну&amp;nbsp;правда.&lt;/li&gt;
+&lt;li&gt;Единственный способ быстро найти разработчика: провести как можно
+больше&amp;nbsp;собеседований&lt;/li&gt;
+&lt;li&gt;Среднее время, которое затратит интервьюер на 1 собеседование: ~2.5
+часа (отсмотр резюме, подготовка к интервью, само интервью, общение
+с &lt;span class="caps"&gt;HR&lt;/span&gt; и &lt;span class="caps"&gt;CTO&lt;/span&gt;).&lt;/li&gt;
+&lt;li&gt;Не стоит делать техническое интервью дольше 2 часов. Идеально 1.5&amp;nbsp;часа.&lt;/li&gt;
+&lt;li&gt;3 собеседования в неделю – это хороший темп. Больше – тяжело
+(физически для интервьюера, для &lt;span class="caps"&gt;HR&lt;/span&gt; в смыле поиска кандидата и для
+проекта в смысле отсутствия лида во время собеседований). Меньше –
+подбор сотрудника&amp;nbsp;затянется.&lt;/li&gt;
+&lt;li&gt;Среднее время поиска Python-разработчика зависит от проекта, грейда
+и того, что может предложить ваша компания. В среднем 3 месяца от
+размещения заявки в &lt;span class="caps"&gt;HR&lt;/span&gt; до первого дня работы нового сотрудника это&amp;nbsp;нормально.&lt;/li&gt;
+&lt;li&gt;Ваш главный союзник в общегуманитарных вопросах собеседования - ваш
+&lt;span class="caps"&gt;HR&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;Не все разработчики – это тихие интроверты. Есть достаточное
+количество людей, которые умеют говорить, продавать себя и выучивать
+ответы для собеседований, не имея глубоких знаний. Не дайте себя
+обмануть, обязательно давайте&amp;nbsp;задачки.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id39"&gt;Гуманитарные&amp;nbsp;вопросы&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Что кандидат делал на прошлых местах работы. Какую позицию&amp;nbsp;занимал?&lt;/li&gt;
+&lt;li&gt;Какой состав команды был на прошлых проектах (фронт, бэк, &lt;span class="caps"&gt;QA&lt;/span&gt;,
+админы,&amp;nbsp;менеджеры)?&lt;/li&gt;
+&lt;li&gt;Как был организован процесс планирования, постановки задач и ревью?
+Какие в этом были плюсы и&amp;nbsp;минусы?&lt;/li&gt;
+&lt;li&gt;Почему кандидат решил уйти (или уже ушел) с прошлого места&amp;nbsp;работы?&lt;/li&gt;
+&lt;li&gt;Что хотелось бы от нового проекта? В смысле задач и&amp;nbsp;процессов?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id40"&gt;Python&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id41"&gt;Проверка знаний, как развивается&amp;nbsp;язык&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Расскажи, что появилось в последней версии Python? (&lt;a class="reference external" href="https://docs.python.org/3/whatsnew/3.8.html"&gt;Python 3.8&lt;/a&gt; на момент создания&amp;nbsp;статьи)&lt;/li&gt;
+&lt;li&gt;В чем состоят &lt;a class="reference external" href="https://docs.python.org/3.0/whatsnew/3.0.html"&gt;основные различия&lt;/a&gt; между Python 2.7 и&amp;nbsp;3.0&lt;/li&gt;
+&lt;li&gt;Какие синтаксические изменения произошли в языке после Python 2.7?
+(хочется услышать как минимум об asyncio и type&amp;nbsp;hinting)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id42"&gt;Основные типы и структуры данных в&amp;nbsp;Python&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Назови основные типы данных в&amp;nbsp;Python&lt;/li&gt;
+&lt;li&gt;Расскажи, какие структуры данных есть в&amp;nbsp;Python&lt;/li&gt;
+&lt;li&gt;На какие два больших класса можно разделить типы/структуры данных? (mutable,&amp;nbsp;immutable)&lt;/li&gt;
+&lt;li&gt;Зачем вообще нужны immutable объекты? Почему нельзя везде использовать&amp;nbsp;mutable?&lt;/li&gt;
+&lt;li&gt;Какие строки в примере ниже выбросят исключение? Какие&amp;nbsp;исключения?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="c1"&gt;# TypeError: unhashable type: &amp;#39;list&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="c1"&gt;# TypeError: unhashable type: &amp;#39;list&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id9"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id43"&gt;Порядок вычисления дефолтных аргументов&amp;nbsp;функций&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;У нас есть&amp;nbsp;функция:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Какие значения будут иметь следующие списки после выполнения всего блока&amp;nbsp;присваиваний:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;l1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;l2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[])&lt;/span&gt;
+&lt;span class="n"&gt;l3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# [1, 3]&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# [2]&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# [1, 3]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Как поправить эту функцию, чтобы ответ был [1], [2], [3]&amp;nbsp;соответственно?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_default_fixed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;lst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id10"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id44"&gt;Что такое&amp;nbsp;декоратор?&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Что такое&amp;nbsp;декоратор?&lt;/li&gt;
+&lt;li&gt;Какие декораторы из коробки&amp;nbsp;знаешь?&lt;/li&gt;
+&lt;li&gt;Расскажи про &lt;a class="reference external" href="https://docs.python.org/3.7/howto/descriptor.html"&gt;протокол descriptor&lt;/a&gt; (сложный вопрос, можно раскручивать&amp;nbsp;долго)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="stdout"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id45"&gt;Декоратор, выводящий в stdout время выполнения&amp;nbsp;функции&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;У нас есть функция, которая обращается в БД. Хочется, чтобы каждый
+вызов этой функции показывал в консоли время ее выполнения. Реализуй
+этот функционал с помощью декоратора. Допущение: декорируемая функция
+может иметь любое количество позиционных и непозиционных&amp;nbsp;аргументов.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Wrapper function&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id11"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id46"&gt;Применение&amp;nbsp;декоратора&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Как можно применить декоратор к функции &lt;cite&gt;fun&lt;/cite&gt;, используя синтаксический сахар и без&amp;nbsp;него?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# with syntactic sugar&lt;/span&gt;
+&lt;span class="nd"&gt;@measure&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="c1"&gt;# sugar free&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# function&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id12"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id47"&gt;Имя декорированной&amp;nbsp;функции&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Какое имя и &lt;cite&gt;docstring&lt;/cite&gt; будут у функции после применения к ней&amp;nbsp;декоратора?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;wrapper&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;Wrapper function&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Как вернуть задекорированной функции оригинальное имя и &lt;cite&gt;doctring&lt;/cite&gt;?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nd"&gt;@wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Wrapper function&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+
+&lt;span class="nd"&gt;@measure&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;My func&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;fun&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;My func&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id13"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id48"&gt;Декоратор для&amp;nbsp;генераторов&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Какое время будет выводиться, если применить декоратор к&amp;nbsp;генератору?&lt;/p&gt;
+&lt;p&gt;Допустим, мы применим написанный выше декоратор к такой&amp;nbsp;функции:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Any&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_gen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Any&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Почему в консоли время, выведенное декоратором, такое маленькое?
+Как замерить время итерации по всему&amp;nbsp;генератору?&lt;/p&gt;
+&lt;p&gt;Этот вариант декоратора прокрутит генератор до конца и выведет общее время&amp;nbsp;итерирования:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Any&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure_gen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;yield from&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+
+&lt;span class="nd"&gt;@measure_gen&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_gen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Any&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id14"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id49"&gt;Декоратор с&amp;nbsp;аргументами&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Перепиши декоратор из задачи выше так, чтобы в него можно было
+передать аргумент, который будет устанавливать пороговое значение,
+начиная с которого будет выводиться время исполнения декорируемой&amp;nbsp;функции:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# Don&amp;#39;t forget to set limit when decorating a function!&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;outer_wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inner_wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="n"&gt;elapsed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;before&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;elapsed&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;inner_wrapper&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;outer_wrapper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Покажи, как использовать этот декоратор с синтаксическим сахаром и без&amp;nbsp;него.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;new_measure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="c1"&gt;# sugar free&lt;/span&gt;
+&lt;span class="n"&gt;new_measure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id15"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id50"&gt;Переменные&amp;nbsp;класса&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Что такое переменная&amp;nbsp;класса?&lt;/p&gt;
+&lt;p&gt;Даны следующие&amp;nbsp;классы:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Child1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Child2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Что выведут следующие&amp;nbsp;строки?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 1 1 1&lt;/span&gt;
+
+&lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 1 2 1&lt;/span&gt;
+
+&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 3 2 3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id16"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id51"&gt;Слайсы в&amp;nbsp;списках&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Как исполнятся следующие&amp;nbsp;строки?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# [2]&lt;/span&gt;
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# [1, 2, 3, 4]&lt;/span&gt;
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;  &lt;span class="c1"&gt;# []&lt;/span&gt;
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# IndexError&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="list-dict-comprehensions"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id52"&gt;Что такое list/dict&amp;nbsp;comprehensions?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Создай список квадрат четных чисел от [0, 10), используя list&amp;nbsp;comprehension&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;То же самое, используя map и&amp;nbsp;filter?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="generator-expressions"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id53"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Как превратить первый пример в generator (generator&amp;nbsp;expression)?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="functools"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id54"&gt;Какие полезные функции из модуля functools ты&amp;nbsp;знаешь?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Этот вопрос можно задавать после вопроса про декораторы и
+functools.wraps. В functools много всякого интересного.  Хотелось бы
+услышать про reduce и особенно про&amp;nbsp;partial.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="asyncio-multithreading-multiprocessing"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id55"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;В чем разница между процессом и&amp;nbsp;трэдом?&lt;/li&gt;
+&lt;li&gt;Есть лист из 1к урлов, по каждому из них нужно сделать &lt;span class="caps"&gt;GET&lt;/span&gt;
+запрос. Как это сделать быстрее и дешевле? (&lt;span class="caps"&gt;IO&lt;/span&gt;-bound tasks -&amp;gt;
+asyncio, Tornado etc или&amp;nbsp;multithreading)&lt;/li&gt;
+&lt;li&gt;Есть 1к видеофайлов, которые надо отрендерить, или 1к программ,
+которые надо скомпилировать. Как это сделать быстрее? (&lt;span class="caps"&gt;CPU&lt;/span&gt;-bound
+tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
+&lt;li&gt;Как устроен asyncio или аналогичные библиотеки для асинхронного
+программирования в Python? (огромный вопрос, который можно превратить
+в целое собеседование. Хочется как минимум понимания на уровне
+&lt;a class="reference external" href="https://trio.readthedocs.io/en/latest/tutorial.html"&gt;туториала Trio&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id17"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id56"&gt;Экосистема&amp;nbsp;языка&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Какие решения существуют для выполнения фоновых отложенных задач? (&lt;cite&gt;celery&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;Как сделать package из Python-кода? (wheels, eggs, в чем&amp;nbsp;отличия?)&lt;/li&gt;
+&lt;li&gt;Какие есть решения для документирования кода на Python? (&lt;cite&gt;sphinx-doc&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;Какие есть решения для документирования &lt;span class="caps"&gt;REST&lt;/span&gt; &lt;span class="caps"&gt;API&lt;/span&gt; (&lt;cite&gt;swagger&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;Назови &lt;span class="caps"&gt;ORM&lt;/span&gt;, с которыми ты работал (&lt;cite&gt;SQLAlchemy&lt;/cite&gt;, &lt;cite&gt;Django &lt;span class="caps"&gt;ORM&lt;/span&gt;&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;Какие статические анализаторы кода, линтеры для Python ты знаешь? (&lt;cite&gt;mypy&lt;/cite&gt;, &lt;cite&gt;flake8&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;Какие web-фреймворки тебе известны? (&lt;cite&gt;Flask&lt;/cite&gt;, &lt;cite&gt;Django&lt;/cite&gt;, &lt;cite&gt;aiohttp&lt;/cite&gt;, &lt;cite&gt;sanic&lt;/cite&gt;,&amp;nbsp;etc.)&lt;/li&gt;
+&lt;li&gt;Какие package management tools ты знаешь? (&lt;cite&gt;pip&lt;/cite&gt;, &lt;cite&gt;pipenv&lt;/cite&gt;, &lt;cite&gt;poetry&lt;/cite&gt;,&amp;nbsp;etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id18"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id57"&gt;Алгоритмы&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id19"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id58"&gt;Временная&amp;nbsp;сложность&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Что такое временная сложность (time&amp;nbsp;complexity)?&lt;/li&gt;
+&lt;li&gt;Что такое большая&amp;nbsp;O?&lt;/li&gt;
+&lt;li&gt;Какая временная сложность вот такой&amp;nbsp;операции:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# O(n^2)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+         &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Какова временная сложность для следующих&amp;nbsp;стейтментов?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="c1"&gt;# где type(s) is list/tuple # O(n)&lt;/span&gt;
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="c1"&gt;# где type(s) is set        # O(1)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;                             &lt;span class="c1"&gt;# O(1)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;                             &lt;span class="c1"&gt;# O(n)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;                               &lt;span class="c1"&gt;# O(1)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;                                 &lt;span class="c1"&gt;# O(n log n)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Можно еще поспрашивать временную сложность операций над &lt;a class="reference external" href="https://wiki.python.org/moin/TimeComplexity"&gt;другими
+структурами данных&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="lisp"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id59"&gt;Проверка сбалансированности скобок в&amp;nbsp;Lisp-программе&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Я обожаю программировать на Racket – это диалект Lisp, который
+славится большим &lt;a class="reference external" href="https://blog.pilosus.org/images/git-the-princess.png"&gt;количеством скобочек&lt;/a&gt;. Напиши функцию на Python,
+которая будет получать на вход текст (строку) и возвращать &lt;cite&gt;True&lt;/cite&gt;,
+если скобки в тексте сбалансированы и &lt;cite&gt;False&lt;/cite&gt; в противном&amp;nbsp;случае.&lt;/p&gt;
+&lt;p&gt;Примеры сбалансированных&amp;nbsp;скобочек:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;()&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;(())&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;(custom-set-variables &amp;#39;(inhibit-startup-screen t) &amp;#39;(package-selected-packages (quote&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;indent&lt;/span&gt; &lt;span class="n"&gt;magit&lt;/span&gt; &lt;span class="n"&gt;dockerfile&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;gitlab&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;lorem&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ipsum&lt;/span&gt; &lt;span class="n"&gt;jedi&lt;/span&gt;
+&lt;span class="n"&gt;elpy&lt;/span&gt; &lt;span class="n"&gt;anaconda&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;afternoon&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;(hello [world {!}])&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Примеры несбалансированных&amp;nbsp;скобочек:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;)(&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;())&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;({))&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;balance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;  Return True if string&amp;#39;s parentheses are balanced, False otherwise&lt;/span&gt;
+
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  True&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;(())&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  True&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;))((&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  False&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;()()(())(()())&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  True&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;(]&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  False&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+  &lt;span class="n"&gt;opening&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;[&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;closing&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;closing&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ch&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+      &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;closing&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
+              &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;stack&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Если кандидату трудно придумать решение для скобочек разных типов,
+можно упростить задание до поверки, например, только круглых&amp;nbsp;скобочек.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id20"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id60"&gt;Базы&amp;nbsp;данных&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="rdbms"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id61"&gt;Зачем нужна &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;У нас стартап из &lt;span class="caps"&gt;CTO&lt;/span&gt;, &lt;span class="caps"&gt;CEO&lt;/span&gt; и одного разработчика. Админов нету. Мы
+пишем сервис аутентификации – регистрация пользотелей, проверка прав –
+на Python. Зачем нам нужна БД? Почему бы не использовать текстовый
+файл?  Стандартная библиотека языка имеет все необходимое для работы с
+файлами. Записываем логин и хэш пароля при регистрации, читаем при
+запросе доступа. Это просто. Не требует админитрирования, избавляет от
+зависимостей.  При сложностях, можно переформулировать вопрос так –
+какие существуют механизмы реляционной БД, достаточно сложные для их
+самостоятельно реализации, но необходимые для нашего&amp;nbsp;случая?&lt;/p&gt;
+&lt;p&gt;От кандидата хочется услышать упоминания следующих&amp;nbsp;механизмов:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;индекс&lt;/li&gt;
+&lt;li&gt;связи&amp;nbsp;таблиц&lt;/li&gt;
+&lt;li&gt;транзакции&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Про каждый механизм можно поспрашивать отдельно. Например, про индекс
+можно&amp;nbsp;спросить:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;временная сложность для поиска по&amp;nbsp;индексу&lt;/li&gt;
+&lt;li&gt;в таблице &lt;cite&gt;candidates&lt;/cite&gt; есть колонка &lt;cite&gt;is_interviewed&lt;/cite&gt; с возможными
+значениями 0 и 1. какой прирост произодительности для поиска по этой
+колонке даст индекс для&amp;nbsp;нее?&lt;/li&gt;
+&lt;li&gt;что такое составные индексы? есть ли какие-то правила для запросов
+по колонкам, участвующим в составном индексе?составном&amp;nbsp;индексе?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mysql-postgresql"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id62"&gt;Запросы в&amp;nbsp;MySQL/PostgreSQL&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;У нас есть сервис по типу iTunes, где можно арендовать/покупать
+видео. Вот схема таблиц реляционной базы, положим, в&amp;nbsp;PostgreSQL&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://blog.pilosus.org/images/sql-tables.pdf"&gt;&lt;img alt="Схема таблиц реляционной базы данных для технического собеседования" class="responsive" src="https://blog.pilosus.org/images/sql-tables.jpg" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Напиши запрос, который выведет топ-20 фильмов, в которых играет актер John Doe. Запрос должен&amp;nbsp;выводить:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Название&amp;nbsp;фильма&lt;/li&gt;
+&lt;li&gt;Язык&amp;nbsp;издания&lt;/li&gt;
+&lt;li&gt;Год&amp;nbsp;выпуска&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Результаты нужно упорядочить по убыванию года&amp;nbsp;выпуска.&lt;/p&gt;
+&lt;p&gt;(Если нужна подсказка) на основе таблиц: &lt;cite&gt;film&lt;/cite&gt;, &lt;cite&gt;language&lt;/cite&gt;, &lt;cite&gt;film_actor&lt;/cite&gt;, &lt;cite&gt;actor&lt;/cite&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;release_year&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;film&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="k"&gt;language&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;language_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;language_id&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;film_actor&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;film_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;film_id&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;actor&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;actor_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;actor_id&lt;/span&gt;
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;John&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;release_year&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt;
+&lt;span class="k"&gt;LIMIT&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Напиши запрос, который выведет топ-10 клиентов, которые оставили в
+сервисе больше всего денег, но не менее 100 у.е. Запрос должен&amp;nbsp;выводить:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;span class="caps"&gt;ID&lt;/span&gt; и полное имя&amp;nbsp;клиента&lt;/li&gt;
+&lt;li&gt;сумму всех заказов&amp;nbsp;юзера&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(Если нужна подсказка) на основе таблиц: &lt;cite&gt;payment&lt;/cite&gt;, &lt;cite&gt;customer&lt;/cite&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;SUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amount&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;money&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;payment&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;
+&lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;
+&lt;span class="k"&gt;HAVING&lt;/span&gt; &lt;span class="k"&gt;SUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amount&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;money&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt;
+&lt;span class="k"&gt;LIMIT&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nosql"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id63"&gt;Общие представления о&amp;nbsp;NoSQL&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Что такое NoSQL БД? Какие типы NoSQL БД выделяют?&amp;nbsp;Примеры&lt;/p&gt;
+&lt;p&gt;Хочется услышать хотя бы самые общие вещи: NoSQL БД &amp;#8212; коллекция
+данных в одном из форматов (см. типы ниже). Данные денормализованы,
+&lt;span class="caps"&gt;JOIN&lt;/span&gt; реализуют обычно на уровне&amp;nbsp;приложения.&lt;/p&gt;
+&lt;p&gt;Типы NoSQL&amp;nbsp;БД:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;key-value store (реализация hash table: Redis,&amp;nbsp;AeroSpike)&lt;/li&gt;
+&lt;li&gt;document-store (аналогично key-value, но в качестве значения документ, например, &lt;span class="caps"&gt;JSON&lt;/span&gt;:&amp;nbsp;MongoDB)&lt;/li&gt;
+&lt;li&gt;wide column store (HBase,&amp;nbsp;Cassandra)&lt;/li&gt;
+&lt;li&gt;graph database&amp;nbsp;(Neo4j)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="redis"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id64"&gt;Общие представления о&amp;nbsp;Redis&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Что такое Redis? Почему его так любят использовать для хранения кэшей?
+Чем, с точки зрения хранения данных, он принципиально отличается от,
+например, MySQL? Что произойдет с данными в Redis, если прозойдет
+рестарт сервера?  Какие существуют механизмы для High Availability в&amp;nbsp;Redis?&lt;/p&gt;
+&lt;p&gt;Ожидания от ответа: Redis – это in-memory key-value БД. У нее есть
+механизм снапшотов данных из памяти на диск. Для &lt;span class="caps"&gt;HA&lt;/span&gt; используют,
+например, Redis&amp;nbsp;Sentinel&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id21"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id65"&gt;Тестирование&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="unit"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id66"&gt;Общие представления о&amp;nbsp;unit-тестировании&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Что это&amp;nbsp;такое?&lt;/li&gt;
+&lt;li&gt;Чем отличается от интеграционного, функционального&amp;nbsp;тестирования?&lt;/li&gt;
+&lt;li&gt;Какие библиотеки для Python использовал для этого? (&lt;cite&gt;unittest&lt;/cite&gt;,
+&lt;cite&gt;pytest&lt;/cite&gt;, в чем&amp;nbsp;разница?)&lt;/li&gt;
+&lt;li&gt;Когда нужно писать unit-тест? (в существующем проекте, в новом
+проекте, при починке бага, при реализации&amp;nbsp;фичи)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mysql"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id67"&gt;Как протестировать функцию, которая изменяет запись в&amp;nbsp;MySQL?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Есть функция, которая выполняет &lt;cite&gt;&lt;span class="caps"&gt;INSERT&lt;/span&gt;&lt;/cite&gt; в тестовой базе данных MySQL,
+которой пользуются все разработчики команды. Нужно написать тест на
+эту функцию. Но не хочется вносить изменения в общую базу. Как можно
+решить эту&amp;nbsp;проблему?&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;mock&lt;/li&gt;
+&lt;li&gt;transaction&amp;nbsp;rollback&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="devops"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id68"&gt;DevOps/Администрирование&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="google-com"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id69"&gt;Проблема с нечитаемым ответом&amp;nbsp;google.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Я захожу на &lt;cite&gt;https://www.google.com&lt;/cite&gt; в браузере, открываю исходный код
+и вижу вполне читаемый&amp;nbsp;текст.&lt;/p&gt;
+&lt;p&gt;Но если я делаю такой запрос через &lt;cite&gt;curl&lt;/cite&gt; то вижу нечто нечитаемое,
+похожее на бинарный&amp;nbsp;файл:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; GET / HTTP/2
+&amp;gt; Host: www.google.com
+&amp;gt; User-Agent: curl/7.58.0
+&amp;gt; Accept: */*
+&amp;gt; Accept-Encoding: gzip, deflate
+
+%�j��~d+.K�W��me&lt;span class="sb"&gt;`&lt;/span&gt;�,x�x�m�G�67��&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="nv"&gt;$#&lt;/span&gt;������~&lt;span class="o"&gt;{&lt;/span&gt;d���&lt;span class="o"&gt;]&lt;/span&gt;�.&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;����
+����Q���Mʥu���&amp;lt;�O&lt;span class="o"&gt;)&lt;/span&gt;,�&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;�����,���E�.���_�
+&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;�I&lt;span class="se"&gt;\�&lt;/span&gt;�p��#&lt;span class="o"&gt;]&lt;/span&gt;�,�����K+����p�vk
+j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E���;3+�v�BT1T��(W��J��m�yO��&lt;/span&gt;
+&lt;span class="s2"&gt;�j��&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Почему так&amp;nbsp;происходит?&lt;/p&gt;
+&lt;p&gt;Для&amp;nbsp;интервьюера:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -v &lt;span class="s2"&gt;&amp;quot;https://www.google.com&amp;quot;&lt;/span&gt; --header &lt;span class="s2"&gt;&amp;quot;Accept-Encoding: gzip, deflate&amp;quot;&lt;/span&gt; --output -
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ip-nginx"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id70"&gt;Топ &lt;span class="caps"&gt;IP&lt;/span&gt; адресов из лога &lt;span class="caps"&gt;NGINX&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Наш сервис парсят боты. Это создает большую нагрузку, мешающую
+нормальным пользователям. Мы решаем забанить ботов по &lt;span class="caps"&gt;IP&lt;/span&gt;-адресам. Для
+этого мы хотим составить топ &lt;span class="caps"&gt;IP&lt;/span&gt;-адресов, с которых приходили
+запросы. Мы просим админов сделать выгрузку логов за 1&amp;nbsp;час.&lt;/p&gt;
+&lt;p&gt;С помощью стандартных &lt;span class="caps"&gt;GNU&lt;/span&gt; utils создай файл с топом &lt;span class="caps"&gt;IP&lt;/span&gt;-адресов в
+порядке убывания частоты запросов.  Предположим, что &lt;span class="caps"&gt;IP&lt;/span&gt;-адрес
+находится в 9-й колонке лога, колонки отделяются через &lt;cite&gt;t&lt;/cite&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;awk &lt;span class="s1"&gt;&amp;#39;{print $9}&amp;#39;&lt;/span&gt; nginx.log &lt;span class="p"&gt;|&lt;/span&gt; sort &lt;span class="p"&gt;|&lt;/span&gt; uniq -c &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $1&amp;quot;,&amp;quot;$2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sort -r -t, -nk1 &amp;gt; bots.csv
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="docker"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id71"&gt;Docker&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Что такое докер&amp;nbsp;контейнер?&lt;/li&gt;
+&lt;li&gt;В чем отличие от virtualbox и других виртуальных&amp;nbsp;машин?&lt;/li&gt;
+&lt;li&gt;Зачем использовать докер, если можно просто скопировать файлы на&amp;nbsp;машину?&lt;/li&gt;
+&lt;li&gt;Почему нельзя просто использовать&amp;nbsp;virtualenv?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id22"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id72"&gt;Архитектура&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Parental advisory: highly opinionated content&amp;nbsp;(35+)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="section" id="pastebin"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id73"&gt;Проектирование сервиса копипасты&amp;nbsp;pastebin&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="id23"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id74"&gt;Бизнес-описание&lt;/a&gt;&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Пользователь сабмитит&amp;nbsp;текст&lt;/li&gt;
+&lt;li&gt;Текст сохраняется, ему присваивается уникальный &lt;span class="caps"&gt;URL&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;По переходу по сгенерированному &lt;span class="caps"&gt;URL&lt;/span&gt; мы видим&amp;nbsp;текст&lt;/li&gt;
+&lt;li&gt;Текст хранится какой-то срок (в&amp;nbsp;минутах)&lt;/li&gt;
+&lt;li&gt;Сервис удаляет просроченные&amp;nbsp;тексты&lt;/li&gt;
+&lt;li&gt;Сервис&amp;nbsp;высоконагруженый&lt;/li&gt;
+&lt;li&gt;Нужна статистика для посещения различных урлов по&amp;nbsp;месяцам&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id24"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id75"&gt;Ограничения и&amp;nbsp;допущения&lt;/a&gt;&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Пасты только&amp;nbsp;текстовые&lt;/li&gt;
+&lt;li&gt;Аналитика может быть не&amp;nbsp;реалтаймовой&lt;/li&gt;
+&lt;li&gt;10 миллионов записей в месяц
+(3.85 &lt;span class="caps"&gt;RPS&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;100 миллионов чтений в месяц
+(38.5 &lt;span class="caps"&gt;RPS&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;Железо планируем на 3 года&amp;nbsp;вперед&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id25"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id76"&gt;Ответить соискателю, если&amp;nbsp;спросит&lt;/a&gt;&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Средний размер пасты&amp;nbsp;1Kb&lt;/li&gt;
+&lt;li&gt;Короткая ссылка длиной 7 байт в&amp;nbsp;БД&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;TTL&lt;/span&gt; ссылки в минутах 4 байта в&amp;nbsp;БД&lt;/li&gt;
+&lt;li&gt;Время создания ссылки 5&amp;nbsp;байт&lt;/li&gt;
+&lt;li&gt;Путь хранения файла пасты - 255&amp;nbsp;байт&lt;/li&gt;
+&lt;li&gt;Итого: 1.27 Кбайт на 1&amp;nbsp;пасту&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;1.27 Гб пасты в месяц
+За 3 года:
+- 36 * 12.7 = 457 Гб пасты
+- 36 * 10 = 360 млн&amp;nbsp;урлов&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id26"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id77"&gt;Крупноблочная схема&amp;nbsp;архитектуры&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Client
+    |
+    V
+Load Balancer
+    |
+      V
+ Web Server (Reverse Proxy, i.e. Nginx)
+  |      |
+  V      V
+Write   Read                                Analytics (MapReduce)
+API     API---------------------------       |         |
+ |       |        |                  |       |         |
+ |       V        |                  |       |         |
+ |      Cache     |                  |       |         V
+ ------------------------------      |       |       SQL for Analytics
+ V                |            |     |       |
+SQL-----------    |            V     V       V
+ |_Master    |    |           Object (File) Store
+ |_Slave     V    |
+            SQL   V
+ ^                    Read-only Replica
+ |
+ |
+Periodic Task
+(remove expired)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="write-api"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id78"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Генерит &lt;span class="caps"&gt;URL&lt;/span&gt;, проверяет уникальность в &lt;span class="caps"&gt;SQL&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Если уникальное, делает &lt;span class="caps"&gt;INSERT&lt;/span&gt; в таблицу, иначе идет в п.&amp;nbsp;1&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;shortlink&lt;/span&gt; &lt;span class="nb"&gt;char&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="n"&gt;expiration_in_minutes&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="n"&gt;created_at&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="n"&gt;paste_path&lt;/span&gt; &lt;span class="nb"&gt;varchar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shortlink&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="n"&gt;shortlink_idx&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;pastes&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shortlink&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;USING&lt;/span&gt; &lt;span class="n"&gt;BTREE&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="n"&gt;created_at_idx&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;pastes&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;created_at&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;USING&lt;/span&gt; &lt;span class="n"&gt;BTREE&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id27"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id79"&gt;Создание уникального&amp;nbsp;урла&lt;/a&gt;&lt;/h4&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Берем рандомную строку (или &lt;span class="caps"&gt;IP&lt;/span&gt; address юзера + timestamp) и вычисляем &lt;span class="caps"&gt;MD5&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Кодируем &lt;cite&gt;Base 62&lt;/cite&gt; (как Base 64 но без&amp;nbsp;escape-символов)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;base_encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;62&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;digits&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+      &lt;span class="n"&gt;remainder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;modulo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;digits&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;remainder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;divide&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;digits&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;digits&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reverse&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;От строки в Base 62 можем взять 7 символов это даст 62**7 возможных
+значений (это намного больше чем 360 миллионов урлов, которые мы
+планируем на 3&amp;nbsp;года)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base_encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;md5&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip_address&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;timestamp&lt;/span&gt;&lt;span class="p"&gt;))[:&lt;/span&gt;&lt;span class="n"&gt;URL_LENGTH&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id28"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id80"&gt;Запрос к Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ curl -X POST https://pastebin.com/api/v1.0/paste &lt;span class="se"&gt;\&lt;/span&gt;
+       --data &lt;span class="s1"&gt;&amp;#39;{ &amp;quot;expiration_in_minutes&amp;quot;: &amp;quot;60&amp;quot;, &amp;quot;paste_contents&amp;quot;: &amp;quot;My paste&amp;quot; }&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id29"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id81"&gt;Ответ Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;shortlink&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xJlsmeT&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="read-api"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id82"&gt;Запрос к Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ curl https://pastebin.com/api/v1.0/paste?shortlink&lt;span class="o"&gt;=&lt;/span&gt;xJlsmeT
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id30"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id83"&gt;Ответ Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;paste&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;My paste&amp;quot;&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;YYYY-MM-DD HH:MM:SS&amp;quot;&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;expiration_in_minutes&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;60&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id31"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id84"&gt;Аналитика&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Поскольку не нужен реалтайм, будем брать логи с реверс прокси и
+скартимливать их в&amp;nbsp;MapReduce&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;HitCounts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MRJob&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Extract the generated url from the log line.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_year_month&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the year and month portions of the timestamp.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Parse each log line, extract and transform relevant lines.&lt;/span&gt;
+
+&lt;span class="sd"&gt;        Emit key value pairs of the form:&lt;/span&gt;
+
+&lt;span class="sd"&gt;        (2016-01, url0), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        (2016-01, url0), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        (2016-01, url1), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;period&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_year_month&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reducer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Sum values for each key.&lt;/span&gt;
+
+&lt;span class="sd"&gt;        (2016-01, url0), 2&lt;/span&gt;
+&lt;span class="sd"&gt;        (2016-01, url1), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id32"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id85"&gt;Полезные&amp;nbsp;ссылки&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.toptal.com/python/interview-questions"&gt;Toptal Python Interview&amp;nbsp;Questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Python Interview Questions (&lt;a class="reference external" href="https://luminousmen.com/post/6"&gt;junior&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/7"&gt;middle&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/8"&gt;senior&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/checkcheckzz/system-design-interview"&gt;System design&amp;nbsp;interview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://docs.python.org/3.8/reference/index.html"&gt;The Python Language&amp;nbsp;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.postgresqltutorial.com/"&gt;PostgreSQL&amp;nbsp;Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="python"></category><category term="interview"></category><category term="ru"></category></entry><entry><title>PostgreSQL: update by spliting result set into evenly sized chunks using window function</title><link href="https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/" rel="alternate"></link><published>2019-12-07T14:58:00+03:00</published><updated>2019-12-07T14:58:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-07:/posts/2019/12/07/postgresql-update-rows-in-chunks/</id><summary type="html">&lt;p class="first last"&gt;How do you update result set by spliting it into evenly
 sized chunks using window function&amp;nbsp;row_number()&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Sometimes you need to process your database data in batches. It may be
 absolutely necessary to retrieve the rows from the database in your
