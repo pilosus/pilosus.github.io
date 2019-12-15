@@ -1,5 +1,921 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-08T14:57:00+03:00</updated><entry><title>Вопросы для собеседования веб-разработчика на Python</title><link href="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" rel="alternate"></link><published>2019-12-08T14:57:00+03:00</published><updated>2019-12-08T14:57:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-08:/posts/2019/12/08/python-interview-questions-ru/</id><summary type="html">&lt;p class="first last"&gt;Вопросы для собеседования&amp;nbsp;Python-разработчика&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-15T14:00:00+03:00</updated><entry><title>Python interview questions</title><link href="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" rel="alternate"></link><published>2019-12-15T14:00:00+03:00</published><updated>2019-12-15T14:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-15:/posts/2019/12/15/python-interview-questions/</id><summary type="html">&lt;p class="first last"&gt;Python questions for a technical&amp;nbsp;interview&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Although the questions you find in this blog post are universal, they
+are crafted for a technical interview for a web developer&amp;nbsp;position.&lt;/p&gt;
+&lt;p&gt;The questions have been tested in real life: I used them in more
+than 35 interview sessions. They allowed my team and me to hire three
+brilliant developers: a junior developer (ex-Yandex), a middle
+developer (ex-Yandex), and a senior&amp;nbsp;one.&lt;/p&gt;
+&lt;p&gt;The questions have also been reviewed by my peers and got positive
+feedback. Some of my colleagues use these questions in their technical
+interviews. I also use the questions when consulting people about
+preparing for the interview or getting their first software&amp;nbsp;job.&lt;/p&gt;
+&lt;p&gt;The questions are not unique. I&amp;#8217;m not revealing any professional
+secrets by posting them. The single most valuable thing about these
+questions is the principle they are combined in an interview
+session. You can also use these questions to come up with your
+questions for the Python interview as an interviewer. Also, you can
+use them to prepare for an interview as an&amp;nbsp;interviewee.&lt;/p&gt;
+&lt;div class="contents topic" id="table-of-contents"&gt;
+&lt;p class="topic-title first"&gt;Table of&amp;nbsp;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#introduction" id="id2"&gt;Introduction&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#premises" id="id3"&gt;Premises&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#candidates-cvs" id="id4"&gt;Candidates &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;CVs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#non-technical-questions" id="id5"&gt;Non-technical&amp;nbsp;questions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#python-questions" id="id6"&gt;Python questions&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-language-evolves" id="id7"&gt;How language&amp;nbsp;evolves&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#basic-types-and-data-structures-in-python" id="id8"&gt;Basic types and data structures in&amp;nbsp;Python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#function-default-arguments" id="id9"&gt;Function default&amp;nbsp;arguments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-s-decorator" id="id10"&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorator-that-prints-function-execution-time" id="id11"&gt;Decorator that prints function execution&amp;nbsp;time&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#using-decorator" id="id12"&gt;Using&amp;nbsp;decorator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorated-function-s-name" id="id13"&gt;Decorated function&amp;#8217;s&amp;nbsp;name&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorators-for-generators" id="id14"&gt;Decorators for&amp;nbsp;generators&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorator-with-arguments" id="id15"&gt;Decorator with&amp;nbsp;arguments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#class-variables" id="id16"&gt;Class&amp;nbsp;variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#list-slices" id="id17"&gt;List&amp;nbsp;slices&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-s-list-dict-comprehension" id="id18"&gt;What&amp;#8217;s list/dict&amp;nbsp;comprehension?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#generator-expressions" id="id19"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-useful-functions-from-functools-do-you-know" id="id20"&gt;What useful functions from functools do you&amp;nbsp;know?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#asyncio-multithreading-multiprocessing" id="id21"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#python-ecosystem" id="id22"&gt;Python&amp;nbsp;ecosystem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#computer-science-questions" id="id23"&gt;Computer science questions&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#time-complexity" id="id24"&gt;Time&amp;nbsp;complexity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#balanced-brackets-in-a-lisp-program-problem" id="id25"&gt;Balanced brackets in a Lisp-program&amp;nbsp;problem&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#databases" id="id26"&gt;Databases&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-rdbms" id="id27"&gt;Why &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mysql-postgresql-queries" id="id28"&gt;MySQL/PostgreSQL&amp;nbsp;queries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#nosql-overview" id="id29"&gt;NoSQL&amp;nbsp;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#redis-overview" id="id30"&gt;Redis&amp;nbsp;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#testing" id="id31"&gt;Testing&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unit-testing-overview" id="id32"&gt;Unit-testing&amp;nbsp;overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-do-you-test-a-function-that-changes-data-in-mysql" id="id33"&gt;How do you test a function that changes data in&amp;nbsp;MySQL?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#devops-sysadmin-skills" id="id34"&gt;DevOps/SysAdmin skills&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#broken-response-from-google-com" id="id35"&gt;Broken response from&amp;nbsp;google.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#ip-addresses-top-from-nginx-log" id="id36"&gt;&lt;span class="caps"&gt;IP&lt;/span&gt; addresses top from Nginx&amp;nbsp;log&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#docker" id="id37"&gt;Docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#system-design-and-architecture" id="id38"&gt;System Design and Architecture&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#system-design-of-pastebin-like-service" id="id39"&gt;System design of pastebin-like service&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#user-story-business-description" id="id40"&gt;User story (business&amp;nbsp;description)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#assume" id="id41"&gt;Assume&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#hints" id="id42"&gt;Hints&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#capacity-planning-for-3-years" id="id43"&gt;Capacity planning for 3&amp;nbsp;years&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#service-architecture" id="id44"&gt;Service&amp;nbsp;architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api" id="id45"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unique-url-path-generation" id="id46"&gt;Unique &lt;span class="caps"&gt;URL&lt;/span&gt; path&amp;nbsp;generation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#request-write-api" id="id47"&gt;Request Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api-response" id="id48"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Response&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#request-read-api" id="id49"&gt;Request Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#read-api-reponse" id="id50"&gt;Read &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Reponse&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#statistics" id="id51"&gt;Statistics&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#sources-and-useful-links" id="id52"&gt;Sources and useful&amp;nbsp;links&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="introduction"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id2"&gt;Introduction&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="premises"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id3"&gt;Premises&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Software development is no longer an art, nor a lifelong quest, but
+rather an everyday office job, though highly-skilled one. That&amp;#8217;s why
+a candidate&amp;#8217;s abilities for teamwork, coping with chores are super
+important. But pure computer science, algorithms are in the
+background, whether you like it or&amp;nbsp;not.&lt;/li&gt;
+&lt;li&gt;An algorithm-based technical interview is an analogue of &lt;span class="caps"&gt;IQ&lt;/span&gt;-tests
+that have been invented in the early &lt;span class="caps"&gt;XX&lt;/span&gt; century in the &lt;span class="caps"&gt;US&lt;/span&gt; for a
+quick military recruits categorization. &lt;span class="caps"&gt;IQ&lt;/span&gt; provides some insights
+about human intelligence but also has its flaws. Demonstrated
+algorithm skill also provides an insight about candidate&amp;#8217;s
+intelligence but also has its flaws. Algorithm-based technical
+interviews are used by corporations to quickly process a huge queue
+of candidates, hire the ones they need and evaluate their grades and
+salary. Corporations everybody wants to work for can afford a false
+negative in hiring, i.e. not hiring the right person, as many
+candidates compete to be hired by these companies. If you are not
+one of these companies, then &lt;strong&gt;you&lt;/strong&gt; compete with other companies
+for the candidates. So don&amp;#8217;t pretend to be a Google if you are not&amp;nbsp;Google.&lt;/li&gt;
+&lt;li&gt;Human intelligence neither is an &amp;#8220;on/off&amp;#8221;, nor a range. Rather,
+intelligence is a swiss army knife, a multitool. It may contain an
+excellent sharp blade for everyday chores, it may also have a
+screwdriver that merely works, and it may also have a corkscrew that
+you actually don&amp;#8217;t need at all. Can we evaluate an overall score for
+such a multitool? Sure. But why would we? Unless you are Google,
+find a multitool with the blades and bits that solve your exact
+problems, not the abstract&amp;nbsp;ones.&lt;/li&gt;
+&lt;li&gt;You need an interview to find out three things: a) why the candidate
+has left (or are ready to leave) his/her previous (current) job; b)
+what is he/she looking for at the new company; c) what value can
+he/she bring to your&amp;nbsp;team?&lt;/li&gt;
+&lt;li&gt;Hiring error can be mitigated by the probationary period. Take it
+seriously. Set some goals (tasks) for probation. The same for the
+candidate: during probation decide if the company is the right
+choice. But hiring error is still an error that costs your company
+money and time. You should do your best to avoid this error. The
+same for the candidate. That&amp;#8217;s why you never tell lies about your
+project and team in the interview. Still, there&amp;#8217;s nothing wrong with
+presenting your project positively. Actually, it&amp;#8217;s your duty if you
+want to hire someone in a highly competitive job&amp;nbsp;market.&lt;/li&gt;
+&lt;li&gt;There are no two identical interviews even for the same grade. The
+technical interview is always improvisation. It&amp;#8217;s an attempt to
+reveal a candidate&amp;#8217;s boundaries of competence, strengths and
+weaknesses in a short period of&amp;nbsp;time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="candidates-cvs"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id4"&gt;Candidates &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;CVs&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Not everybody is a &lt;span class="caps"&gt;CV&lt;/span&gt;-ninja.&amp;nbsp;Really&lt;/li&gt;
+&lt;li&gt;Too high salary expectations isn&amp;#8217;t a reason to reject a
+candidate &lt;span class="caps"&gt;CV&lt;/span&gt;. You always can ask questions that will either lower
+the expectations or prove you are interviewing a&amp;nbsp;genius.&lt;/li&gt;
+&lt;li&gt;(sarcasm mode on) Of course, an interviewer always knows best!
+(sarcasm mode off) But there are no solid grounds for reject
+candidate CVs with grammar mistakes or expressions of inexperience or
+quirks in their CVs. Asking inadequately complex questions is also
+not a good idea. The interview is not about you, it&amp;#8217;s about the&amp;nbsp;candidate.&lt;/li&gt;
+&lt;li&gt;Don&amp;#8217;t afraid of people with some irrelevant background,
+e.g. designers, analysts, etc., who changed his/her profession to a
+technical one. Be honest, your boring &lt;span class="caps"&gt;REST&lt;/span&gt; &lt;span class="caps"&gt;API&lt;/span&gt; doesn&amp;#8217;t require a
+university graduate&amp;nbsp;program.&lt;/li&gt;
+&lt;li&gt;A candidate&amp;#8217;s technology stack may not be 100% yours. Still, he/she
+may be a good match for your team. Should you hire someone with 3+
+years of experience with Flask but no Django experience for your
+Django project? Probably you&amp;nbsp;should.&lt;/li&gt;
+&lt;li&gt;The only way to hire someone quickly is to do as many interviews as
+you&amp;nbsp;can.&lt;/li&gt;
+&lt;li&gt;Average interview time for an interviewer is about 2.5 hours (skim
+over the CVs, prepare for the interview, the interview itself,
+discussion with an &lt;span class="caps"&gt;HR&lt;/span&gt; specialist and a &lt;span class="caps"&gt;CTO&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;Don&amp;#8217;t make a technical interview for too long. 2 hour is enough. 1.5
+hours is&amp;nbsp;optimal.&lt;/li&gt;
+&lt;li&gt;Three interviews a week is a good pace. More than 3 is too much for
+the interviewer and his/her team. Less than 3 makes your search&amp;nbsp;longer.&lt;/li&gt;
+&lt;li&gt;Average time for hiring a Python developer depends on the project,
+expected experience and your offer conditions. As a rule of thumb, 3
+months from submitting an open position to &lt;span class="caps"&gt;HR&lt;/span&gt; department to the
+first working day is&amp;nbsp;okay.&lt;/li&gt;
+&lt;li&gt;Not every software engineer is an introvert. There are people with
+outstanding &amp;#8220;selling&amp;#8221; skills who are prepared for typical interview
+questions, present themselves, but still lack solid knowledge of
+software development. Don&amp;#8217;t let them trick you! Ask whiteboard
+programming&amp;nbsp;questions!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="non-technical-questions"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id5"&gt;Non-technical&amp;nbsp;questions&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What have you done in your previous/current&amp;nbsp;project?&lt;/li&gt;
+&lt;li&gt;Describe your team line-up (frontend/backend developers, &lt;span class="caps"&gt;QA&lt;/span&gt;
+engineers, &lt;span class="caps"&gt;SRE&lt;/span&gt;/DevOps/SysAdmins, product/project managers,&amp;nbsp;etc)?&lt;/li&gt;
+&lt;li&gt;How planning, code review, etc. are organized in your project? What
+you liked and disliked about&amp;nbsp;it?&lt;/li&gt;
+&lt;li&gt;Why did you decice to leave (have already left) the&amp;nbsp;project?&lt;/li&gt;
+&lt;li&gt;What do you expect from the new project (things to develop, processes,&amp;nbsp;etc)?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="python-questions"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id6"&gt;Python&amp;nbsp;questions&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="how-language-evolves"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id7"&gt;How language&amp;nbsp;evolves&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s new in the latest Python version? (&lt;a class="reference external" href="https://docs.python.org/3/whatsnew/3.8.html"&gt;Python 3.8&lt;/a&gt; at the moment of&amp;nbsp;writing)&lt;/li&gt;
+&lt;li&gt;How Python 3+ differs from Python 2.7? (&lt;a class="reference external" href="https://docs.python.org/3.0/whatsnew/3.0.html"&gt;What&amp;#8217;s new in Python 3&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;What new syntax has been introduced since Python 2.7? (minimal expectations: asyncio, type&amp;nbsp;hinting)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-types-and-data-structures-in-python"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id8"&gt;Basic types and data structures in&amp;nbsp;Python&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What are the basic types in&amp;nbsp;Python?&lt;/li&gt;
+&lt;li&gt;What are the basic data structures in&amp;nbsp;Python?&lt;/li&gt;
+&lt;li&gt;All data types and structures in Python can be divided into two groups. Name these groups (mutable,&amp;nbsp;immutable)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Problem. What lines of the following code raise exceptions? What&amp;nbsp;expectations?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;       &lt;span class="c1"&gt;# TypeError: unhashable type: &amp;#39;list&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="c1"&gt;# TypeError: unhashable type: &amp;#39;list&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="function-default-arguments"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id9"&gt;Function default&amp;nbsp;arguments&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. We have got a&amp;nbsp;function:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What the following print statements will print after the block of assignments is&amp;nbsp;executed?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;l1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;l2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[])&lt;/span&gt;
+&lt;span class="n"&gt;l3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# [1, 3]&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# [2]&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# [1, 3]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How would you fix the function so that print statements print [1], [2], [3]&amp;nbsp;respectively?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_default_fixed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;lst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-s-decorator"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id10"&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/li&gt;
+&lt;li&gt;What decorators from the standard library you&amp;nbsp;know?&lt;/li&gt;
+&lt;li&gt;Tell about &lt;a class="reference external" href="https://docs.python.org/3.7/howto/descriptor.html"&gt;descriptor protocol&lt;/a&gt; (complex&amp;nbsp;question)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="decorator-that-prints-function-execution-time"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id11"&gt;Decorator that prints function execution&amp;nbsp;time&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We have got a function that queries a database. We want each function
+call to print time of its execution. Implement it with a decorator.
+Assume: decorated function may have any number of positional or
+keyword&amp;nbsp;arguments.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Wrapper function&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="using-decorator"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id12"&gt;Using&amp;nbsp;decorator&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;How do you apply your decorator to a function &lt;cite&gt;fun&lt;/cite&gt; using syntactic
+sugar and without&amp;nbsp;it?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# with syntactic sugar&lt;/span&gt;
+&lt;span class="nd"&gt;@measure&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="c1"&gt;# sugar free&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# function&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="decorated-function-s-name"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id13"&gt;Decorated function&amp;#8217;s&amp;nbsp;name&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;What is function &lt;cite&gt;docstring&lt;/cite&gt; and &lt;cite&gt;name&lt;/cite&gt; after decorator is&amp;nbsp;applied?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;wrapper&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;Wrapper function&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How do you return the original name and docstring to the decorated&amp;nbsp;function?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wraps&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nd"&gt;@wraps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Wrapper function&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+
+&lt;span class="nd"&gt;@measure&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;My func&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;fun&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;   &lt;span class="c1"&gt;# &amp;#39;My func&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How would you do that without &lt;cite&gt;functools.wraps&lt;/cite&gt;?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Wrapper function&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;
+    &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="decorators-for-generators"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id14"&gt;Decorators for&amp;nbsp;generators&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;What time do we get if we decorate a generator function like the&amp;nbsp;following?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Any&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_gen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Any&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Why time we see is so small? How would you measure the real time of
+iteration over the whole&amp;nbsp;generator?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Any&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure_gen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;yield from&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+
+&lt;span class="nd"&gt;@measure_gen&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_gen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Any&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="decorator-with-arguments"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id15"&gt;Decorator with&amp;nbsp;arguments&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Rewrite the decorator from the previous question so that it could take
+in an argument for a limit. Execution time is printed if it exceeds
+the&amp;nbsp;limit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# Don&amp;#39;t forget to set limit when decorating a function!&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;outer_wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inner_wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="n"&gt;elapsed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;before&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;elapsed&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;inner_wrapper&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;outer_wrapper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;How do we decorate a function using syntactic sugar and without&amp;nbsp;it?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;new_measure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="c1"&gt;# sugar free&lt;/span&gt;
+&lt;span class="n"&gt;new_measure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="class-variables"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id16"&gt;Class&amp;nbsp;variables&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;What&amp;#8217;s a class&amp;nbsp;variable?&lt;/p&gt;
+&lt;p&gt;Problem.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Child1&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Child2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What will the following print statements&amp;nbsp;print?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 1 1 1&lt;/span&gt;
+
+&lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 1 2 1&lt;/span&gt;
+
+&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Parent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Child2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 3 2 3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="list-slices"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id17"&gt;List&amp;nbsp;slices&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. What are the results of this code block&amp;nbsp;execution?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# [2]&lt;/span&gt;
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# [1, 2, 3, 4]&lt;/span&gt;
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;  &lt;span class="c1"&gt;# []&lt;/span&gt;
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;   &lt;span class="c1"&gt;# IndexError&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-s-list-dict-comprehension"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id18"&gt;What&amp;#8217;s list/dict&amp;nbsp;comprehension?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Implement a list of even numbers in a range [0, 10) to the power 2
+using list&amp;nbsp;comprehension.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Implement the same using map and&amp;nbsp;filter.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="generator-expressions"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id19"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;What&amp;#8217;s the easiest way to turn the above list comprehension into a
+generator (generator&amp;nbsp;expression)?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-useful-functions-from-functools-do-you-know"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id20"&gt;What useful functions from functools do you&amp;nbsp;know?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The question may be a follow-up for decorator questions and
+&lt;cite&gt;functools.wraps&lt;/cite&gt;. functools is a great module with loads of useful
+things. What would be great to hear from the candidate is something
+like &lt;cite&gt;reduce&lt;/cite&gt; and &lt;cite&gt;partial&lt;/cite&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="asyncio-multithreading-multiprocessing"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id21"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s the difference between a process and a&amp;nbsp;thread?&lt;/li&gt;
+&lt;li&gt;Problem. We have got a list of 1000 URLs, we have to iterate over it
+and make &lt;span class="caps"&gt;GET&lt;/span&gt; requests. How would you do that? (&lt;span class="caps"&gt;IO&lt;/span&gt;-bound tasks -&amp;gt;
+asyncio, Tornado etc или&amp;nbsp;multithreading)&lt;/li&gt;
+&lt;li&gt;Problem. We have got 1000 video files than should be rendered
+somehow using Python. How would you do that? (&lt;span class="caps"&gt;CPU&lt;/span&gt;-bound tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
+&lt;li&gt;Give an overview of &lt;cite&gt;asyncio&lt;/cite&gt; or similar libraries for asynchronous
+programming. How does it work? (huge question, expectations are
+covered in &lt;a class="reference external" href="https://trio.readthedocs.io/en/latest/tutorial.html"&gt;Trio tutorial&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="python-ecosystem"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id22"&gt;Python&amp;nbsp;ecosystem&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What do you use for background tasks in a Python project? (&lt;cite&gt;celery&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;How do you pack your Python code? (&lt;cite&gt;wheels&lt;/cite&gt;, &lt;cite&gt;eggs&lt;/cite&gt;, what&amp;#8217;s the&amp;nbsp;difference?)&lt;/li&gt;
+&lt;li&gt;How do you document your Python project? (&lt;cite&gt;sphinx-doc&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;What do you use for &lt;span class="caps"&gt;REST&lt;/span&gt; &lt;span class="caps"&gt;API&lt;/span&gt; documenting? (&lt;cite&gt;swagger&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;What &lt;span class="caps"&gt;ORM&lt;/span&gt; do you use? (&lt;cite&gt;SQLAlchemy&lt;/cite&gt;, &lt;cite&gt;Django &lt;span class="caps"&gt;ORM&lt;/span&gt;&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;What static analysis tools and linters for Python code do you use?
+(&lt;cite&gt;mypy&lt;/cite&gt;, &lt;cite&gt;flake8&lt;/cite&gt;)&lt;/li&gt;
+&lt;li&gt;What web frameworks do you use? (&lt;cite&gt;Flask&lt;/cite&gt;, &lt;cite&gt;Django&lt;/cite&gt;, &lt;cite&gt;aiohttp&lt;/cite&gt;,
+&lt;cite&gt;sanic&lt;/cite&gt;,&amp;nbsp;etc.)&lt;/li&gt;
+&lt;li&gt;What package management tools do you use? (&lt;cite&gt;pip&lt;/cite&gt;, &lt;cite&gt;pipenv&lt;/cite&gt;,
+&lt;cite&gt;poetry&lt;/cite&gt;,&amp;nbsp;etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="computer-science-questions"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id23"&gt;Computer science&amp;nbsp;questions&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="time-complexity"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id24"&gt;Time&amp;nbsp;complexity&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s time&amp;nbsp;complexity?&lt;/li&gt;
+&lt;li&gt;What&amp;#8217;s Big&amp;nbsp;O?&lt;/li&gt;
+&lt;li&gt;What&amp;#8217;s time complexity for the following&amp;nbsp;algorithm?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# O(n^2)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+         &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What&amp;#8217;s time complexity for each of these&amp;nbsp;statements?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="c1"&gt;# where type(s) is list/tuple # O(n)&lt;/span&gt;
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="c1"&gt;# where type(s) is set        # O(1)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;                               &lt;span class="c1"&gt;# O(1)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;                               &lt;span class="c1"&gt;# O(n)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;                                 &lt;span class="c1"&gt;# O(1)&lt;/span&gt;
+&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;                                   &lt;span class="c1"&gt;# O(n log n)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check out other data structures &lt;a class="reference external" href="https://wiki.python.org/moin/TimeComplexity"&gt;time complexity&lt;/a&gt; if&amp;nbsp;needed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="balanced-brackets-in-a-lisp-program-problem"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id25"&gt;Balanced brackets in a Lisp-program&amp;nbsp;problem&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. I like to code in Racket, which is a Lisp dialect that uses a
+&lt;a class="reference external" href="https://blog.pilosus.org/images/git-the-princess.png"&gt;lot of brackets&lt;/a&gt;.  Implement a Python function that takes in text
+and returns &lt;cite&gt;True&lt;/cite&gt; if brackets in the text are balanced, and returns
+&lt;cite&gt;False&lt;/cite&gt; otherwise.&lt;/p&gt;
+&lt;p&gt;Examples of balanced&amp;nbsp;brackets:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;()&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;(())&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;(custom-set-variables &amp;#39;(inhibit-startup-screen t) &amp;#39;(package-selected-packages (quote&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;indent&lt;/span&gt; &lt;span class="n"&gt;magit&lt;/span&gt; &lt;span class="n"&gt;dockerfile&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;gitlab&lt;/span&gt; &lt;span class="n"&gt;markdown&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;lorem&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ipsum&lt;/span&gt; &lt;span class="n"&gt;jedi&lt;/span&gt;
+&lt;span class="n"&gt;elpy&lt;/span&gt; &lt;span class="n"&gt;anaconda&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;afternoon&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;(hello [world {!}])&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Examples of unbalanced&amp;nbsp;brackets:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;)(&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;())&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;({))&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;balance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;  Return True if string&amp;#39;s parentheses are balanced, False otherwise&lt;/span&gt;
+
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  True&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;(())&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  True&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;))((&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  False&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;()()(())(()())&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  True&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;gt;&amp;gt;&amp;gt; balance(&amp;quot;(]&amp;quot;)&lt;/span&gt;
+&lt;span class="sd"&gt;  False&lt;/span&gt;
+&lt;span class="sd"&gt;  &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+  &lt;span class="n"&gt;opening&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;[&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;closing&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;closing&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ch&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+      &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;closing&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
+              &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;stack&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If needed the function can be simplified to check only for round&amp;nbsp;brackets.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="databases"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id26"&gt;Databases&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="why-rdbms"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id27"&gt;Why &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. We are a startup with &lt;span class="caps"&gt;CTO&lt;/span&gt;, &lt;span class="caps"&gt;CEO&lt;/span&gt; and a couple of devs. We have
+no admins yet. We are developing authentication service (users
+registration, access rights, etc) in Python. Why do we need a
+database? Why not using a simple text file? Python has all we need to
+write to and read from a text file. We can just write user login and
+password hash to the file when the user is signing up. And then we
+read the credentials when the user is signing in in. It&amp;#8217;s easy. It
+doesn&amp;#8217;t require database admin work. Why not a text&amp;nbsp;file?&lt;/p&gt;
+&lt;p&gt;If needed, the question can be put this way: what mechanisms of a
+relational database do you know, that are complex enough to implement,
+but are necessary for our&amp;nbsp;case?&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;DB&lt;/span&gt; features that the candidate expected to&amp;nbsp;mention:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;index&lt;/li&gt;
+&lt;li&gt;relations&lt;/li&gt;
+&lt;li&gt;transactions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The candidate may be asked to elaborate on each of these features. For
+example, you can ask him/her about&amp;nbsp;indices:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s time complexity for searching using the&amp;nbsp;index?&lt;/li&gt;
+&lt;li&gt;Problem. In table &lt;cite&gt;candidates&lt;/cite&gt; we have a &lt;cite&gt;is_interviewed&lt;/cite&gt; column
+with possible values 0 or 1. How adding an index for this column
+will affect search&amp;nbsp;performance?&lt;/li&gt;
+&lt;li&gt;What&amp;#8217;s composite index (or multicolumn index)? What are the rules of
+using composite&amp;nbsp;index?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mysql-postgresql-queries"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id28"&gt;MySQL/PostgreSQL&amp;nbsp;queries&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. We have got service like iTunes where users can buy or rent a
+video. This is a PostgreSQL database schema for the&amp;nbsp;service:&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://blog.pilosus.org/images/sql-tables.pdf"&gt;&lt;img alt="PostgreSQL dababase schema for technical interview questions" class="responsive" src="https://blog.pilosus.org/images/sql-tables.jpg" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Write a &lt;span class="caps"&gt;SQL&lt;/span&gt; query to select top-20 movies starring actor John Doe. The
+query also&amp;nbsp;selects:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Movie&amp;nbsp;title&lt;/li&gt;
+&lt;li&gt;Movie&amp;nbsp;language&lt;/li&gt;
+&lt;li&gt;Movie release&amp;nbsp;year&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Results should be ordered in descendant order by a release&amp;nbsp;year.&lt;/p&gt;
+&lt;p&gt;(If help needed) use tables: &lt;cite&gt;film&lt;/cite&gt;, &lt;cite&gt;language&lt;/cite&gt;, &lt;cite&gt;film_actor&lt;/cite&gt;, &lt;cite&gt;actor&lt;/cite&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;release_year&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;film&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="k"&gt;language&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;language_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;language_id&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;film_actor&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;film_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;film_id&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;actor&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;actor_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;actor_id&lt;/span&gt;
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;John&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;release_year&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt;
+&lt;span class="k"&gt;LIMIT&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Write a &lt;span class="caps"&gt;SQL&lt;/span&gt; query to select top-10 customers who paid most, but not
+less than 100. The query also&amp;nbsp;selects:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Customer&amp;#8217;s &lt;span class="caps"&gt;ID&lt;/span&gt; and full&amp;nbsp;name&lt;/li&gt;
+&lt;li&gt;Customer sum of&amp;nbsp;payments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(If help needed) use tables: &lt;cite&gt;payment&lt;/cite&gt;, &lt;cite&gt;customer&lt;/cite&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;SUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amount&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;money&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;payment&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;
+&lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;
+&lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;customer_id&lt;/span&gt;
+&lt;span class="k"&gt;HAVING&lt;/span&gt; &lt;span class="k"&gt;SUM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amount&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;money&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt;
+&lt;span class="k"&gt;LIMIT&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="nosql-overview"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id29"&gt;NoSQL&amp;nbsp;Overview&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s&amp;nbsp;NoSQL?&lt;/li&gt;
+&lt;li&gt;What types of NoSQL do you&amp;nbsp;know?&lt;/li&gt;
+&lt;li&gt;What NoSQL &lt;span class="caps"&gt;DB&lt;/span&gt; did you&amp;nbsp;use?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Minimal expected answer: NoSQL is a database for collections of
+data. Data is denormalized, &lt;span class="caps"&gt;JOIN&lt;/span&gt; is not supported (usually implemented
+in your&amp;nbsp;app).&lt;/p&gt;
+&lt;p&gt;Types of NoSQL&amp;nbsp;DBs:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;key-value store (hash table implementation: Redis,&amp;nbsp;AeroSpike)&lt;/li&gt;
+&lt;li&gt;document-store (like key-value but with documents, e.g &lt;span class="caps"&gt;JSON&lt;/span&gt;, for
+values:&amp;nbsp;MongoDB)&lt;/li&gt;
+&lt;li&gt;wide column store (HBase,&amp;nbsp;Cassandra)&lt;/li&gt;
+&lt;li&gt;graph database&amp;nbsp;(Neo4j)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="redis-overview"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id30"&gt;Redis&amp;nbsp;Overview&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s Redis is used&amp;nbsp;for?&lt;/li&gt;
+&lt;li&gt;Why it&amp;#8217;s so popular for caching&amp;nbsp;layer?&lt;/li&gt;
+&lt;li&gt;How Redis is different from MySQL when it comes to data&amp;nbsp;storage?&lt;/li&gt;
+&lt;li&gt;What happens if a machine that runs Redis server is&amp;nbsp;rebooted?&lt;/li&gt;
+&lt;li&gt;What high availability mechanisms for Redis do you&amp;nbsp;know?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Expectations: Redis is an in-memory key-value &lt;span class="caps"&gt;DB&lt;/span&gt;. Data snapshot
+mechanism can be used in Redis to dump data to the disk. Redis
+Sentinel is a mechanism for high&amp;nbsp;availability.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="testing"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id31"&gt;Testing&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="unit-testing-overview"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id32"&gt;Unit-testing&amp;nbsp;overview&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s&amp;nbsp;unit-testing?&lt;/li&gt;
+&lt;li&gt;How it&amp;#8217;s different from integration or functional&amp;nbsp;testing?&lt;/li&gt;
+&lt;li&gt;What libraries did you use for testing in Python? (&lt;cite&gt;unittest&lt;/cite&gt;,
+&lt;cite&gt;pytest&lt;/cite&gt;) How they are different from each&amp;nbsp;other?&lt;/li&gt;
+&lt;li&gt;When you write a unit-test? (in the existing project, in the new
+project, when fixing a bug, when implementing a new&amp;nbsp;feature)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="how-do-you-test-a-function-that-changes-data-in-mysql"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id33"&gt;How do you test a function that changes data in&amp;nbsp;MySQL?&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. We&amp;#8217;ve got a function that executes a &lt;cite&gt;&lt;span class="caps"&gt;INSERT&lt;/span&gt;&lt;/cite&gt; &lt;span class="caps"&gt;SQL&lt;/span&gt; query in
+the test database. Other developers in your team use the same
+database. We need to write a unittest for the function. But we don&amp;#8217;t
+want to change test &lt;span class="caps"&gt;DB&lt;/span&gt; on each test run. How do you do&amp;nbsp;it?&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;mock&lt;/li&gt;
+&lt;li&gt;transaction&amp;nbsp;rollback&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="devops-sysadmin-skills"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id34"&gt;DevOps/SysAdmin&amp;nbsp;skills&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="broken-response-from-google-com"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id35"&gt;Broken response from&amp;nbsp;google.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. When I open a browser, go to &lt;cite&gt;https://www.google.com&lt;/cite&gt; and see
+the raw response, it&amp;#8217;s normal&amp;nbsp;text.&lt;/p&gt;
+&lt;p&gt;Here I do a &lt;span class="caps"&gt;GET&lt;/span&gt; request using &lt;cite&gt;curl&lt;/cite&gt;, but a response seems to be&amp;nbsp;broken.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; GET / HTTP/2
+&amp;gt; Host: www.google.com
+&amp;gt; User-Agent: curl/7.58.0
+&amp;gt; Accept: */*
+&amp;gt; Accept-Encoding: gzip, deflate
+
+%�j��~d+.K�W��me&lt;span class="sb"&gt;`&lt;/span&gt;�,x�x�m�G�67��&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="nv"&gt;$#&lt;/span&gt;������~&lt;span class="o"&gt;{&lt;/span&gt;d���&lt;span class="o"&gt;]&lt;/span&gt;�.&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;����
+����Q���Mʥu���&amp;lt;�O&lt;span class="o"&gt;)&lt;/span&gt;,�&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;�����,���E�.���_�
+&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;�I&lt;span class="se"&gt;\�&lt;/span&gt;�p��#&lt;span class="o"&gt;]&lt;/span&gt;�,�����K+����p�vk
+j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E���;3+�v�BT1T��(W��J��m�yO��&lt;/span&gt;
+&lt;span class="s2"&gt;�j��&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Why is it&amp;nbsp;so?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -v &lt;span class="s2"&gt;&amp;quot;https://www.google.com&amp;quot;&lt;/span&gt; --header &lt;span class="s2"&gt;&amp;quot;Accept-Encoding: gzip, deflate&amp;quot;&lt;/span&gt; --output -
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="ip-addresses-top-from-nginx-log"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id36"&gt;&lt;span class="caps"&gt;IP&lt;/span&gt; addresses top from Nginx&amp;nbsp;log&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Problem. Our service is under high load because of DDoS-attack. It
+makes hard for our legitimate customers to get a response from the
+service. We want to ban &lt;span class="caps"&gt;IP&lt;/span&gt; addresses bots get used of. To do so we
+want to make a top of &lt;span class="caps"&gt;IP&lt;/span&gt; addresses with the most requests. We ask our
+admins to provide web server logs as a file &lt;cite&gt;nginx.log&lt;/cite&gt;.&lt;/p&gt;
+&lt;p&gt;Using console &lt;span class="caps"&gt;GNU&lt;/span&gt; utils create a file with top &lt;span class="caps"&gt;IP&lt;/span&gt;-addresses with most
+requests in descending order. Assume that &lt;span class="caps"&gt;IP&lt;/span&gt;-address is in 9th column
+in the log, columns are separated by &lt;cite&gt;t&lt;/cite&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;awk &lt;span class="s1"&gt;&amp;#39;{print $9}&amp;#39;&lt;/span&gt; nginx.log &lt;span class="p"&gt;|&lt;/span&gt; sort &lt;span class="p"&gt;|&lt;/span&gt; uniq -c &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $1&amp;quot;,&amp;quot;$2}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sort -r -t, -nk1 &amp;gt; bots.csv
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="docker"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id37"&gt;Docker&lt;/a&gt;&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;What&amp;#8217;s a docker&amp;nbsp;container?&lt;/li&gt;
+&lt;li&gt;What&amp;#8217;s the difference between docker and virtualbox or other virtual&amp;nbsp;machines?&lt;/li&gt;
+&lt;li&gt;Why docker? We can just copy files to the real hardware&amp;nbsp;machine&lt;/li&gt;
+&lt;li&gt;Why not using virtualenv instead of&amp;nbsp;Docker?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="system-design-and-architecture"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id38"&gt;System Design and&amp;nbsp;Architecture&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Parental advisory: highly opinionated content&amp;nbsp;(35+)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="section" id="system-design-of-pastebin-like-service"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id39"&gt;System design of pastebin-like&amp;nbsp;service&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="user-story-business-description"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id40"&gt;User story (business&amp;nbsp;description)&lt;/a&gt;&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;A user submits text&amp;nbsp;(copypasta)&lt;/li&gt;
+&lt;li&gt;Text is saved, the user gets a unique &lt;span class="caps"&gt;URL&lt;/span&gt; (base serive &lt;span class="caps"&gt;URL&lt;/span&gt; + short&amp;nbsp;path)&lt;/li&gt;
+&lt;li&gt;User goes to the &lt;span class="caps"&gt;URL&lt;/span&gt; and sees his/her original&amp;nbsp;text&lt;/li&gt;
+&lt;li&gt;Text is stored until it&amp;#8217;s&amp;nbsp;expired&lt;/li&gt;
+&lt;li&gt;Service deletes expired&amp;nbsp;texts&lt;/li&gt;
+&lt;li&gt;Once the text is expired, it&amp;#8217;s not accessible anymore by its &lt;span class="caps"&gt;URL&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Service is operating under high&amp;nbsp;load&lt;/li&gt;
+&lt;li&gt;A product owner needs monthly statistics for URLs&amp;nbsp;visits&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="assume"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id41"&gt;Assume&lt;/a&gt;&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Copypasta can be in text format&amp;nbsp;only&lt;/li&gt;
+&lt;li&gt;The product owner doesn&amp;#8217;t need realtime&amp;nbsp;statistics&lt;/li&gt;
+&lt;li&gt;Service gets 10 million new copypastas a month (3.85 &lt;span class="caps"&gt;RPS&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;Service has 100 million copypasta reads a month (38.5 &lt;span class="caps"&gt;RPS&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;We need capacity planning (hardware planning) for 3&amp;nbsp;years&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="hints"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id42"&gt;Hints&lt;/a&gt;&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Average text size is&amp;nbsp;1Kb&lt;/li&gt;
+&lt;li&gt;Short &lt;span class="caps"&gt;URL&lt;/span&gt; path takes 7 bytes in &lt;span class="caps"&gt;DB&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;URL&lt;/span&gt; expiry (or &lt;span class="caps"&gt;TTL&lt;/span&gt;) takes 4 bytes in &lt;span class="caps"&gt;DB&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;URL&lt;/span&gt; timestamp takes 5 bytes in &lt;span class="caps"&gt;DB&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;File path to a copypasta takes 255 bytes in &lt;span class="caps"&gt;DB&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;In total: 1.27 &lt;span class="caps"&gt;KB&lt;/span&gt; per copypasta or 1.27 Gb of copypasta a&amp;nbsp;month&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="capacity-planning-for-3-years"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id43"&gt;Capacity planning for 3&amp;nbsp;years&lt;/a&gt;&lt;/h4&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;36 * 12.7 = 457 Gb of&amp;nbsp;copypasta&lt;/li&gt;
+&lt;li&gt;36 * 10 = 360 million&amp;nbsp;URLs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="service-architecture"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id44"&gt;Service&amp;nbsp;architecture&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Client
+    |
+    V
+Load Balancer
+    |
+    V
+ Web Server (Reverse Proxy, i.e. Nginx)
+  |      |
+  V      V
+Write   Read                                Analytics (MapReduce)
+API     API---------------------------       |         |
+ |       |        |                  |       |         |
+ |       V        |                  |       |         |
+ |      Cache     |                  |       |         V
+ ------------------------------      |       |       SQL for Analytics
+ V                |            |     |       |
+SQL-----------    |            V     V       V
+ |_Master    |    |           Object (File) Store
+ |_Slave     V    |
+            SQL   V
+ ^                    Read-only Replica
+ |
+ |
+Periodic Task
+(remove expired)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="write-api"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id45"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Generate a &lt;span class="caps"&gt;URL&lt;/span&gt;, check for unique constraint in &lt;span class="caps"&gt;SQL&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;If the &lt;span class="caps"&gt;URL&lt;/span&gt; is unique, make an &lt;span class="caps"&gt;INSERT&lt;/span&gt; into &lt;span class="caps"&gt;DB&lt;/span&gt; table, otherwise go to&amp;nbsp;1.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;shortlink&lt;/span&gt; &lt;span class="nb"&gt;char&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="n"&gt;expiration_in_minutes&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="n"&gt;created_at&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="n"&gt;paste_path&lt;/span&gt; &lt;span class="nb"&gt;varchar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;255&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;
+&lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shortlink&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="n"&gt;shortlink_idx&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;pastes&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shortlink&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;USING&lt;/span&gt; &lt;span class="n"&gt;BTREE&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="n"&gt;created_at_idx&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;pastes&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;created_at&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;USING&lt;/span&gt; &lt;span class="n"&gt;BTREE&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="unique-url-path-generation"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id46"&gt;Unique &lt;span class="caps"&gt;URL&lt;/span&gt; path&amp;nbsp;generation&lt;/a&gt;&lt;/h4&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Generate a random string md5(&amp;#8220;user &lt;span class="caps"&gt;IP&lt;/span&gt; address string&amp;#8221; + &amp;#8220;timestamp&amp;nbsp;string&amp;#8221;)&lt;/li&gt;
+&lt;li&gt;Encode string from 1 with &lt;cite&gt;Base 62&lt;/cite&gt; (like Base 64 but without escape&amp;nbsp;characters)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;base_encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;62&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;digits&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+      &lt;span class="n"&gt;remainder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;modulo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;digits&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;remainder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;divide&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;digits&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;digits&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reverse&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ol class="arabic simple" start="3"&gt;
+&lt;li&gt;Get first 7 characters from base62 string: it&amp;#8217;s 62**7 possible
+short paths (which is much more than we need in our 3 years plan,
+i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base_encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;md5&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip_address&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;timestamp&lt;/span&gt;&lt;span class="p"&gt;))[:&lt;/span&gt;&lt;span class="n"&gt;URL_LENGTH&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="request-write-api"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id47"&gt;Request Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ curl -X POST https://pastebin.com/api/v1.0/paste &lt;span class="se"&gt;\&lt;/span&gt;
+       --data &lt;span class="s1"&gt;&amp;#39;{ &amp;quot;expiration_in_minutes&amp;quot;: &amp;quot;60&amp;quot;, &amp;quot;paste_contents&amp;quot;: &amp;quot;My paste&amp;quot; }&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="write-api-response"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id48"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Response&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;shortlink&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xJlsmeT&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="request-read-api"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id49"&gt;Request Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ curl https://pastebin.com/api/v1.0/paste?shortlink&lt;span class="o"&gt;=&lt;/span&gt;xJlsmeT
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="read-api-reponse"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id50"&gt;Read &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Reponse&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;paste&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;My paste&amp;quot;&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;YYYY-MM-DD HH:MM:SS&amp;quot;&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;expiration_in_minutes&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;60&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="statistics"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id51"&gt;Statistics&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Since we don&amp;#8217;t need realtime analytics, let&amp;#8217;s use Nginx logs and process them in&amp;nbsp;MapReduce&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;HitCounts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MRJob&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Extract the generated url from the log line.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_year_month&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the year and month portions of the timestamp.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="o"&gt;...&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Parse each log line, extract and transform relevant lines.&lt;/span&gt;
+
+&lt;span class="sd"&gt;        Emit key value pairs of the form:&lt;/span&gt;
+
+&lt;span class="sd"&gt;        (2016-01, url0), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        (2016-01, url0), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        (2016-01, url1), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;period&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_year_month&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reducer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Sum values for each key.&lt;/span&gt;
+
+&lt;span class="sd"&gt;        (2016-01, url0), 2&lt;/span&gt;
+&lt;span class="sd"&gt;        (2016-01, url1), 1&lt;/span&gt;
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sources-and-useful-links"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id52"&gt;Sources and useful&amp;nbsp;links&lt;/a&gt;&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.toptal.com/python/interview-questions"&gt;Toptal Python Interview&amp;nbsp;Questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Python Interview Questions (&lt;a class="reference external" href="https://luminousmen.com/post/6"&gt;junior&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/7"&gt;middle&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/8"&gt;senior&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/checkcheckzz/system-design-interview"&gt;System design&amp;nbsp;interview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://docs.python.org/3.8/reference/index.html"&gt;The Python Language&amp;nbsp;Reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.postgresqltutorial.com/"&gt;PostgreSQL&amp;nbsp;Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="python"></category><category term="interview"></category></entry><entry><title>Вопросы для собеседования веб-разработчика на Python</title><link href="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" rel="alternate"></link><published>2019-12-08T14:57:00+03:00</published><updated>2019-12-08T14:57:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-08:/posts/2019/12/08/python-interview-questions-ru/</id><summary type="html">&lt;p class="first last"&gt;Вопросы для собеседования&amp;nbsp;Python-разработчика&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Ниже вы найдете принципы проведения и вопросы для технического
 собеседования на позицию Python-разработчика. Хотя вопросы довольно
 универсальны, больше всего они подойдут для области&amp;nbsp;веб-разработки.&lt;/p&gt;
@@ -309,6 +1225,21 @@ HRы), смешными формулировками с проявлениями
 &lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;fun&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;My func&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Как добиться того же эффекта без &lt;cite&gt;functools.wraps&lt;/cite&gt;?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Wrapper function&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Time elapsed: {after - before} seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+    &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;
+    &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id13"&gt;
 &lt;h3&gt;&lt;a class="toc-backref" href="#id48"&gt;Декоратор для&amp;nbsp;генераторов&lt;/a&gt;&lt;/h3&gt;
@@ -564,7 +1495,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 значениями 0 и 1. какой прирост произодительности для поиска по этой
 колонке даст индекс для&amp;nbsp;нее?&lt;/li&gt;
 &lt;li&gt;что такое составные индексы? есть ли какие-то правила для запросов
-по колонкам, участвующим в составном индексе?составном&amp;nbsp;индексе?&lt;/li&gt;
+по колонкам, участвующим в составном&amp;nbsp;индексе?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mysql-postgresql"&gt;
@@ -587,7 +1518,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="k"&gt;language&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;language_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;language_id&lt;/span&gt;
 &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;film_actor&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;film_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;film_id&lt;/span&gt;
 &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="n"&gt;actor&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;actor_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fa&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;actor_id&lt;/span&gt;
-&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;John&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;John&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;
 &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;release_year&lt;/span&gt; &lt;span class="k"&gt;DESC&lt;/span&gt;
 &lt;span class="k"&gt;LIMIT&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -755,7 +1686,7 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
     V
 Load Balancer
     |
-      V
+    V
  Web Server (Reverse Proxy, i.e. Nginx)
   |      |
   V      V
