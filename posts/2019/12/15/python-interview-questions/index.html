@@ -2,17 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Python interview questions</title>
+    <title>Python interview questions and answers</title>
 
     <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta property="og:title" content="Python interview questions" />
+    <meta property="og:title" content="Python interview questions and answers" />
     <meta property="og:type" content="article" />
     <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
     <meta property="og:url" content="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" />
-    <meta property="og:description" content="Python questions for a technical interview" />
+    <meta property="og:description" content="Python questions and answers for a technical interview" />
     <meta property="og:locale" content="" />
     <meta property="og:site_name" content="Vitaly&#39;s Technical Blog" />
     <meta property="article:published_time" content="2019-12-15" />
@@ -58,6 +58,7 @@
           <ul class="navbar-list">
 	    
             <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/subscribe/">Subscribe</a></li>
             <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
           </ul>
 	</div>
@@ -83,7 +84,7 @@
             <header class="post-header">
               <h4 class="post-title">
                 <a href="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" rel="bookmark"
-                   title="Permalink to Python interview questions">Python interview&nbsp;questions</a></h4>
+                   title="Permalink to Python interview questions and answers">Python interview questions and&nbsp;answers</a></h4>
             </header>
 
             <div class="entry-content">
@@ -642,7 +643,7 @@ and returns <cite>True</cite> if brackets in the text are balanced, and returns
   <span class="n">opening</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;(&quot;</span><span class="p">,</span> <span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="s2">&quot;{&quot;</span><span class="p">}</span>
   <span class="n">closing</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="s2">&quot;}&quot;</span><span class="p">}</span>
   <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">opening</span><span class="p">,</span> <span class="n">closing</span><span class="p">))</span>
-      <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
   <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
       <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">opening</span><span class="p">:</span>
           <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">ch</span><span class="p">])</span>
@@ -899,7 +900,7 @@ SQL-----------    |            V     V       V
  |_Master    |    |           Object (File) Store
  |_Slave     V    |
             SQL   V
- ^                    Read-only Replica
+ ^              Read-only Replica
  |
  |
 Periodic Task

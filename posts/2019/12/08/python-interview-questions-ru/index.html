@@ -2,17 +2,17 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <title>Вопросы для собеседования веб-разработчика на Python</title>
+    <title>Вопросы и ответы для собеседования веб-разработчика на Python</title>
 
     <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <meta property="og:title" content="Вопросы для собеседования веб-разработчика на Python" />
+    <meta property="og:title" content="Вопросы и ответы для собеседования веб-разработчика на Python" />
     <meta property="og:type" content="article" />
     <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
     <meta property="og:url" content="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" />
-    <meta property="og:description" content="Вопросы для собеседования Python-разработчика" />
+    <meta property="og:description" content="Вопросы и ответы для технического собеседования Python-разработчика" />
     <meta property="og:locale" content="" />
     <meta property="og:site_name" content="Vitaly&#39;s Technical Blog" />
     <meta property="article:published_time" content="2019-12-08" />
@@ -59,6 +59,7 @@
           <ul class="navbar-list">
 	    
             <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/subscribe/">Subscribe</a></li>
             <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
           </ul>
 	</div>
@@ -84,7 +85,7 @@
             <header class="post-header">
               <h4 class="post-title">
                 <a href="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" rel="bookmark"
-                   title="Permalink to Вопросы для собеседования веб-разработчика на Python">Вопросы для собеседования веб-разработчика на&nbsp;Python</a></h4>
+                   title="Permalink to Вопросы и ответы для собеседования веб-разработчика на Python">Вопросы и ответы для собеседования веб-разработчика на&nbsp;Python</a></h4>
             </header>
 
             <div class="entry-content">
@@ -642,7 +643,7 @@ tasks -&gt;&nbsp;multiprocessing)</li>
   <span class="n">opening</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;(&quot;</span><span class="p">,</span> <span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="s2">&quot;{&quot;</span><span class="p">}</span>
   <span class="n">closing</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="s2">&quot;}&quot;</span><span class="p">}</span>
   <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">opening</span><span class="p">,</span> <span class="n">closing</span><span class="p">))</span>
-      <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
   <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
       <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">opening</span><span class="p">:</span>
           <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">ch</span><span class="p">])</span>
@@ -888,7 +889,7 @@ SQL-----------    |            V     V       V
  |_Master    |    |           Object (File) Store
  |_Slave     V    |
             SQL   V
- ^                    Read-only Replica
+ ^              Read-only Replica
  |
  |
 Periodic Task

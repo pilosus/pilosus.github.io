@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-15T14:00:00+03:00</updated><entry><title>Python interview questions</title><link href="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" rel="alternate"></link><published>2019-12-15T14:00:00+03:00</published><updated>2019-12-15T14:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-15:/posts/2019/12/15/python-interview-questions/</id><summary type="html">&lt;p class="first last"&gt;Python questions for a technical&amp;nbsp;interview&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-15T14:00:00+03:00</updated><entry><title>Python interview questions and answers</title><link href="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" rel="alternate"></link><published>2019-12-15T14:00:00+03:00</published><updated>2019-12-15T14:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-15:/posts/2019/12/15/python-interview-questions/</id><summary type="html">&lt;p class="first last"&gt;Python questions and answers for a technical&amp;nbsp;interview&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Although the questions you find in this blog post are universal, they
 are crafted for a technical interview for a web developer&amp;nbsp;position.&lt;/p&gt;
 &lt;p&gt;The questions have been tested in real life: I used them in more
@@ -540,7 +540,7 @@ and returns &lt;cite&gt;True&lt;/cite&gt; if brackets in the text are balanced, 
   &lt;span class="n"&gt;opening&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;[&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="n"&gt;closing&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;closing&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-      &lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+  &lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
   &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
       &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
           &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ch&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -797,7 +797,7 @@ SQL-----------    |            V     V       V
  |_Master    |    |           Object (File) Store
  |_Slave     V    |
             SQL   V
- ^                    Read-only Replica
+ ^              Read-only Replica
  |
  |
 Periodic Task
@@ -915,7 +915,7 @@ i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.postgresqltutorial.com/"&gt;PostgreSQL&amp;nbsp;Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="interview"></category></entry><entry><title>Вопросы для собеседования веб-разработчика на Python</title><link href="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" rel="alternate"></link><published>2019-12-08T14:57:00+03:00</published><updated>2019-12-08T14:57:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-08:/posts/2019/12/08/python-interview-questions-ru/</id><summary type="html">&lt;p class="first last"&gt;Вопросы для собеседования&amp;nbsp;Python-разработчика&lt;/p&gt;
+</content><category term="Blog"></category><category term="python"></category><category term="interview"></category></entry><entry><title>Вопросы и ответы для собеседования веб-разработчика на Python</title><link href="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" rel="alternate"></link><published>2019-12-08T14:57:00+03:00</published><updated>2019-12-08T14:57:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-08:/posts/2019/12/08/python-interview-questions-ru/</id><summary type="html">&lt;p class="first last"&gt;Вопросы и ответы для технического собеседования&amp;nbsp;Python-разработчика&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Ниже вы найдете принципы проведения и вопросы для технического
 собеседования на позицию Python-разработчика. Хотя вопросы довольно
 универсальны, больше всего они подойдут для области&amp;nbsp;веб-разработки.&lt;/p&gt;
@@ -1455,7 +1455,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
   &lt;span class="n"&gt;opening&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;[&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="n"&gt;closing&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="n"&gt;mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;zip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;closing&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-      &lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+  &lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
   &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
       &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ch&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;opening&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
           &lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ch&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -1701,7 +1701,7 @@ SQL-----------    |            V     V       V
  |_Master    |    |           Object (File) Store
  |_Slave     V    |
             SQL   V
- ^                    Read-only Replica
+ ^              Read-only Replica
  |
  |
 Periodic Task

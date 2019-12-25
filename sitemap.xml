@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2019-12-15T15:46:41-00:00</lastmod>
+<lastmod>2019-12-25T22:14:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2019-12-15T15:46:41-00:00</lastmod>
+<lastmod>2019-12-25T22:14:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2019-12-15T15:46:41-00:00</lastmod>
+<lastmod>2019-12-25T22:14:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2019-12-15T15:46:41-00:00</lastmod>
+<lastmod>2019-12-25T22:14:23-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -34,6 +34,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://blog.pilosus.org/pages/contact/</loc>
 <lastmod>2019-04-28T16:45:00+03:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/pages/subscribe/</loc>
+<lastmod>2019-12-25T14:00:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
