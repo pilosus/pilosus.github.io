@@ -100,7 +100,7 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">3549 words</span>
+		<span class="word-count">3552 words</span>
 		|
 		<span class="word-count">15 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/interview/">interview</a> <a href="https://blog.pilosus.org/tag/ru/">ru</a> </span>                
@@ -482,9 +482,10 @@ HRы), смешными формулировками с проявлениями
     <span class="k">return</span> <span class="n">outer_wrapper</span>
 </pre></div>
 <p>Покажи, как использовать этот декоратор с синтаксическим сахаром и без&nbsp;него.</p>
-<div class="highlight"><pre><span></span><span class="n">new_measure</span> <span class="o">=</span> <span class="n">measure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="n">new_measure</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
-<span class="n">fun</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><span class="c1"># syntactic sugar</span>
+<span class="nd">@measure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">l</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">pass</span>
 
 <span class="c1"># sugar free</span>
 <span class="n">new_measure</span> <span class="o">=</span> <span class="n">measure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>

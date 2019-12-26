@@ -1,5 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-15T14:00:00+03:00</updated><entry><title>Python interview questions and answers</title><link href="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" rel="alternate"></link><published>2019-12-15T14:00:00+03:00</published><updated>2019-12-15T14:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-15:/posts/2019/12/15/python-interview-questions/</id><summary type="html">&lt;p class="first last"&gt;Python questions and answers for a technical&amp;nbsp;interview&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-26T12:10:00+03:00</updated><entry><title>Python third-party tools configuration: one file to cover them all?</title><link href="https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/" rel="alternate"></link><published>2019-12-26T12:10:00+03:00</published><updated>2019-12-26T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-26:/posts/2019/12/26/python-third-party-tools-configuration/</id><summary type="html">&lt;p class="first last"&gt;Universal config file for Python third-party tools in 2020? It&amp;#8217;s a&amp;nbsp;myth&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;A couple of years ago two PEPs have been proposed to fix some package
+building interface problems. Basically, in order to build a Python
+package we need to checkout source of the project, then install a
+build system and finally run it. &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0517/"&gt;&lt;span class="caps"&gt;PEP&lt;/span&gt; 517&lt;/a&gt; defines the last step,
+including how to get the build system dynamically specify more
+dependencies that the build system requires to perform its job. The
+&lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0518/"&gt;&lt;span class="caps"&gt;PEP&lt;/span&gt; 518&lt;/a&gt; defines the second step, including a new configuration file
+&lt;tt class="docutils literal"&gt;pyproject.toml&lt;/tt&gt; to be used by the building&amp;nbsp;system.&lt;/p&gt;
+&lt;p&gt;As &lt;tt class="docutils literal"&gt;setuptools&lt;/tt&gt; have been dominating in Python packaging field for a
+long time, many third-party tools adopted its configuration file
+&lt;a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html#configuring-setup-using-setup-cfg-files"&gt;setup.cfg&lt;/a&gt; too. Libraries for testing, static code analysis tools
+like linters or type checkers along with their custom configuration
+files often allow to use &lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt;. After all, it&amp;#8217;s &lt;span class="caps"&gt;INI&lt;/span&gt;-style
+configuration format, easy for humans to read and edit it, with no
+standard behind it&amp;nbsp;though.&lt;/p&gt;
+&lt;p&gt;Moving tool settings to the &lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt; as opposed to supporing a
+bunch of custom config files seems to be common practice. But now that
+we have the new PEPs, should we abandon &lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt; in favour of the
+brand new &lt;tt class="docutils literal"&gt;pyproject.toml&lt;/tt&gt;? Let&amp;#8217;s&amp;nbsp;see.&lt;/p&gt;
+&lt;div class="section" id="popular-python-tools-and-their-configs"&gt;
+&lt;h2&gt;6 popular Python tools and their&amp;nbsp;configs&lt;/h2&gt;
+&lt;p&gt;Here are the 6 Python tools that I use daily both at my job and for
+the personal projects: &lt;a class="reference external" href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; for testing, &lt;a class="reference external" href="https://pytest-cov.readthedocs.io/en/latest/"&gt;pytest-cov&lt;/a&gt; as a
+pytest plugin for &lt;a class="reference external" href="https://coverage.readthedocs.io/en/coverage-5.0/"&gt;coverage&lt;/a&gt; tool that calculates code coverage,
+&lt;a class="reference external" href="http://mypy-lang.org/"&gt;mypy&lt;/a&gt; as a type checker, &lt;a class="reference external" href="http://flake8.pycqa.org/en/latest/"&gt;flake8&lt;/a&gt; as a code style checker, &lt;a class="reference external" href="https://black.readthedocs.io/en/stable/"&gt;black&lt;/a&gt;
+for code formatting, and &lt;a class="reference external" href="https://timothycrosley.github.io/isort/"&gt;isort&lt;/a&gt; for sorting&amp;nbsp;imports.&lt;/p&gt;
+&lt;p&gt;In a table below you&amp;#8217;ll find these tools along with their versions at
+the time of writing, popular and (arguably) universal config files as
+well as their &lt;em&gt;native&lt;/em&gt; configuration file&amp;nbsp;formats.&lt;/p&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="14%" /&gt;
+&lt;col width="8%" /&gt;
+&lt;col width="14%" /&gt;
+&lt;col width="22%" /&gt;
+&lt;col width="12%" /&gt;
+&lt;col width="29%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;tool&lt;/th&gt;
+&lt;th class="head"&gt;version&lt;/th&gt;
+&lt;th class="head"&gt;&lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt;&lt;/th&gt;
+&lt;th class="head"&gt;&lt;tt class="docutils literal"&gt;pyproject.toml&lt;/tt&gt;&lt;/th&gt;
+&lt;th class="head"&gt;&lt;tt class="docutils literal"&gt;tox.ini&lt;/tt&gt;&lt;/th&gt;
+&lt;th class="head"&gt;custom format&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a class="reference external" href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;5.3.2&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;no (&lt;span class="caps"&gt;WIP&lt;/span&gt;)&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;pytest.ini&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a class="reference external" href="https://pytest-cov.readthedocs.io/en/latest/"&gt;pytest-cov&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;2.8.1&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;.coveragerc&lt;/tt&gt;, pytest conf&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a class="reference external" href="http://mypy-lang.org/"&gt;mypy&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;0.750.0&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;no (won&amp;#8217;t fix?)&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;mypy.ini&lt;/tt&gt; (preferred)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a class="reference external" href="http://flake8.pycqa.org/en/latest/"&gt;flake8&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;3.7.9&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;yes (unofficially)&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;.flake8&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a class="reference external" href="https://black.readthedocs.io/en/stable/"&gt;black&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;19.10b0&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;no&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--config&lt;/span&gt;&lt;/tt&gt; any &lt;span class="caps"&gt;TOML&lt;/span&gt; file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a class="reference external" href="https://timothycrosley.github.io/isort/"&gt;isort&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;4.3.21&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;yes&lt;/td&gt;
+&lt;td&gt;&lt;tt class="docutils literal"&gt;.isort.cfg&lt;/tt&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;If there&amp;#8217;s something to take in from the table, then it&amp;#8217;s the
+following. First, there&amp;#8217;s no consensus in the Python community over
+the usage of &lt;tt class="docutils literal"&gt;pyproject.toml&lt;/tt&gt;. The most notable discussion involves
+Guido van Rossum in &lt;a class="reference external" href="https://github.com/python/mypy/issues/5205#issuecomment-410281336"&gt;mypy issue&lt;/a&gt; on the GitHub. &lt;span class="caps"&gt;PEP&lt;/span&gt; 518 is all about
+configuration for package building systems like &lt;tt class="docutils literal"&gt;distutils&lt;/tt&gt;,
+&lt;tt class="docutils literal"&gt;setuptools&lt;/tt&gt;, &lt;a class="reference external" href="https://github.com/takluyver/flit"&gt;flit&lt;/a&gt;, &lt;a class="reference external" href="https://cournape.github.io/Bento/"&gt;bento&lt;/a&gt;. It says nothing about configuration
+for tools outside of the package builing context. But what if package
+building process involves type checking or code formatting? Also,
+&lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt; is a part of the &lt;tt class="docutils literal"&gt;setuptools&lt;/tt&gt; which is a building
+system too. Still, people use it for third-party tools configuration
+outside of the package building context, e.g. for imports sorting
+checks in their &lt;span class="caps"&gt;CI&lt;/span&gt; pipelines. All in all, mypy has set a precedent for
+not supporting &lt;tt class="docutils literal"&gt;pyproject.toml&lt;/tt&gt; on purpose, so that some other tools
+developers hesitate either to openly support the new config file like
+flake8 does, or just postpone implementation until a consensus is
+emerged in the Python&amp;nbsp;community.&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="How standards prolifirate" class="align-right" src="https://imgs.xkcd.com/comics/standards.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Secondly, there&amp;#8217;s always a &lt;a class="reference external" href="https://black.readthedocs.io/en/stable/"&gt;black&lt;/a&gt; sheep of the family. Being a great
+formatting tool that eventually has ended so many holy wars about code
+formatting, black doesn&amp;#8217;t support anything except for &lt;span class="caps"&gt;TOML&lt;/span&gt; config
+files. Even if you are more inclined towards ol&amp;#8217; reliable
+&lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt;, you still has a black sheep in your
+setup.cfg-compatible&amp;nbsp;flock.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/toml-lang/toml"&gt;&lt;span class="caps"&gt;TOML&lt;/span&gt;&lt;/a&gt; is a great human-readable, machine-editable, strong typed,
+well-defined configuration format. Having Python- and
+setuptools-independent configuration file &lt;tt class="docutils literal"&gt;pyproject.toml&lt;/tt&gt; is a
+great idea. Still, as the usage of &lt;tt class="docutils literal"&gt;pyproject.toml&lt;/tt&gt; for non-package
+building context is not defined, we are in the &lt;a class="reference external" href="https://xkcd.com/927/"&gt;xkcd&lt;/a&gt;
+how-standards-proliferate situation. Until consensus is finally set,
+it&amp;#8217;s better off either use &lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt; with an annoying exception
+for &lt;tt class="docutils literal"&gt;black&lt;/tt&gt;, or stick to the tools custom config formats and&amp;nbsp;files.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="python"></category></entry><entry><title>Python interview questions and answers</title><link href="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" rel="alternate"></link><published>2019-12-15T14:00:00+03:00</published><updated>2019-12-15T14:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-15:/posts/2019/12/15/python-interview-questions/</id><summary type="html">&lt;p class="first last"&gt;Python questions and answers for a technical&amp;nbsp;interview&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Although the questions you find in this blog post are universal, they
 are crafted for a technical interview for a web developer&amp;nbsp;position.&lt;/p&gt;
 &lt;p&gt;The questions have been tested in real life: I used them in more
@@ -1294,9 +1424,10 @@ HRы), смешными формулировками с проявлениями
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;outer_wrapper&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Покажи, как использовать этот декоратор с синтаксическим сахаром и без&amp;nbsp;него.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;new_measure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# syntactic sugar&lt;/span&gt;
+&lt;span class="nd"&gt;@measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
 
 &lt;span class="c1"&gt;# sugar free&lt;/span&gt;
 &lt;span class="n"&gt;new_measure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
