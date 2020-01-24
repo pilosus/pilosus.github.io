@@ -1,5 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2019-12-26T12:10:00+03:00</updated><entry><title>Python third-party tools configuration: one file to cover them all?</title><link href="https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/" rel="alternate"></link><published>2019-12-26T12:10:00+03:00</published><updated>2019-12-26T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-26:/posts/2019/12/26/python-third-party-tools-configuration/</id><summary type="html">&lt;p class="first last"&gt;Universal config file for Python third-party tools in 2020? It&amp;#8217;s a&amp;nbsp;myth&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-01-24T09:10:00+03:00</updated><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+03:00</published><updated>2020-01-24T09:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/posts/2020/01/24/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Python provides more than one way to format strings: &lt;a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting"&gt;%-formatting&lt;/a&gt;,
+&lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;str.format()&lt;/a&gt;, &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;string.Template&lt;/a&gt; and &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0498/"&gt;f-strings&lt;/a&gt;.  What format
+developers use is the matter of personal aesthetic reasons rather than
+anything else. Still there are use cases where good old printf-style
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;%-formatting&lt;/span&gt;&lt;/tt&gt; may have advantages over other formats. Python&amp;#8217;s
+&lt;a class="reference external" href="https://docs.python.org/3/library/logging.html"&gt;logging&lt;/a&gt; module is one of these cases. Let&amp;#8217;s see what are the main
+reasons to use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;%-formatting&lt;/span&gt;&lt;/tt&gt; for logging in&amp;nbsp;Python.&lt;/p&gt;
+&lt;div class="section" id="python-logging-optimization-format-string-until-it-cannot-be-avoided"&gt;
+&lt;h2&gt;Python logging optimization: format string until it cannot be&amp;nbsp;avoided&lt;/h2&gt;
+&lt;p&gt;Python &lt;a class="reference external" href="https://docs.python.org/3/library/logging.html"&gt;logging&lt;/a&gt; methods like &lt;a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.debug"&gt;debug&lt;/a&gt; get in message argument along
+with optional &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;kwargs&lt;/tt&gt;. Arguments used for message
+formatting. Formatting of these arguments is deferred until it cannot
+be avoided. That means the final message is not evaluated if its log
+level is below the logger&amp;#8217;s log level. On the other hand, f-string is
+really an expression that evaluated at runtime and it lacks logging&amp;#8217;s
+optimizations. Let&amp;#8217;s see an&amp;nbsp;example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;basicConfig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;TestLogger&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;A&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__str__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;         &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Unnecessary slow computations are done here!&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__class__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;log level below INFO with args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;log level below INFO with f-string: {obj}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Unnecessary&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;computations&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt;&lt;span class="err"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;log level INFO with args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Unnecessary&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;computations&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt;&lt;span class="err"&gt;!&lt;/span&gt;
+&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;TestLogger&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt; &lt;span class="n"&gt;INFO&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see in step 3 message is not logged as root logger&amp;#8217;s level
+is higher than &lt;tt class="docutils literal"&gt;debug&lt;/tt&gt;. That&amp;#8217;s why that message is not formatted. In
+step 4 f-string is evaluated even though it&amp;#8217;s not getting logged&amp;nbsp;either.&lt;/p&gt;
+&lt;p&gt;Logging module has other nice &lt;a class="reference external" href="https://docs.python.org/3/howto/logging.html#optimization"&gt;optimizations&lt;/a&gt; that worth&amp;nbsp;learning.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="sentry-integration-with-logging"&gt;
+&lt;h2&gt;Sentry integration with&amp;nbsp;logging&lt;/h2&gt;
+&lt;p&gt;Sentry is a popular error tracking solution. Sentry &lt;a class="reference external" href="https://docs.sentry.io/platforms/python/logging/"&gt;integrates&lt;/a&gt; with
+the Python logging module. &lt;a class="reference external" href="https://docs.sentry.io/data-management/event-grouping/"&gt;Error aggregation&lt;/a&gt; is another great
+feature of Sentry. Sentry looks at the event&amp;#8217;s stacktrace, exception,
+or message and group it with existing ones if they are the same. If
+you get a hundred of exceptions that are all the same they get grouped
+into one with nice&amp;nbsp;statistics.&lt;/p&gt;
+&lt;p&gt;When integrating Sentry with Python logging, it&amp;#8217;s important to use
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;%-formatting&lt;/span&gt;&lt;/tt&gt;, so that Sentry can group your messages. As an
+example, let&amp;#8217;s log failed attempts to retrieve an &lt;span class="caps"&gt;URL&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Failed to retrieve URL &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With printf-style formatting your messages will be grouped together no
+matter what value &lt;tt class="docutils literal"&gt;url&lt;/tt&gt; variable holds. But in this&amp;nbsp;case:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Failed to retrieve URL {url}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;you get a separate event in Sentry for every single unique &lt;span class="caps"&gt;URL&lt;/span&gt;. If you
+get 1000 unique &lt;span class="caps"&gt;URL&lt;/span&gt;, your Sentry dashboard might get&amp;nbsp;messy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusions"&gt;
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;p&gt;Although Python is not Perl, there&amp;#8217;s still more than one way to do
+it. Which string formatting style to use is an open question. Your
+project may not use Sentry, or you may prefer f-strings for
+readability reasons. You may see deferred formatting in logging for
+printf-style strings as a futile micro-optimization that won&amp;#8217;t improve
+your app performance. But still, there may be cases where using an
+oldie but goldie &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;%-formatting&lt;/span&gt;&lt;/tt&gt; is beneficial, even at price of
+string formatting&amp;nbsp;inconsistency.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="python"></category><category term="logging"></category><category term="f-string"></category></entry><entry><title>Python third-party tools configuration: pyproject.toml vs setup.cfg</title><link href="https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/" rel="alternate"></link><published>2019-12-26T12:10:00+03:00</published><updated>2019-12-26T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-26:/posts/2019/12/26/python-third-party-tools-configuration/</id><summary type="html">&lt;p class="first last"&gt;Universal config file for Python third-party tools in 2020? It&amp;#8217;s a&amp;nbsp;myth&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;A couple of years ago two PEPs have been proposed to fix some package
 building interface problems. Basically, in order to build a Python
 package we need to checkout source of the project, then install a
