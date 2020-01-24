@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-01-24T09:10:00+03:00</updated><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+03:00</published><updated>2020-01-24T09:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/posts/2020/01/24/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-01-24T21:35:00+03:00</updated><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+03:00</published><updated>2020-01-24T21:35:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/posts/2020/01/24/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides more than one way to format strings: &lt;a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting"&gt;%-formatting&lt;/a&gt;,
 &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;str.format()&lt;/a&gt;, &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;string.Template&lt;/a&gt; and &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0498/"&gt;f-strings&lt;/a&gt;.  What format
 developers use is the matter of personal aesthetic reasons rather than
@@ -10,9 +10,9 @@ reasons to use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;%-form
 &lt;div class="section" id="python-logging-optimization-format-string-until-it-cannot-be-avoided"&gt;
 &lt;h2&gt;Python logging optimization: format string until it cannot be&amp;nbsp;avoided&lt;/h2&gt;
 &lt;p&gt;Python &lt;a class="reference external" href="https://docs.python.org/3/library/logging.html"&gt;logging&lt;/a&gt; methods like &lt;a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.debug"&gt;debug&lt;/a&gt; get in message argument along
-with optional &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;kwargs&lt;/tt&gt;. Arguments used for message
-formatting. Formatting of these arguments is deferred until it cannot
-be avoided. That means the final message is not evaluated if its log
+with optional &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;kwargs&lt;/tt&gt;. Args used for message
+formatting. &lt;strong&gt;Formatting of these arguments is deferred until it cannot
+be avoided&lt;/strong&gt;. That means the final message is not evaluated if its log
 level is below the logger&amp;#8217;s log level. On the other hand, f-string is
 really an expression that evaluated at runtime and it lacks logging&amp;#8217;s
 optimizations. Let&amp;#8217;s see an&amp;nbsp;example:&lt;/p&gt;
@@ -32,14 +32,26 @@ optimizations. Let&amp;#8217;s see an&amp;nbsp;example:&lt;/p&gt;
 &lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;log level below INFO with f-string: {obj}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Unnecessary&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;computations&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt;&lt;span class="err"&gt;!&lt;/span&gt;
 
-&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;log level INFO with args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;log level below INFO with args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Unnecessary&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;computations&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt;&lt;span class="err"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;In&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;log level INFO with args: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Unnecessary&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;computations&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;done&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt;&lt;span class="err"&gt;!&lt;/span&gt;
 &lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;TestLogger&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt; &lt;span class="n"&gt;INFO&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;As you can see in step 3 message is not logged as root logger&amp;#8217;s level
-is higher than &lt;tt class="docutils literal"&gt;debug&lt;/tt&gt;. That&amp;#8217;s why that message is not formatted. In
-step 4 f-string is evaluated even though it&amp;#8217;s not getting logged&amp;nbsp;either.&lt;/p&gt;
-&lt;p&gt;Logging module has other nice &lt;a class="reference external" href="https://docs.python.org/3/howto/logging.html#optimization"&gt;optimizations&lt;/a&gt; that worth&amp;nbsp;learning.&lt;/p&gt;
+&lt;p&gt;As you can see in &lt;strong&gt;step 3&lt;/strong&gt; a message doesn&amp;#8217;t get logged as the root
+logger&amp;#8217;s level is higher than &lt;tt class="docutils literal"&gt;debug&lt;/tt&gt;. Logging module&amp;#8217;s inner
+optimization makes sure that the message is not formatted in this
+case. Compare this to &lt;strong&gt;step 6&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;step 4&lt;/strong&gt; the f-string is also not logged because of the low log
+level. But it&amp;#8217;s formatted anyway. That&amp;#8217;s why you see &lt;tt class="docutils literal"&gt;obj.__str__&lt;/tt&gt;
+called.&lt;/p&gt;
+&lt;p&gt;Please note, that logging optimization doesn&amp;#8217;t work for &lt;tt class="docutils literal"&gt;&amp;quot;format
+string&amp;quot; % values&lt;/tt&gt; format. You can see that in &lt;strong&gt;step 5&lt;/strong&gt;. The magic
+applies for &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;%-format&lt;/span&gt;&lt;/tt&gt; message &lt;strong&gt;if and only if the values for
+message formatting are passed in as logger method&amp;#8217;s&amp;nbsp;arguments!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So &lt;strong&gt;step 3&lt;/strong&gt; shows the optimized way to do message formatting in&amp;nbsp;logging.&lt;/p&gt;
+&lt;p&gt;By the way, &lt;a class="reference external" href="https://docs.python.org/3/library/logging.html"&gt;logging&lt;/a&gt; module has other nice &lt;a class="reference external" href="https://docs.python.org/3/howto/logging.html#optimization"&gt;optimizations&lt;/a&gt; that worth&amp;nbsp;learning.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="sentry-integration-with-logging"&gt;
 &lt;h2&gt;Sentry integration with&amp;nbsp;logging&lt;/h2&gt;
@@ -71,6 +83,14 @@ printf-style strings as a futile micro-optimization that won&amp;#8217;t improve
 your app performance. But still, there may be cases where using an
 oldie but goldie &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;%-formatting&lt;/span&gt;&lt;/tt&gt; is beneficial, even at price of
 string formatting&amp;nbsp;inconsistency.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="updates"&gt;
+&lt;h2&gt;Updates&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;2020-01-24 21:35&lt;/em&gt;. Many thanks to &lt;a class="reference external" href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/#comment-4769289809"&gt;symmitchry&lt;/a&gt; who stressed out the
+importance of passing values for a message to be formatted as
+&lt;em&gt;arguments to logger&amp;#8217;s method&lt;/em&gt; (e.g. args to
+&lt;tt class="docutils literal"&gt;logger.debug()&lt;/tt&gt;). Probably, that wasn&amp;#8217;t quite clear in the first
+edition of the post. I&amp;#8217;ve made this point&amp;nbsp;explicit.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="Blog"></category><category term="python"></category><category term="logging"></category><category term="f-string"></category></entry><entry><title>Python third-party tools configuration: pyproject.toml vs setup.cfg</title><link href="https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/" rel="alternate"></link><published>2019-12-26T12:10:00+03:00</published><updated>2019-12-26T12:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-26:/posts/2019/12/26/python-third-party-tools-configuration/</id><summary type="html">&lt;p class="first last"&gt;Universal config file for Python third-party tools in 2020? It&amp;#8217;s a&amp;nbsp;myth&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;A couple of years ago two PEPs have been proposed to fix some package
