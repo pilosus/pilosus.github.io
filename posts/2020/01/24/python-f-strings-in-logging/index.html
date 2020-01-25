@@ -16,7 +16,7 @@
     <meta property="og:locale" content="" />
     <meta property="og:site_name" content="Vitaly&#39;s Technical Blog" />
     <meta property="article:published_time" content="2020-01-24" />
-    <meta property="article:modified_time" content="2020-01-24" />
+    <meta property="article:modified_time" content="2020-01-25" />
     <meta property="article:section" content="Blog" />
     <meta property="article:tag" content="python" />
     <meta property="article:tag" content="logging" />
@@ -94,7 +94,7 @@
                 <span class="published" title="2020-01-24T09:10:00+03:00">
                   24-01-2020 09:10
                 </span>
-                | upd. <span class="modified" title="2020-01-24T21:35:00+03:00">24-01-2020 21:35</span>
+                | upd. <span class="modified" title="2020-01-25T13:45:00+03:00">25-01-2020 13:45</span>
                 |
                 <span class="vcard author">
                   by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
@@ -102,7 +102,7 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">654 words</span>
+		<span class="word-count">705 words</span>
 		|
 		<span class="word-count">3 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/logging/">logging</a> <a href="https://blog.pilosus.org/tag/f-string/">f-string</a> </span>                
@@ -197,6 +197,11 @@ importance of passing values for a message to be formatted as
 <em>arguments to logger&#8217;s method</em> (e.g. args to
 <tt class="docutils literal">logger.debug()</tt>). Probably, that wasn&#8217;t quite clear in the first
 edition of the post. I&#8217;ve made this point&nbsp;explicit.</p>
+<p><em>2020-01-25 13:45</em>. As a redditor pointed out in the <a class="reference external" href="https://old.reddit.com/r/Python/comments/etcnq2/python_logging_why_printfstyle_string_formatting/ffgmvn2/">post
+discussion</a> a Python linter <tt class="docutils literal">pylint</tt> has a rule <a class="reference external" href="https://docs.pylint.org/en/1.6.0/features.html">W1202</a> that warns
+you when <tt class="docutils literal">str.format</tt> is used in logging. It&#8217;s worth to mention a
+rule W1201 too, which is triggered for the cases like in step 5 (see
+the code snippet&nbsp;above).</p>
 </div>
 
             </div><!-- /.entry-content -->

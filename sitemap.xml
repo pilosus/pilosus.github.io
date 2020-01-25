@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2020-01-24T21:47:54-00:00</lastmod>
+<lastmod>2020-01-25T14:16:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2020-01-24T21:47:54-00:00</lastmod>
+<lastmod>2020-01-25T14:16:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2020-01-24T21:47:54-00:00</lastmod>
+<lastmod>2020-01-25T14:16:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2020-01-24T21:47:54-00:00</lastmod>
+<lastmod>2020-01-25T14:16:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -47,7 +47,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/</loc>
-<lastmod>2020-01-24T21:35:00+03:00</lastmod>
+<lastmod>2020-01-25T13:45:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
@@ -194,28 +194,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2020-01-24T21:35:00+02:30</lastmod>
+<lastmod>2020-01-25T13:45:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/python/</loc>
-<lastmod>2020-01-24T21:35:00+02:30</lastmod>
+<lastmod>2020-01-25T13:45:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/logging/</loc>
-<lastmod>2020-01-24T21:35:00+02:30</lastmod>
+<lastmod>2020-01-25T13:45:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/f-string/</loc>
-<lastmod>2020-01-24T21:35:00+02:30</lastmod>
+<lastmod>2020-01-25T13:45:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
