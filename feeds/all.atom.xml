@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-01-25T13:45:00+03:00</updated><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+03:00</published><updated>2020-01-25T13:45:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/posts/2020/01/24/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-04-01T18:10:00+03:00</updated><entry><title>workflow-tools: CLI tools for GitHub Actions</title><link href="https://blog.pilosus.org/posts/2020/04/01/workflow-tools-cli-tools-for-github-actions/" rel="alternate"></link><published>2020-04-01T18:10:00+03:00</published><updated>2020-04-01T18:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-01:/posts/2020/04/01/workflow-tools-cli-tools-for-github-actions/</id><summary type="html">&lt;p&gt;Microservice architecture may have dozens and dozens of lookalikes
+services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With infrastructure as
+code approach taken by the GitHub Actions, why not using workflows
+generation? Provisioning repository for a new microservice may also be&amp;nbsp;automated.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;ve just opensourced an internal tool we use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Microservice architecture may have dozens and dozens of lookalikes
+services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With infrastructure as
+code approach taken by the GitHub Actions, why not using workflows
+generation? Provisioning repository for a new microservice may also be&amp;nbsp;automated.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;ve just opensourced an internal tool we use here at &lt;a class="reference external" href="https://anna.money/"&gt;&lt;span class="caps"&gt;ANNA&lt;/span&gt;&lt;/a&gt; to
+automate setting up new microservices. &lt;a class="reference external" href="https://github.com/anna-money/workflow-tools"&gt;workflow-tools&lt;/a&gt; is a
+collection of &lt;span class="caps"&gt;CLI&lt;/span&gt; tools used&amp;nbsp;to:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;generate GitHub Actions workflows from a&amp;nbsp;Jijna2-template&lt;/li&gt;
+&lt;li&gt;set GitHub secrets (used by the&amp;nbsp;workflows)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Project&amp;nbsp;links:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/anna-money/workflow-tools"&gt;GitHub&amp;nbsp;project&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://workflow-tools.readthedocs.io/"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://pypi.org/project/workflow-tools/"&gt;PyPI&amp;nbsp;Package&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content><category term="Blog"></category><category term="opensource"></category><category term="automation"></category><category term="microservice"></category></entry><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+03:00</published><updated>2020-01-25T13:45:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/posts/2020/01/24/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides more than one way to format strings: &lt;a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting"&gt;%-formatting&lt;/a&gt;,
 &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;str.format()&lt;/a&gt;, &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;string.Template&lt;/a&gt; and &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0498/"&gt;f-strings&lt;/a&gt;.  What format
 developers use is the matter of personal aesthetic reasons rather than
