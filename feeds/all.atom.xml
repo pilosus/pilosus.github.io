@@ -1,25 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-04-01T18:10:00+03:00</updated><entry><title>workflow-tools: CLI tools for GitHub Actions</title><link href="https://blog.pilosus.org/posts/2020/04/01/workflow-tools-cli-tools-for-github-actions/" rel="alternate"></link><published>2020-04-01T18:10:00+03:00</published><updated>2020-04-01T18:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-01:/posts/2020/04/01/workflow-tools-cli-tools-for-github-actions/</id><summary type="html">&lt;p&gt;Microservice architecture may have dozens and dozens of lookalikes
-services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With infrastructure as
-code approach taken by the GitHub Actions, why not using workflows
-generation? Provisioning repository for a new microservice may also be&amp;nbsp;automated.&lt;/p&gt;
-&lt;p&gt;I&amp;#8217;ve just opensourced an internal tool we use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Microservice architecture may have dozens and dozens of lookalikes
-services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With infrastructure as
-code approach taken by the GitHub Actions, why not using workflows
-generation? Provisioning repository for a new microservice may also be&amp;nbsp;automated.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-04-01T18:10:00+03:00</updated><entry><title>workflow-tools: start using GitHub Actions at scale</title><link href="https://blog.pilosus.org/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/" rel="alternate"></link><published>2020-04-01T18:10:00+03:00</published><updated>2020-04-01T18:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-01:/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/</id><summary type="html">&lt;p&gt;Microservice architecture may have dozens or even hundreds of
+lookalikes services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With
+infrastructure as code approach taken by the GitHub Actions, why not
+using code generation? Provisioning a repository for a new
+microservice may also be&amp;nbsp;automated.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;ve just opensourced an internal tool …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Microservice architecture may have dozens or even hundreds of
+lookalikes services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With
+infrastructure as code approach taken by the GitHub Actions, why not
+using code generation? Provisioning a repository for a new
+microservice may also be&amp;nbsp;automated.&lt;/p&gt;
 &lt;p&gt;I&amp;#8217;ve just opensourced an internal tool we use here at &lt;a class="reference external" href="https://anna.money/"&gt;&lt;span class="caps"&gt;ANNA&lt;/span&gt;&lt;/a&gt; to
-automate setting up new microservices. &lt;a class="reference external" href="https://github.com/anna-money/workflow-tools"&gt;workflow-tools&lt;/a&gt; is a
-collection of &lt;span class="caps"&gt;CLI&lt;/span&gt; tools used&amp;nbsp;to:&lt;/p&gt;
+automate GitHub Actions-based &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflow
+generation. &lt;a class="reference external" href="https://github.com/anna-money/workflow-tools"&gt;workflow-tools&lt;/a&gt; is a collection of &lt;span class="caps"&gt;CLI&lt;/span&gt; tools used&amp;nbsp;to:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;generate GitHub Actions workflows from a&amp;nbsp;Jijna2-template&lt;/li&gt;
 &lt;li&gt;set GitHub secrets (used by the&amp;nbsp;workflows)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Project&amp;nbsp;links:&lt;/p&gt;
+&lt;div class="section" id="examples"&gt;
+&lt;h2&gt;Examples&lt;/h2&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://blog.pilosus.org/images/workflow-tools.png"&gt;&lt;img alt="workflow-tools" class="align-right" src="https://blog.pilosus.org/images/workflow-tools.png" style="width: 300px;" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Let&amp;#8217;s consider a real world example: setting up a GitHub Actions workflow for the &lt;a class="reference external" href="https://github.com/anna-money/workflow-tools"&gt;workflow-tools&lt;/a&gt; repository itself.
+We&amp;nbsp;need:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Generate a GitHub Action workflow using &lt;tt class="docutils literal"&gt;workflow_generator&lt;/tt&gt; tool&lt;/li&gt;
+&lt;li&gt;Set GitHub Secrets the workflow needs using &lt;tt class="docutils literal"&gt;workflow_secret&lt;/tt&gt; tool&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="section" id="generating-workflow"&gt;
+&lt;h3&gt;Generating&amp;nbsp;workflow&lt;/h3&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;WORKFLOW_RUNNER_VERSION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ubuntu-latest &lt;span class="se"&gt;\&lt;/span&gt;
+workflow_generator &lt;span class="se"&gt;\&lt;/span&gt;
+docs/examples/master.tmpl &lt;span class="se"&gt;\&lt;/span&gt;
+~/PATH-TO-YOUR-REPO/.github/workflows/master.yml &lt;span class="se"&gt;\&lt;/span&gt;
+-e docs/examples/envfile
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;First, we define a Jinja2-template for the workflow (see a
+&lt;a class="reference external" href="https://github.com/anna-money/workflow-tools/blob/master/docs/examples/master.tmpl"&gt;master.yml&lt;/a&gt; at line 3).  Variables to be substituted should be
+marked up this&amp;nbsp;way:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;[[ workflow.your_variable ]]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When rendering the resulting file, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;workflow-generator&lt;/span&gt;&lt;/tt&gt; tool substitutes the markup with the value
+of corresponding environment&amp;nbsp;variable:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;WORKFLOW_YOUR_VARIABLE&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The environment variable can be set globally, for a single command
+run, or can be read from the envfile specified by the option flag
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-e&lt;/span&gt;&lt;/tt&gt; (see an &lt;a class="reference external" href="https://github.com/anna-money/workflow-tools/blob/master/docs/examples/envfile"&gt;envfile&lt;/a&gt; at line&amp;nbsp;5).&lt;/p&gt;
+&lt;p&gt;Envfile comes in handy when a template uses many variables at
+once. It&amp;#8217;s also easier to share variables between the templates using
+envfile. The envfile has the &lt;em&gt;lowest precedence&lt;/em&gt;, it can be overridden
+(line&amp;nbsp;1).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="setting-secrets"&gt;
+&lt;h3&gt;Setting&amp;nbsp;secrets&lt;/h3&gt;
+&lt;p&gt;Now that we generated the workflow, let&amp;#8217;s set a GitHub secret used by the&amp;nbsp;template:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;workflow_secret &lt;span class="se"&gt;\&lt;/span&gt;
+  --owner&lt;span class="o"&gt;=&lt;/span&gt;anna-money &lt;span class="se"&gt;\&lt;/span&gt;
+  --repo&lt;span class="o"&gt;=&lt;/span&gt;workflow-tools &lt;span class="se"&gt;\&lt;/span&gt;
+  --token&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YOUR-PERSONAL-ACCESS-TOKEN&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ update &lt;span class="se"&gt;\&lt;/span&gt;
+   --key&lt;span class="o"&gt;=&lt;/span&gt;PYPI_PUSH_USER &lt;span class="se"&gt;\&lt;/span&gt;
+   --value&lt;span class="o"&gt;=&lt;/span&gt;YOUR_SECRET_VALUE
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;First, we need to get a &lt;a class="reference external" href="https://github.com/settings/tokens"&gt;personal access token&lt;/a&gt; (see line 4). &lt;tt class="docutils literal"&gt;workflow_secret&lt;/tt&gt; tool has multiple commands
+(see &lt;a class="reference external" href="https://workflow-tools.readthedocs.io/en/latest/workflow-tools.html"&gt;Tools autodocs&lt;/a&gt;). To set up new or update existing secret &lt;tt class="docutils literal"&gt;update&lt;/tt&gt; command is used (line 5).
+The command accepts &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--key&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--value&lt;/span&gt;&lt;/tt&gt; options (lines 6, 7). &lt;tt class="docutils literal"&gt;workflow_secret&lt;/tt&gt; also have tool-wide
+options used for each command: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--owner&lt;/span&gt;&lt;/tt&gt; (GitHub user, line 2), &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--repo&lt;/span&gt;&lt;/tt&gt; (GitHub repository name, line 3) and
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--token&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, let&amp;#8217;s check what secrets are set for the&amp;nbsp;repository:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;workflow_secret &lt;span class="se"&gt;\&lt;/span&gt;
+  --owner&lt;span class="o"&gt;=&lt;/span&gt;anna-money &lt;span class="se"&gt;\&lt;/span&gt;
+  --repo&lt;span class="o"&gt;=&lt;/span&gt;workflow-tools &lt;span class="se"&gt;\&lt;/span&gt;
+  --token&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YOUR-PERSONAL-ACCESS-TOKEN&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+ list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-workflow-tools"&gt;
+&lt;h2&gt;Why &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;workflow-tools&lt;/span&gt;&lt;/tt&gt;?&lt;/h2&gt;
+&lt;p&gt;It&amp;#8217;s a common practice to use templating in system administration,
+especially once DevOps practices have spread widely. Some tools
+&lt;a class="reference external" href="https://docs.ansible.com/ansible/latest/modules/template_module.html"&gt;Ansible template module&lt;/a&gt; have embedded templating mechanisms. It may
+be of great help where the tools originally fit. But it may be an
+overhead when applied to GitHub Actions&amp;nbsp;configuration.&lt;/p&gt;
+&lt;p&gt;Other tools like &lt;a class="reference external" href="https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html"&gt;envsubst&lt;/a&gt; have been there for a long time and
+proofed being useful. But one-size-fits-all approach may affect
+usability in a negative&amp;nbsp;way.&lt;/p&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;workflow-tools&lt;/span&gt;&lt;/tt&gt; approach is to make Jinja2 standalone compiler
+with usability focused on the GitHub Actions&amp;nbsp;workflows.&lt;/p&gt;
+&lt;p&gt;GitHub secrets setting tool from the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;workflow-tools&lt;/span&gt;&lt;/tt&gt; package
+follows the same approach: simple &lt;span class="caps"&gt;CLI&lt;/span&gt; that does one thing and does it
+well, but not too general-purpose as it could&amp;nbsp;be.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="who-should-use-workflow-tools"&gt;
+&lt;h2&gt;Who should use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;workflow-tools&lt;/span&gt;&lt;/tt&gt;?&lt;/h2&gt;
+&lt;p&gt;If you are using GitHub Actions and similar workflows are needed for
+multiple repositories, then &lt;a class="reference external" href="https://github.com/anna-money/workflow-tools"&gt;workflow-tools&lt;/a&gt; package is for&amp;nbsp;you.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="project-links"&gt;
+&lt;h2&gt;Project&amp;nbsp;links&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://github.com/anna-money/workflow-tools"&gt;GitHub&amp;nbsp;project&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://workflow-tools.readthedocs.io/"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://pypi.org/project/workflow-tools/"&gt;PyPI&amp;nbsp;Package&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
 </content><category term="Blog"></category><category term="opensource"></category><category term="automation"></category><category term="microservice"></category></entry><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+03:00</published><updated>2020-01-25T13:45:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/posts/2020/01/24/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides more than one way to format strings: &lt;a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting"&gt;%-formatting&lt;/a&gt;,
 &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;str.format()&lt;/a&gt;, &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;string.Template&lt;/a&gt; and &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0498/"&gt;f-strings&lt;/a&gt;.  What format
