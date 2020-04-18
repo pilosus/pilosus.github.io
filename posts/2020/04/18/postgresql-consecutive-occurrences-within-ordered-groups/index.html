@@ -99,7 +99,7 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">718 words</span>
+		<span class="word-count">740 words</span>
 		|
 		<span class="word-count">3 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/sql/">sql</a> <a href="https://blog.pilosus.org/tag/postgres/">postgres</a> </span>                
@@ -142,8 +142,10 @@ size of 3 or more and a flag <tt class="docutils literal">A</tt>:</p>
 more rows with the flag <tt class="docutils literal">A</tt></li>
 </ul>
 <p>As we see in the data above <tt class="docutils literal">Name1</tt> has a sequence of three rows
-with the flag <tt class="docutils literal">A</tt>. Thus the resulting <span class="caps">SQL</span> query should return
-<tt class="docutils literal">Name1</tt>.</p>
+with the flag <tt class="docutils literal">A</tt> (with dt <tt class="docutils literal"><span class="pre">2020-01-01</span></tt>, <tt class="docutils literal"><span class="pre">2020-02-01</span></tt>, and
+<tt class="docutils literal"><span class="pre">2020-03-01</span></tt>). All other ordered by date consecutive rows with the
+same flag have two items or less. Thus the resulting <span class="caps">SQL</span> query should
+return <tt class="docutils literal">Name1</tt>.</p>
 <p>Whenever we need to group a set by the subsets of rows (windows) and
 then do something over these subsets, <a class="reference external" href="https://www.postgresqltutorial.com/postgresql-window-function/">window function</a> comes in
 handy. In this case, we would use <a class="reference external" href="https://www.postgresqltutorial.com/postgresql-row_number/">ROW_NUMBER()</a> that assigns a
