@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2020-04-18T21:47:33-00:00</lastmod>
+<lastmod>2020-04-18T21:47:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2020-04-18T21:47:33-00:00</lastmod>
+<lastmod>2020-04-18T21:47:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2020-04-18T21:47:33-00:00</lastmod>
+<lastmod>2020-04-18T21:47:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2020-04-18T21:47:33-00:00</lastmod>
+<lastmod>2020-04-18T21:47:58-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -222,13 +222,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/tag/postgres/</loc>
-<lastmod>2020-04-18T18:00:00+02:30</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/tag/window/</loc>
 <lastmod>2020-04-18T18:00:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
