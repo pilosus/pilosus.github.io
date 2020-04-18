@@ -1,5 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-04-18T15:45:00+03:00</updated><entry><title>workflow-tools: start using GitHub Actions at scale</title><link href="https://blog.pilosus.org/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/" rel="alternate"></link><published>2020-04-01T18:10:00+03:00</published><updated>2020-04-01T18:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-01:/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/</id><summary type="html">&lt;p&gt;Microservice architecture may have dozens or even hundreds of
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-04-18T18:00:00+03:00</updated><entry><title>PostgreSQL: find sequences of consecutive values within ordered groups</title><link href="https://blog.pilosus.org/posts/2020/04/18/postgresql-consecutive-sequences-within-ordered-groups/" rel="alternate"></link><published>2020-04-18T18:00:00+03:00</published><updated>2020-04-18T18:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-18:/posts/2020/04/18/postgresql-consecutive-sequences-within-ordered-groups/</id><summary type="html">&lt;p class="first last"&gt;Using a window function to find sequences of the consecutive
+values for grouped and ordered&amp;nbsp;entities&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve been solving a problem of finding database items that
+have to be grouped by one parameter (let&amp;#8217;s say a name), then ordered
+by the timestamp within each group. The tricky part was to find groups
+where the last N most recent items all have the same second parameter
+(say, a flag). A colleague of mine pointed out to even more
+interesting variation of the same problem: find such groups that
+contain sequences of the size N of consecutive rows with the same&amp;nbsp;flag.&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s create a &lt;a class="reference external" href="http://sqlfiddle.com/#!17/a1730/3"&gt;table&lt;/a&gt; to illustrate the problem for the sequence
+size of 3 or more and a flag &lt;tt class="docutils literal"&gt;A&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="k"&gt;names&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="nb"&gt;varchar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="k"&gt;timestamp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="nb"&gt;varchar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="k"&gt;names&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;VALUES&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-01-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-02-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-03-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-04-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-05-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-06-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-07-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-08-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-01-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-02-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-03-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Name2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020-04-01 00:00:00&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What we would like to&amp;nbsp;have:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The result should be grouped by the &lt;tt class="docutils literal"&gt;name&lt;/tt&gt; column&lt;/li&gt;
+&lt;li&gt;Within the group, the rows should be ordered by &lt;tt class="docutils literal"&gt;dt&lt;/tt&gt; column&lt;/li&gt;
+&lt;li&gt;We are interested only in the groups containing sequences of 3 or
+more rows with the flag &lt;tt class="docutils literal"&gt;A&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As we see in the data above &lt;tt class="docutils literal"&gt;Name1&lt;/tt&gt; has a sequence of three rows
+with the flag &lt;tt class="docutils literal"&gt;A&lt;/tt&gt;. Thus the resulting &lt;span class="caps"&gt;SQL&lt;/span&gt; query should return
+&lt;tt class="docutils literal"&gt;Name1&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Whenever we need to group a set by the subsets of rows (windows) and
+then do something over these subsets, &lt;a class="reference external" href="https://www.postgresqltutorial.com/postgresql-window-function/"&gt;window function&lt;/a&gt; comes in
+handy. In this case, we would use &lt;a class="reference external" href="https://www.postgresqltutorial.com/postgresql-row_number/"&gt;ROW_NUMBER()&lt;/a&gt; that assigns a
+sequential integer to each row in a result&amp;nbsp;set.&lt;/p&gt;
+&lt;p&gt;Postgres window functions have &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;PARTITION&lt;/span&gt; &lt;span class="caps"&gt;BY&lt;/span&gt;&lt;/tt&gt; clause that divides
+rows into multiple partitions. We can use more than one column here to
+group by the &lt;tt class="docutils literal"&gt;name&lt;/tt&gt; and the &lt;tt class="docutils literal"&gt;flag&lt;/tt&gt; columns. Let&amp;#8217;s explore&amp;nbsp;it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;name_part&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;name_flag_part&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;seq&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="k"&gt;names&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="window function with partitioning by multiple columns" class="responsive" src="/images/row_number.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;As you can see partitioning by the &lt;tt class="docutils literal"&gt;name&lt;/tt&gt; column in &lt;tt class="docutils literal"&gt;ROW_NUMBER()&lt;/tt&gt;
+function assigns consecutive row numbers within groups by the &lt;tt class="docutils literal"&gt;name&lt;/tt&gt;
+column (a red bar for the &lt;tt class="docutils literal"&gt;Name1&lt;/tt&gt;, a black one for &lt;tt class="docutils literal"&gt;Name2&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;When partitioning by the two columns &lt;tt class="docutils literal"&gt;name&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;flag&lt;/tt&gt; we have
+independent numbering within each name group for each flag&amp;nbsp;subgroup:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;green (flag &lt;tt class="docutils literal"&gt;A&lt;/tt&gt;, name &lt;tt class="docutils literal"&gt;Name1&lt;/tt&gt;)&lt;/li&gt;
+&lt;li&gt;blue (flag &lt;tt class="docutils literal"&gt;B&lt;/tt&gt;, name &lt;tt class="docutils literal"&gt;Name1&lt;/tt&gt;)&lt;/li&gt;
+&lt;li&gt;yellow (flag &lt;tt class="docutils literal"&gt;A&lt;/tt&gt;, name &lt;tt class="docutils literal"&gt;Name2&lt;/tt&gt;)&lt;/li&gt;
+&lt;li&gt;magenta (flag &lt;tt class="docutils literal"&gt;B&lt;/tt&gt;, name &lt;tt class="docutils literal"&gt;Name2&lt;/tt&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Given these numberings, how can we detect a sequence occurrence? We
+can subtract a row number for &lt;tt class="docutils literal"&gt;name&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;flag&lt;/tt&gt; partitioning from
+the row number for the &lt;tt class="docutils literal"&gt;name&lt;/tt&gt; column partitioning (see alias &lt;tt class="docutils literal"&gt;seq&lt;/tt&gt;
+above). The subtaction gives each flag subgroup the same numbers that
+we can use for&amp;nbsp;counting:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;
+  &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="k"&gt;MIN&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;min_dt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;seq&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="k"&gt;SELECT&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;seq&lt;/span&gt;
+  &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="k"&gt;names&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;numbered&lt;/span&gt;
+&lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seq&lt;/span&gt;
+&lt;span class="k"&gt;HAVING&lt;/span&gt; &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_dt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We do the&amp;nbsp;following:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Find the difference between row numbers when partitioning by a name
+and partitioning by a name and a&amp;nbsp;flag&lt;/li&gt;
+&lt;li&gt;Group the set by name, flag and the difference from the step&amp;nbsp;above&lt;/li&gt;
+&lt;li&gt;Apply filtering for the grouped result to find sequences with flag
+&lt;tt class="docutils literal"&gt;A&lt;/tt&gt; only with 3 or more consecutive&amp;nbsp;rows&lt;/li&gt;
+&lt;li&gt;Order by the name and the timestamp of the first row in the&amp;nbsp;sequence&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now that we found the solution let&amp;#8217;s finalize the query to meet our&amp;nbsp;goal:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;
+  &lt;span class="k"&gt;DISTINCT&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+&lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="k"&gt;SELECT&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;seq&lt;/span&gt;
+  &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="k"&gt;SELECT&lt;/span&gt;
+      &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;ROW_NUMBER&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="n"&gt;OVER&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PARTITION&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;dt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;AS&lt;/span&gt; &lt;span class="n"&gt;seq&lt;/span&gt;
+    &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="k"&gt;names&lt;/span&gt;
+  &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;numbered&lt;/span&gt;
+  &lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seq&lt;/span&gt;
+  &lt;span class="k"&gt;HAVING&lt;/span&gt; &lt;span class="k"&gt;COUNT&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;flag&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;filtered&lt;/span&gt;
+&lt;span class="k"&gt;ORDER&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Summing up the post I would say that &lt;span class="caps"&gt;SQL&lt;/span&gt; and PostgreSQL specifically
+is a powerfull tool worth learning. Window functions allow doing some
+sophisticated analytics with a single &lt;span class="caps"&gt;SQL&lt;/span&gt;&amp;nbsp;query.&lt;/p&gt;
+</content><category term="Blog"></category><category term="sql"></category><category term="postgres"></category><category term="window"></category></entry><entry><title>workflow-tools: start using GitHub Actions at scale</title><link href="https://blog.pilosus.org/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/" rel="alternate"></link><published>2020-04-01T18:10:00+03:00</published><updated>2020-04-01T18:10:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-01:/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/</id><summary type="html">&lt;p&gt;Microservice architecture may have dozens or even hundreds of
 lookalikes services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With
 infrastructure as code approach taken by the GitHub Actions, why not
 using code generation? Provisioning a repository for a new

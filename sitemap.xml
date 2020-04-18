@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2020-04-18T15:57:25-00:00</lastmod>
+<lastmod>2020-04-18T21:47:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2020-04-18T15:57:25-00:00</lastmod>
+<lastmod>2020-04-18T21:47:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2020-04-18T15:57:25-00:00</lastmod>
+<lastmod>2020-04-18T21:47:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2020-04-18T15:57:25-00:00</lastmod>
+<lastmod>2020-04-18T21:47:33-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -43,6 +43,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2019-12-25T14:00:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/posts/2020/04/18/postgresql-consecutive-sequences-within-ordered-groups/</loc>
+<lastmod>2020-04-18T18:00:00+03:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -201,7 +208,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2020-04-18T15:45:00+02:30</lastmod>
+<lastmod>2020-04-18T18:00:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/sql/</loc>
+<lastmod>2020-04-18T18:00:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/postgres/</loc>
+<lastmod>2020-04-18T18:00:00+02:30</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/window/</loc>
+<lastmod>2020-04-18T18:00:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -272,20 +300,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://blog.pilosus.org/tag/ru/</loc>
 <lastmod>2020-04-18T15:45:00+02:30</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/tag/sql/</loc>
-<lastmod>2019-12-07T14:58:00+02:30</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/tag/postgres/</loc>
-<lastmod>2019-12-07T14:58:00+02:30</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
