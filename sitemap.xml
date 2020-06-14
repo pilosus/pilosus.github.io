@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2020-06-14T23:38:00-00:00</lastmod>
+<lastmod>2020-06-14T23:40:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2020-06-14T23:38:00-00:00</lastmod>
+<lastmod>2020-06-14T23:40:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2020-06-14T23:38:00-00:00</lastmod>
+<lastmod>2020-06-14T23:40:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2020-06-14T23:38:00-00:00</lastmod>
+<lastmod>2020-06-14T23:40:45-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -46,7 +46,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://blog.pilosus.org/posts/2020/06/14/the-clean-code-book-review/</loc>
+<loc>https://blog.pilosus.org/posts/2020/06/14/the-clean-coder-book-review/</loc>
 <lastmod>2020-06-14T22:30:00+03:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
