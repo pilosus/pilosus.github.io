@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-04-18T18:00:00+03:00</updated><entry><title>PostgreSQL: find sequences of same-parameter values within ordered groups</title><link href="https://blog.pilosus.org/posts/2020/04/18/postgresql-consecutive-occurrences-within-ordered-groups/" rel="alternate"></link><published>2020-04-18T18:00:00+03:00</published><updated>2020-04-18T18:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-18:/posts/2020/04/18/postgresql-consecutive-occurrences-within-ordered-groups/</id><summary type="html">&lt;p class="first last"&gt;Using a window function find and group consecutive
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-06-14T22:30:00+03:00</updated><entry><title>Book review: The Clean Coder by Robert C. Martin</title><link href="https://blog.pilosus.org/posts/2020/06/14/the-clean-code-book-review/" rel="alternate"></link><published>2020-06-14T22:30:00+03:00</published><updated>2020-06-14T22:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-06-14:/posts/2020/06/14/the-clean-code-book-review/</id><summary type="html">&lt;p class="first last"&gt;A Code Of Conduct For Professional&amp;nbsp;Programmers&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;&lt;em&gt;A Code Of Conduct For Professional Programmers&lt;/em&gt;, a subtitle of the
+book, says it all. Robert C. Martin answers the question: what does it
+mean to be a professional&amp;nbsp;programmer.&lt;/p&gt;
+&lt;p&gt;If professionalism could be boiled down to a single aspect it&amp;#8217;s
+&lt;em&gt;responsibility&lt;/em&gt;. Responsibility for the&amp;nbsp;following:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Product&amp;nbsp;quality&lt;/li&gt;
+&lt;li&gt;Time&amp;nbsp;estimates&lt;/li&gt;
+&lt;li&gt;Keeping competences and skills up to&amp;nbsp;date&lt;/li&gt;
+&lt;li&gt;Understanding business goals and&amp;nbsp;interests&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="section" id="product-quality"&gt;
+&lt;h2&gt;Product&amp;nbsp;quality&lt;/h2&gt;
+&lt;p&gt;The book dedicates a few chapters to different aspects of keeping high
+standards of product development. The technical aspect of quality is
+about &lt;em&gt;software testing&lt;/em&gt;:&lt;/p&gt;
+&lt;ol class="loweralpha simple"&gt;
+&lt;li&gt;&lt;em&gt;hierarchy of testing&lt;/em&gt; (unit, component, integration, system,
+research&amp;nbsp;testing)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;test-driven development&lt;/em&gt; (&lt;span class="caps"&gt;TDD&lt;/span&gt;) as a way to deliver quality code, a
+safety net for refactoring, self-documentation for developers, a way
+to reduce code complexity and design program architecture more&amp;nbsp;carefully.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;acceptance testing&lt;/em&gt; as project documentation and criteria of
+what&amp;#8217;s &amp;#8220;done&amp;#8221; (tests&amp;nbsp;passing)&lt;/li&gt;
+&lt;li&gt;testing&amp;nbsp;automation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The non-technical aspect of quality includes techniques to boost
+attention span. The author also dismantles some myths about
+productivity: coding late in the night, overtime work,&amp;nbsp;etc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="time-estimates"&gt;
+&lt;h2&gt;Time&amp;nbsp;estimates&lt;/h2&gt;
+&lt;p&gt;Being responsible means you want to be predictable to your colleagues,
+deliver code on time. Correct time estimates are the single most
+important way to be predictable for a professional&amp;nbsp;programmer.&lt;/p&gt;
+&lt;p&gt;The author just scratches the surface of the technical aspects of time
+estimation (&lt;span class="caps"&gt;PERT&lt;/span&gt; technique, planning poker, etc.). But he goes to
+great lengths to educate about the skill of saying &amp;#8220;No&amp;#8221; and&amp;nbsp;&amp;#8220;Yes&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;It&amp;#8217;s okay for the business to try to get precise time estimates to
+eliminate the risks. It&amp;#8217;s also okay for the business to wish to get
+things done quickly. Yet accepting unrealistic deadlines comes at a
+price for a programmer: work/life balance, productivity, and product
+quality, all of them deteriorate so that possible short-run benefits
+of working under pressure turn into a long-term&amp;nbsp;disaster.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="keeping-competences-and-skills-up-to-date"&gt;
+&lt;h2&gt;Keeping competences and skills up to&amp;nbsp;date&lt;/h2&gt;
+&lt;p&gt;A professional programmer must keep his/her technical and soft skills
+up to date. Technical skills require regular training. Just like
+professional musicians do their chores with scales, professional
+programmers should practice so-called code kata, programming or tech
+design problems, the author&amp;nbsp;argues.&lt;/p&gt;
+&lt;p&gt;Learning new languages and systems in your spare time is also
+essential for a professional&amp;nbsp;programmer.&lt;/p&gt;
+&lt;p&gt;Soft skills may include the ability to work in a team, do pair
+programming, or mentoring interns and&amp;nbsp;colleagues.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="understanding-business-goals-and-interests"&gt;
+&lt;h2&gt;Understanding business goals and&amp;nbsp;interests&lt;/h2&gt;
+&lt;p&gt;As a professional (i.e. responsible) programmer, you care about
+business interests. The business problems are your problems&amp;nbsp;too.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The book has been published back in 2011. The industry has progressed
+quite a bit since then. Many bits of advice and techniques &amp;#8220;Uncle Bob&amp;#8221;
+suggests in his book now is a common practice. It&amp;#8217;s unclear if the
+book will become a revelation for a reader in 2020. Yet it certainly
+encourages you to think about what does it mean exactly to be a
+professional and master your&amp;nbsp;skills.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="book"></category><category term="review"></category></entry><entry><title>PostgreSQL: find sequences of same-parameter values within ordered groups</title><link href="https://blog.pilosus.org/posts/2020/04/18/postgresql-consecutive-occurrences-within-ordered-groups/" rel="alternate"></link><published>2020-04-18T18:00:00+03:00</published><updated>2020-04-18T18:00:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-18:/posts/2020/04/18/postgresql-consecutive-occurrences-within-ordered-groups/</id><summary type="html">&lt;p class="first last"&gt;Using a window function find and group consecutive
 occurences of the values with the same&amp;nbsp;paratemer&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve been solving a problem of finding database items that
 have to be grouped by one parameter (let&amp;#8217;s say a name), then ordered
