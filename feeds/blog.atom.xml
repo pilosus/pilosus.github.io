@@ -1,5 +1,343 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2020-06-14T22:30:00+03:00</updated><entry><title>Book review: The Clean Coder by Robert C. Martin</title><link href="https://blog.pilosus.org/posts/2020/06/14/the-clean-coder-book-review/" rel="alternate"></link><published>2020-06-14T22:30:00+03:00</published><updated>2020-06-14T22:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-06-14:/posts/2020/06/14/the-clean-coder-book-review/</id><summary type="html">&lt;p class="first last"&gt;A Code Of Conduct For Professional&amp;nbsp;Programmers&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2021-09-15T23:41:00+03:00</updated><entry><title>pip-license-checker: a license compliance tool</title><link href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/" rel="alternate"></link><published>2021-09-07T09:10:00+03:00</published><updated>2021-09-15T23:41:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2021-09-07:/posts/2021/09/07/pip-license-checker/</id><summary type="html">&lt;p class="first last"&gt;Detect license types for your poject&amp;#8217;s third-party&amp;nbsp;dependencies&lt;/p&gt;
+</summary><content type="html">&lt;div class="contents topic" id="table-of-contents"&gt;
+&lt;p class="topic-title"&gt;Table of&amp;nbsp;Contents&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id1" id="id9"&gt;Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id10"&gt;What is &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-license-checks-are-needed" id="id11"&gt;Why license checks are&amp;nbsp;needed?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-automating-license-compliance-checks-is-needed" id="id12"&gt;Why automating license compliance checks is&amp;nbsp;needed?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#who-needs-to-check-licenses" id="id13"&gt;Who needs to check&amp;nbsp;licenses?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-pip-license-checker" id="id14"&gt;Why &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-are-license-types" id="id15"&gt;What are license types?&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#copyright-or-end-user-license-agreement" id="id16"&gt;Copyright or End-user license&amp;nbsp;agreement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id3" id="id17"&gt;Public-domain-like&amp;nbsp;licenses&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#permissive-licenses-requiring-attribution" id="id18"&gt;Permissive licenses requiring&amp;nbsp;attribution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#copyleft" id="id19"&gt;Copyleft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id4" id="id20"&gt;Weak&amp;nbsp;copyleft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id5" id="id21"&gt;Strong&amp;nbsp;copyleft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#copyleft-over-a-network" id="id22"&gt;Copyleft over a&amp;nbsp;network&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id6" id="id23"&gt;Outro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#id7" id="id24"&gt;Disclaimer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;span id="intro"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;Intro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;A software project may have hundreds of third-party dependencies. Even
+when available freely over the Internet, these dependencies may be
+distributed under licenses with some conditions, more or less
+restrictive. There are over a hundred of popular free software and
+open-source licenses used nowadays. All of them may be roughly divided
+into a few license types depending on their conditions for usage,
+attribution, modification and distribution. Third-party dependencies
+under licenses of some types are good for your project, while others
+may result in license violation. License violation can pose high
+risks, both of financial and reputation losses. Understanding what
+license types are good for your project&amp;#8217;s 3rd-party dependencies is
+important. Once you know what are you looking for, check your deps
+regularly. &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; is a tool for automating license
+type checks that may&amp;nbsp;help.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;span id="what-is-pip-license-checker"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id10"&gt;What is &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; is a license compliance tool. It detects
+&lt;a class="reference internal" href="#license-types"&gt;license types&lt;/a&gt; for your project&amp;#8217;s third-party dependencies. The tool
+covers the majority of popular free/libre and open-source (&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Free_and_open-source_software"&gt;&lt;span class="caps"&gt;FLOSS&lt;/span&gt;&lt;/a&gt;)
+licenses of all types: public domain, permissive, copyleft. It also
+detects proprietory licenses or &lt;a class="reference external" href="https://en.wikipedia.org/wiki/End-user_license_agreement"&gt;&lt;span class="caps"&gt;EULA&lt;/span&gt;&lt;/a&gt; as well as technical problems
+obtaining the license for a&amp;nbsp;dependency.&lt;/p&gt;
+&lt;p&gt;Originally developed with Python packages in mind, the tool operates
+in two&amp;nbsp;modes:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Detecting license &lt;em&gt;names and types&lt;/em&gt; for the list of Python&amp;nbsp;dependencies&lt;/li&gt;
+&lt;li&gt;Detecting license &lt;strong&gt;types&lt;/strong&gt; for any list of dependencies with their
+license&amp;nbsp;names&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The tool supports output of some popular languange-specific license
+detection&amp;nbsp;plugins:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/jaredsburrows/gradle-license-plugin"&gt;gradle-license-plugin&lt;/a&gt; for Andoid&amp;nbsp;(Java),&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/CocoaPods/cocoapods-acknowledgements"&gt;cocoapods-acknowledgements&lt;/a&gt; of iOS (Swift,&amp;nbsp;ObjectiveC),&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://www.npmjs.com/package/license-checker"&gt;license-checker&lt;/a&gt; for&amp;nbsp;JavaScript,&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/technomancy/lein-licenses"&gt;lein-licenses&lt;/a&gt; for Clojure&amp;nbsp;(Leiningen),&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;as well as universal &lt;cite&gt;&lt;span class="caps"&gt;CSV&lt;/span&gt;&lt;/cite&gt; format.&lt;/p&gt;
+&lt;p&gt;The tool is distributed both as&amp;nbsp;a:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;command-line&amp;nbsp;tool,&lt;/li&gt;
+&lt;li&gt;containirized&amp;nbsp;application&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://github.com/pilosus/action-pip-license-checker"&gt;GitHub Action&lt;/a&gt;,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;so that it&amp;#8217;s easy to use locally on you machine or incorporate into
+project&amp;#8217;s &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt;&amp;nbsp;pipeline.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Takeaways&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; is a tool to check lincense types in your
+project&amp;#8217;s third-party dependencies. It covers the majority of popular
+&lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses. It has integration with some popular license fetching
+plugins. You can easily incorporate the tool into &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; pipeline to
+automate license compliance checks.&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-license-checks-are-needed"&gt;
+&lt;span id="why-check-license"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id11"&gt;Why license checks are&amp;nbsp;needed?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Nobody develops software from scratch today. Software development has
+evolved from artisan shop&amp;#8217;s craft to a heavy industry assembly
+line. We, software developers, &lt;em&gt;rely heavily on third-party code&lt;/em&gt;:
+libraries, packages, platforms, operating systems. Building something
+new has become, to a larger extent, assembling parts, applying some
+glue, implementing custom logic with the code written by someone else,
+someone outside of the project or the company. Most of such
+third-party dependencies today are &lt;em&gt;freely available over the internet&lt;/em&gt;,
+both as executable code that a machine can run, and as human-readable
+code we, developers, can use, copy and learn&amp;nbsp;from.&lt;/p&gt;
+&lt;p&gt;But does being freely available over the network mean these
+third-party dependencies are really free? Free as in &amp;#8220;free lunch&amp;#8221;?
+Free as in &amp;#8220;freedom&amp;#8221;? Most of the dependencies are distributed under
+popular &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses, e.g. &lt;a class="reference external" href="https://www.apache.org/licenses/LICENSE-2.0.html"&gt;Apache License&lt;/a&gt;, &lt;a class="reference external" href="https://opensource.org/licenses/MIT"&gt;&lt;span class="caps"&gt;MIT&lt;/span&gt; License&lt;/a&gt;,
+&lt;a class="reference external" href="https://www.mozilla.org/en-US/MPL/2.0/"&gt;Mozilla Public License&lt;/a&gt; or &lt;a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.en.html"&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; General Public License&lt;/a&gt; to name a
+few. The licenses differ on the &lt;strong&gt;permissiveness/restrictiveness
+scale&lt;/strong&gt;, ranging from the public-domain-like licenses with no
+conditions to the licenses requiring the authors of derivative works
+to give away the source code and use the same or compatible license
+under certain circumstances. Some dependencies are distributed as
+&amp;#8220;freeware&amp;#8221;, i.e. under proprietory end-user license agreements
+(&lt;a class="reference external" href="https://en.wikipedia.org/wiki/End-user_license_agreement"&gt;&lt;span class="caps"&gt;EULA&lt;/span&gt;&lt;/a&gt;), usually with some permissions and&amp;nbsp;conditions.&lt;/p&gt;
+&lt;p&gt;The conditions some licenses impose may be unacceptable for your
+personal project or your company. License violation is a &lt;strong&gt;legal
+risk&lt;/strong&gt;. The court cases are &lt;a class="reference external" href="https://wiki.fsfe.org/Migrated/GPL%20Enforcement%20Cases"&gt;real&lt;/a&gt;. Both financial and reputation
+losses may be high. In such cases preventing license violation is
+crucial to mitigate or avoid&amp;nbsp;risks.&lt;/p&gt;
+&lt;p&gt;Sometimes choosing a &amp;#8220;wrong&amp;#8221; license for your &lt;span class="caps"&gt;FLOSS&lt;/span&gt; project may become
+an obstacle for its wide adoption (e.g. copyleft license for a project
+in a presense of many other alternative proprietory or free software
+projects of high quality). Checking licenses for project&amp;#8217;s
+dependencies may help to understand your options when choosing the
+license most suitable for your&amp;nbsp;goals.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Takeaways&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Third-party dependencies freely available over the internet are
+usually distributed under some terms and conditions of &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Free_and_open-source_software"&gt;&lt;span class="caps"&gt;FLOSS&lt;/span&gt;&lt;/a&gt;
+licenses or &lt;a class="reference external" href="https://en.wikipedia.org/wiki/End-user_license_agreement"&gt;&lt;span class="caps"&gt;EULA&lt;/span&gt;&lt;/a&gt;. The conditions vary in their
+permissiveness. Some license types may be too restrictive to be used
+in your&amp;nbsp;project.&lt;/p&gt;
+&lt;p&gt;Legal implications and reputation losses of license violations are
+&lt;a class="reference external" href="https://wiki.fsfe.org/Migrated/GPL%20Enforcement%20Cases"&gt;real&lt;/a&gt;. To mitigate or avoid the risks regular license compliance
+checks are&amp;nbsp;needed.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-automating-license-compliance-checks-is-needed"&gt;
+&lt;span id="why-automate"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id12"&gt;Why automating license compliance checks is&amp;nbsp;needed?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The number of third-party dependencies (deps) in a project may be
+high: from tens in a tiny personal pet-project, to hundreds in a big
+one, to even thousands in the enterprise settings. As the project
+evoles the list of dependencies may change over time&amp;nbsp;too.&lt;/p&gt;
+&lt;p&gt;The &lt;a class="reference external" href="https://spdx.org/licenses/"&gt;list of popular &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses&lt;/a&gt; is also long. &lt;strong&gt;Over 100
+licenses and counting!&lt;/strong&gt; While some licenses are short and easy to
+understand, others are challenging reads that may require a lawyer
+qualification to grasp the conditions. Arguably, no average software
+developer ever read all of the &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses that exist in the&amp;nbsp;wild.&lt;/p&gt;
+&lt;p&gt;Increasing dependencies versions (so called version bumps) in the
+project may also result in dependencies changing their licenses. This
+is the most relevant for the deps at early stages of their&amp;nbsp;development.&lt;/p&gt;
+&lt;p&gt;All in all, when managing project&amp;#8217;s 3rd-party dependencies, we need
+not only to comply with their licenses, but do these license checks
+regularly, in an automated way. That requires a tool to be
+incorporated into project&amp;#8217;s continuous integration and continuous
+delivery (&lt;span class="caps"&gt;CD&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt;)&amp;nbsp;pipeline.&lt;/p&gt;
+&lt;p&gt;This is exactly what &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; is&amp;nbsp;for.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Takeaways&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Modern projects rely on &lt;strong&gt;10s, 100s or even 1000s&lt;/strong&gt; of third-party
+dependencies. Their list is changing over time as projects
+evolve. This is too much to check licenses&amp;nbsp;manually.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.fsf.org/"&gt;Free Software Foundation&lt;/a&gt; and &lt;a class="reference external" href="https://opensource.org/"&gt;Open Source Initiative&lt;/a&gt;, the two
+most respectful non-profit orginisations for free/libre and
+open-source software, approved &lt;strong&gt;100s&lt;/strong&gt; of popular &lt;span class="caps"&gt;FLOSS&lt;/span&gt;
+licenses. Reading and understanding their conditions is a challenge
+for an average software developer. Expertise is&amp;nbsp;needed.&lt;/p&gt;
+&lt;p&gt;Dependencies themselves may change their licenses over the lifetime&amp;nbsp;too.&lt;/p&gt;
+&lt;p&gt;Automated regular license compliance checks are&amp;nbsp;needed.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="who-needs-to-check-licenses"&gt;
+&lt;span id="who-needs-checks"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id13"&gt;Who needs to check&amp;nbsp;licenses?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Anyone&amp;nbsp;who:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;develops a proprietory project based on other &lt;span class="caps"&gt;FLOSS&lt;/span&gt;&amp;nbsp;code&lt;/li&gt;
+&lt;li&gt;creates, contributes to, or maintains a &lt;span class="caps"&gt;FLOSS&lt;/span&gt;&amp;nbsp;project&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As an independent open-source developer you may want to check your
+project deps&amp;#8217; licenses to make sure the project&amp;#8217;s license itself is in
+compliance with the libraries and packages it&amp;#8217;s based on. That will
+help to avoid risk of reputation losses or enable to choose the right
+license for your project to make&amp;nbsp;headway.&lt;/p&gt;
+&lt;p&gt;As a pro-profit company you may want to make sure your proprietory
+software product doesn&amp;#8217;t violate dependencies licenses to avoid legal
+risks, financial and reputation losses. As a startup you may want to
+have license compliance in place before an investment round, valuation
+or&amp;nbsp;acquisition.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="why-pip-license-checker"&gt;
+&lt;span id="who-pip-license-checker"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id14"&gt;Why &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;There are dozens of tools and plugins to detetect &lt;strong&gt;license names&lt;/strong&gt;
+for the third-party dependencies used in your project. But as it has
+been said above, for a large number of dependencies and an
+&lt;a class="reference external" href="https://en.wikipedia.org/wiki/License_proliferation"&gt;ever-growing number&lt;/a&gt; of open source licenses, having the list of
+license names may bring little or no value without legal expertise&amp;nbsp;applied.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; brings some of the expertise needed by
+detecting &lt;a class="reference internal" href="#license-types"&gt;license types&lt;/a&gt;, so that a user may decide what types are
+unacceptable in her/his project and get alerted whenever the licenses
+of unacceptable types are found among project&amp;#8217;s third-party&amp;nbsp;dependencies.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-are-license-types"&gt;
+&lt;span id="license-types"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;What are license&amp;nbsp;types?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Despite a large number of licenses third-party dependecies are
+distributed under on the internet, all of them can be splitted into a
+relatively small number of&amp;nbsp;categories.&lt;/p&gt;
+&lt;div class="section" id="copyright-or-end-user-license-agreement"&gt;
+&lt;span id="copyright"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id16"&gt;Copyright or End-user license&amp;nbsp;agreement&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;At the highest level we may divide all the licenses into proprietory
+end-user license agreements (&lt;a class="reference external" href="https://en.wikipedia.org/wiki/End-user_license_agreement"&gt;&lt;span class="caps"&gt;EULA&lt;/span&gt;&lt;/a&gt;) and free/libre and open-source
+(&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Free_and_open-source_software"&gt;&lt;span class="caps"&gt;FLOSS&lt;/span&gt;&lt;/a&gt;) licenses. &lt;span class="caps"&gt;EULA&lt;/span&gt; dependencies may be freely available over
+the internet or even come with the source code available along with an
+executable object code, but their usage, distribution and modification
+may still be regulated in a more traditional copyright fashion: you
+need to ask authors for some permissions explicitly. By contrast, free
+software licenses grant recipient of a piece of software rights to
+use, modify, redistribute the&amp;nbsp;software.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses, in turn, can be break down to more types. They differ
+on the &amp;#8220;permissiveness/restrictiveness&amp;#8221; scale by the conditions they
+impose on someone who modifies and distributes the original software
+or its derivative&amp;nbsp;works.&lt;/p&gt;
+&lt;p&gt;If you use a third-party dependency under a proprietory license
+agreement, it&amp;#8217;s worth reading it as some unexpected conditions may
+apply even if the dependency is freely available over the&amp;nbsp;network.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;span id="public-domain-like-licenses"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id17"&gt;Public-domain-like&amp;nbsp;licenses&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The most permissive type of &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses is &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Public-domain-equivalent_license"&gt;public domain&lt;/a&gt;
+equivalent licenses. &lt;a class="reference external" href="https://opensource.org/licenses/0BSD"&gt;Zero-Clause &lt;span class="caps"&gt;BSD&lt;/span&gt;&lt;/a&gt; is a great example of
+public-domain-like licenses. This type of &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses has &lt;strong&gt;no
+coditions&lt;/strong&gt;, but may have a &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Liability_waiver"&gt;liability waiver&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="permissive-licenses-requiring-attribution"&gt;
+&lt;span id="permissive-with-notice"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id18"&gt;Permissive licenses requiring&amp;nbsp;attribution&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Permissive licenses with attribution clause usually allow modification
+and redistribution under the license of choice with the only condition
+of preserving original copyright notice. Some licenses are
+indiscriminate about how exactly the attribution to be done, while
+others require prominent notice, e.g. preserving the original notice
+in the source code and adding the copyright notice to the
+application&amp;#8217;s legal section. &lt;a class="reference external" href="https://www.apache.org/licenses/LICENSE-2.0.html"&gt;Apache License&lt;/a&gt; and &lt;a class="reference external" href="https://opensource.org/licenses/MIT"&gt;&lt;span class="caps"&gt;MIT&lt;/span&gt; License&lt;/a&gt; both
+fall under this license&amp;nbsp;type.&lt;/p&gt;
+&lt;p&gt;Along with public-domain-like licenses, this license type is the most
+permissive of all &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses, which makes them easy to be hijacked
+into a proprietory close-sourced code base or incorporated into a
+&lt;span class="caps"&gt;FLOSS&lt;/span&gt; project with no&amp;nbsp;relicensing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="copyleft"&gt;
+&lt;span id="copyleft-licenses"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id19"&gt;Copyleft&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Copyleft"&gt;Copyleft&lt;/a&gt; is the next big category of licenses. The licenses of this
+type may also be called &lt;strong&gt;reciprocal&lt;/strong&gt; as they require that
+modification and distribution of derivative works is done under the
+same or compatible license with the source code made&amp;nbsp;available.&lt;/p&gt;
+&lt;p&gt;The copyleft licenses differ on the &amp;#8220;permissiveness/restrictiveness&amp;#8221;
+scale as well and can be break down into the following fine-grained
+copyleft license&amp;nbsp;types.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;span id="weak-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id20"&gt;Weak&amp;nbsp;copyleft&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Weak copyleft licenses trigger the copyleft (reciprocal share-alike
+mechanism requiring to disclose the derivative work&amp;#8217;s source code and
+to use the same or compatible license) when an original file or a
+library under the weak copyleft license is modified and
+redistributed. Simply using or incorporating the file or a library
+under weak copyleft into a &lt;a class="reference external" href="https://www.mozilla.org/en-US/MPL/2.0/FAQ/#virality"&gt;larger work&lt;/a&gt; (e.g. by dynamic linking)
+and distributing it does not require to give away the source code or
+use the corresponding weak copyleft license. &lt;a class="reference external" href="https://www.mozilla.org/en-US/MPL/2.0/"&gt;Mozilla Public License&lt;/a&gt;
+and &lt;a class="reference external" href="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.txt"&gt;Eclipse Public License&lt;/a&gt; are good examples of weak copyleft type
+of &lt;span class="caps"&gt;FLOSS&lt;/span&gt;&amp;nbsp;licenses.&lt;/p&gt;
+&lt;p&gt;Third-party deps under weak copyleft licenses try to be
+business-friendly by allowing incorporating into a larger work, but
+care about sharing the improvements made to the original work. Weak
+copyleft licenses may be unacceptable in some cases, but very welcome
+in&amp;nbsp;others.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;span id="strong-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id21"&gt;Strong&amp;nbsp;copyleft&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Strong copyleft license type tries to go even further in its
+conditions that require to disclose the source code of the derivative
+works and require to use the same strong copyleft license. Combining
+your proprietory modules with a module under strong copyleft into a
+single executable file; dynamic linking of a library under strong
+copyleft license in your permissive &lt;span class="caps"&gt;FLOSS&lt;/span&gt; project; or even exchanging
+data between your program and a standalone program under strong
+copyleft in such a way that &lt;a class="reference external" href="https://www.gnu.org/licenses/gpl-faq.html#MereAggregation"&gt;semantics of the communication are
+intimate enough&lt;/a&gt;, exchanging complex internal data structures, may be
+considered a work based on the software under the strong copyleft
+(derivative work), so that in case of distribution the source code
+must be given away and the same strong copyleft license must be used
+for the derivative work. &lt;a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0.en.html"&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; General Public License&lt;/a&gt; is the most
+illustrative example of strong copyleft license&amp;nbsp;type.&lt;/p&gt;
+&lt;p&gt;Third-party dependencies under strong copyleft licenses cannot be part
+of a proprietory code delievered to the outside users (unless a
+proprietor decided to give away a source code of the project and
+relicense it under corresponding strong copyleft license). Private
+usage of a derivative work without distribution to outside users or
+customers (e.g. on your computer only, or on your company&amp;#8217;s server
+only) is not considered distribution and does not trigger the&amp;nbsp;copyleft.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="copyleft-over-a-network"&gt;
+&lt;span id="network-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id22"&gt;Copyleft over a&amp;nbsp;network&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The most restrictive license category of all copyleft
+licenses. Network copyleft license type picks up where the strong
+copleft has left, i.e. it expands what distribution is and amends what
+private usage is by considering users interaction with a derivative
+work over a network as the work&amp;#8217;s distribution. &lt;a class="reference external" href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; Affero General
+Public License&lt;/a&gt;, a notable example of the copyleft-over-a-network
+license, aims at programs that are &lt;a class="reference external" href="https://www.gnu.org/licenses/why-affero-gpl.en.html"&gt;used on servers&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+[&amp;#8230;] if you run a modified program on a server and let other users
+communicate with it there, your server must also allow them to
+download the source code corresponding to the modified version
+running there.&lt;/blockquote&gt;
+&lt;p&gt;Copyleft over a network license type may be too restrictive in many
+cases, so that detecting it in your project&amp;#8217;s dependencies is&amp;nbsp;important.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;span id="outro"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id23"&gt;Outro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Make use you know what license types are safe/desirable for your
+project&amp;#8217;s 3rd-party dependencies. Is your project an open source
+libary for others to dynamically link in their software? A
+closed-source mobile app available over a popular digital distribution
+service as an executable? An embedded software for a device for wide
+public use? A website&amp;#8217;s frontend software delievered to users when the
+website is requested via a browser? A backend software privately run
+in the background on your company&amp;#8217;s server? In other words, what&amp;#8217;s
+your project&amp;#8217;s usage and distribution &amp;#8220;profile&amp;#8221; and what are the
+actions that are not acceptable for the project: source code
+disclosure, an obligation to change the license to reciprocal one,
+dependency&amp;#8217;s authors attribution,&amp;nbsp;etc.?&lt;/p&gt;
+&lt;p&gt;Once you know the answers, try to incorporate third-party deps license
+checks into your project&amp;#8217;s &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; pipeline to detect licenses you are
+not safe to use. The &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; tool may help with&amp;nbsp;that.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;P.S.&lt;/span&gt; See the tool&amp;#8217;s documentation in the &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; GitHub
+repository and the correspondent &lt;a class="reference external" href="https://github.com/pilosus/action-pip-license-checker"&gt;GitHub Action&lt;/a&gt;. Your feedback is
+welcome via &lt;a class="reference external" href="/pages/contact/"&gt;email&lt;/a&gt; or &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker/issues"&gt;GitHub Issues&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;span id="disclaimer"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id24"&gt;Disclaimer&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; and this blog post are provided on an &amp;#8220;as-is&amp;#8221;
+basis and make no warranties regarding any information provided
+through them, and disclaim liability for damages resulting from using
+them. Using &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; and this blog post does not
+constitute legal advice nor does it create an attorney-client&amp;nbsp;relationship.&lt;/p&gt;
+&lt;!-- Links --&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="license"></category><category term="dependencies"></category><category term="license-management"></category><category term="compliance"></category><category term="floss"></category><category term="open-source"></category><category term="free-software"></category></entry><entry><title>Book review: The Clean Coder by Robert C. Martin</title><link href="https://blog.pilosus.org/posts/2020/06/14/the-clean-coder-book-review/" rel="alternate"></link><published>2020-06-14T22:30:00+03:00</published><updated>2020-06-14T22:30:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-06-14:/posts/2020/06/14/the-clean-coder-book-review/</id><summary type="html">&lt;p class="first last"&gt;A Code Of Conduct For Professional&amp;nbsp;Programmers&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;em&gt;A Code Of Conduct For Professional Programmers&lt;/em&gt;, a subtitle of the
 book, says it all. Robert C. Martin answers the question: what does it
 mean to be a professional&amp;nbsp;programmer.&lt;/p&gt;
