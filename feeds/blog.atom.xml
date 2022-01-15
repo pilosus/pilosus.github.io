@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2021-09-16T15:54:00+03:00</updated><entry><title>pip-license-checker: detect third-party dependencies with “wrong” licenses</title><link href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/" rel="alternate"></link><published>2021-09-07T09:10:00+03:00</published><updated>2021-09-16T15:54:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2021-09-07:/posts/2021/09/07/pip-license-checker/</id><summary type="html">&lt;p class="first last"&gt;Detect license types for your poject&amp;#8217;s third-party&amp;nbsp;dependencies&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2022-01-16T00:59:00+03:00</updated><entry><title>dienstplan: Slack bot for duty rotations</title><link href="https://blog.pilosus.org/posts/2022/01/16/dienstplan/" rel="alternate"></link><published>2022-01-16T00:59:00+03:00</published><updated>2022-01-16T00:59:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2022-01-16:/posts/2022/01/16/dienstplan/</id><summary type="html">&lt;p class="first last"&gt;Simple app for on-call duty rotations in Slack&amp;nbsp;channels&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;dienstplan&lt;/a&gt; is a bot application for on-call duty rotations in Slack
+channels. It&amp;#8217;s simple, ideal for small teams. It plays nicely with
+Slack &lt;a class="reference external" href="https://slack.com/resources/using-slack/how-to-use-reminders-in-slack"&gt;reminders&lt;/a&gt; and &lt;a class="reference external" href="https://slack.com/features/workflow-automation"&gt;workflows&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="section" id="usage"&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+&lt;a class="reference external image-reference" href="https://blog.pilosus.org/images/dienstplan.gif"&gt;&lt;img alt="Dienstplan Slack bot" class="responsive" src="https://blog.pilosus.org/images/dienstplan.gif" /&gt;&lt;/a&gt;
+&lt;p&gt;Let&amp;#8217;s create a rotation called &lt;tt class="docutils literal"&gt;duty&lt;/tt&gt; using &lt;tt class="docutils literal"&gt;dienstplan&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;#64;dienstplan create duty &amp;#64;user1 &amp;#64;user2 &amp;#64;user3
+On-call engineer's duties:
+Process support team questions queue
+Resolve service alerts
+Check service health metrics
+Casual code refactoring
+Follow the boy scout rule: always leave the campground cleaner than you found it
+&lt;/pre&gt;
+&lt;p&gt;Rotation iterates over the list of users mentioned, one by one,
+starting from the first one (&lt;tt class="docutils literal"&gt;&amp;#64;user1&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;Now let&amp;#8217;s use Slack &lt;tt class="docutils literal"&gt;/remind&lt;/tt&gt; command to rotate users&amp;nbsp;weekly:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+/remind #my-channel to &amp;quot;&amp;#64;dienstplan rotate duty&amp;quot; every Monday at 9AM UTC
+&lt;/pre&gt;
+&lt;p&gt;Let&amp;#8217;s also show a current duty engineer with a&amp;nbsp;reminder:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+/remind #my-channel to &amp;quot;&amp;#64;dienstplan who duty&amp;quot; every Monday, Tuesday, Wednesday, Thursday, Friday at 10AM UTC
+&lt;/pre&gt;
+&lt;p&gt;To get help, invoke to following&amp;nbsp;command:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;#64;dienstplan help
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="up-running"&gt;
+&lt;h2&gt;Up &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;Running&lt;/h2&gt;
+&lt;p&gt;Grab &lt;tt class="docutils literal"&gt;dienstplan&lt;/tt&gt; from the &lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;GitHub&lt;/a&gt; repository along with user
+documentation, installation guide and deployment&amp;nbsp;scripts.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="open-source"></category><category term="floss"></category><category term="slack"></category></entry><entry><title>pip-license-checker: detect third-party dependencies with “wrong” licenses</title><link href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/" rel="alternate"></link><published>2021-09-07T09:10:00+03:00</published><updated>2021-09-16T15:54:00+03:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2021-09-07:/posts/2021/09/07/pip-license-checker/</id><summary type="html">&lt;p class="first last"&gt;Detect license types for your poject&amp;#8217;s third-party&amp;nbsp;dependencies&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="table-of-contents"&gt;
 &lt;p class="topic-title"&gt;Table of&amp;nbsp;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
