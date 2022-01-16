@@ -99,37 +99,54 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">163 words</span>
+		<span class="word-count">264 words</span>
 		|
-		<span class="word-count">1 min to read</span>
+		<span class="word-count">2 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/open-source/">open-source</a> <a href="https://blog.pilosus.org/tag/floss/">floss</a> <a href="https://blog.pilosus.org/tag/slack/">slack</a> </span>                
-              </div><!-- /.post-info -->              <p><a class="reference external" href="https://github.com/pilosus/dienstplan">dienstplan</a> is a bot application for on-call duty rotations in Slack
-channels. It&#8217;s simple, ideal for small teams. It plays nicely with
-Slack <a class="reference external" href="https://slack.com/resources/using-slack/how-to-use-reminders-in-slack">reminders</a> and <a class="reference external" href="https://slack.com/features/workflow-automation">workflows</a>.</p>
-<div class="section" id="usage">
-<h2>Usage</h2>
-<a class="reference external image-reference" href="https://blog.pilosus.org/images/dienstplan.gif"><img alt="Dienstplan Slack bot" class="responsive" src="https://blog.pilosus.org/images/dienstplan.gif" /></a>
-<p>Let&#8217;s create a rotation called <tt class="docutils literal">duty</tt> using <tt class="docutils literal">dienstplan</tt>:</p>
+              </div><!-- /.post-info -->              <p><a class="reference external" href="https://github.com/pilosus/dienstplan">dienstplan</a> is a Slack bot for duty rotations. It&#8217;s dead simple:
+just a few commands to manage on-call duty rotations in your team&#8217;s
+Slack channels. The bot application follows the rule &#8220;Do One Thing and
+Do It Well&#8221;. It plays nicely with Slack <a class="reference external" href="https://slack.com/resources/using-slack/how-to-use-reminders-in-slack">reminders</a> and <a class="reference external" href="https://slack.com/features/workflow-automation">workflows</a>.</p>
+<div class="section" id="usage-example">
+<h2>Usage&nbsp;example</h2>
+<a class="reference external image-reference" href="https://youtu.be/pZWJYpsT1_w"><img alt="Dienstplan Slack bot" class="responsive" src="https://blog.pilosus.org/images/dienstplan.gif" /></a>
+<p>Let&#8217;s create a rotation using <a class="reference external" href="https://github.com/pilosus/dienstplan">dienstplan</a>. Just pass in a <tt class="docutils literal">create</tt>
+command followed by a rotation name, a list of the channel users in a
+rotation, and a rotation&nbsp;description:</p>
 <pre class="literal-block">
-&#64;dienstplan create duty &#64;user1 &#64;user2 &#64;user3
+&#64;dienstplan create my-rota &#64;user1 &#64;user2 &#64;user3
 On-call engineer's duties:
-Process support team questions queue
-Resolve service alerts
-Check service health metrics
-Casual code refactoring
-Follow the boy scout rule: always leave the campground cleaner than you found it
+- Process support team questions queue
+- Resolve service alerts
+- Check service health metrics
+- Casual code refactoring-
+ Follow the boy scout rule: always leave the campground cleaner than you found it
 </pre>
-<p>Rotation iterates over the list of users mentioned, one by one,
-starting from the first one (<tt class="docutils literal">&#64;user1</tt>).</p>
-<p>Now let&#8217;s use Slack <tt class="docutils literal">/remind</tt> command to rotate users&nbsp;weekly:</p>
+<p>Once the rota is set up, the first user in the list becomes a current
+on-call person. Check it with a <tt class="docutils literal">who</tt> command:</p>
 <pre class="literal-block">
-/remind #my-channel to &quot;&#64;dienstplan rotate duty&quot; every Monday at 9AM UTC
+&#64;dienstplan who my-rota
 </pre>
-<p>Let&#8217;s also show a current duty engineer with a&nbsp;reminder:</p>
+<p>To change the current on-call person to the next one use <tt class="docutils literal">rotate</tt>
+command:</p>
 <pre class="literal-block">
-/remind #my-channel to &quot;&#64;dienstplan who duty&quot; every Monday, Tuesday, Wednesday, Thursday, Friday at 10AM UTC
+&#64;dienstplan rotate my-rota
 </pre>
-<p>To get help, invoke to following&nbsp;command:</p>
+<p>The bot iterates over the users in the list&nbsp;order:</p>
+<pre class="literal-block">
+&#64;user1 -&gt; &#64;user2 -&gt;  &#64;user3 -&gt; &#64;user1 ...
+</pre>
+<p>Now that you know the basics, let&#8217;s automate rotation and current duty
+notifications with Slack&#8217;s built-in <tt class="docutils literal">/remind</tt> command. First, set up a
+reminder to rotate users&nbsp;weekly:</p>
+<pre class="literal-block">
+/remind #my-channel to &quot;&#64;dienstplan rotate my-rota&quot; every Monday at 9AM UTC
+</pre>
+<p>Second, remind duties to a current on-call&nbsp;person:</p>
+<pre class="literal-block">
+/remind #my-channel to &quot;&#64;dienstplan who my-rota&quot; every Monday, Tuesday, Wednesday, Thursday, Friday at 10AM UTC
+</pre>
+<p>Get help&nbsp;with:</p>
 <pre class="literal-block">
 &#64;dienstplan help
 </pre>
@@ -137,7 +154,7 @@ starting from the first one (<tt class="docutils literal">&#64;user1</tt>).</p>
 <div class="section" id="up-running">
 <h2>Up <span class="amp">&amp;</span>&nbsp;Running</h2>
 <p>Grab <tt class="docutils literal">dienstplan</tt> from the <a class="reference external" href="https://github.com/pilosus/dienstplan">GitHub</a> repository along with user
-documentation, installation guide and deployment&nbsp;scripts.</p>
+documentation, installation guide and <a class="reference external" href="https://github.com/pilosus/dienstplan-deploy">deployment scripts</a>.</p>
 </div>
 
             </div><!-- /.entry-content -->
