@@ -89,7 +89,7 @@
 
             <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-06-07T20:30:00+03:00">
+                <span class="published" title="2019-06-07T20:30:00+02:00">
                   07-06-2019 20:30
                 </span>
                 |
@@ -268,11 +268,11 @@ format for our configs. It&#8217;s opinionated, but I personally think that
 <p>So what if we use a <span class="caps">YAML</span> file and substitute our secrets with
 environment variables&nbsp;tokens?</p>
 <div class="highlight"><pre><span></span><span class="nt">db</span><span class="p">:</span>
-  <span class="nt">login</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">user</span>
-  <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${DB_PASSWORD}</span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${DB_PASSWORD}</span>
 <span class="nt">mail</span><span class="p">:</span>
-  <span class="nt">login</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">user</span>
-  <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${MAIL_PASSWORD:-my_default_password}</span>
+<span class="w">  </span><span class="nt">login</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+<span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MAIL_PASSWORD:-my_default_password}</span>
 </pre></div>
 <p>Then our app loads the <span class="caps">YAML</span> and <strong>interpolates environment variables</strong>
 in&nbsp;it:</p>
@@ -319,21 +319,6 @@ also a name for <span class="caps">YAML</span> marked up with environment&nbsp;v
 </div>
 
             </div><!-- /.entry-content -->
-            <div class="comments">
-              <h3>Comments</h3>
-              <div id="disqus_thread"></div>
-              <script type="text/javascript">
-                var disqus_shortname = 'https-blog-pilosus-org';
-                var disqus_identifier = 'posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/';
-                var disqus_url = 'https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/';
-                (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-              </script>
-              <noscript>Please enable JavaScript to view the comments.</noscript>
-            </div>
 
           </article>
         </section>
@@ -359,24 +344,6 @@ also a name for <span class="caps">YAML</span> marked up with environment&nbsp;v
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-140765245-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'https-blog-pilosus-org';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     </div>
   </body>
 </html>

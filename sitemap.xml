@@ -5,560 +5,560 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2022-01-16T22:17:08-00:00</lastmod>
+<lastmod>2023-01-01T13:20:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2022-01-16T22:17:08-00:00</lastmod>
+<lastmod>2023-01-01T13:20:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2022-01-16T22:17:08-00:00</lastmod>
+<lastmod>2023-01-01T13:20:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2022-01-16T22:17:08-00:00</lastmod>
+<lastmod>2023-01-01T13:20:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/pages/contact/</loc>
-<lastmod>2021-09-15T23:49:00+03:00</lastmod>
+<lastmod>2023-01-01T13:10:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2022/01/16/dienstplan/</loc>
-<lastmod>2022-01-16T00:59:00+03:00</lastmod>
+<lastmod>2022-01-16T00:59:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/</loc>
-<lastmod>2021-09-16T15:54:00+03:00</lastmod>
+<lastmod>2021-09-16T15:54:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2020/06/14/the-clean-coder-book-review/</loc>
-<lastmod>2020-06-14T22:30:00+03:00</lastmod>
+<lastmod>2020-06-14T22:30:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2020/04/18/postgresql-consecutive-occurrences-within-ordered-groups/</loc>
-<lastmod>2020-04-18T18:00:00+03:00</lastmod>
+<lastmod>2020-04-18T18:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/</loc>
-<lastmod>2020-04-01T18:10:00+03:00</lastmod>
+<lastmod>2020-04-01T18:10:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/</loc>
-<lastmod>2020-01-25T13:45:00+03:00</lastmod>
+<lastmod>2020-01-25T13:45:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/</loc>
-<lastmod>2019-12-26T12:10:00+03:00</lastmod>
+<lastmod>2019-12-26T12:10:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/</loc>
-<lastmod>2019-12-15T14:00:00+03:00</lastmod>
+<lastmod>2019-12-15T14:00:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/</loc>
-<lastmod>2020-04-18T15:45:00+03:00</lastmod>
+<lastmod>2020-04-18T15:45:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/</loc>
-<lastmod>2019-12-07T14:58:00+03:00</lastmod>
+<lastmod>2019-12-07T14:58:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/09/28/kubernetes-context-switch/</loc>
-<lastmod>2019-09-28T14:12:00+03:00</lastmod>
+<lastmod>2019-09-28T14:12:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/</loc>
-<lastmod>2019-06-07T20:30:00+03:00</lastmod>
+<lastmod>2019-06-07T20:30:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/</loc>
-<lastmod>2019-06-01T14:12:00+03:00</lastmod>
+<lastmod>2019-06-01T14:12:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/</loc>
-<lastmod>2019-06-01T20:50:00+03:00</lastmod>
+<lastmod>2019-06-01T20:50:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/</loc>
-<lastmod>2019-05-28T12:03:00+03:00</lastmod>
+<lastmod>2019-05-28T12:03:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/</loc>
-<lastmod>2019-05-26T12:00:00+03:00</lastmod>
+<lastmod>2019-05-26T12:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/</loc>
-<lastmod>2019-05-24T20:15:00+03:00</lastmod>
+<lastmod>2019-05-24T20:15:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/</loc>
-<lastmod>2019-05-20T19:20:00+03:00</lastmod>
+<lastmod>2019-05-20T19:20:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/</loc>
-<lastmod>2019-05-20T15:50:00+03:00</lastmod>
+<lastmod>2019-05-20T15:50:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/</loc>
-<lastmod>2019-05-18T19:00:00+03:00</lastmod>
+<lastmod>2019-05-18T19:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/</loc>
-<lastmod>2019-05-18T11:00:00+03:00</lastmod>
+<lastmod>2019-05-18T11:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/02/python-mixin/</loc>
-<lastmod>2019-05-02T13:50:00+03:00</lastmod>
+<lastmod>2019-05-02T13:50:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/02/python-mro/</loc>
-<lastmod>2019-05-02T12:10:00+03:00</lastmod>
+<lastmod>2019-05-02T12:10:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/</loc>
-<lastmod>2019-05-01T11:30:00+03:00</lastmod>
+<lastmod>2019-05-01T11:30:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/04/29/bound-class-method/</loc>
-<lastmod>2019-04-29T17:30:00+03:00</lastmod>
+<lastmod>2019-04-29T17:30:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/posts/2019/04/28/intro/</loc>
-<lastmod>2019-04-28T16:45:00+03:00</lastmod>
+<lastmod>2019-04-28T16:45:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2022-01-16T00:59:00+02:30</lastmod>
+<lastmod>2022-01-16T00:59:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/open-source/</loc>
-<lastmod>2022-01-16T00:59:00+02:30</lastmod>
+<lastmod>2022-01-16T00:59:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/floss/</loc>
-<lastmod>2022-01-16T00:59:00+02:30</lastmod>
+<lastmod>2022-01-16T00:59:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/slack/</loc>
-<lastmod>2022-01-16T00:59:00+02:30</lastmod>
+<lastmod>2022-01-16T00:59:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/license/</loc>
-<lastmod>2021-09-16T15:54:00+02:30</lastmod>
+<lastmod>2021-09-16T15:54:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/dependencies/</loc>
-<lastmod>2021-09-16T15:54:00+02:30</lastmod>
+<lastmod>2021-09-16T15:54:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/license-management/</loc>
-<lastmod>2021-09-16T15:54:00+02:30</lastmod>
+<lastmod>2021-09-16T15:54:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/compliance/</loc>
-<lastmod>2021-09-16T15:54:00+02:30</lastmod>
+<lastmod>2021-09-16T15:54:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/free-software/</loc>
-<lastmod>2021-09-16T15:54:00+02:30</lastmod>
+<lastmod>2021-09-16T15:54:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/book/</loc>
-<lastmod>2020-06-14T22:30:00+02:30</lastmod>
+<lastmod>2020-06-14T22:30:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/review/</loc>
-<lastmod>2020-06-14T22:30:00+02:30</lastmod>
+<lastmod>2020-06-14T22:30:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/sql/</loc>
-<lastmod>2020-04-18T18:00:00+02:30</lastmod>
+<lastmod>2020-04-18T18:00:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/postgres/</loc>
-<lastmod>2020-04-18T18:00:00+02:30</lastmod>
+<lastmod>2020-04-18T18:00:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/opensource/</loc>
-<lastmod>2020-04-01T18:10:00+02:30</lastmod>
+<lastmod>2020-04-01T18:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/automation/</loc>
-<lastmod>2020-04-01T18:10:00+02:30</lastmod>
+<lastmod>2020-04-01T18:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/microservice/</loc>
-<lastmod>2020-04-01T18:10:00+02:30</lastmod>
+<lastmod>2020-04-01T18:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/python/</loc>
-<lastmod>2020-04-18T15:45:00+02:30</lastmod>
+<lastmod>2020-04-18T15:45:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/logging/</loc>
-<lastmod>2020-01-25T13:45:00+02:30</lastmod>
+<lastmod>2020-01-25T13:45:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/f-string/</loc>
-<lastmod>2020-01-25T13:45:00+02:30</lastmod>
+<lastmod>2020-01-25T13:45:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/tool/</loc>
-<lastmod>2019-12-26T12:10:00+02:30</lastmod>
+<lastmod>2019-12-26T12:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/standard/</loc>
-<lastmod>2019-12-26T12:10:00+02:30</lastmod>
+<lastmod>2019-12-26T12:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/interview/</loc>
-<lastmod>2020-04-18T15:45:00+02:30</lastmod>
+<lastmod>2020-04-18T15:45:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/ru/</loc>
-<lastmod>2020-04-18T15:45:00+02:30</lastmod>
+<lastmod>2020-04-18T15:45:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/k8s/</loc>
-<lastmod>2019-09-28T14:12:00+02:30</lastmod>
+<lastmod>2019-09-28T14:12:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/kubectx/</loc>
-<lastmod>2019-09-28T14:12:00+02:30</lastmod>
+<lastmod>2019-09-28T14:12:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/kubens/</loc>
-<lastmod>2019-09-28T14:12:00+02:30</lastmod>
+<lastmod>2019-09-28T14:12:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/architecture/</loc>
-<lastmod>2019-06-07T20:30:00+02:30</lastmod>
+<lastmod>2019-06-07T20:30:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/config/</loc>
-<lastmod>2019-06-07T20:30:00+02:30</lastmod>
+<lastmod>2019-06-07T20:30:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/helm/</loc>
-<lastmod>2019-06-01T14:12:00+02:30</lastmod>
+<lastmod>2019-06-01T14:12:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/prometheus/</loc>
-<lastmod>2019-06-01T20:50:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/kubernetes-operator/</loc>
-<lastmod>2019-06-01T14:12:00+02:30</lastmod>
+<lastmod>2019-06-01T14:12:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/til/</loc>
-<lastmod>2019-06-01T14:12:00+02:30</lastmod>
+<lastmod>2019-06-01T14:12:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/grafana/</loc>
-<lastmod>2019-06-01T20:50:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/visualization/</loc>
-<lastmod>2019-06-01T20:50:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/metrics/</loc>
-<lastmod>2019-06-01T20:50:00+02:30</lastmod>
+<lastmod>2019-06-01T20:50:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/pelican/</loc>
-<lastmod>2019-05-28T12:03:00+02:30</lastmod>
+<lastmod>2019-05-28T12:03:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/blog/</loc>
-<lastmod>2019-05-28T12:03:00+02:30</lastmod>
+<lastmod>2019-05-28T12:03:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/plugin/</loc>
-<lastmod>2019-05-28T12:03:00+02:30</lastmod>
+<lastmod>2019-05-28T12:03:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/ingress/</loc>
-<lastmod>2019-05-26T12:00:00+02:30</lastmod>
+<lastmod>2019-05-26T12:00:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/digitalocean/</loc>
-<lastmod>2019-05-26T12:00:00+02:30</lastmod>
+<lastmod>2019-05-26T12:00:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/kubectl/</loc>
-<lastmod>2019-05-24T20:15:00+02:30</lastmod>
+<lastmod>2019-05-24T20:15:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/chart/</loc>
-<lastmod>2019-05-20T19:20:00+02:30</lastmod>
+<lastmod>2019-05-20T19:20:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/redis/</loc>
-<lastmod>2019-05-20T19:20:00+02:30</lastmod>
+<lastmod>2019-05-20T19:20:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/minikube/</loc>
-<lastmod>2019-05-18T19:00:00+02:30</lastmod>
+<lastmod>2019-05-18T19:00:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/mro/</loc>
-<lastmod>2019-05-02T13:50:00+02:30</lastmod>
+<lastmod>2019-05-02T13:50:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/mixin/</loc>
-<lastmod>2019-05-02T13:50:00+02:30</lastmod>
+<lastmod>2019-05-02T13:50:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/cpython/</loc>
-<lastmod>2019-05-02T12:10:00+02:30</lastmod>
+<lastmod>2019-05-02T12:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/algorithms/</loc>
-<lastmod>2019-05-02T12:10:00+02:30</lastmod>
+<lastmod>2019-05-02T12:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/intro/</loc>
-<lastmod>2019-04-28T16:45:00+02:30</lastmod>
+<lastmod>2019-04-28T16:45:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

@@ -89,7 +89,7 @@
 
             <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-12-07T14:58:00+03:00">
+                <span class="published" title="2019-12-07T14:58:00+01:00">
                   07-12-2019 14:58
                 </span>
                 |
@@ -150,10 +150,10 @@ do it using pure PostgreSQL 9+&nbsp;query.</p>
 <div class="section" id="solution-postgresql-query-for-updating-rows-in-chunks-using-row-number-function">
 <h2>Solution: PostgreSQL query for updating rows in chunks using row_number()&nbsp;function</h2>
 <p>First, let&#8217;s see how the table&#8217;s schema may look&nbsp;like.</p>
-<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">balcklist</span><span class="p">(</span>
-  <span class="n">customer_id</span> <span class="nb">INTEGER</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
-  <span class="n">expiry</span> <span class="k">TIMESTAMP</span> <span class="k">WITHOUT</span> <span class="n">TIME</span> <span class="k">ZONE</span> <span class="k">default</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="k">timestamp</span> <span class="k">TIMESTAMP</span> <span class="k">WITHOUT</span> <span class="n">TIME</span> <span class="k">ZONE</span> <span class="k">default</span> <span class="p">(</span><span class="n">now</span><span class="p">()</span> <span class="k">at</span> <span class="n">time</span> <span class="k">zone</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">balcklist</span><span class="p">(</span>
+<span class="w">  </span><span class="n">customer_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">expiry</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITHOUT</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="k">timestamp</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITHOUT</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="s1">&#39;utc&#39;</span><span class="p">)</span>
 <span class="p">);</span>
 </pre></div>
 <p>A log of suspicious activity is stored in <cite>suspicious_activity</cite>
@@ -171,48 +171,48 @@ for customers selected in the&nbsp;subquery.</li>
 </ol>
 <p>The final <span class="caps">SQL</span> query then is the&nbsp;following:</p>
 <div class="highlight"><pre><span></span><span class="c1">-- main: update expiry timestamp column in chunks</span>
-<span class="k">UPDATE</span> <span class="n">blacklist</span>
-<span class="k">SET</span> <span class="n">expiry</span> <span class="o">=</span> <span class="n">subquery</span><span class="p">.</span><span class="n">new_expiry_timestamp</span>
-<span class="k">FROM</span> <span class="p">(</span>
-  <span class="c1">-- subquery 3: get new expiration timestamps based on a chunk number</span>
-  <span class="k">SELECT</span>
-    <span class="n">row_num</span><span class="p">,</span>
-    <span class="n">row_batched</span><span class="p">,</span>
-    <span class="n">customer_id</span><span class="p">,</span>
-    <span class="n">NOW</span><span class="p">()::</span><span class="k">TIMESTAMP</span> <span class="o">+</span> <span class="n">row_batched</span> <span class="o">*</span> <span class="nb">INTERVAL</span> <span class="s1">&#39;1 day&#39;</span> <span class="k">AS</span> <span class="n">new_expiry_timestamp</span><span class="p">,</span>
-    <span class="n">latest_suspicious_activity</span><span class="p">,</span>
-    <span class="n">blacklist_timestamp</span>
-  <span class="k">FROM</span> <span class="p">(</span>
-    <span class="c1">-- subquery 2: get chunk numbers based on a row number</span>
-    <span class="k">SELECT</span>
-      <span class="n">row_num</span><span class="p">,</span>
-      <span class="p">((</span><span class="n">row_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">AS</span> <span class="n">row_batched</span><span class="p">,</span>
-      <span class="n">customer_id</span><span class="p">,</span>
-      <span class="n">latest_suspicious_activity</span><span class="p">,</span>
-      <span class="n">blacklist_timestamp</span>
-    <span class="k">FROM</span> <span class="p">(</span>
-      <span class="c1">-- subquery 1: get row numbers</span>
-      <span class="k">SELECT</span>
-        <span class="n">row_number</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">latest_suspicious_activity</span> <span class="k">DESC</span> <span class="n">NULLS</span> <span class="k">LAST</span><span class="p">)</span> <span class="k">AS</span> <span class="n">row_num</span><span class="p">,</span>
-        <span class="n">customer_id</span><span class="p">,</span>
-        <span class="n">latest_suspicious_activity</span><span class="p">,</span>
-        <span class="n">blacklist_timestamp</span>
-      <span class="k">FROM</span> <span class="p">(</span>
-        <span class="c1">-- subquery 0: order blacklist</span>
-        <span class="k">SELECT</span>
-          <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span> <span class="k">AS</span> <span class="n">customer_id</span><span class="p">,</span>
-          <span class="k">MAX</span><span class="p">(</span><span class="n">suspicious_activity</span><span class="p">.</span><span class="n">created</span><span class="p">)</span> <span class="k">AS</span> <span class="n">latest_suspicious_activity</span><span class="p">,</span>
-          <span class="n">blacklist</span><span class="p">.</span><span class="k">timestamp</span> <span class="k">AS</span> <span class="n">blacklist_timestamp</span>
-        <span class="k">FROM</span> <span class="n">blacklist</span>
-        <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">suspicious_activity</span> <span class="k">ON</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">suspicious_activity</span><span class="p">.</span><span class="n">customer_id</span>
-        <span class="k">WHERE</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">expiry_timestamp</span> <span class="k">is</span> <span class="k">NULL</span>
-        <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span>
-        <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">latest_suspicious_activity</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">blacklist_timestamp</span> <span class="k">DESC</span>
-       <span class="p">)</span> <span class="k">AS</span> <span class="n">ordered</span>
-    <span class="p">)</span> <span class="k">AS</span> <span class="n">numbered</span>
-  <span class="p">)</span> <span class="k">AS</span> <span class="n">offsetted</span>
-<span class="p">)</span> <span class="k">AS</span> <span class="n">subquery</span>
-<span class="k">WHERE</span> <span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">subquery</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">blacklist</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">expiry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subquery</span><span class="p">.</span><span class="n">new_expiry_timestamp</span>
+<span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="c1">-- subquery 3: get new expiration timestamps based on a chunk number</span>
+<span class="w">  </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">row_num</span><span class="p">,</span>
+<span class="w">    </span><span class="n">row_batched</span><span class="p">,</span>
+<span class="w">    </span><span class="n">customer_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">NOW</span><span class="p">()::</span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">row_batched</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 day&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">new_expiry_timestamp</span><span class="p">,</span>
+<span class="w">    </span><span class="n">latest_suspicious_activity</span><span class="p">,</span>
+<span class="w">    </span><span class="n">blacklist_timestamp</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="c1">-- subquery 2: get chunk numbers based on a row number</span>
+<span class="w">    </span><span class="k">SELECT</span>
+<span class="w">      </span><span class="n">row_num</span><span class="p">,</span>
+<span class="w">      </span><span class="p">((</span><span class="n">row_num</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">row_batched</span><span class="p">,</span>
+<span class="w">      </span><span class="n">customer_id</span><span class="p">,</span>
+<span class="w">      </span><span class="n">latest_suspicious_activity</span><span class="p">,</span>
+<span class="w">      </span><span class="n">blacklist_timestamp</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="c1">-- subquery 1: get row numbers</span>
+<span class="w">      </span><span class="k">SELECT</span>
+<span class="w">        </span><span class="n">row_number</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">latest_suspicious_activity</span><span class="w"> </span><span class="k">DESC</span><span class="w"> </span><span class="n">NULLS</span><span class="w"> </span><span class="k">LAST</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">row_num</span><span class="p">,</span>
+<span class="w">        </span><span class="n">customer_id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">latest_suspicious_activity</span><span class="p">,</span>
+<span class="w">        </span><span class="n">blacklist_timestamp</span>
+<span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="c1">-- subquery 0: order blacklist</span>
+<span class="w">        </span><span class="k">SELECT</span>
+<span class="w">          </span><span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span>
+<span class="w">          </span><span class="k">MAX</span><span class="p">(</span><span class="n">suspicious_activity</span><span class="p">.</span><span class="n">created</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">latest_suspicious_activity</span><span class="p">,</span>
+<span class="w">          </span><span class="n">blacklist</span><span class="p">.</span><span class="k">timestamp</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">blacklist_timestamp</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">blacklist</span>
+<span class="w">        </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">suspicious_activity</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">suspicious_activity</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">blacklist</span><span class="p">.</span><span class="n">expiry_timestamp</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">        </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="w">        </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">latest_suspicious_activity</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="n">blacklist_timestamp</span><span class="w"> </span><span class="k">DESC</span>
+<span class="w">       </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ordered</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">numbered</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">offsetted</span>
+<span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">subquery</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">blacklist</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subquery</span><span class="p">.</span><span class="n">customer_id</span>
 </pre></div>
 <p>The <span class="caps">SQL</span> above may not be <span class="caps">SQL</span>-standard compatible and is guaranteed to
 work on PostgreSQL 9.6 or&nbsp;later.</p>
@@ -236,21 +236,6 @@ great help&nbsp;here.</p>
 </div>
 
             </div><!-- /.entry-content -->
-            <div class="comments">
-              <h3>Comments</h3>
-              <div id="disqus_thread"></div>
-              <script type="text/javascript">
-                var disqus_shortname = 'https-blog-pilosus-org';
-                var disqus_identifier = 'posts/2019/12/07/postgresql-update-rows-in-chunks/';
-                var disqus_url = 'https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/';
-                (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-              </script>
-              <noscript>Please enable JavaScript to view the comments.</noscript>
-            </div>
 
           </article>
         </section>
@@ -276,24 +261,6 @@ great help&nbsp;here.</p>
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-140765245-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'https-blog-pilosus-org';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     </div>
   </body>
 </html>

@@ -89,7 +89,7 @@
 
             <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-05-02T13:50:00+03:00">
+                <span class="published" title="2019-05-02T13:50:00+02:00">
                   02-05-2019 13:50
                 </span>
                 |
@@ -129,19 +129,19 @@ following so called <em>diamond inheritance</em> to add some checks to the
 method <tt class="docutils literal">do</tt> we are interested&nbsp;in.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Top</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Top class&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Top class&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Top.do&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Top.do&#39;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">Left</span><span class="p">(</span><span class="n">Top</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Left class&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Left class&#39;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Left.do&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Left.do&#39;</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s1">&#39;Left.do expected integer values only&#39;</span>
         <span class="c1"># We explicitly return parent&#39;s do method.</span>
         <span class="c1"># If there was no such return, then Right.do would never be called</span>
@@ -151,22 +151,22 @@ method <tt class="docutils literal">do</tt> we are interested&nbsp;in.</p>
 
 <span class="k">class</span> <span class="nc">Right</span><span class="p">(</span><span class="n">Top</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Right class&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Right class&#39;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Right.do&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Right.do&#39;</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Right.do expected positive numbers only&#39;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">Bottom</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span> <span class="n">Right</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bottom class&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bottom class&#39;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bottom.do&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bottom.do&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
 <p>We can instantiate <tt class="docutils literal">Top</tt> class when no checks in <tt class="docutils literal">do</tt> method
@@ -174,95 +174,80 @@ needed, we can use class <tt class="docutils literal">Left</tt> when workgin wit
 use <tt class="docutils literal">Right</tt> class when working with non-negative numbers. When both
 checks are needed though, we use the <tt class="docutils literal">Bottom</tt> class.</p>
 <p>The initialization of the <tt class="docutils literal">Bottom</tt> class reveals it&#8217;s <span class="caps">MRO</span>:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Bottom</span><span class="p">()</span>
-<span class="n">Bottom</span> <span class="k">class</span>
-<span class="nc">Left</span> <span class="k">class</span>
-<span class="nc">Right</span> <span class="k">class</span>
-<span class="nc">Top</span> <span class="k">class</span>
+<div class="highlight"><pre><span></span>In [2]: b = Bottom()
+Bottom class
+Left class
+Right class
+Top class
 
-<span class="nc">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">Bottom</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="p">[</span><span class="n">__main__</span><span class="o">.</span><span class="n">Bottom</span><span class="p">,</span> <span class="n">__main__</span><span class="o">.</span><span class="n">Left</span><span class="p">,</span> <span class="n">__main__</span><span class="o">.</span><span class="n">Right</span><span class="p">,</span> <span class="n">__main__</span><span class="o">.</span><span class="n">Top</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span>
+In [3]: Bottom.mro()
+Out[3]: [__main__.Bottom, __main__.Left, __main__.Right, __main__.Top, object]
 </pre></div>
 <p>Now let&#8217;s see how multiple inheritance&nbsp;works:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">b</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">Bottom</span><span class="o">.</span><span class="n">do</span>
-<span class="n">Left</span><span class="o">.</span><span class="n">do</span>
-<span class="n">Right</span><span class="o">.</span><span class="n">do</span>
-<span class="n">Top</span><span class="o">.</span><span class="n">do</span>
+<div class="highlight"><pre><span></span>In [4]: b.do(10)
+Bottom.do
+Left.do
+Right.do
+Top.do
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">b</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="mf">10.5</span><span class="p">)</span>
-<span class="n">Bottom</span><span class="o">.</span><span class="n">do</span>
-<span class="n">Left</span><span class="o">.</span><span class="n">do</span>
-<span class="o">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="n">eceeaaa850f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">b</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="mf">10.5</span><span class="p">)</span>
+In [5]: b.do(10.5)
+Bottom.do
+Left.do
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+&lt;ipython-input-5-1eceeaaa850f&gt; in &lt;module&gt;
+----&gt; 1 b.do(10.5)
 
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">f358c005e4dd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-     <span class="mi">39</span>     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-     <span class="mi">40</span>         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bottom.do&#39;</span><span class="p">)</span>
-<span class="o">---&gt;</span> <span class="mi">41</span>         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-     <span class="mi">42</span>
+&lt;ipython-input-1-f358c005e4dd&gt; in do(self, value)
+     39     def do(self, value):
+     40         print(&#39;Bottom.do&#39;)
+---&gt; 41         return super().do(value)
+     42
 
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">f358c005e4dd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-     <span class="mi">14</span>     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-     <span class="mi">15</span>         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Left.do&#39;</span><span class="p">)</span>
-<span class="o">---&gt;</span> <span class="mi">16</span>         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s1">&#39;Left.do expected integer values only&#39;</span>
-     <span class="mi">17</span>         <span class="c1"># We explicitly return parent&#39;s do method.</span>
-     <span class="mi">18</span>         <span class="c1"># If there was no such return, then Right.do would never be called</span>
+&lt;ipython-input-1-f358c005e4dd&gt; in do(self, value)
+     14     def do(self, value):
+     15         print(&#39;Left.do&#39;)
+---&gt; 16         assert isinstance(value, int), &#39;Left.do expected integer values only&#39;
+     17         # We explicitly return parent&#39;s do method.
+     18         # If there was no such return, then Right.do would never be called
 
-<span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Left</span><span class="o">.</span><span class="n">do</span> <span class="n">expected</span> <span class="n">integer</span> <span class="n">values</span> <span class="n">only</span>
+AssertionError: Left.do expected integer values only
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">b</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">Bottom</span><span class="o">.</span><span class="n">do</span>
-<span class="n">Left</span><span class="o">.</span><span class="n">do</span>
-<span class="n">Right</span><span class="o">.</span><span class="n">do</span>
-<span class="o">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">f82b823fc4ec</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">b</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+In [6]: b.do(-10)
+Bottom.do
+Left.do
+Right.do
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+&lt;ipython-input-6-f82b823fc4ec&gt; in &lt;module&gt;
+----&gt; 1 b.do(-10)
 
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">f358c005e4dd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-     <span class="mi">39</span>     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-     <span class="mi">40</span>         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bottom.do&#39;</span><span class="p">)</span>
-<span class="o">---&gt;</span> <span class="mi">41</span>         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-     <span class="mi">42</span>
+&lt;ipython-input-1-f358c005e4dd&gt; in do(self, value)
+     39     def do(self, value):
+     40         print(&#39;Bottom.do&#39;)
+---&gt; 41         return super().do(value)
+     42
 
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">f358c005e4dd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-     <span class="mi">18</span>         <span class="c1"># If there was no such return, then Right.do would never be called</span>
-     <span class="mi">19</span>         <span class="c1"># when Bottom.do() is called</span>
-<span class="o">---&gt;</span> <span class="mi">20</span>         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-     <span class="mi">21</span>
-     <span class="mi">22</span>
+&lt;ipython-input-1-f358c005e4dd&gt; in do(self, value)
+     18         # If there was no such return, then Right.do would never be called
+     19         # when Bottom.do() is called
+---&gt; 20         return super().do(value)
+     21
+     22
 
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">f358c005e4dd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-     <span class="mi">28</span>     <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-     <span class="mi">29</span>         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Right.do&#39;</span><span class="p">)</span>
-<span class="o">---&gt;</span> <span class="mi">30</span>         <span class="k">assert</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Right.do expected positive numbers only&#39;</span>
-     <span class="mi">31</span>         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-     <span class="mi">32</span>
+&lt;ipython-input-1-f358c005e4dd&gt; in do(self, value)
+     28     def do(self, value):
+     29         print(&#39;Right.do&#39;)
+---&gt; 30         assert value &gt;= 0, &#39;Right.do expected positive numbers only&#39;
+     31         return super().do(value)
+     32
 
-<span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Right</span><span class="o">.</span><span class="n">do</span> <span class="n">expected</span> <span class="n">positive</span> <span class="n">numbers</span> <span class="n">only</span>
+AssertionError: Right.do expected positive numbers only
 </pre></div>
 <p>See more about the inner workings of the <span class="caps">MRO</span> in my article about <a class="reference external" href="https://blog.pilosus.org/posts/2019/05/02/python-mro/">C3
 linearisation algorithm</a>.</p>
 
             </div><!-- /.entry-content -->
-            <div class="comments">
-              <h3>Comments</h3>
-              <div id="disqus_thread"></div>
-              <script type="text/javascript">
-                var disqus_shortname = 'https-blog-pilosus-org';
-                var disqus_identifier = 'posts/2019/05/02/python-mixin/';
-                var disqus_url = 'https://blog.pilosus.org/posts/2019/05/02/python-mixin/';
-                (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-              </script>
-              <noscript>Please enable JavaScript to view the comments.</noscript>
-            </div>
 
           </article>
         </section>
@@ -288,24 +273,6 @@ linearisation algorithm</a>.</p>
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-140765245-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'https-blog-pilosus-org';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     </div>
   </body>
 </html>

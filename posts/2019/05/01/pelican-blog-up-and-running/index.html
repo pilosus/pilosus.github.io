@@ -89,7 +89,7 @@
 
             <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-05-01T11:30:00+03:00">
+                <span class="published" title="2019-05-01T11:30:00+02:00">
                   01-05-2019 11:30
                 </span>
                 |
@@ -130,26 +130,26 @@ documentation. Instead I will focus on the step that allows you&nbsp;to:</p>
 my workflow for the Python projects that do not require
 containerization is the&nbsp;following:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Create directory for the project, cd to it</span>
-$ mkdir my-project <span class="o">&amp;&amp;</span> <span class="nb">cd</span> my-project
+$<span class="w"> </span>mkdir<span class="w"> </span>my-project<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-project
 
 <span class="c1"># Set up virtual env with Python version needed</span>
-$ pyenv virtualenv <span class="m">3</span>.7.2 venv
+$<span class="w"> </span>pyenv<span class="w"> </span>virtualenv<span class="w"> </span><span class="m">3</span>.7.2<span class="w"> </span>venv
 
 <span class="c1"># Activate virtualenv</span>
-$ pyenv activate venv
+$<span class="w"> </span>pyenv<span class="w"> </span>activate<span class="w"> </span>venv
 
 <span class="c1"># Initialize git reposotory, add README and basic .gitignore</span>
-$ git init
-$ touch README.md
-$ <span class="nb">echo</span> <span class="s1">&#39;*~&#39;</span> &gt; .gitignore
-$ git commit -m <span class="s1">&#39;Initial commit&#39;</span>
+$<span class="w"> </span>git<span class="w"> </span>init
+$<span class="w"> </span>touch<span class="w"> </span>README.md
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;*~&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>.gitignore
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Initial commit&#39;</span>
 </pre></div>
 <p>Now that a repository for your project is ready, install <tt class="docutils literal">pelican</tt>
 package, fix its version and initialize the&nbsp;app:</p>
-<div class="highlight"><pre><span></span>$ pip install pelican
-$ pip freeze <span class="p">|</span> grep pelican &gt; requirements.txt
-$ git commit -a -m <span class="s1">&#39;Fix pelican version&#39;</span>
-$ pelican-quickstart
+<div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pelican
+$<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>pelican<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-a<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Fix pelican version&#39;</span>
+$<span class="w"> </span>pelican-quickstart
 </pre></div>
 <p>All the questions are pretty straightforward. One thing I would advise
 though is to confirm that you do want to <strong>automate site generation and
@@ -167,9 +167,9 @@ development I used <a class="reference external" href="http://getskeleton.com/">
 to the Pelican&#8217;s theme path or by creating a symlink, I used <tt class="docutils literal">git
 submodule</tt> add theme in my blog repo directory. Then I added a path
 to the theme under <tt class="docutils literal"><span class="caps">THEME</span></tt> variable in <tt class="docutils literal">pelicanconf.py</tt>:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
-$ git submodule add https://github.com/pilosus/pilosus-pelican-theme.git themes/pilosus-pelican-theme
-$ <span class="nb">echo</span> <span class="s2">&quot;THEME = &#39;themes/pilosus-pelican-theme&#39;&quot;</span> &gt;&gt; pelicanconf.py
+<div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-project
+$<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/pilosus/pilosus-pelican-theme.git<span class="w"> </span>themes/pilosus-pelican-theme
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;THEME = &#39;themes/pilosus-pelican-theme&#39;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>pelicanconf.py
 </pre></div>
 <p>Now my custom theme is versioned and can be easily developed
 separately from the blog. The blog may be generated with whatever
@@ -192,10 +192,10 @@ keep the code versioned, site deployments deterministic and
 maintanence predictable and&nbsp;easy.</p>
 <p>I place plugins under <tt class="docutils literal">plugins</tt> directory in my blog repo, then
 define <tt class="docutils literal">PLUGIN_PATHS</tt> and <tt class="docutils literal"><span class="caps">PLUGINS</span></tt> variables in the&nbsp;settings:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
-$ git submodule add https://github.com/pilosus/pilosus_pelican_og plugins/pilosus_pelican_og
-$ <span class="nb">echo</span> <span class="s2">&quot;PLUGIN_PATHS = [&#39;plugins&#39;]&quot;</span> &gt;&gt; pelicanconf.py
-$ <span class="nb">echo</span> <span class="s2">&quot;PLUGINS = [&#39;pilosus_pelican_og&#39;,]&quot;</span> &gt;&gt; pelicanconf.py
+<div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-project
+$<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/pilosus/pilosus_pelican_og<span class="w"> </span>plugins/pilosus_pelican_og
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PLUGIN_PATHS = [&#39;plugins&#39;]&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>pelicanconf.py
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PLUGINS = [&#39;pilosus_pelican_og&#39;,]&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>pelicanconf.py
 </pre></div>
 </div>
 <div class="section" id="build-and-deploy-automation">
@@ -211,25 +211,25 @@ decided to give <tt class="docutils literal">invoke</tt> a try. So the following
 <p>We need to install <tt class="docutils literal">invoke</tt> package in your virtualenv, as well as
 <tt class="docutils literal"><span class="pre">ghp-import</span></tt> for GitHub Page push. Don&#8217;t forget to fix all
 dependencies in the <tt class="docutils literal">requirements.txt</tt>:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my-project
-$ pyenv activate venv
-$ pip install invoke
-$ pip freeze <span class="p">|</span> grep invoke &gt;&gt; requirements.txt
-$ pip install ghp-import
-$ pip freeze <span class="p">|</span> grep invoke &gt;&gt; requirements.txt
+<div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-project
+$<span class="w"> </span>pyenv<span class="w"> </span>activate<span class="w"> </span>venv
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>invoke
+$<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>invoke<span class="w"> </span>&gt;&gt;<span class="w"> </span>requirements.txt
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ghp-import
+$<span class="w"> </span>pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>invoke<span class="w"> </span>&gt;&gt;<span class="w"> </span>requirements.txt
 </pre></div>
 <p>Now that we have all dependencies installed let&#8217;s add a new task for
 GitHub Pages&nbsp;deployment:</p>
 <div class="highlight"><pre><span></span><span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">github</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
   <span class="n">preview</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
   <span class="n">cname</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ghp-import -b {github_pages_branch} &#39;</span>
-        <span class="s1">&#39;-m {commit_message} &#39;</span>
-        <span class="s1">&#39;{deploy_path} -p&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push --force {github_repo} &#39;</span>
-        <span class="s1">&#39;{github_pages_branch}:{github_repo_target_branch}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;ghp-import -b </span><span class="si">{github_pages_branch}</span><span class="s1"> &#39;</span>
+        <span class="s1">&#39;-m </span><span class="si">{commit_message}</span><span class="s1"> &#39;</span>
+        <span class="s1">&#39;</span><span class="si">{deploy_path}</span><span class="s1"> -p&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;git push --force </span><span class="si">{github_repo}</span><span class="s1"> &#39;</span>
+        <span class="s1">&#39;</span><span class="si">{github_pages_branch}</span><span class="s1">:</span><span class="si">{github_repo_target_branch}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
 </pre></div>
 <p><tt class="docutils literal">preview(c)</tt> is a predefined <tt class="docutils literal">invoke</tt> task that generates static
 files for production environment (i.e. with <tt class="docutils literal">publishconf.py</tt>
@@ -238,12 +238,12 @@ settings&nbsp;file).</p>
 hostname of your custom&nbsp;domain:</p>
 <div class="highlight"><pre><span></span><span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">cname</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Generate CNAME file with you custom domain name</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Generate CNAME file with you custom domain name</span>
 
 <span class="sd">  Its used in GitHub Pages. Otherwise custom domain name setting</span>
 <span class="sd">  gets reset on each git push to GH Page repo.</span>
 <span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;echo {custom_domain_name} &gt; {deploy_path}/CNAME&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
+  <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;echo </span><span class="si">{custom_domain_name}</span><span class="s1"> &gt; </span><span class="si">{deploy_path}</span><span class="s1">/CNAME&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">CONFIG</span><span class="p">))</span>
 </pre></div>
 <p><tt class="docutils literal">cname</tt> docstring says it all. You really need this&nbsp;file!</p>
 <p><tt class="docutils literal"><span class="pre">ghp-import</span></tt> command checks out you output directory (i.e. the one
@@ -262,7 +262,7 @@ repository for static GitHub Pages (it should be named as
     <span class="s1">&#39;github_repo_target_branch&#39;</span><span class="p">:</span> <span class="s1">&#39;master&#39;</span><span class="p">,</span>
     <span class="s1">&#39;github_repo&#39;</span><span class="p">:</span> <span class="s1">&#39;git@github.com:pilosus/pilosus.github.io.git&#39;</span><span class="p">,</span>
     <span class="s1">&#39;custom_domain_name&#39;</span><span class="p">:</span> <span class="s1">&#39;blog.pilosus.org&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;commit_message&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;Publish site on {}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()),</span>
+    <span class="s1">&#39;commit_message&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;Publish site on </span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()),</span>
     <span class="c1"># Port for `serve`</span>
     <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
 <span class="p">}</span>
@@ -305,21 +305,6 @@ blog&nbsp;repository.</p>
 </div>
 
             </div><!-- /.entry-content -->
-            <div class="comments">
-              <h3>Comments</h3>
-              <div id="disqus_thread"></div>
-              <script type="text/javascript">
-                var disqus_shortname = 'https-blog-pilosus-org';
-                var disqus_identifier = 'posts/2019/05/01/pelican-blog-up-and-running/';
-                var disqus_url = 'https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/';
-                (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-              </script>
-              <noscript>Please enable JavaScript to view the comments.</noscript>
-            </div>
 
           </article>
         </section>
@@ -345,24 +330,6 @@ blog&nbsp;repository.</p>
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-140765245-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'https-blog-pilosus-org';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     </div>
   </body>
 </html>

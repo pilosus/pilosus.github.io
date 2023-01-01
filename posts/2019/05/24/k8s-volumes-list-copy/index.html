@@ -89,7 +89,7 @@
 
             <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-05-24T20:15:00+03:00">
+                <span class="published" title="2019-05-24T20:15:00+02:00">
                   24-05-2019 20:15
                 </span>
                 |
@@ -116,50 +116,35 @@ favourite tools like <tt class="docutils literal">ls</tt> and <tt class="docutil
 the volume usage. Just make sure that an image your pod container is
 using has all the tools you&nbsp;need.</p>
 <div class="highlight"><pre><span></span><span class="c1"># open bash on the pod</span>
-$ kubectl <span class="nb">exec</span> -it redis-master-0 bash
+$<span class="w"> </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>redis-master-0<span class="w"> </span>bash
 
 <span class="c1"># see disk usage stats</span>
 <span class="c1"># volume is mounted under /data</span>
-I have no name!@redis-master-0:/$ df -h
-Filesystem                                                                Size  Used Avail Use% Mounted on
-overlay                                                                   158G  <span class="m">6</span>.5G  145G   <span class="m">5</span>% /
-tmpfs                                                                      64M     <span class="m">0</span>   64M   <span class="m">0</span>% /dev
-tmpfs                                                                     <span class="m">3</span>.9G     <span class="m">0</span>  <span class="m">3</span>.9G   <span class="m">0</span>% /sys/fs/cgroup
-/dev/vda1                                                                 158G  <span class="m">6</span>.5G  145G   <span class="m">5</span>% /health
-/dev/disk/by-id/scsi-0DO_Volume_pvc-ae31a80d-7b23-11e9-bffb-0ab3124b7b1c  <span class="m">7</span>.9G   36M  <span class="m">7</span>.4G   <span class="m">1</span>% /data
-shm                                                                        64M     <span class="m">0</span>   64M   <span class="m">0</span>% /dev/shm
-tmpfs                                                                     <span class="m">3</span>.9G   12K  <span class="m">3</span>.9G   <span class="m">1</span>% /run/secrets/kubernetes.io/serviceaccount
-tmpfs                                                                     <span class="m">3</span>.9G     <span class="m">0</span>  <span class="m">3</span>.9G   <span class="m">0</span>% /proc/acpi
-tmpfs                                                                     <span class="m">3</span>.9G     <span class="m">0</span>  <span class="m">3</span>.9G   <span class="m">0</span>% /sys/firmware
+I<span class="w"> </span>have<span class="w"> </span>no<span class="w"> </span>name!@redis-master-0:/$<span class="w"> </span>df<span class="w"> </span>-h
+Filesystem<span class="w">                                                                </span>Size<span class="w">  </span>Used<span class="w"> </span>Avail<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
+overlay<span class="w">                                                                   </span>158G<span class="w">  </span><span class="m">6</span>.5G<span class="w">  </span>145G<span class="w">   </span><span class="m">5</span>%<span class="w"> </span>/
+tmpfs<span class="w">                                                                      </span>64M<span class="w">     </span><span class="m">0</span><span class="w">   </span>64M<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/dev
+tmpfs<span class="w">                                                                     </span><span class="m">3</span>.9G<span class="w">     </span><span class="m">0</span><span class="w">  </span><span class="m">3</span>.9G<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/sys/fs/cgroup
+/dev/vda1<span class="w">                                                                 </span>158G<span class="w">  </span><span class="m">6</span>.5G<span class="w">  </span>145G<span class="w">   </span><span class="m">5</span>%<span class="w"> </span>/health
+/dev/disk/by-id/scsi-0DO_Volume_pvc-ae31a80d-7b23-11e9-bffb-0ab3124b7b1c<span class="w">  </span><span class="m">7</span>.9G<span class="w">   </span>36M<span class="w">  </span><span class="m">7</span>.4G<span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/data
+shm<span class="w">                                                                        </span>64M<span class="w">     </span><span class="m">0</span><span class="w">   </span>64M<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/dev/shm
+tmpfs<span class="w">                                                                     </span><span class="m">3</span>.9G<span class="w">   </span>12K<span class="w">  </span><span class="m">3</span>.9G<span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/run/secrets/kubernetes.io/serviceaccount
+tmpfs<span class="w">                                                                     </span><span class="m">3</span>.9G<span class="w">     </span><span class="m">0</span><span class="w">  </span><span class="m">3</span>.9G<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/proc/acpi
+tmpfs<span class="w">                                                                     </span><span class="m">3</span>.9G<span class="w">     </span><span class="m">0</span><span class="w">  </span><span class="m">3</span>.9G<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/sys/firmware
 
 <span class="c1"># list files</span>
-$ ls -l /data
-total <span class="m">24</span>
--rw-r--r-- <span class="m">1</span> <span class="m">1001</span> <span class="m">1001</span>   <span class="m">130</span> May <span class="m">20</span> <span class="m">18</span>:23 appendonly.aof
--rw-r--r-- <span class="m">1</span> <span class="m">1001</span> <span class="m">1001</span>   <span class="m">175</span> May <span class="m">20</span> <span class="m">17</span>:22 dump.rdb
-drwxrws--- <span class="m">2</span> root <span class="m">1001</span> <span class="m">16384</span> May <span class="m">20</span> <span class="m">17</span>:22 lost+found
+$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/data
+total<span class="w"> </span><span class="m">24</span>
+-rw-r--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1001</span><span class="w"> </span><span class="m">1001</span><span class="w">   </span><span class="m">130</span><span class="w"> </span>May<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">18</span>:23<span class="w"> </span>appendonly.aof
+-rw-r--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1001</span><span class="w"> </span><span class="m">1001</span><span class="w">   </span><span class="m">175</span><span class="w"> </span>May<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">17</span>:22<span class="w"> </span>dump.rdb
+drwxrws---<span class="w"> </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span><span class="m">1001</span><span class="w"> </span><span class="m">16384</span><span class="w"> </span>May<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="m">17</span>:22<span class="w"> </span>lost+found
 </pre></div>
 <p>Third, you can copy files or directories from or to a Kubernetes pod using <tt class="docutils literal">kubectl cp</tt>:</p>
-<div class="highlight"><pre><span></span>kubectl cp default/redis-master-0:/data/dump.rdb /home/vitaly/Downloads/dump.rdb
+<div class="highlight"><pre><span></span>kubectl<span class="w"> </span>cp<span class="w"> </span>default/redis-master-0:/data/dump.rdb<span class="w"> </span>/home/vitaly/Downloads/dump.rdb
 </pre></div>
 <p>See <tt class="docutils literal">kubectl cp <span class="pre">--help</span></tt> for more&nbsp;details.</p>
 
             </div><!-- /.entry-content -->
-            <div class="comments">
-              <h3>Comments</h3>
-              <div id="disqus_thread"></div>
-              <script type="text/javascript">
-                var disqus_shortname = 'https-blog-pilosus-org';
-                var disqus_identifier = 'posts/2019/05/24/k8s-volumes-list-copy/';
-                var disqus_url = 'https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/';
-                (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-              </script>
-              <noscript>Please enable JavaScript to view the comments.</noscript>
-            </div>
 
           </article>
         </section>
@@ -185,24 +170,6 @@ drwxrws--- <span class="m">2</span> root <span class="m">1001</span> <span class
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-140765245-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'https-blog-pilosus-org';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     </div>
   </body>
 </html>

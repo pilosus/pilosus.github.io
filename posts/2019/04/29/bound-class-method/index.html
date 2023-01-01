@@ -88,7 +88,7 @@
 
             <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-04-29T17:30:00+03:00">
+                <span class="published" title="2019-04-29T17:30:00+02:00">
                   29-04-2019 17:30
                 </span>
                 |
@@ -103,87 +103,87 @@
 		<span class="word-count">2 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> </span>                
               </div><!-- /.post-info -->              <p>A code snippet in Python 3 below has been discussed recently on the&nbsp;internet:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="k">pass</span>
-   <span class="o">...</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span> <span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="nd">@classmethod</span>
-   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-   <span class="o">...</span><span class="p">:</span>         <span class="k">pass</span>
+<div class="highlight"><pre><span></span>In [1]: class A:
+   ...:     def method(self):
+   ...:         pass
+   ...:
+   ...: class B:
+   ...:     @classmethod
+   ...:     def method(cls):
+   ...:         pass
 
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="bp">True</span>
+In [2]: A.method is A.method
+Out[2]: True
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="bp">False</span>
+In [3]: B.method is B.method
+Out[3]: False
 </pre></div>
 <p>The question is why <tt class="docutils literal">A.method</tt> returns the same object on each call
 while <tt class="docutils literal">B.method</tt> returns the new&nbsp;one?</p>
 <p>Let&#8217;s explore first what <tt class="docutils literal">A.method</tt> really&nbsp;is:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">A</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span>In [4]: A.method
+Out[4]: &lt;function __main__.A.method(self)&gt;
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">function</span>
+In [5]: type(A.method)
+Out[5]: function
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">inspect</span>
+In [6]: import inspect
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="bp">False</span>
+In [7]: inspect.ismethod(A.method)
+Out[7]: False
 </pre></div>
 <p>Essentially, what that means is that <tt class="docutils literal">A.method</tt> is a <em>function</em>,
 i.e. <tt class="docutils literal">unbound method</tt> of the <tt class="docutils literal">class A</tt>. A great way to check if a
 method is indeed unbound is to check if its function object and a
 class instance&nbsp;exist:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="bp">False</span>
+<div class="highlight"><pre><span></span>In [13]: hasattr(A.method, &#39;__func__&#39;)
+Out[13]: False
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__self__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="bp">False</span>
+In [14]: hasattr(A.method, &#39;__self__&#39;)
+Out[14]: False
 </pre></div>
 <p>See Python documentation for more details, specifically an <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#index-32">instance
 method</a> subsection of the <tt class="docutils literal">Data model</tt> section.</p>
 <p>On the other hand, <tt class="docutils literal">B.method</tt> is a <tt class="docutils literal">class method</tt>. It returns an
 <em>instance of the bound method object</em>. Let&#8217;s check&nbsp;it:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">bound</span> <span class="n">method</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span> <span class="n">of</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="sa">B</span><span class="s1">&#39;&gt;&gt;</span>
+<div class="highlight"><pre><span></span>In [15]: B.method
+Out[15]: &lt;bound method B.method of &lt;class &#39;__main__.B&#39;&gt;&gt;
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="nb">type</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">method</span>
+In [16]: type(B.method)
+Out[16]: method
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="bp">True</span>
+In [17]: inspect.ismethod(B.method)
+Out[17]: True
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__func__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="bp">True</span>
+In [18]: hasattr(B.method, &#39;__func__&#39;)
+Out[18]: True
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="s1">&#39;__self__&#39;</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="bp">True</span>
+In [19]: hasattr(B.method, &#39;__self__&#39;)
+Out[19]: True
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="vm">__self__</span> <span class="ow">is</span> <span class="n">B</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="bp">True</span>
+In [20]: B.method.__self__ is B
+Out[20]: True
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="vm">__func__</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span><span class="o">&gt;</span>
+In [21]: B.method.__func__
+Out[21]: &lt;function __main__.B.method(cls)&gt;
 </pre></div>
 <p>That means on each <tt class="docutils literal">B.method</tt> invocation a new object is
 created. You can achieve the same behaviour with <tt class="docutils literal">A.method</tt> once the
 method gets&nbsp;bound:</p>
-<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<div class="highlight"><pre><span></span>In [22]: a = A()
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="mi">140613204502216</span>
+In [23]: id(a.method)
+Out[23]: 140613204502216
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="mi">140613210350280</span>
+In [24]: id(a.method)
+Out[24]: 140613210350280
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="mi">140613209057096</span>
+In [25]: id(a.method)
+Out[25]: 140613209057096
 
-<span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">a</span><span class="o">.</span><span class="n">method</span> <span class="ow">is</span> <span class="n">a</span><span class="o">.</span><span class="n">method</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="bp">False</span>
+In [26]: a.method is a.method
+Out[26]: False
 </pre></div>
 <p>Again, every time you call <tt class="docutils literal">a.method</tt> a new bound method object is&nbsp;created.</p>
 <p>The example above doesn&#8217;t apply to Python 2.7 though. It seems that
@@ -191,21 +191,6 @@ Python 2.7 had different implementation, so that <tt class="docutils literal">A.
 return different objects every time it&#8217;s&nbsp;called.</p>
 
             </div><!-- /.entry-content -->
-            <div class="comments">
-              <h3>Comments</h3>
-              <div id="disqus_thread"></div>
-              <script type="text/javascript">
-                var disqus_shortname = 'https-blog-pilosus-org';
-                var disqus_identifier = 'posts/2019/04/29/bound-class-method/';
-                var disqus_url = 'https://blog.pilosus.org/posts/2019/04/29/bound-class-method/';
-                (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-              </script>
-              <noscript>Please enable JavaScript to view the comments.</noscript>
-            </div>
 
           </article>
         </section>
@@ -231,24 +216,6 @@ return different objects every time it&#8217;s&nbsp;called.</p>
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-140765245-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'https-blog-pilosus-org';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     </div>
   </body>
 </html>

@@ -90,7 +90,7 @@
 
             <div class="entry-content">
               <div class="post-info">
-                <span class="published" title="2019-05-02T12:10:00+03:00">
+                <span class="published" title="2019-05-02T12:10:00+02:00">
                   02-05-2019 12:10
                 </span>
                 |
@@ -147,7 +147,7 @@ L(K1) := [K1] + merge(L(A), L(B), L(C), [A, B, C])
 <p>So at the higher level a naive implementation of the C3 linearization
 algorith can be expressed as a simple&nbsp;recursion:</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mro</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
-  <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Return a list of classes in order corresponding to Python&#39;s MRO.</span>
 <span class="sd">  &quot;&quot;&quot;</span>
   <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="p">]</span>
@@ -163,7 +163,7 @@ append appropriate heads to the resulting <span class="caps">MRO</span>:</p>
   <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
   <span class="n">linearizations</span> <span class="o">=</span> <span class="n">DependencyList</span><span class="p">(</span><span class="o">*</span><span class="n">lists</span><span class="p">)</span>
 
-  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
       <span class="k">if</span> <span class="n">linearizations</span><span class="o">.</span><span class="n">exhausted</span><span class="p">:</span>
           <span class="k">return</span> <span class="n">result</span>
 
@@ -192,11 +192,11 @@ append appropriate heads to the resulting <span class="caps">MRO</span>:</p>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tail</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">islice</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return islice object, which is suffice for iteration or calling `in`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -206,18 +206,18 @@ append appropriate heads to the resulting <span class="caps">MRO</span>:</p>
 
 
 <span class="k">class</span> <span class="nc">DependencyList</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class represents list of linearizations (dependencies)</span>
 
 <span class="sd">    The last element of DependencyList is a list of parents.</span>
 <span class="sd">    It&#39;s needed  to the merge process preserves the local</span>
 <span class="sd">    precedence order of direct parent classes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lists</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">lists</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span> <span class="o">=</span> <span class="p">[</span><span class="n">Dependency</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return True if any linearization&#39;s tail contains an item</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">any</span><span class="p">([</span><span class="n">item</span> <span class="ow">in</span> <span class="n">l</span><span class="o">.</span><span class="n">tail</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
@@ -235,7 +235,7 @@ append appropriate heads to the resulting <span class="caps">MRO</span>:</p>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tails</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DependencyList&#39;</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self so that __contains__ could be called</span>
 
 <span class="sd">        Used for readability reasons only</span>
@@ -244,13 +244,13 @@ append appropriate heads to the resulting <span class="caps">MRO</span>:</p>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">exhausted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return True if all elements of the lists are exhausted</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lists</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove an item from the lists</span>
 
 <span class="sd">        Once an item removed from heads, the leftmost elements of the tails</span>
@@ -262,8 +262,8 @@ append appropriate heads to the resulting <span class="caps">MRO</span>:</p>
 </pre></div>
 <p>The whole codebase can be found in my <a class="reference external" href="https://github.com/pilosus/c3linear">c3linear repository</a>. You can
 install it from the source code or via&nbsp;PyPI:</p>
-<div class="highlight"><pre><span></span>python setup.py install  <span class="c1"># from the source code</span>
-pip install c3linear  <span class="c1"># from the Cheese Shop</span>
+<div class="highlight"><pre><span></span>python<span class="w"> </span>setup.py<span class="w"> </span>install<span class="w">  </span><span class="c1"># from the source code</span>
+pip<span class="w"> </span>install<span class="w"> </span>c3linear<span class="w">  </span><span class="c1"># from the Cheese Shop</span>
 </pre></div>
 <p>Then just import it and check against Python&#8217;s object&#8217;s <tt class="docutils literal">mro</tt> method:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">c3linear.mro</span> <span class="kn">import</span> <span class="n">mro</span>
@@ -275,21 +275,6 @@ pip install c3linear  <span class="c1"># from the Cheese Shop</span>
 <p>Take a look at the <a class="reference external" href="https://github.com/pilosus/c3linear/blob/master/tests/test_mro.py">tests</a> to dive into more complex multiple inheritance&nbsp;examples.</p>
 
             </div><!-- /.entry-content -->
-            <div class="comments">
-              <h3>Comments</h3>
-              <div id="disqus_thread"></div>
-              <script type="text/javascript">
-                var disqus_shortname = 'https-blog-pilosus-org';
-                var disqus_identifier = 'posts/2019/05/02/python-mro/';
-                var disqus_url = 'https://blog.pilosus.org/posts/2019/05/02/python-mro/';
-                (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//https-blog-pilosus-org.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-              </script>
-              <noscript>Please enable JavaScript to view the comments.</noscript>
-            </div>
 
           </article>
         </section>
@@ -315,24 +300,6 @@ pip install c3linear  <span class="c1"># from the Cheese Shop</span>
         </address><!-- /#about -->
       </footer><!-- /#contentinfo -->
 
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-140765245-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-<script type="text/javascript">
-    var disqus_shortname = 'https-blog-pilosus-org';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
     </div>
   </body>
 </html>
