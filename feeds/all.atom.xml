@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2022-01-16T00:59:00+01:00</updated><entry><title>dienstplan: Slack bot for duty rotations</title><link href="https://blog.pilosus.org/posts/2022/01/16/dienstplan/" rel="alternate"></link><published>2022-01-16T00:59:00+01:00</published><updated>2022-01-16T00:59:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2022-01-16:/posts/2022/01/16/dienstplan/</id><summary type="html">&lt;p class="first last"&gt;A simple bot app for on-call duty rotations in your team&amp;#8217;s Slack&amp;nbsp;channels&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-07-07T12:00:00+02:00</updated><entry><title>kairos: crontab parsing library for Clojure</title><link href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/" rel="alternate"></link><published>2023-07-07T12:00:00+02:00</published><updated>2023-07-07T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/</id><summary type="html">&lt;p&gt;I have been tinkering with &lt;a class="reference external" href="https://blog.pilosus.org/tag/clojure/"&gt;Clojure&lt;/a&gt; since the late 2020. When I
+publish an open-source project in Clojure, it&amp;#8217;s mostly about two
+goals: solving a real-world problem and learning some new concepts or
+tooling in Clojure ecosystem. &lt;a class="reference external" href="https://github.com/pilosus/kairos"&gt;kairos&lt;/a&gt; is a Clojure library for
+parsing crontab is no exception of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I have been tinkering with &lt;a class="reference external" href="https://blog.pilosus.org/tag/clojure/"&gt;Clojure&lt;/a&gt; since the late 2020. When I
+publish an open-source project in Clojure, it&amp;#8217;s mostly about two
+goals: solving a real-world problem and learning some new concepts or
+tooling in Clojure ecosystem. &lt;a class="reference external" href="https://github.com/pilosus/kairos"&gt;kairos&lt;/a&gt; is a Clojure library for
+parsing crontab is no exception of this&amp;nbsp;rule.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;kairos&lt;/cite&gt; parses &lt;a class="reference external" href="https://man7.org/linux/man-pages/man5/crontab.5.html"&gt;vixie&lt;/a&gt; crontab format and produces a lazy sequence
+of &lt;cite&gt;java.time.ZonedDateTime&lt;/cite&gt; objects for &lt;cite&gt;&lt;span class="caps"&gt;UTC&lt;/span&gt;&lt;/cite&gt; timezone that are in
+the&amp;nbsp;future.&lt;/p&gt;
+&lt;div class="section" id="java-interop"&gt;
+&lt;h2&gt;Java&amp;nbsp;interop&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/kairos"&gt;kairos&lt;/a&gt; doesn&amp;#8217;t use any Clojure wrapper libraries to work with
+&lt;cite&gt;java.time&lt;/cite&gt; classes, like &lt;a class="reference external" href="https://github.com/henryw374/cljc.java-time"&gt;cljc.java-time&lt;/a&gt; or
+&lt;a class="reference external" href="https://github.com/dm3/clojure.java-time"&gt;clojure.java-time&lt;/a&gt;. Instead it uses Java interop directly, so that
+no dependencies are needed for the&amp;nbsp;library.&lt;/p&gt;
+&lt;p&gt;The main lesson learned here: using &lt;a class="reference external" href="https://clojure.org/reference/java_interop#typehints"&gt;type hints&lt;/a&gt; and enabling
+warnings on reflection can boost code performance to 6-8&amp;nbsp;times!&lt;/p&gt;
+&lt;p&gt;Plain &lt;cite&gt;(set! *warn-on-reflection* true)&lt;/cite&gt; works well for reflection
+detection. But &lt;a class="reference external" href="https://github.com/jonase/eastwood"&gt;eastwood&lt;/a&gt; linter can do the job too, in addition to
+many other&amp;nbsp;things.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="clojure-cli-and-deps-edn"&gt;
+&lt;h2&gt;Clojure &lt;span class="caps"&gt;CLI&lt;/span&gt; and&amp;nbsp;deps.edn&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/kairos"&gt;kairos&lt;/a&gt; is my first project with &lt;cite&gt;deps.edn&lt;/cite&gt; and Clojure &lt;span class="caps"&gt;CLI&lt;/span&gt; used
+from the day 1. In my previous projects I used &lt;a class="reference external" href="https://leiningen.org/"&gt;lein&lt;/a&gt;. Leiningen is a
+fantastic integrated tool for all important project-related tasks from
+running tests to building an &lt;cite&gt;uberjar&lt;/cite&gt;. I still think that &lt;cite&gt;lein&lt;/cite&gt; is
+the best in class for Clojure beginners, who want to focus on Clojure
+code and not on the tooling. On the other hand, Clojure &lt;span class="caps"&gt;CLI&lt;/span&gt; allows you
+to be much more flexible when writing tasks for &lt;span class="caps"&gt;CI&lt;/span&gt;, e.g. create custom
+entrypoints in Clojure code for &lt;a class="reference external" href="https://github.com/pilosus/kairos/blob/v0.1.14/build.clj#L43"&gt;testing&lt;/a&gt; or &lt;a class="reference external" href="https://github.com/pilosus/kairos/blob/v0.1.14/build.clj#L65"&gt;deploying jars&lt;/a&gt; to
+Clojars. It also seems to be a first-class citizen when it comes to
+Clojure core team &lt;a class="reference external" href="https://github.com/nubank/morse/issues/5"&gt;support&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Apart from official docs, Sean Corfield&amp;#8217;s &lt;a class="reference external" href="https://github.com/seancorfield/dot-clojure"&gt;dot-clojure&lt;/a&gt; repo and
+Practicalli&amp;#8217;s &lt;a class="reference external" href="https://github.com/practicalli/clojure-cli-config"&gt;clojure-cli-config&lt;/a&gt; are both great sources of&amp;nbsp;inspiration.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="clojure"></category></entry><entry><title>dienstplan: Slack bot for duty rotations</title><link href="https://blog.pilosus.org/posts/2022/01/16/dienstplan/" rel="alternate"></link><published>2022-01-16T00:59:00+01:00</published><updated>2022-01-16T00:59:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2022-01-16:/posts/2022/01/16/dienstplan/</id><summary type="html">&lt;p class="first last"&gt;A simple bot app for on-call duty rotations in your team&amp;#8217;s Slack&amp;nbsp;channels&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;dienstplan&lt;/a&gt; is a Slack bot for duty rotations. It&amp;#8217;s dead simple:
 just a few commands to manage on-call duty rotations in your team&amp;#8217;s
 Slack channels. The bot application follows the rule &amp;#8220;Do One Thing and
@@ -53,7 +92,7 @@ reminder to rotate users&amp;nbsp;weekly:&lt;/p&gt;
 &lt;p&gt;Grab &lt;tt class="docutils literal"&gt;dienstplan&lt;/tt&gt; from the &lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;GitHub&lt;/a&gt; repository along with user
 documentation, installation guide and &lt;a class="reference external" href="https://github.com/pilosus/dienstplan-deploy"&gt;deployment scripts&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="open-source"></category><category term="floss"></category><category term="slack"></category></entry><entry><title>pip-license-checker: detect third-party dependencies with “wrong” licenses</title><link href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/" rel="alternate"></link><published>2021-09-07T09:10:00+02:00</published><updated>2021-09-16T15:54:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2021-09-07:/posts/2021/09/07/pip-license-checker/</id><summary type="html">&lt;p class="first last"&gt;Detect license types for your poject&amp;#8217;s third-party&amp;nbsp;dependencies&lt;/p&gt;
+</content><category term="Blog"></category><category term="foss"></category><category term="slack"></category><category term="clojure"></category></entry><entry><title>pip-license-checker: detect third-party dependencies with “wrong” licenses</title><link href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/" rel="alternate"></link><published>2021-09-07T09:10:00+02:00</published><updated>2021-09-16T15:54:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2021-09-07:/posts/2021/09/07/pip-license-checker/</id><summary type="html">&lt;p class="first last"&gt;Detect license types for your poject&amp;#8217;s third-party&amp;nbsp;dependencies&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="table-of-contents"&gt;
 &lt;p class="topic-title"&gt;Table of&amp;nbsp;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -435,7 +474,7 @@ for further&amp;nbsp;development.&lt;/p&gt;
 &lt;!-- Links --&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="license"></category><category term="dependencies"></category><category term="license-management"></category><category term="compliance"></category><category term="floss"></category><category term="open-source"></category><category term="free-software"></category></entry><entry><title>Book review: The Clean Coder by Robert C. Martin</title><link href="https://blog.pilosus.org/posts/2020/06/14/the-clean-coder-book-review/" rel="alternate"></link><published>2020-06-14T22:30:00+02:00</published><updated>2020-06-14T22:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-06-14:/posts/2020/06/14/the-clean-coder-book-review/</id><summary type="html">&lt;p class="first last"&gt;A Code Of Conduct For Professional&amp;nbsp;Programmers&lt;/p&gt;
+</content><category term="Blog"></category><category term="license"></category><category term="dependencies"></category><category term="license-management"></category><category term="compliance"></category><category term="foss"></category><category term="clojure"></category></entry><entry><title>Book review: The Clean Coder by Robert C. Martin</title><link href="https://blog.pilosus.org/posts/2020/06/14/the-clean-coder-book-review/" rel="alternate"></link><published>2020-06-14T22:30:00+02:00</published><updated>2020-06-14T22:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-06-14:/posts/2020/06/14/the-clean-coder-book-review/</id><summary type="html">&lt;p class="first last"&gt;A Code Of Conduct For Professional&amp;nbsp;Programmers&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;em&gt;A Code Of Conduct For Professional Programmers&lt;/em&gt;, a subtitle of the
 book, says it all. Robert C. Martin answers the question: what does it
 mean to be a professional&amp;nbsp;programmer.&lt;/p&gt;

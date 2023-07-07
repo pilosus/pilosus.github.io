@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2023-01-01T13:20:18-00:00</lastmod>
+<lastmod>2023-07-07T12:50:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/archives.html</loc>
-<lastmod>2023-01-01T13:20:18-00:00</lastmod>
+<lastmod>2023-07-07T12:50:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tags.html</loc>
-<lastmod>2023-01-01T13:20:18-00:00</lastmod>
+<lastmod>2023-07-07T12:50:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/categories.html</loc>
-<lastmod>2023-01-01T13:20:18-00:00</lastmod>
+<lastmod>2023-07-07T12:50:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -36,6 +36,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2023-01-01T13:10:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/</loc>
+<lastmod>2023-07-07T12:00:00+02:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -222,20 +229,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2022-01-16T00:59:00+01:05</lastmod>
+<lastmod>2023-07-07T12:00:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://blog.pilosus.org/tag/open-source/</loc>
-<lastmod>2022-01-16T00:59:00+01:05</lastmod>
+<loc>https://blog.pilosus.org/tag/clojure/</loc>
+<lastmod>2023-07-07T12:00:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://blog.pilosus.org/tag/floss/</loc>
+<loc>https://blog.pilosus.org/tag/foss/</loc>
 <lastmod>2022-01-16T00:59:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -271,13 +278,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/tag/compliance/</loc>
-<lastmod>2021-09-16T15:54:00+01:05</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/tag/free-software/</loc>
 <lastmod>2021-09-16T15:54:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
