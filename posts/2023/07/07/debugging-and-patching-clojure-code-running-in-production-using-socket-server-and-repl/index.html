@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Debugging and patching Clojure code running in production using socket server and REPL</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Debugging and patching Clojure code running in production using socket server and REPL" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/" />
+    <meta property="og:description" content="Common Lisp is well known for its interactivity. The story of NASA engineers who used remote REPL to patch Lisp code running 60 million miles away inside the interplanetary spacecraft is well known too. You can debug and patch Clojure code running in production using REPL too. This is where …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly&#39;s Technical Blog" />
+    <meta property="article:published_time" content="2023-07-07" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="clojure" />
+    <meta property="article:tag" content="repl" />
+
+
+    <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic" rel="stylesheet" type="text/css">
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly's Technical Blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.png">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly's Technical Blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+	    
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/" rel="bookmark"
+                   title="Permalink to Debugging and patching Clojure code running in production using socket server and REPL">Debugging and patching Clojure code running in production using socket server and <span class="caps">REPL</span></a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2023-07-07T20:00:00+02:00">
+                  07-07-2023 20:00
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">887 words</span>
+		|
+		<span class="word-count">4 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/clojure/">clojure</a> <a href="https://blog.pilosus.org/tag/repl/">repl</a> </span>                
+              </div><!-- /.post-info -->              <p>Common Lisp is well known for its interactivity. The story of <span class="caps">NASA</span>
+engineers who used remote <span class="caps">REPL</span> to patch Lisp code running 60 million
+miles away inside the interplanetary spacecraft is <a class="reference external" href="https://youtu.be/_gZK0tW8EhQ">well known</a>
+too. You can debug and patch Clojure code running in production using
+<span class="caps">REPL</span> too. This is where Clojure <a class="reference external" href="https://clojure.org/reference/repl_and_main#_launching_a_socket_server">socket server</a> comes in&nbsp;handy.</p>
+<div class="section" id="practicle-example">
+<h2>Practicle&nbsp;example</h2>
+<p>Let&#8217;s interact with the live web service written in Clojure and try to
+change the running program&#8217;s state using <span class="caps">REPL</span> and Clojure&#8217;s socket
+server. I assume you have Java 17 or later (earlier versions might
+work but not tested), <a class="reference external" href="https://clojure.org/guides/install_clojure">Clojure 1.11 or later</a>, <tt class="docutils literal">git</tt> and <tt class="docutils literal">curl</tt>
+installed on you computer to work through this&nbsp;tutorial.</p>
+<div class="section" id="get-sample-code">
+<h3>Get sample&nbsp;code</h3>
+<p>Get <a class="reference external" href="https://github.com/pilosus/dienstplan">dienstplan</a> app (it&#8217;s&nbsp;opensourced):</p>
+<pre class="literal-block">
+$ git clone git&#64;github.com:pilosus/dienstplan.git
+$ cd dienstplan
+$ git checkout ba1aa1f846bff8f690e14a6fbb8989ae73a10b53
+</pre>
+</div>
+<div class="section" id="compile-the-code">
+<h3>Compile the&nbsp;code</h3>
+<p>Compile an <tt class="docutils literal">uberjar</tt>. It produces <tt class="docutils literal">app.jar</tt> in your working&nbsp;directory:</p>
+<pre class="literal-block">
+$ clojure -T:build uberjar :uber-file '&quot;app.jar&quot;'
+</pre>
+</div>
+<div class="section" id="run-the-app-with-socket-server">
+<h3>Run the app with socket&nbsp;server</h3>
+<p>Let&#8217;s run the app with a Java option string
+<tt class="docutils literal"><span class="pre">-Dclojure.server.repl=&quot;{:port</span> 5555 :accept clojure.core.server/repl}&quot;</tt>
+needed to start a socket server with <span class="caps">REPL</span>
+on localhost with the port 5555 open. Environment variables are needed
+to start the&nbsp;app:</p>
+<pre class="literal-block">
+$ APP__DEBUG=false \
+SLACK__TOKEN=&quot;xoxb-Your-Bot-User-OAuth-Token&quot; \
+SLACK__SIGN=&quot;Your-Signing-Secret&quot; \
+ALERTS__SENTRY_DSN=&quot;https://public:private&#64;localhost/1&quot; \
+SERVER__PORT=8080 \
+SERVER__LOGLEVEL=INFO \
+DB__SERVER_NAME=localhost \
+DB__PORT_NUMBER=15432 \
+DB__DATABASE_NAME=&quot;dienstplan&quot; \
+DB__USERNAME=&quot;dienstplan&quot; \
+DB__PASSWORD=&quot;dienstplan&quot; \
+java -Dclojure.server.repl=&quot;{:port 5555 :accept clojure.core.server/repl}&quot; -jar app.jar
+</pre>
+</div>
+<div class="section" id="check-if-app-is-running-properly">
+<h3>Check if app is running&nbsp;properly</h3>
+<p>Let&#8217;s check if the app is working properly by making a <span class="caps">HTTP</span> <span class="caps">GET</span>
+request to its healthcheck <span class="caps">API</span>&nbsp;endpoint:</p>
+<pre class="literal-block">
+$ curl http://localhost:8080/api/healthcheck
+{&quot;status&quot;:&quot;ok&quot;}
+
+$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
+HTTP/1.1 200 OK
+</pre>
+</div>
+<div class="section" id="connect-to-repl">
+<h3>Connect to <span class="caps">REPL</span></h3>
+<p>Now, let&#8217;s connect to the <span class="caps">REPL</span> socket server running alongside the
+app. Remember, it&#8217;s a pure <span class="caps">REPL</span> accessible via <span class="caps">UDP</span> connection, so your
+emacs <span class="caps">CIDER</span>&#8217;s <a class="reference external" href="https://nrepl.org/nrepl/1.0/alternatives.html#comparison">nrepl</a>, implementing more complex tooling protocol and
+working over <span class="caps">TCP</span>, won&#8217;t be able to connect to it! We can use simpler
+things like <tt class="docutils literal">telnet</tt> or <tt class="docutils literal">netcat</tt> (or <tt class="docutils literal">nc</tt>) instead. For better
+line editing experience, like moving the cursor back and forth, using
+backspace, and history support, you may use <tt class="docutils literal">readline</tt> library with
+<tt class="docutils literal">rlwrap</tt> (readline wrap) <span class="caps">CLI</span>&nbsp;tool:</p>
+<pre class="literal-block">
+$ rlwrap nc localhost 5555
+user=&gt;
+</pre>
+</div>
+<div class="section" id="access-state-of-the-running-app">
+<h3>Access state of the running&nbsp;app</h3>
+<p>Now let&#8217;s tinker with our running app&#8217;s state from within the <span class="caps">REPL</span>!
+First, let&#8217;s take a look at the <a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/config.clj#L39">config</a> initialized with the
+envorinment variables a few steps above. To do it we need to load
+app&#8217;s namespace <tt class="docutils literal">dienstplan.config</tt>:</p>
+<pre class="literal-block">
+user=&gt; (require '[dienstplan.config :as config])
+nil
+
+user=&gt; config/config
+{:application {:name &quot;dienstplan&quot;, :version &quot;latest&quot;, :env &quot;production&quot;, :debug false}, :server {:port 8080, :loglevel &quot;INFO&quot;, :access-log true, :block-thread true}, :slack {:token &quot;xoxb-Your-Bot-User-OAuth-Token&quot;, :sign &quot;Your-Signing-Secret&quot;}, :alerts {:sentry &quot;https://public:private&#64;localhost/1&quot;}, :db {:dbtype &quot;postgres&quot;, :password &quot;dienstplan&quot;, :minimumIdle 20, :username &quot;dienstplan&quot;, :maxLifetime 1800000, :port 15432, :dbname &quot;dienstplan&quot;, :connectionTimeout 10000, :host &quot;localhost&quot;, :keepaliveTime 0, :maximumPoolSize 20}}
+</pre>
+</div>
+<div class="section" id="patch-the-code-of-the-runnning-app">
+<h3>Patch the code of the runnning&nbsp;app</h3>
+<p>And now for something completely different! Let&#8217;s override some code
+in the running app! Let&#8217;s update the <span class="caps">API</span> handler <a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/endpoints.clj#L34">/api/healthcheck</a>
+that requested above with&nbsp;this:</p>
+<pre class="literal-block">
+(defmethod multi-handler :healthcheck
+  [_]
+  (log/warn
+   &quot;If I were to suggest that between the Earth and Mars there is a
+   china teapot revolving about the sun in an elliptical orbit...&quot;)
+  {:status 418
+   :body {:status &quot;I'm a teapot&quot;}})
+</pre>
+<p>To do it, let&#8217;s use <a class="reference external" href="https://clojure.org/guides/repl/navigating_namespaces#_switching_to_an_existing_namespace_with_in_ns">in-ns</a> function to switch the current <span class="caps">REPL</span>&#8217;s
+namespace to <tt class="docutils literal">dienstplan.endpoints</tt> where we want to override the&nbsp;method:</p>
+<pre class="literal-block">
+user=&gt; (in-ns 'dienstplan.endpoints)
+#object[clojure.lang.Namespace 0x50c83f27 &quot;dienstplan.endpoints&quot;]
+
+dienstplan.endpoints=&gt; (defmethod multi-handler :healthcheck
+[_]
+(log/warn
+ &quot;If I were to suggest that between the Earth and Mars there is a
+china teapot revolving about the sun in an elliptical orbit...&quot;)
+{:status 418
+ :body {:status &quot;I'm a teapot&quot;}})
+#object[clojure.lang.MultiFn 0x5d8ea5bb &quot;clojure.lang.MultiFn&#64;5d8ea5bb&quot;]
+</pre>
+</div>
+<div class="section" id="check-if-changes-applied">
+<h3>Check if changes&nbsp;applied</h3>
+<p>Let&#8217;s make another <span class="caps">HTTP</span> <span class="caps">GET</span> request to the <tt class="docutils literal">/api/healthcheck</tt>
+handler:</p>
+<pre class="literal-block">
+$ curl http://localhost:8080/api/healthcheck
+{&quot;status&quot;:&quot;I'm a teapot&quot;}
+
+$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
+HTTP/1.1 418 I'm a Teapot
+</pre>
+<p>Response body has changed, so did the <span class="caps">HTTP</span> status code. In the app
+logs we also&nbsp;see:</p>
+<pre class="literal-block">
+2023-07-07 18:52:00,665 [qtp1116648405-23] WARN  dienstplan.endpoints - If I were to suggest that between the Earth and Mars there is a
+  china teapot revolving about the sun in an elliptical orbit...
+</pre>
+<p>Method has been sucessfully&nbsp;overriden!</p>
+</div>
+<div class="section" id="revert-changes-by-restarting-the-process">
+<h3>Revert changes by restarting the&nbsp;process</h3>
+<p>Tinkering with the running code doesn&#8217;t change the code itself
+though. Restart the app process and fire another <span class="caps">HTTP</span> request to make
+sure all is back to&nbsp;normal:</p>
+<pre class="literal-block">
+$ curl http://localhost:8080/api/healthcheck
+{&quot;status&quot;:&quot;ok&quot;}
+</pre>
+</div>
+<div class="section" id="conclusion">
+<h3>Conclusion</h3>
+<p>Socket server with <span class="caps">REPL</span> running along with the main app is a nice way
+to use various <a class="reference external" href="https://clojure.org/guides/repl/enhancing_your_repl_workflow#debugging-tools-and-techniques">debugging tools and techniques</a> the Clojure and
+third-parties provide. Code override won&#8217;t work if you use
+<a class="reference external" href="https://clojure.org/reference/compilation">ahead-of-time</a> compilation (doube-check your <a class="reference external" href="https://leiningen.org/tutorial.html#uberjar">project settings</a>,
+especially if you build <tt class="docutils literal">uberjar</tt> with <tt class="docutils literal">lein</tt>). But for on-the-fly
+compilation to <span class="caps">JVM</span> bytecode you can debug the running code without
+touching the code itself, right in the <span class="caps">REPL</span>, and revert the changes by
+simply restarting the app&#8217;s&nbsp;process.</p>
+</div>
+<div class="section" id="precautions">
+<h3>Precautions</h3>
+<p>Running a socker server allows an intruder to connect to it over the
+network if an exposed port isn&#8217;t protected with a firewall, <span class="caps">VPN</span> and/or
+other access control tool. It may impose huge security risks on your
+app in production&nbsp;environment.</p>
+<p>Patching code directly in the running app may be the only available
+solution when your production environment is <a class="reference external" href="https://corecursive.com/lisp-in-space-with-ron-garret/">millions miles away</a>
+and costs $150M. While patches themselves are easily reverted by
+restarting the process, your app&#8217;s state may be damaged
+irreversably. Make sure you know what you are&nbsp;doing!</p>
+</div>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin-05027233/">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

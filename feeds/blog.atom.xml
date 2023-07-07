@@ -1,5 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-07-07T12:00:00+02:00</updated><entry><title>kairos: crontab parsing library for Clojure</title><link href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/" rel="alternate"></link><published>2023-07-07T12:00:00+02:00</published><updated>2023-07-07T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/</id><summary type="html">&lt;p&gt;I have been tinkering with &lt;a class="reference external" href="https://blog.pilosus.org/tag/clojure/"&gt;Clojure&lt;/a&gt; since the late 2020. When I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-07-07T20:00:00+02:00</updated><entry><title>Debugging and patching Clojure code running in production using socket server and REPL</title><link href="https://blog.pilosus.org/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/" rel="alternate"></link><published>2023-07-07T20:00:00+02:00</published><updated>2023-07-07T20:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/</id><summary type="html">&lt;p&gt;Common Lisp is well known for its interactivity. The story of &lt;span class="caps"&gt;NASA&lt;/span&gt;
+engineers who used remote &lt;span class="caps"&gt;REPL&lt;/span&gt; to patch Lisp code running 60 million
+miles away inside the interplanetary spacecraft is &lt;a class="reference external" href="https://youtu.be/_gZK0tW8EhQ"&gt;well known&lt;/a&gt;
+too. You can debug and patch Clojure code running in production using
+&lt;span class="caps"&gt;REPL&lt;/span&gt; too. This is where …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Common Lisp is well known for its interactivity. The story of &lt;span class="caps"&gt;NASA&lt;/span&gt;
+engineers who used remote &lt;span class="caps"&gt;REPL&lt;/span&gt; to patch Lisp code running 60 million
+miles away inside the interplanetary spacecraft is &lt;a class="reference external" href="https://youtu.be/_gZK0tW8EhQ"&gt;well known&lt;/a&gt;
+too. You can debug and patch Clojure code running in production using
+&lt;span class="caps"&gt;REPL&lt;/span&gt; too. This is where Clojure &lt;a class="reference external" href="https://clojure.org/reference/repl_and_main#_launching_a_socket_server"&gt;socket server&lt;/a&gt; comes in&amp;nbsp;handy.&lt;/p&gt;
+&lt;div class="section" id="practicle-example"&gt;
+&lt;h2&gt;Practicle&amp;nbsp;example&lt;/h2&gt;
+&lt;p&gt;Let&amp;#8217;s interact with the live web service written in Clojure and try to
+change the running program&amp;#8217;s state using &lt;span class="caps"&gt;REPL&lt;/span&gt; and Clojure&amp;#8217;s socket
+server. I assume you have Java 17 or later (earlier versions might
+work but not tested), &lt;a class="reference external" href="https://clojure.org/guides/install_clojure"&gt;Clojure 1.11 or later&lt;/a&gt;, &lt;tt class="docutils literal"&gt;git&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;curl&lt;/tt&gt;
+installed on you computer to work through this&amp;nbsp;tutorial.&lt;/p&gt;
+&lt;div class="section" id="get-sample-code"&gt;
+&lt;h3&gt;Get sample&amp;nbsp;code&lt;/h3&gt;
+&lt;p&gt;Get &lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;dienstplan&lt;/a&gt; app (it&amp;#8217;s&amp;nbsp;opensourced):&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ git clone git&amp;#64;github.com:pilosus/dienstplan.git
+$ cd dienstplan
+$ git checkout ba1aa1f846bff8f690e14a6fbb8989ae73a10b53
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="compile-the-code"&gt;
+&lt;h3&gt;Compile the&amp;nbsp;code&lt;/h3&gt;
+&lt;p&gt;Compile an &lt;tt class="docutils literal"&gt;uberjar&lt;/tt&gt;. It produces &lt;tt class="docutils literal"&gt;app.jar&lt;/tt&gt; in your working&amp;nbsp;directory:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ clojure -T:build uberjar :uber-file '&amp;quot;app.jar&amp;quot;'
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="run-the-app-with-socket-server"&gt;
+&lt;h3&gt;Run the app with socket&amp;nbsp;server&lt;/h3&gt;
+&lt;p&gt;Let&amp;#8217;s run the app with a Java option string
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-Dclojure.server.repl=&amp;quot;{:port&lt;/span&gt; 5555 :accept clojure.core.server/repl}&amp;quot;&lt;/tt&gt;
+needed to start a socket server with &lt;span class="caps"&gt;REPL&lt;/span&gt;
+on localhost with the port 5555 open. Environment variables are needed
+to start the&amp;nbsp;app:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ APP__DEBUG=false \
+SLACK__TOKEN=&amp;quot;xoxb-Your-Bot-User-OAuth-Token&amp;quot; \
+SLACK__SIGN=&amp;quot;Your-Signing-Secret&amp;quot; \
+ALERTS__SENTRY_DSN=&amp;quot;https://public:private&amp;#64;localhost/1&amp;quot; \
+SERVER__PORT=8080 \
+SERVER__LOGLEVEL=INFO \
+DB__SERVER_NAME=localhost \
+DB__PORT_NUMBER=15432 \
+DB__DATABASE_NAME=&amp;quot;dienstplan&amp;quot; \
+DB__USERNAME=&amp;quot;dienstplan&amp;quot; \
+DB__PASSWORD=&amp;quot;dienstplan&amp;quot; \
+java -Dclojure.server.repl=&amp;quot;{:port 5555 :accept clojure.core.server/repl}&amp;quot; -jar app.jar
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="check-if-app-is-running-properly"&gt;
+&lt;h3&gt;Check if app is running&amp;nbsp;properly&lt;/h3&gt;
+&lt;p&gt;Let&amp;#8217;s check if the app is working properly by making a &lt;span class="caps"&gt;HTTP&lt;/span&gt; &lt;span class="caps"&gt;GET&lt;/span&gt;
+request to its healthcheck &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;endpoint:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ curl http://localhost:8080/api/healthcheck
+{&amp;quot;status&amp;quot;:&amp;quot;ok&amp;quot;}
+
+$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
+HTTP/1.1 200 OK
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="connect-to-repl"&gt;
+&lt;h3&gt;Connect to &lt;span class="caps"&gt;REPL&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;Now, let&amp;#8217;s connect to the &lt;span class="caps"&gt;REPL&lt;/span&gt; socket server running alongside the
+app. Remember, it&amp;#8217;s a pure &lt;span class="caps"&gt;REPL&lt;/span&gt; accessible via &lt;span class="caps"&gt;UDP&lt;/span&gt; connection, so your
+emacs &lt;span class="caps"&gt;CIDER&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://nrepl.org/nrepl/1.0/alternatives.html#comparison"&gt;nrepl&lt;/a&gt;, implementing more complex tooling protocol and
+working over &lt;span class="caps"&gt;TCP&lt;/span&gt;, won&amp;#8217;t be able to connect to it! We can use simpler
+things like &lt;tt class="docutils literal"&gt;telnet&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;netcat&lt;/tt&gt; (or &lt;tt class="docutils literal"&gt;nc&lt;/tt&gt;) instead. For better
+line editing experience, like moving the cursor back and forth, using
+backspace, and history support, you may use &lt;tt class="docutils literal"&gt;readline&lt;/tt&gt; library with
+&lt;tt class="docutils literal"&gt;rlwrap&lt;/tt&gt; (readline wrap) &lt;span class="caps"&gt;CLI&lt;/span&gt;&amp;nbsp;tool:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ rlwrap nc localhost 5555
+user=&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="access-state-of-the-running-app"&gt;
+&lt;h3&gt;Access state of the running&amp;nbsp;app&lt;/h3&gt;
+&lt;p&gt;Now let&amp;#8217;s tinker with our running app&amp;#8217;s state from within the &lt;span class="caps"&gt;REPL&lt;/span&gt;!
+First, let&amp;#8217;s take a look at the &lt;a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/config.clj#L39"&gt;config&lt;/a&gt; initialized with the
+envorinment variables a few steps above. To do it we need to load
+app&amp;#8217;s namespace &lt;tt class="docutils literal"&gt;dienstplan.config&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+user=&amp;gt; (require '[dienstplan.config :as config])
+nil
+
+user=&amp;gt; config/config
+{:application {:name &amp;quot;dienstplan&amp;quot;, :version &amp;quot;latest&amp;quot;, :env &amp;quot;production&amp;quot;, :debug false}, :server {:port 8080, :loglevel &amp;quot;INFO&amp;quot;, :access-log true, :block-thread true}, :slack {:token &amp;quot;xoxb-Your-Bot-User-OAuth-Token&amp;quot;, :sign &amp;quot;Your-Signing-Secret&amp;quot;}, :alerts {:sentry &amp;quot;https://public:private&amp;#64;localhost/1&amp;quot;}, :db {:dbtype &amp;quot;postgres&amp;quot;, :password &amp;quot;dienstplan&amp;quot;, :minimumIdle 20, :username &amp;quot;dienstplan&amp;quot;, :maxLifetime 1800000, :port 15432, :dbname &amp;quot;dienstplan&amp;quot;, :connectionTimeout 10000, :host &amp;quot;localhost&amp;quot;, :keepaliveTime 0, :maximumPoolSize 20}}
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="patch-the-code-of-the-runnning-app"&gt;
+&lt;h3&gt;Patch the code of the runnning&amp;nbsp;app&lt;/h3&gt;
+&lt;p&gt;And now for something completely different! Let&amp;#8217;s override some code
+in the running app! Let&amp;#8217;s update the &lt;span class="caps"&gt;API&lt;/span&gt; handler &lt;a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/endpoints.clj#L34"&gt;/api/healthcheck&lt;/a&gt;
+that requested above with&amp;nbsp;this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+(defmethod multi-handler :healthcheck
+  [_]
+  (log/warn
+   &amp;quot;If I were to suggest that between the Earth and Mars there is a
+   china teapot revolving about the sun in an elliptical orbit...&amp;quot;)
+  {:status 418
+   :body {:status &amp;quot;I'm a teapot&amp;quot;}})
+&lt;/pre&gt;
+&lt;p&gt;To do it, let&amp;#8217;s use &lt;a class="reference external" href="https://clojure.org/guides/repl/navigating_namespaces#_switching_to_an_existing_namespace_with_in_ns"&gt;in-ns&lt;/a&gt; function to switch the current &lt;span class="caps"&gt;REPL&lt;/span&gt;&amp;#8217;s
+namespace to &lt;tt class="docutils literal"&gt;dienstplan.endpoints&lt;/tt&gt; where we want to override the&amp;nbsp;method:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+user=&amp;gt; (in-ns 'dienstplan.endpoints)
+#object[clojure.lang.Namespace 0x50c83f27 &amp;quot;dienstplan.endpoints&amp;quot;]
+
+dienstplan.endpoints=&amp;gt; (defmethod multi-handler :healthcheck
+[_]
+(log/warn
+ &amp;quot;If I were to suggest that between the Earth and Mars there is a
+china teapot revolving about the sun in an elliptical orbit...&amp;quot;)
+{:status 418
+ :body {:status &amp;quot;I'm a teapot&amp;quot;}})
+#object[clojure.lang.MultiFn 0x5d8ea5bb &amp;quot;clojure.lang.MultiFn&amp;#64;5d8ea5bb&amp;quot;]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="check-if-changes-applied"&gt;
+&lt;h3&gt;Check if changes&amp;nbsp;applied&lt;/h3&gt;
+&lt;p&gt;Let&amp;#8217;s make another &lt;span class="caps"&gt;HTTP&lt;/span&gt; &lt;span class="caps"&gt;GET&lt;/span&gt; request to the &lt;tt class="docutils literal"&gt;/api/healthcheck&lt;/tt&gt;
+handler:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ curl http://localhost:8080/api/healthcheck
+{&amp;quot;status&amp;quot;:&amp;quot;I'm a teapot&amp;quot;}
+
+$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
+HTTP/1.1 418 I'm a Teapot
+&lt;/pre&gt;
+&lt;p&gt;Response body has changed, so did the &lt;span class="caps"&gt;HTTP&lt;/span&gt; status code. In the app
+logs we also&amp;nbsp;see:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+2023-07-07 18:52:00,665 [qtp1116648405-23] WARN  dienstplan.endpoints - If I were to suggest that between the Earth and Mars there is a
+  china teapot revolving about the sun in an elliptical orbit...
+&lt;/pre&gt;
+&lt;p&gt;Method has been sucessfully&amp;nbsp;overriden!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="revert-changes-by-restarting-the-process"&gt;
+&lt;h3&gt;Revert changes by restarting the&amp;nbsp;process&lt;/h3&gt;
+&lt;p&gt;Tinkering with the running code doesn&amp;#8217;t change the code itself
+though. Restart the app process and fire another &lt;span class="caps"&gt;HTTP&lt;/span&gt; request to make
+sure all is back to&amp;nbsp;normal:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ curl http://localhost:8080/api/healthcheck
+{&amp;quot;status&amp;quot;:&amp;quot;ok&amp;quot;}
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Socket server with &lt;span class="caps"&gt;REPL&lt;/span&gt; running along with the main app is a nice way
+to use various &lt;a class="reference external" href="https://clojure.org/guides/repl/enhancing_your_repl_workflow#debugging-tools-and-techniques"&gt;debugging tools and techniques&lt;/a&gt; the Clojure and
+third-parties provide. Code override won&amp;#8217;t work if you use
+&lt;a class="reference external" href="https://clojure.org/reference/compilation"&gt;ahead-of-time&lt;/a&gt; compilation (doube-check your &lt;a class="reference external" href="https://leiningen.org/tutorial.html#uberjar"&gt;project settings&lt;/a&gt;,
+especially if you build &lt;tt class="docutils literal"&gt;uberjar&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;lein&lt;/tt&gt;). But for on-the-fly
+compilation to &lt;span class="caps"&gt;JVM&lt;/span&gt; bytecode you can debug the running code without
+touching the code itself, right in the &lt;span class="caps"&gt;REPL&lt;/span&gt;, and revert the changes by
+simply restarting the app&amp;#8217;s&amp;nbsp;process.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="precautions"&gt;
+&lt;h3&gt;Precautions&lt;/h3&gt;
+&lt;p&gt;Running a socker server allows an intruder to connect to it over the
+network if an exposed port isn&amp;#8217;t protected with a firewall, &lt;span class="caps"&gt;VPN&lt;/span&gt; and/or
+other access control tool. It may impose huge security risks on your
+app in production&amp;nbsp;environment.&lt;/p&gt;
+&lt;p&gt;Patching code directly in the running app may be the only available
+solution when your production environment is &lt;a class="reference external" href="https://corecursive.com/lisp-in-space-with-ron-garret/"&gt;millions miles away&lt;/a&gt;
+and costs $150M. While patches themselves are easily reverted by
+restarting the process, your app&amp;#8217;s state may be damaged
+irreversably. Make sure you know what you are&amp;nbsp;doing!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="clojure"></category><category term="repl"></category></entry><entry><title>kairos: crontab parsing library for Clojure</title><link href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/" rel="alternate"></link><published>2023-07-07T12:00:00+02:00</published><updated>2023-07-07T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/</id><summary type="html">&lt;p&gt;I have been tinkering with &lt;a class="reference external" href="https://blog.pilosus.org/tag/clojure/"&gt;Clojure&lt;/a&gt; since the late 2020. When I
 publish an open-source project in Clojure, it&amp;#8217;s mostly about two
 goals: solving a real-world problem and learning some new concepts or
 tooling in Clojure ecosystem. &lt;a class="reference external" href="https://github.com/pilosus/kairos"&gt;kairos&lt;/a&gt; is a Clojure library for
