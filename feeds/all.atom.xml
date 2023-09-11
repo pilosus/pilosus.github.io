@@ -1,5 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-07-07T20:00:00+02:00</updated><entry><title>Debugging and patching Clojure code running in production using socket server and REPL</title><link href="https://blog.pilosus.org/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/" rel="alternate"></link><published>2023-07-07T20:00:00+02:00</published><updated>2023-07-07T20:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/</id><summary type="html">&lt;p&gt;Common Lisp is well known for its interactivity. The story of &lt;span class="caps"&gt;NASA&lt;/span&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly's Technical Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-09-11T15:00:00+02:00</updated><entry><title>GNU Stow repo with git submodules</title><link href="https://blog.pilosus.org/posts/2023/09/11/gnu-stow-repo-with-git-submodules/" rel="alternate"></link><published>2023-09-11T15:00:00+02:00</published><updated>2023-09-11T15:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-09-11:/posts/2023/09/11/gnu-stow-repo-with-git-submodules/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; &lt;a class="reference external" href="https://www.gnu.org/software/stow/manual/stow.html"&gt;Stow&lt;/a&gt; is a tool to manage symlinks from a single directory. That
+makes the tool a perfect candidte to keep configuration files (or
+dotfiles) in a &lt;span class="caps"&gt;VCS&lt;/span&gt; repository, such as a Git repo. This is where &lt;a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;git
+submodules&lt;/a&gt; come in handy: oftentimes people maintain configurations
+as standalone repositories, e …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; &lt;a class="reference external" href="https://www.gnu.org/software/stow/manual/stow.html"&gt;Stow&lt;/a&gt; is a tool to manage symlinks from a single directory. That
+makes the tool a perfect candidte to keep configuration files (or
+dotfiles) in a &lt;span class="caps"&gt;VCS&lt;/span&gt; repository, such as a Git repo. This is where &lt;a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;git
+submodules&lt;/a&gt; come in handy: oftentimes people maintain configurations
+as standalone repositories, e.g. configuration for &lt;a class="reference external" href="https://github.com/pilosus/dot-emacs/"&gt;Emacs&lt;/a&gt;. They can
+be plugged into a stow directory as a&amp;nbsp;submodule.&lt;/p&gt;
+&lt;div class="section" id="example-stow-directory"&gt;
+&lt;h2&gt;Example stow&amp;nbsp;directory&lt;/h2&gt;
+&lt;p&gt;Let&amp;#8217;s create a stow directory and initialise a git&amp;nbsp;repository:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ mkdir stow-example
+$ cd stow-example/
+$ git init
+Initialized empty Git repository in /home/pilosus/git/stow-example/.git/
+&lt;/pre&gt;
+&lt;p&gt;Now, let&amp;#8217;s create a stow package for Emacs - a directory in a stow
+directory containing all the necessary files and directories to be
+installed into a target directory (which is &lt;tt class="docutils literal"&gt;$&lt;span class="caps"&gt;HOME&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;~/&lt;/tt&gt;). The
+package resides under &lt;tt class="docutils literal"&gt;emacs&lt;/tt&gt; directory and will contain a
+&lt;tt class="docutils literal"&gt;.emacs.d&lt;/tt&gt; directory as a git&amp;nbsp;submodule:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ mkdir emacs
+$ cd emacs/
+$ git submodule add git&amp;#64;github.com:pilosus/dot-emacs.git .emacs.d
+Cloning into '/home/pilosus/git/stow-example/emacs/.emacs.d'...
+&lt;/pre&gt;
+&lt;p&gt;Let&amp;#8217;s add one more stow package as a git submodule, a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.clojure&lt;/span&gt;&lt;/tt&gt;
+directory that contains tools and basic aliases for Clojure&amp;nbsp;language:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ cd ..
+$ mkdir clojure
+$ cd clojure/
+$ git submodule add git&amp;#64;github.com:pilosus/dot-clojure.git .clojure
+Cloning into '/home/pilosus/git/stow-example/clojure/.clojure'...
+&lt;/pre&gt;
+&lt;p&gt;So now we have two stow packages, &lt;cite&gt;emacs&lt;/cite&gt; and &lt;cite&gt;clojure&lt;/cite&gt; installed as git&amp;nbsp;submodules:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ tree -R -a -L 2 -I '.git'
+.
+├── clojure
+│&amp;nbsp;&amp;nbsp; └── .clojure
+├── emacs
+│&amp;nbsp;&amp;nbsp; └── .emacs.d
+└── .gitmodules
+&lt;/pre&gt;
+&lt;p&gt;Installing packages with Stow is as easy as&amp;nbsp;this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ stow --target=$HOME emacs
+$ stow --target=$HOME clojure
+&lt;/pre&gt;
+&lt;p&gt;For bulk install &lt;tt class="docutils literal"&gt;*/&lt;/tt&gt; can be&amp;nbsp;used:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ stow --target=$HOME --stow */
+&lt;/pre&gt;
+&lt;p&gt;Stowing a package will create symlinks in the target directory
+(&lt;tt class="docutils literal"&gt;$&lt;span class="caps"&gt;HOME&lt;/span&gt;&lt;/tt&gt; in this case) that reflect the hierarchy of files and
+directories in the package. E.g. for &lt;tt class="docutils literal"&gt;clojure&lt;/tt&gt; package the hierarcy
+is the&amp;nbsp;following:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ cd clojure
+$ tree -R -a
+.
+└── .clojure
+    ├── deps.edn
+    ├── .git
+    ├── .gitignore
+    ├── LICENSE
+    ├── README.md
+    └── tools
+        ├── antq.edn
+        ├── clj-watson.edn
+        ├── new.edn
+        └── tools.edn
+&lt;/pre&gt;
+&lt;p&gt;It&amp;#8217;s symlinked to a home directory that we used as a target directory when&amp;nbsp;stowing:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ ls -lth ~/.clojure
+lrwxrwxrwx. 1 pilosus pilosus 29 Sep  5 15:51 /home/pilosus/.clojure -&amp;gt; git/stow-example/clojure/.clojure
+&lt;/pre&gt;
+&lt;p&gt;Using git modules allows to support a standalone repository for
+configuration files so that they can be kept separately from the stow
+repo itself. This is a good solution given that a stow repo can
+contain sensitive configuration files such as inventory for Ansible or
+other authentication&amp;nbsp;information.&lt;/p&gt;
+&lt;p&gt;Git submodules also allow to do all the normal git things such as
+checking out a certain commit or tag, pushing changes upstream,
+etc. That makes the package management easy and&amp;nbsp;flexible.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="blog"></category><category term="dotfiles"></category><category term="shell"></category></entry><entry><title>Clojure: decision fatigue</title><link href="https://blog.pilosus.org/posts/2023/07/16/clojure-decision-fatigue/" rel="alternate"></link><published>2023-07-16T17:00:00+02:00</published><updated>2023-07-16T17:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-16:/posts/2023/07/16/clojure-decision-fatigue/</id><summary type="html">&lt;p&gt;As someone who uses Clojure mostly for solo projects I often find
+myself in a situation when a decision on what libraries to use is
+hard. Clojure and its community seems to follow &amp;#8220;There Is More Than
+One Way To Do It&amp;#8221; path. Possibly often unintentiallally, because the
+core team …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As someone who uses Clojure mostly for solo projects I often find
+myself in a situation when a decision on what libraries to use is
+hard. Clojure and its community seems to follow &amp;#8220;There Is More Than
+One Way To Do It&amp;#8221; path. Possibly often unintentiallally, because the
+core team is too small to ship some features before the community
+comes up with the missing parts. According to &lt;a class="reference external" href="https://www.surveymonkey.com/stories/SM-_2BH3b49f_2FXEkUlrb_2BJSThxg_3D_3D/"&gt;State of Clojure 2023&lt;/a&gt;
+survey, Clojure is mostly used in smaller teams (of, presumably,
+experienced developers), which is probably the reason, why Clojure
+ecosystem also lacks &lt;a class="reference external" href="https://pkg.go.dev/cmd/gofmt"&gt;opinionated tools&lt;/a&gt; that may save you some
+mental energy. All in all, these result in a decision fatigue when
+deciding on third-party libraries and&amp;nbsp;tools.&lt;/p&gt;
+&lt;div class="section" id="possible-decisions"&gt;
+&lt;h2&gt;Possible&amp;nbsp;decisions&lt;/h2&gt;
+&lt;div class="section" id="enriched-version-of-clojure-toolbox-com"&gt;
+&lt;h3&gt;Enriched version of&amp;nbsp;clojure-toolbox.com&lt;/h3&gt;
+&lt;p&gt;When the quality of the popular search engines seems to be
+&lt;a class="reference external" href="https://hn.algolia.com/?dateRange=all&amp;amp;page=0&amp;amp;prefix=false&amp;amp;query=google%20search%20quality&amp;amp;sort=byPopularity&amp;amp;type=story"&gt;declining&lt;/a&gt;, a hand-picked collection may be a &lt;a class="reference external" href="https://wiki.archlinux.org/title/list_of_applications"&gt;good solution&lt;/a&gt;. For
+Clojure, &lt;a class="reference external" href="https://www.clojure-toolbox.com/"&gt;clojure-toolbox.com&lt;/a&gt; is a high quality categorised
+directory of libraries and tools for the language. And it seems to be
+well &lt;a class="reference external" href="https://github.com/weavejester/clojure-toolbox.com/pulls?q=is%3Apr+is%3Amerged+"&gt;maintained&lt;/a&gt;. It has a few drawbacks&amp;nbsp;though:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Projects are not&amp;nbsp;rated&lt;/li&gt;
+&lt;li&gt;No hints on projects maintenance&amp;nbsp;status&lt;/li&gt;
+&lt;li&gt;Projects description is hidden in&amp;nbsp;tooltips&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These are hard things. Not only it&amp;#8217;s hard to compare dependencies that
+differ in their feature sets even under the same category. But also
+there could be no single source of statistics about number of
+downloads (Maven Central, Clojars, GitHub), the last release date,
+etc. Let alone the popularity isn&amp;#8217;t necessary a sign of quality and
+the recent last release timestamp isn&amp;#8217;t necessary a sign of good
+maintenance in a community with the strong commitment to backwards
+compatibility. Yet something simple would still be a huge relief to
+decision&amp;nbsp;fatigue:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Number of stars on GitHub is a project uses it for&amp;nbsp;hosting&lt;/li&gt;
+&lt;li&gt;The timestamp of the last commit on&amp;nbsp;GitHub&lt;/li&gt;
+&lt;li&gt;Showing project&amp;#8217;s description&amp;nbsp;openly&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It turned out, that 970 out of 1001 projects at the moment of writing
+had GitHub repo &lt;span class="caps"&gt;URL&lt;/span&gt; as a project link. That makes the approach
+mentioned above good&amp;nbsp;enough!&lt;/p&gt;
+&lt;p&gt;Here&amp;#8217;s how I enrich clojure-toolbox.com&amp;#8217;s data with the GitHub&amp;nbsp;stats:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Pull down clojure-toolbox.com &lt;span class="caps"&gt;DB&lt;/span&gt; (a &lt;span class="caps"&gt;YAML&lt;/span&gt; file stored in GitHub&amp;nbsp;repo)&lt;/li&gt;
+&lt;li&gt;If a project has a GitHub link, get information about number of
+stargazers and the last commit push timestamp via GitHub &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Use &lt;cite&gt;clojure.core.async&lt;/cite&gt; and GitHub access token to run operations
+in&amp;nbsp;bulk&lt;/li&gt;
+&lt;li&gt;Format results in&amp;nbsp;Markdown&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here&amp;#8217;s an &lt;a class="reference external" href="https://github.com/pilosus/github.api.async/blob/main/src/org/pilosus/github/api/async.clj#L240"&gt;example code&lt;/a&gt;. And this is how the &lt;a class="reference external" href="https://gist.github.com/pilosus/8d1ed78c2851e6f82b54357ac4b5e220#file-clojure-toolbox-md"&gt;enriched catalogue&lt;/a&gt;
+looks like. Much more&amp;nbsp;informative!&lt;/p&gt;
+&lt;p&gt;The same could possibly be done for &lt;a class="reference external" href="https://babashka.org/toolbox/"&gt;The Babashka toolbox&lt;/a&gt; as it&amp;#8217;s
+&lt;a class="reference external" href="https://github.com/babashka/toolbox"&gt;derived&lt;/a&gt; from the &lt;a class="reference external" href="https://github.com/weavejester/clojure-toolbox.com"&gt;The Clojure Toolbox&lt;/a&gt; source&amp;nbsp;code.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="clojurians-slack"&gt;
+&lt;h3&gt;Clojurians&amp;nbsp;Slack&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://clojurians.net"&gt;Clojurians&lt;/a&gt; Slack is another great source of knowledge. Not only you
+can ask questions to some experienced Clojure programmers, but also
+search the Slack&amp;#8217;s&amp;nbsp;history.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="clojure"></category></entry><entry><title>Debugging and patching Clojure code running in production using socket server and REPL</title><link href="https://blog.pilosus.org/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/" rel="alternate"></link><published>2023-07-07T20:00:00+02:00</published><updated>2023-07-07T20:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/</id><summary type="html">&lt;p&gt;Common Lisp is well known for its interactivity. The story of &lt;span class="caps"&gt;NASA&lt;/span&gt;
 engineers who used remote &lt;span class="caps"&gt;REPL&lt;/span&gt; to patch Lisp code running 60 million
 miles away inside the interplanetary spacecraft is &lt;a class="reference external" href="https://youtu.be/_gZK0tW8EhQ"&gt;well known&lt;/a&gt;
 too. You can debug and patch Clojure code running in production using
@@ -18,18 +177,16 @@ installed on you computer to work through this&amp;nbsp;tutorial.&lt;/p&gt;
 &lt;div class="section" id="get-sample-code"&gt;
 &lt;h3&gt;Get sample&amp;nbsp;code&lt;/h3&gt;
 &lt;p&gt;Get &lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;dienstplan&lt;/a&gt; app (it&amp;#8217;s&amp;nbsp;opensourced):&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ git clone git&amp;#64;github.com:pilosus/dienstplan.git
-$ cd dienstplan
-$ git checkout ba1aa1f846bff8f690e14a6fbb8989ae73a10b53
-&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;clone&lt;span class="w"&gt; &lt;/span&gt;git@github.com:pilosus/dienstplan.git
+$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;dienstplan
+$&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;checkout&lt;span class="w"&gt; &lt;/span&gt;ba1aa1f846bff8f690e14a6fbb8989ae73a10b53
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="compile-the-code"&gt;
 &lt;h3&gt;Compile the&amp;nbsp;code&lt;/h3&gt;
 &lt;p&gt;Compile an &lt;tt class="docutils literal"&gt;uberjar&lt;/tt&gt;. It produces &lt;tt class="docutils literal"&gt;app.jar&lt;/tt&gt; in your working&amp;nbsp;directory:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ clojure -T:build uberjar :uber-file '&amp;quot;app.jar&amp;quot;'
-&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;clojure&lt;span class="w"&gt; &lt;/span&gt;-T:build&lt;span class="w"&gt; &lt;/span&gt;uberjar&lt;span class="w"&gt; &lt;/span&gt;:uber-file&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;quot;app.jar&amp;quot;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="run-the-app-with-socket-server"&gt;
 &lt;h3&gt;Run the app with socket&amp;nbsp;server&lt;/h3&gt;
@@ -38,32 +195,30 @@ $ clojure -T:build uberjar :uber-file '&amp;quot;app.jar&amp;quot;'
 needed to start a socket server with &lt;span class="caps"&gt;REPL&lt;/span&gt;
 on localhost with the port 5555 open. Environment variables are needed
 to start the&amp;nbsp;app:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ APP__DEBUG=false \
-SLACK__TOKEN=&amp;quot;xoxb-Your-Bot-User-OAuth-Token&amp;quot; \
-SLACK__SIGN=&amp;quot;Your-Signing-Secret&amp;quot; \
-ALERTS__SENTRY_DSN=&amp;quot;https://public:private&amp;#64;localhost/1&amp;quot; \
-SERVER__PORT=8080 \
-SERVER__LOGLEVEL=INFO \
-DB__SERVER_NAME=localhost \
-DB__PORT_NUMBER=15432 \
-DB__DATABASE_NAME=&amp;quot;dienstplan&amp;quot; \
-DB__USERNAME=&amp;quot;dienstplan&amp;quot; \
-DB__PASSWORD=&amp;quot;dienstplan&amp;quot; \
-java -Dclojure.server.repl=&amp;quot;{:port 5555 :accept clojure.core.server/repl}&amp;quot; -jar app.jar
-&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;APP__DEBUG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;SLACK__TOKEN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;xoxb-Your-Bot-User-OAuth-Token&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;SLACK__SIGN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Your-Signing-Secret&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;ALERTS__SENTRY_DSN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://public:private@localhost/1&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;SERVER__PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;8080&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;SERVER__LOGLEVEL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;INFO&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;DB__SERVER_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;localhost&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;DB__PORT_NUMBER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;15432&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;DB__DATABASE_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dienstplan&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;DB__USERNAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dienstplan&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="nv"&gt;DB__PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dienstplan&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+java&lt;span class="w"&gt; &lt;/span&gt;-Dclojure.server.repl&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{:port 5555 :accept clojure.core.server/repl}&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-jar&lt;span class="w"&gt; &lt;/span&gt;app.jar
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="check-if-app-is-running-properly"&gt;
 &lt;h3&gt;Check if app is running&amp;nbsp;properly&lt;/h3&gt;
 &lt;p&gt;Let&amp;#8217;s check if the app is working properly by making a &lt;span class="caps"&gt;HTTP&lt;/span&gt; &lt;span class="caps"&gt;GET&lt;/span&gt;
 request to its healthcheck &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;endpoint:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ curl http://localhost:8080/api/healthcheck
-{&amp;quot;status&amp;quot;:&amp;quot;ok&amp;quot;}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8080/api/healthcheck
+&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;status&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;ok&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
 
-$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
-HTTP/1.1 200 OK
-&lt;/pre&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-SsL&lt;span class="w"&gt; &lt;/span&gt;-I&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8080/api/healthcheck&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;head&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;OK
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="connect-to-repl"&gt;
 &lt;h3&gt;Connect to &lt;span class="caps"&gt;REPL&lt;/span&gt;&lt;/h3&gt;
@@ -75,10 +230,9 @@ things like &lt;tt class="docutils literal"&gt;telnet&lt;/tt&gt; or &lt;tt class
 line editing experience, like moving the cursor back and forth, using
 backspace, and history support, you may use &lt;tt class="docutils literal"&gt;readline&lt;/tt&gt; library with
 &lt;tt class="docutils literal"&gt;rlwrap&lt;/tt&gt; (readline wrap) &lt;span class="caps"&gt;CLI&lt;/span&gt;&amp;nbsp;tool:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ rlwrap nc localhost 5555
-user=&amp;gt;
-&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;rlwrap&lt;span class="w"&gt; &lt;/span&gt;nc&lt;span class="w"&gt; &lt;/span&gt;localhost&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;5555&lt;/span&gt;
+&lt;span class="nv"&gt;user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="access-state-of-the-running-app"&gt;
 &lt;h3&gt;Access state of the running&amp;nbsp;app&lt;/h3&gt;
@@ -86,55 +240,51 @@ user=&amp;gt;
 First, let&amp;#8217;s take a look at the &lt;a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/config.clj#L39"&gt;config&lt;/a&gt; initialized with the
 envorinment variables a few steps above. To do it we need to load
 app&amp;#8217;s namespace &lt;tt class="docutils literal"&gt;dienstplan.config&lt;/tt&gt;:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-user=&amp;gt; (require '[dienstplan.config :as config])
-nil
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;user=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;dienstplan.config&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:as&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;config&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="nv"&gt;nil&lt;/span&gt;
 
-user=&amp;gt; config/config
-{:application {:name &amp;quot;dienstplan&amp;quot;, :version &amp;quot;latest&amp;quot;, :env &amp;quot;production&amp;quot;, :debug false}, :server {:port 8080, :loglevel &amp;quot;INFO&amp;quot;, :access-log true, :block-thread true}, :slack {:token &amp;quot;xoxb-Your-Bot-User-OAuth-Token&amp;quot;, :sign &amp;quot;Your-Signing-Secret&amp;quot;}, :alerts {:sentry &amp;quot;https://public:private&amp;#64;localhost/1&amp;quot;}, :db {:dbtype &amp;quot;postgres&amp;quot;, :password &amp;quot;dienstplan&amp;quot;, :minimumIdle 20, :username &amp;quot;dienstplan&amp;quot;, :maxLifetime 1800000, :port 15432, :dbname &amp;quot;dienstplan&amp;quot;, :connectionTimeout 10000, :host &amp;quot;localhost&amp;quot;, :keepaliveTime 0, :maximumPoolSize 20}}
-&lt;/pre&gt;
+&lt;span class="nv"&gt;user=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;config/config&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dienstplan&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;latest&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:env&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;production&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:debug&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;false&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:server&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:port&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:loglevel&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;INFO&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:access-log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;true&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:block-thread&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;true&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:slack&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:token&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;xoxb-Your-Bot-User-OAuth-Token&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:sign&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Your-Signing-Secret&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:alerts&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:sentry&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://public:private@localhost/1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:db&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:dbtype&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;postgres&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:password&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dienstplan&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:minimumIdle&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:username&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dienstplan&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:maxLifetime&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1800000&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:port&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;15432&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:dbname&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dienstplan&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:connectionTimeout&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:host&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;localhost&amp;quot;&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:keepaliveTime&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:maximumPoolSize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="patch-the-code-of-the-runnning-app"&gt;
 &lt;h3&gt;Patch the code of the runnning&amp;nbsp;app&lt;/h3&gt;
 &lt;p&gt;And now for something completely different! Let&amp;#8217;s override some code
 in the running app! Let&amp;#8217;s update the &lt;span class="caps"&gt;API&lt;/span&gt; handler &lt;a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/endpoints.clj#L34"&gt;/api/healthcheck&lt;/a&gt;
 that requested above with&amp;nbsp;this:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-(defmethod multi-handler :healthcheck
-  [_]
-  (log/warn
-   &amp;quot;If I were to suggest that between the Earth and Mars there is a
-   china teapot revolving about the sun in an elliptical orbit...&amp;quot;)
-  {:status 418
-   :body {:status &amp;quot;I'm a teapot&amp;quot;}})
-&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defmethod &lt;/span&gt;&lt;span class="nv"&gt;multi-handler&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:healthcheck&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;_&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;log/warn&lt;/span&gt;
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;If I were to suggest that between the Earth and Mars there is a&lt;/span&gt;
+&lt;span class="s"&gt;   china teapot revolving about the sun in an elliptical orbit...&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;418&lt;/span&gt;
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="ss"&gt;:body&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;I&amp;#39;m a teapot&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To do it, let&amp;#8217;s use &lt;a class="reference external" href="https://clojure.org/guides/repl/navigating_namespaces#_switching_to_an_existing_namespace_with_in_ns"&gt;in-ns&lt;/a&gt; function to switch the current &lt;span class="caps"&gt;REPL&lt;/span&gt;&amp;#8217;s
 namespace to &lt;tt class="docutils literal"&gt;dienstplan.endpoints&lt;/tt&gt; where we want to override the&amp;nbsp;method:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-user=&amp;gt; (in-ns 'dienstplan.endpoints)
-#object[clojure.lang.Namespace 0x50c83f27 &amp;quot;dienstplan.endpoints&amp;quot;]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;user=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;in-ns &lt;/span&gt;&lt;span class="ss"&gt;&amp;#39;dienstplan.endpoints&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;object&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.lang.Namespace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;x50c83f27&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dienstplan.endpoints&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
-dienstplan.endpoints=&amp;gt; (defmethod multi-handler :healthcheck
-[_]
-(log/warn
- &amp;quot;If I were to suggest that between the Earth and Mars there is a
-china teapot revolving about the sun in an elliptical orbit...&amp;quot;)
-{:status 418
- :body {:status &amp;quot;I'm a teapot&amp;quot;}})
-#object[clojure.lang.MultiFn 0x5d8ea5bb &amp;quot;clojure.lang.MultiFn&amp;#64;5d8ea5bb&amp;quot;]
-&lt;/pre&gt;
+&lt;span class="nv"&gt;dienstplan.endpoints=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defmethod &lt;/span&gt;&lt;span class="nv"&gt;multi-handler&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:healthcheck&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;_&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;log/warn&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;If I were to suggest that between the Earth and Mars there is a&lt;/span&gt;
+&lt;span class="s"&gt;china teapot revolving about the sun in an elliptical orbit...&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;418&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;:body&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;I&amp;#39;m a teapot&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}})&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;object&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.lang.MultiFn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;x5d8ea5bb&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;clojure.lang.MultiFn@5d8ea5bb&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="check-if-changes-applied"&gt;
 &lt;h3&gt;Check if changes&amp;nbsp;applied&lt;/h3&gt;
 &lt;p&gt;Let&amp;#8217;s make another &lt;span class="caps"&gt;HTTP&lt;/span&gt; &lt;span class="caps"&gt;GET&lt;/span&gt; request to the &lt;tt class="docutils literal"&gt;/api/healthcheck&lt;/tt&gt;
 handler:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ curl http://localhost:8080/api/healthcheck
-{&amp;quot;status&amp;quot;:&amp;quot;I'm a teapot&amp;quot;}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8080/api/healthcheck
+&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;status&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;I&amp;#39;m a teapot&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
 
-$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
-HTTP/1.1 418 I'm a Teapot
-&lt;/pre&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-SsL&lt;span class="w"&gt; &lt;/span&gt;-I&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8080/api/healthcheck&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;head&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+HTTP/1.1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;418&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;I&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;m&lt;span class="w"&gt; &lt;/span&gt;a&lt;span class="w"&gt; &lt;/span&gt;Teapot
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Response body has changed, so did the &lt;span class="caps"&gt;HTTP&lt;/span&gt; status code. In the app
 logs we also&amp;nbsp;see:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
@@ -148,10 +298,9 @@ logs we also&amp;nbsp;see:&lt;/p&gt;
 &lt;p&gt;Tinkering with the running code doesn&amp;#8217;t change the code itself
 though. Restart the app process and fire another &lt;span class="caps"&gt;HTTP&lt;/span&gt; request to make
 sure all is back to&amp;nbsp;normal:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ curl http://localhost:8080/api/healthcheck
-{&amp;quot;status&amp;quot;:&amp;quot;ok&amp;quot;}
-&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;http://localhost:8080/api/healthcheck
+&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;status&amp;quot;&lt;/span&gt;:&lt;span class="s2"&gt;&amp;quot;ok&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="conclusion"&gt;
 &lt;h3&gt;Conclusion&lt;/h3&gt;
@@ -170,11 +319,14 @@ simply restarting the app&amp;#8217;s&amp;nbsp;process.&lt;/p&gt;
 network if an exposed port isn&amp;#8217;t protected with a firewall, &lt;span class="caps"&gt;VPN&lt;/span&gt; and/or
 other access control tool. It may impose huge security risks on your
 app in production&amp;nbsp;environment.&lt;/p&gt;
-&lt;p&gt;Patching code directly in the running app may be the only available
+&lt;p&gt;Patching code directly in the running app maybe the only available
 solution when your production environment is &lt;a class="reference external" href="https://corecursive.com/lisp-in-space-with-ron-garret/"&gt;millions miles away&lt;/a&gt;
 and costs $150M. While patches themselves are easily reverted by
-restarting the process, your app&amp;#8217;s state may be damaged
-irreversably. Make sure you know what you are&amp;nbsp;doing!&lt;/p&gt;
+restarting the process, your app&amp;#8217;s state may be damaged&amp;nbsp;irreversably.&lt;/p&gt;
+&lt;p&gt;Touching code in production is a great power, but also is a huge
+responsibility. Oftentimes risks of the live patching are higher than
+longer time needed to prepare and deploy the hotfix. You should know
+what you are&amp;nbsp;doing.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </content><category term="Blog"></category><category term="clojure"></category><category term="repl"></category></entry><entry><title>kairos: crontab parsing library for Clojure</title><link href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/" rel="alternate"></link><published>2023-07-07T12:00:00+02:00</published><updated>2023-07-07T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/</id><summary type="html">&lt;p&gt;I have been tinkering with &lt;a class="reference external" href="https://blog.pilosus.org/tag/clojure/"&gt;Clojure&lt;/a&gt; since the late 2020. When I

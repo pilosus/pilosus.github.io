@@ -44,7 +44,7 @@
       <section class="header">
 	<div class="row">
 	  <div class="two columns">
-	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.png">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
 	  </div>
 	  <div class="ten columns">
 	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly's Technical Blog </a></h2>
@@ -58,7 +58,7 @@
           <ul class="navbar-list">
 	    
             <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
-            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
           </ul>
 	</div>
       </nav>
@@ -98,7 +98,7 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">887 words</span>
+		<span class="word-count">917 words</span>
 		|
 		<span class="word-count">4 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/clojure/">clojure</a> <a href="https://blog.pilosus.org/tag/repl/">repl</a> </span>                
@@ -117,18 +117,16 @@ installed on you computer to work through this&nbsp;tutorial.</p>
 <div class="section" id="get-sample-code">
 <h3>Get sample&nbsp;code</h3>
 <p>Get <a class="reference external" href="https://github.com/pilosus/dienstplan">dienstplan</a> app (it&#8217;s&nbsp;opensourced):</p>
-<pre class="literal-block">
-$ git clone git&#64;github.com:pilosus/dienstplan.git
-$ cd dienstplan
-$ git checkout ba1aa1f846bff8f690e14a6fbb8989ae73a10b53
-</pre>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:pilosus/dienstplan.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>dienstplan
+$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>ba1aa1f846bff8f690e14a6fbb8989ae73a10b53
+</pre></div>
 </div>
 <div class="section" id="compile-the-code">
 <h3>Compile the&nbsp;code</h3>
 <p>Compile an <tt class="docutils literal">uberjar</tt>. It produces <tt class="docutils literal">app.jar</tt> in your working&nbsp;directory:</p>
-<pre class="literal-block">
-$ clojure -T:build uberjar :uber-file '&quot;app.jar&quot;'
-</pre>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>clojure<span class="w"> </span>-T:build<span class="w"> </span>uberjar<span class="w"> </span>:uber-file<span class="w"> </span><span class="s1">&#39;&quot;app.jar&quot;&#39;</span>
+</pre></div>
 </div>
 <div class="section" id="run-the-app-with-socket-server">
 <h3>Run the app with socket&nbsp;server</h3>
@@ -137,32 +135,30 @@ $ clojure -T:build uberjar :uber-file '&quot;app.jar&quot;'
 needed to start a socket server with <span class="caps">REPL</span>
 on localhost with the port 5555 open. Environment variables are needed
 to start the&nbsp;app:</p>
-<pre class="literal-block">
-$ APP__DEBUG=false \
-SLACK__TOKEN=&quot;xoxb-Your-Bot-User-OAuth-Token&quot; \
-SLACK__SIGN=&quot;Your-Signing-Secret&quot; \
-ALERTS__SENTRY_DSN=&quot;https://public:private&#64;localhost/1&quot; \
-SERVER__PORT=8080 \
-SERVER__LOGLEVEL=INFO \
-DB__SERVER_NAME=localhost \
-DB__PORT_NUMBER=15432 \
-DB__DATABASE_NAME=&quot;dienstplan&quot; \
-DB__USERNAME=&quot;dienstplan&quot; \
-DB__PASSWORD=&quot;dienstplan&quot; \
-java -Dclojure.server.repl=&quot;{:port 5555 :accept clojure.core.server/repl}&quot; -jar app.jar
-</pre>
+<div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nv">APP__DEBUG</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">SLACK__TOKEN</span><span class="o">=</span><span class="s2">&quot;xoxb-Your-Bot-User-OAuth-Token&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">SLACK__SIGN</span><span class="o">=</span><span class="s2">&quot;Your-Signing-Secret&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">ALERTS__SENTRY_DSN</span><span class="o">=</span><span class="s2">&quot;https://public:private@localhost/1&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">SERVER__PORT</span><span class="o">=</span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">SERVER__LOGLEVEL</span><span class="o">=</span>INFO<span class="w"> </span><span class="se">\</span>
+<span class="nv">DB__SERVER_NAME</span><span class="o">=</span>localhost<span class="w"> </span><span class="se">\</span>
+<span class="nv">DB__PORT_NUMBER</span><span class="o">=</span><span class="m">15432</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">DB__DATABASE_NAME</span><span class="o">=</span><span class="s2">&quot;dienstplan&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">DB__USERNAME</span><span class="o">=</span><span class="s2">&quot;dienstplan&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="nv">DB__PASSWORD</span><span class="o">=</span><span class="s2">&quot;dienstplan&quot;</span><span class="w"> </span><span class="se">\</span>
+java<span class="w"> </span>-Dclojure.server.repl<span class="o">=</span><span class="s2">&quot;{:port 5555 :accept clojure.core.server/repl}&quot;</span><span class="w"> </span>-jar<span class="w"> </span>app.jar
+</pre></div>
 </div>
 <div class="section" id="check-if-app-is-running-properly">
 <h3>Check if app is running&nbsp;properly</h3>
 <p>Let&#8217;s check if the app is working properly by making a <span class="caps">HTTP</span> <span class="caps">GET</span>
 request to its healthcheck <span class="caps">API</span>&nbsp;endpoint:</p>
-<pre class="literal-block">
-$ curl http://localhost:8080/api/healthcheck
-{&quot;status&quot;:&quot;ok&quot;}
+<div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>http://localhost:8080/api/healthcheck
+<span class="o">{</span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;ok&quot;</span><span class="o">}</span>
 
-$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
-HTTP/1.1 200 OK
-</pre>
+$<span class="w"> </span>curl<span class="w"> </span>-SsL<span class="w"> </span>-I<span class="w"> </span>http://localhost:8080/api/healthcheck<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+HTTP/1.1<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+</pre></div>
 </div>
 <div class="section" id="connect-to-repl">
 <h3>Connect to <span class="caps">REPL</span></h3>
@@ -174,10 +170,9 @@ things like <tt class="docutils literal">telnet</tt> or <tt class="docutils lite
 line editing experience, like moving the cursor back and forth, using
 backspace, and history support, you may use <tt class="docutils literal">readline</tt> library with
 <tt class="docutils literal">rlwrap</tt> (readline wrap) <span class="caps">CLI</span>&nbsp;tool:</p>
-<pre class="literal-block">
-$ rlwrap nc localhost 5555
-user=&gt;
-</pre>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>rlwrap<span class="w"> </span>nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">5555</span>
+<span class="nv">user</span><span class="o">=</span>&gt;
+</pre></div>
 </div>
 <div class="section" id="access-state-of-the-running-app">
 <h3>Access state of the running&nbsp;app</h3>
@@ -185,55 +180,51 @@ user=&gt;
 First, let&#8217;s take a look at the <a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/config.clj#L39">config</a> initialized with the
 envorinment variables a few steps above. To do it we need to load
 app&#8217;s namespace <tt class="docutils literal">dienstplan.config</tt>:</p>
-<pre class="literal-block">
-user=&gt; (require '[dienstplan.config :as config])
-nil
+<div class="highlight"><pre><span></span><span class="nv">user=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">&#39;</span><span class="p">[</span><span class="nv">dienstplan.config</span><span class="w"> </span><span class="ss">:as</span><span class="w"> </span><span class="nv">config</span><span class="p">])</span>
+<span class="nv">nil</span>
 
-user=&gt; config/config
-{:application {:name &quot;dienstplan&quot;, :version &quot;latest&quot;, :env &quot;production&quot;, :debug false}, :server {:port 8080, :loglevel &quot;INFO&quot;, :access-log true, :block-thread true}, :slack {:token &quot;xoxb-Your-Bot-User-OAuth-Token&quot;, :sign &quot;Your-Signing-Secret&quot;}, :alerts {:sentry &quot;https://public:private&#64;localhost/1&quot;}, :db {:dbtype &quot;postgres&quot;, :password &quot;dienstplan&quot;, :minimumIdle 20, :username &quot;dienstplan&quot;, :maxLifetime 1800000, :port 15432, :dbname &quot;dienstplan&quot;, :connectionTimeout 10000, :host &quot;localhost&quot;, :keepaliveTime 0, :maximumPoolSize 20}}
-</pre>
+<span class="nv">user=&gt;</span><span class="w"> </span><span class="nv">config/config</span>
+<span class="p">{</span><span class="ss">:application</span><span class="w"> </span><span class="p">{</span><span class="ss">:name</span><span class="w"> </span><span class="s">&quot;dienstplan&quot;</span>,<span class="w"> </span><span class="ss">:version</span><span class="w"> </span><span class="s">&quot;latest&quot;</span>,<span class="w"> </span><span class="ss">:env</span><span class="w"> </span><span class="s">&quot;production&quot;</span>,<span class="w"> </span><span class="ss">:debug</span><span class="w"> </span><span class="nv">false</span><span class="p">}</span>,<span class="w"> </span><span class="ss">:server</span><span class="w"> </span><span class="p">{</span><span class="ss">:port</span><span class="w"> </span><span class="mi">8080</span>,<span class="w"> </span><span class="ss">:loglevel</span><span class="w"> </span><span class="s">&quot;INFO&quot;</span>,<span class="w"> </span><span class="ss">:access-log</span><span class="w"> </span><span class="nv">true</span>,<span class="w"> </span><span class="ss">:block-thread</span><span class="w"> </span><span class="nv">true</span><span class="p">}</span>,<span class="w"> </span><span class="ss">:slack</span><span class="w"> </span><span class="p">{</span><span class="ss">:token</span><span class="w"> </span><span class="s">&quot;xoxb-Your-Bot-User-OAuth-Token&quot;</span>,<span class="w"> </span><span class="ss">:sign</span><span class="w"> </span><span class="s">&quot;Your-Signing-Secret&quot;</span><span class="p">}</span>,<span class="w"> </span><span class="ss">:alerts</span><span class="w"> </span><span class="p">{</span><span class="ss">:sentry</span><span class="w"> </span><span class="s">&quot;https://public:private@localhost/1&quot;</span><span class="p">}</span>,<span class="w"> </span><span class="ss">:db</span><span class="w"> </span><span class="p">{</span><span class="ss">:dbtype</span><span class="w"> </span><span class="s">&quot;postgres&quot;</span>,<span class="w"> </span><span class="ss">:password</span><span class="w"> </span><span class="s">&quot;dienstplan&quot;</span>,<span class="w"> </span><span class="ss">:minimumIdle</span><span class="w"> </span><span class="mi">20</span>,<span class="w"> </span><span class="ss">:username</span><span class="w"> </span><span class="s">&quot;dienstplan&quot;</span>,<span class="w"> </span><span class="ss">:maxLifetime</span><span class="w"> </span><span class="mi">1800000</span>,<span class="w"> </span><span class="ss">:port</span><span class="w"> </span><span class="mi">15432</span>,<span class="w"> </span><span class="ss">:dbname</span><span class="w"> </span><span class="s">&quot;dienstplan&quot;</span>,<span class="w"> </span><span class="ss">:connectionTimeout</span><span class="w"> </span><span class="mi">10000</span>,<span class="w"> </span><span class="ss">:host</span><span class="w"> </span><span class="s">&quot;localhost&quot;</span>,<span class="w"> </span><span class="ss">:keepaliveTime</span><span class="w"> </span><span class="mi">0</span>,<span class="w"> </span><span class="ss">:maximumPoolSize</span><span class="w"> </span><span class="mi">20</span><span class="p">}}</span>
+</pre></div>
 </div>
 <div class="section" id="patch-the-code-of-the-runnning-app">
 <h3>Patch the code of the runnning&nbsp;app</h3>
 <p>And now for something completely different! Let&#8217;s override some code
 in the running app! Let&#8217;s update the <span class="caps">API</span> handler <a class="reference external" href="https://github.com/pilosus/dienstplan/blob/1.0.0/src/dienstplan/endpoints.clj#L34">/api/healthcheck</a>
 that requested above with&nbsp;this:</p>
-<pre class="literal-block">
-(defmethod multi-handler :healthcheck
-  [_]
-  (log/warn
-   &quot;If I were to suggest that between the Earth and Mars there is a
-   china teapot revolving about the sun in an elliptical orbit...&quot;)
-  {:status 418
-   :body {:status &quot;I'm a teapot&quot;}})
-</pre>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defmethod </span><span class="nv">multi-handler</span><span class="w"> </span><span class="ss">:healthcheck</span>
+<span class="w">  </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">log/warn</span>
+<span class="w">   </span><span class="s">&quot;If I were to suggest that between the Earth and Mars there is a</span>
+<span class="s">   china teapot revolving about the sun in an elliptical orbit...&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span><span class="ss">:status</span><span class="w"> </span><span class="mi">418</span>
+<span class="w">   </span><span class="ss">:body</span><span class="w"> </span><span class="p">{</span><span class="ss">:status</span><span class="w"> </span><span class="s">&quot;I&#39;m a teapot&quot;</span><span class="p">}})</span>
+</pre></div>
 <p>To do it, let&#8217;s use <a class="reference external" href="https://clojure.org/guides/repl/navigating_namespaces#_switching_to_an_existing_namespace_with_in_ns">in-ns</a> function to switch the current <span class="caps">REPL</span>&#8217;s
 namespace to <tt class="docutils literal">dienstplan.endpoints</tt> where we want to override the&nbsp;method:</p>
-<pre class="literal-block">
-user=&gt; (in-ns 'dienstplan.endpoints)
-#object[clojure.lang.Namespace 0x50c83f27 &quot;dienstplan.endpoints&quot;]
+<div class="highlight"><pre><span></span><span class="nv">user=&gt;</span><span class="w"> </span><span class="p">(</span><span class="nb">in-ns </span><span class="ss">&#39;dienstplan.endpoints</span><span class="p">)</span>
+<span class="o">#</span><span class="nv">object</span><span class="p">[</span><span class="nv">clojure.lang.Namespace</span><span class="w"> </span><span class="mi">0</span><span class="nv">x50c83f27</span><span class="w"> </span><span class="s">&quot;dienstplan.endpoints&quot;</span><span class="p">]</span>
 
-dienstplan.endpoints=&gt; (defmethod multi-handler :healthcheck
-[_]
-(log/warn
- &quot;If I were to suggest that between the Earth and Mars there is a
-china teapot revolving about the sun in an elliptical orbit...&quot;)
-{:status 418
- :body {:status &quot;I'm a teapot&quot;}})
-#object[clojure.lang.MultiFn 0x5d8ea5bb &quot;clojure.lang.MultiFn&#64;5d8ea5bb&quot;]
-</pre>
+<span class="nv">dienstplan.endpoints=&gt;</span><span class="w"> </span><span class="p">(</span><span class="kd">defmethod </span><span class="nv">multi-handler</span><span class="w"> </span><span class="ss">:healthcheck</span>
+<span class="p">[</span><span class="nv">_</span><span class="p">]</span>
+<span class="p">(</span><span class="nf">log/warn</span>
+<span class="w"> </span><span class="s">&quot;If I were to suggest that between the Earth and Mars there is a</span>
+<span class="s">china teapot revolving about the sun in an elliptical orbit...&quot;</span><span class="p">)</span>
+<span class="p">{</span><span class="ss">:status</span><span class="w"> </span><span class="mi">418</span>
+<span class="w"> </span><span class="ss">:body</span><span class="w"> </span><span class="p">{</span><span class="ss">:status</span><span class="w"> </span><span class="s">&quot;I&#39;m a teapot&quot;</span><span class="p">}})</span>
+<span class="o">#</span><span class="nv">object</span><span class="p">[</span><span class="nv">clojure.lang.MultiFn</span><span class="w"> </span><span class="mi">0</span><span class="nv">x5d8ea5bb</span><span class="w"> </span><span class="s">&quot;clojure.lang.MultiFn@5d8ea5bb&quot;</span><span class="p">]</span>
+</pre></div>
 </div>
 <div class="section" id="check-if-changes-applied">
 <h3>Check if changes&nbsp;applied</h3>
 <p>Let&#8217;s make another <span class="caps">HTTP</span> <span class="caps">GET</span> request to the <tt class="docutils literal">/api/healthcheck</tt>
 handler:</p>
-<pre class="literal-block">
-$ curl http://localhost:8080/api/healthcheck
-{&quot;status&quot;:&quot;I'm a teapot&quot;}
+<div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>http://localhost:8080/api/healthcheck
+<span class="o">{</span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;I&#39;m a teapot&quot;</span><span class="o">}</span>
 
-$ curl -SsL -I http://localhost:8080/api/healthcheck | head -n 1
-HTTP/1.1 418 I'm a Teapot
-</pre>
+$<span class="w"> </span>curl<span class="w"> </span>-SsL<span class="w"> </span>-I<span class="w"> </span>http://localhost:8080/api/healthcheck<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+HTTP/1.1<span class="w"> </span><span class="m">418</span><span class="w"> </span>I<span class="err">&#39;</span>m<span class="w"> </span>a<span class="w"> </span>Teapot
+</pre></div>
 <p>Response body has changed, so did the <span class="caps">HTTP</span> status code. In the app
 logs we also&nbsp;see:</p>
 <pre class="literal-block">
@@ -247,10 +238,9 @@ logs we also&nbsp;see:</p>
 <p>Tinkering with the running code doesn&#8217;t change the code itself
 though. Restart the app process and fire another <span class="caps">HTTP</span> request to make
 sure all is back to&nbsp;normal:</p>
-<pre class="literal-block">
-$ curl http://localhost:8080/api/healthcheck
-{&quot;status&quot;:&quot;ok&quot;}
-</pre>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>http://localhost:8080/api/healthcheck
+<span class="o">{</span><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;ok&quot;</span><span class="o">}</span>
+</pre></div>
 </div>
 <div class="section" id="conclusion">
 <h3>Conclusion</h3>
@@ -269,11 +259,14 @@ simply restarting the app&#8217;s&nbsp;process.</p>
 network if an exposed port isn&#8217;t protected with a firewall, <span class="caps">VPN</span> and/or
 other access control tool. It may impose huge security risks on your
 app in production&nbsp;environment.</p>
-<p>Patching code directly in the running app may be the only available
+<p>Patching code directly in the running app maybe the only available
 solution when your production environment is <a class="reference external" href="https://corecursive.com/lisp-in-space-with-ron-garret/">millions miles away</a>
 and costs $150M. While patches themselves are easily reverted by
-restarting the process, your app&#8217;s state may be damaged
-irreversably. Make sure you know what you are&nbsp;doing!</p>
+restarting the process, your app&#8217;s state may be damaged&nbsp;irreversably.</p>
+<p>Touching code in production is a great power, but also is a huge
+responsibility. Oftentimes risks of the live patching are higher than
+longer time needed to prepare and deploy the hotfix. You should know
+what you are&nbsp;doing.</p>
 </div>
 </div>
 
