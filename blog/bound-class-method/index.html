@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Method vs. Class Method Quirks in Python 3</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Method vs. Class Method Quirks in Python 3" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/blog/bound-class-method/" />
+    <meta property="og:description" content="A little example of how bound/unbound methods behave in Python 3" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s log" />
+    <meta property="article:published_time" content="2019-04-29" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="python" />
+    <meta property="article:tag" content="cpython" />
+
+
+    <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic" rel="stylesheet" type="text/css">
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's log Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's log </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/articles/">Articles</a></li>
+
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/blog/bound-class-method/" rel="bookmark"
+                   title="Permalink to Method vs. Class Method Quirks in Python 3">Method vs. Class Method Quirks in Python&nbsp;3</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-04-29T17:30:00+02:00">
+                  29-04-2019 17:30
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">319 words</span>
+		|
+		<span class="word-count">2 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/python/">python</a> <a href="https://blog.pilosus.org/tag/cpython/">cpython</a> </span>                
+              </div><!-- /.post-info -->              <p>A code snippet in Python 3 below has been discussed recently on the&nbsp;internet:</p>
+<div class="highlight"><pre><span></span>In [1]: class A:
+   ...:     def method(self):
+   ...:         pass
+   ...:
+   ...: class B:
+   ...:     @classmethod
+   ...:     def method(cls):
+   ...:         pass
+
+
+In [2]: A.method is A.method
+Out[2]: True
+
+In [3]: B.method is B.method
+Out[3]: False
+</pre></div>
+<p>The question is why <tt class="docutils literal">A.method</tt> returns the same object on each call
+while <tt class="docutils literal">B.method</tt> returns the new&nbsp;one?</p>
+<p>Let&#8217;s explore first what <tt class="docutils literal">A.method</tt> really&nbsp;is:</p>
+<div class="highlight"><pre><span></span>In [4]: A.method
+Out[4]: &lt;function __main__.A.method(self)&gt;
+
+In [5]: type(A.method)
+Out[5]: function
+
+In [6]: import inspect
+
+In [7]: inspect.ismethod(A.method)
+Out[7]: False
+</pre></div>
+<p>Essentially, what that means is that <tt class="docutils literal">A.method</tt> is a <em>function</em>,
+i.e. <tt class="docutils literal">unbound method</tt> of the <tt class="docutils literal">class A</tt>. A great way to check if a
+method is indeed unbound is to check if its function object and a
+class instance&nbsp;exist:</p>
+<div class="highlight"><pre><span></span>In [13]: hasattr(A.method, &#39;__func__&#39;)
+Out[13]: False
+
+In [14]: hasattr(A.method, &#39;__self__&#39;)
+Out[14]: False
+</pre></div>
+<p>See Python documentation for more details, specifically an <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#index-32">instance
+method</a> subsection of the <tt class="docutils literal">Data model</tt> section.</p>
+<p>On the other hand, <tt class="docutils literal">B.method</tt> is a <tt class="docutils literal">class method</tt>. It returns an
+<em>instance of the bound method object</em>. Let&#8217;s check&nbsp;it:</p>
+<div class="highlight"><pre><span></span>In [15]: B.method
+Out[15]: &lt;bound method B.method of &lt;class &#39;__main__.B&#39;&gt;&gt;
+
+In [16]: type(B.method)
+Out[16]: method
+
+In [17]: inspect.ismethod(B.method)
+Out[17]: True
+
+In [18]: hasattr(B.method, &#39;__func__&#39;)
+Out[18]: True
+
+In [19]: hasattr(B.method, &#39;__self__&#39;)
+Out[19]: True
+
+In [20]: B.method.__self__ is B
+Out[20]: True
+
+In [21]: B.method.__func__
+Out[21]: &lt;function __main__.B.method(cls)&gt;
+</pre></div>
+<p>That means on each <tt class="docutils literal">B.method</tt> invocation a new object is
+created. You can achieve the same behaviour with <tt class="docutils literal">A.method</tt> once the
+method gets&nbsp;bound:</p>
+<div class="highlight"><pre><span></span>In [22]: a = A()
+
+In [23]: id(a.method)
+Out[23]: 140613204502216
+
+In [24]: id(a.method)
+Out[24]: 140613210350280
+
+In [25]: id(a.method)
+Out[25]: 140613209057096
+
+In [26]: a.method is a.method
+Out[26]: False
+</pre></div>
+<p>Again, every time you call <tt class="docutils literal">a.method</tt> a new bound method object is&nbsp;created.</p>
+<p>The example above doesn&#8217;t apply to Python 2.7 though. It seems that
+Python 2.7 had different implementation, so that <tt class="docutils literal">A.method</tt> would
+return different objects every time it&#8217;s&nbsp;called.</p>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

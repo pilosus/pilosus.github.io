@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Grafana Dashboard for Prometheus official Python client with Flask App metrics" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/images/grafana-dashboard.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/blog/grafana-dashboard-flask-app/" />
+    <meta property="og:description" content="A dashboard with 12 panels showing RPS, latency, errors for web app’s endpoints as well as host and app’s resource usage and some extra details." />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s log" />
+    <meta property="article:published_time" content="2019-06-01" />
+    <meta property="article:modified_time" content="2019-06-01" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="prometheus" />
+    <meta property="article:tag" content="grafana" />
+    <meta property="article:tag" content="visualization" />
+    <meta property="article:tag" content="metrics" />
+
+
+    <!-- FONT –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic" rel="stylesheet" type="text/css">
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's log Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's log </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/articles/">Articles</a></li>
+
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/blog/grafana-dashboard-flask-app/" rel="bookmark"
+                   title="Permalink to Grafana Dashboard for Prometheus official Python client with Flask App metrics">Grafana Dashboard for Prometheus official Python client with Flask App&nbsp;metrics</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-06-01T11:00:00+02:00">
+                  01-06-2019 11:00
+                </span>
+                | upd. <span class="modified" title="2019-06-01T20:50:00+02:00">01-06-2019 20:50</span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">208 words</span>
+		|
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/prometheus/">prometheus</a> <a href="https://blog.pilosus.org/tag/grafana/">grafana</a> <a href="https://blog.pilosus.org/tag/visualization/">visualization</a> <a href="https://blog.pilosus.org/tag/metrics/">metrics</a> </span>                
+              </div><!-- /.post-info -->              <p>I&#8217;ve just <a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard">open-sourced</a> my Grafana dashboard. The dashboard designed
+for a Flask web application that exposes metrics with
+my <a class="reference external" href="https://github.com/pilosus/flask_prometheus_metrics">flask_prometheus_metrics</a> Flask&nbsp;extension.</p>
+<p>Dashboard aimed at the apps deployed with Kubernetes, although it can
+be easily tweaked to be&nbsp;infrastructure-agnostic.</p>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png"><img alt="Grfana dashboard: RPS and latency panels" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-1.png" /></a>
+<p>12 dasboard&#8217;s panels covers the following&nbsp;metrics:</p>
+<blockquote>
+<ul class="simple">
+<li>Requests per second per host, endpoint, <span class="caps">HTTP</span> method&nbsp;etc.</li>
+<li>Latency</li>
+<li>Percentiles (latency within which certain percent of requests&nbsp;served)</li>
+<li>Number of 4xx, 5xx errors per&nbsp;second</li>
+<li>Error count by&nbsp;endpoint</li>
+<li><span class="caps">CPU</span> usage per&nbsp;host</li>
+<li>Memory usage per&nbsp;host</li>
+<li>Open file descriptors per&nbsp;host</li>
+<li>App&#8217;s uptime per&nbsp;host</li>
+<li>App&#8217;s version per&nbsp;host</li>
+<li>App&#8217;s deployment environment (e.g. development, staging, production) per&nbsp;host</li>
+<li>Python interpretor version per&nbsp;host</li>
+</ul>
+</blockquote>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-2.png"><img alt="Grfana dashboard: errors and resource usage" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-2.png" /></a>
+<p>Dashboard also provides&nbsp;variables:</p>
+<blockquote>
+<ul class="simple">
+<li>Prometheus&nbsp;datasource</li>
+<li>Time&nbsp;interval</li>
+<li>Kubernetes pod&nbsp;name</li>
+<li>App&#8217;s&nbsp;endpoint</li>
+<li><span class="caps">HTTP</span>&nbsp;method</li>
+<li>Percentile</li>
+<li><span class="caps">HTTP</span> status code for&nbsp;errors</li>
+</ul>
+</blockquote>
+<a class="reference external image-reference" href="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-3.png"><img alt="Grfana dashboard: app's information" class="responsive" src="https://raw.githubusercontent.com/pilosus/prometheus-client-python-app-grafana-dashboard/master/docs/flask-app-3.png" /></a>
+<p>The variables allow to change some panels charts grouing, intervals,
+labels&nbsp;selection.</p>
+<p>Usage is&nbsp;easy:</p>
+<ol class="arabic simple">
+<li>Install <a class="reference external" href="https://github.com/pilosus/flask_prometheus_metrics">flask_prometheus_metrics</a> exporter to your Flask&nbsp;application</li>
+<li>Make Prometheus scraping your app&#8217;s <tt class="docutils literal">/metrics</tt> endpoint</li>
+<li>Import <a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json">flask-web-app.json</a> at <tt class="docutils literal"><span class="pre">https://&lt;your-grafana-domain&gt;.tld/dashboard/import</span></tt></li>
+</ol>
+<p>If you do not deploy your app in Kubernetes you may need to tweak
+<a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json">flask-web-app.json</a> <tt class="docutils literal">pod</tt> labels to meet your needs. Instead of
+<tt class="docutils literal">pod</tt> you may use <tt class="docutils literal">instance</tt> or <tt class="docutils literal">hostname</tt> or other label name
+depending on how your Prometheus handle your app&#8217;s&nbsp;hostname.</p>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>
