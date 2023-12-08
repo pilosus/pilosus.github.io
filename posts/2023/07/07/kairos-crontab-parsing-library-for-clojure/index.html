@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>kairos: crontab parsing library for Clojure</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="kairos: crontab parsing library for Clojure" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/" />
+    <meta property="og:description" content="I have been tinkering with Clojure since the late 2020. When I publish an open-source project in Clojure, it’s mostly about two goals: solving a real-world problem and learning some new concepts or tooling in Clojure ecosystem. kairos is a Clojure library for parsing crontab is no exception of …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2023-07-07" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="clojure" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/articles/">Articles</a></li>
+
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/" rel="bookmark"
+                   title="Permalink to kairos: crontab parsing library for Clojure">kairos: crontab parsing library for&nbsp;Clojure</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2023-07-07T12:00:00+02:00">
+                  07-07-2023 12:00
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">282 words</span>
+		|
+		<span class="word-count">2 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/clojure/">clojure</a> </span>                
+              </div><!-- /.post-info -->              <p>I have been tinkering with <a class="reference external" href="https://blog.pilosus.org/tag/clojure/">Clojure</a> since the late 2020. When I
+publish an open-source project in Clojure, it&#8217;s mostly about two
+goals: solving a real-world problem and learning some new concepts or
+tooling in Clojure ecosystem. <a class="reference external" href="https://github.com/pilosus/kairos">kairos</a> is a Clojure library for
+parsing crontab is no exception of this&nbsp;rule.</p>
+<p><cite>kairos</cite> parses <a class="reference external" href="https://man7.org/linux/man-pages/man5/crontab.5.html">vixie</a> crontab format and produces a lazy sequence
+of <cite>java.time.ZonedDateTime</cite> objects for <cite><span class="caps">UTC</span></cite> timezone that are in
+the&nbsp;future.</p>
+<div class="section" id="java-interop">
+<h2>Java&nbsp;interop</h2>
+<p><a class="reference external" href="https://github.com/pilosus/kairos">kairos</a> doesn&#8217;t use any Clojure wrapper libraries to work with
+<cite>java.time</cite> classes, like <a class="reference external" href="https://github.com/henryw374/cljc.java-time">cljc.java-time</a> or
+<a class="reference external" href="https://github.com/dm3/clojure.java-time">clojure.java-time</a>. Instead it uses Java interop directly, so that
+no dependencies are needed for the&nbsp;library.</p>
+<p>The main lesson learned here: using <a class="reference external" href="https://clojure.org/reference/java_interop#typehints">type hints</a> and enabling
+warnings on reflection can boost code performance to 6-8&nbsp;times!</p>
+<p>Plain <cite>(set! *warn-on-reflection* true)</cite> works well for reflection
+detection. But <a class="reference external" href="https://github.com/jonase/eastwood">eastwood</a> linter can do the job too, in addition to
+many other&nbsp;things.</p>
+</div>
+<div class="section" id="clojure-cli-and-deps-edn">
+<h2>Clojure <span class="caps">CLI</span> and&nbsp;deps.edn</h2>
+<p><a class="reference external" href="https://github.com/pilosus/kairos">kairos</a> is my first project with <cite>deps.edn</cite> and Clojure <span class="caps">CLI</span> used
+from the day 1. In my previous projects I used <a class="reference external" href="https://leiningen.org/">lein</a>. Leiningen is a
+fantastic integrated tool for all important project-related tasks from
+running tests to building an <cite>uberjar</cite>. I still think that <cite>lein</cite> is
+the best in class for Clojure beginners, who want to focus on Clojure
+code and not on the tooling. On the other hand, Clojure <span class="caps">CLI</span> allows you
+to be much more flexible when writing tasks for <span class="caps">CI</span>, e.g. create custom
+entrypoints in Clojure code for <a class="reference external" href="https://github.com/pilosus/kairos/blob/v0.1.14/build.clj#L43">testing</a> or <a class="reference external" href="https://github.com/pilosus/kairos/blob/v0.1.14/build.clj#L65">deploying jars</a> to
+Clojars. It also seems to be a first-class citizen when it comes to
+Clojure core team <a class="reference external" href="https://github.com/nubank/morse/issues/5">support</a>.</p>
+<p>Apart from official docs, Sean Corfield&#8217;s <a class="reference external" href="https://github.com/seancorfield/dot-clojure">dot-clojure</a> repo and
+Practicalli&#8217;s <a class="reference external" href="https://github.com/practicalli/clojure-cli-config">clojure-cli-config</a> are both great sources of&nbsp;inspiration.</p>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

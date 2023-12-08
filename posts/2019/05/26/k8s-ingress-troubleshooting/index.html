@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" />
+    <meta property="og:description" content="Kubernetes introduces a bunch of abstractions. It’s easy to mess up with them in your manifest files. Yet Kubernetes provides great tools for troubleshooting. Here is how you can tackle problems with Ingress and Service resources." />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2019-05-26" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="k8s" />
+    <meta property="article:tag" content="ingress" />
+    <meta property="article:tag" content="digitalocean" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/articles/">Articles</a></li>
+
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" rel="bookmark"
+                   title="Permalink to Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service">Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for&nbsp;Service</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-05-26T12:00:00+02:00">
+                  26-05-2019 12:00
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">460 words</span>
+		|
+		<span class="word-count">2 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/k8s/">k8s</a> <a href="https://blog.pilosus.org/tag/ingress/">ingress</a> <a href="https://blog.pilosus.org/tag/digitalocean/">digitalocean</a> </span>                
+              </div><!-- /.post-info -->              <p>Recently I&#8217;ve set up an <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes">Nginx Ingress Controller</a> on my DigitalOcean
+Kubernetes cluster. It&#8217;s make up of a replica set of pods that run an
+Nginx web server and watch for <tt class="docutils literal">Ingress</tt> resource
+deployment. Controller also fires up a <tt class="docutils literal">LoadBalancer</tt> service that
+routes and balances external traffic to the Nginx pods. In turn Nginx
+pods route traffic to your app pods in accordance with rules from
+app&#8217;s Ingress manifest. All in all, the whole topology is the&nbsp;following:</p>
+<div class="figure">
+<a class="reference external image-reference" href="https://blog.pilosus.org/images/ingress.png"><img alt="Kubernetes cluster with Nginx Ingress Controller" class="responsive" src="https://blog.pilosus.org/images/ingress.png" /></a>
+</div>
+<p>The problem is Kubernetes uses quite a few abstractions (Pods,
+Deployments, Services, Ingress, Roles, etc.) so that it&#8217;s easy to make
+a mistake. The good news is Kubernetes gives you great tools to
+troubleshoot problems you have bumped into. In my case the first
+response I&#8217;ve got after I set up an Ingress Controller was Nginx&#8217;s 503
+error code (service temporarily unavailable). Here is how I&#8217;ve fixed&nbsp;it.</p>
+<div class="section" id="kubernetes-nginx-ingress-controller-troubleshooting">
+<h2>Kubernetes Nginx Ingress Controller&nbsp;Troubleshooting</h2>
+<p>Let&#8217;s assume we are using <a class="reference external" href="https://github.com/kubernetes/ingress-nginx">Kubernetes Nginx Ingress Controller</a> as
+there are other implementations too. Its components get deployed into
+their own <tt class="docutils literal">Namespace</tt> called <tt class="docutils literal"><span class="pre">ingress-nginx</span></tt>.</p>
+<p>The first thing you are going to see to find out why a service
+responds with 503 status code is Nginx logs. Let&#8217;s see a list of pods
+with&nbsp;Nginx:</p>
+<pre class="literal-block">
+$ ~ kubectl get pods --namespace ingress-nginx
+NAME                                        READY   STATUS    RESTARTS   AGE
+nginx-ingress-controller-5694ccb578-l82hc   1/1     Running   0          21h
+</pre>
+<p>Having only a signle pod it&#8217;s easier to skim through the logs with
+<tt class="docutils literal">kubectl logs</tt>. If there were multiple pods it would be much more
+convenient to have <span class="caps">ELK</span> (or <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-elasticsearch-fluentd-and-kibana-efk-logging-stack-on-kubernetes"><span class="caps">EFK</span></a>) stack running in the&nbsp;cluster.</p>
+<p>Looking up the log we&nbsp;see:</p>
+<pre class="literal-block">
+$ kubectl logs -f nginx-ingress-controller-5694ccb578-l82hc --namespace ingress-nginx
+...
+Error obtaining Endpoints for Service &quot;&lt;namespace&gt;/&lt;your-app-service&gt;&quot;:
+no object matching key &quot;&lt;namespace&gt;/&lt;your-app-service&gt;&quot; in local store
+...
+</pre>
+<p>Let&#8217;s see what endpoints we&nbsp;have:</p>
+<pre class="literal-block">
+$ kubectl get endpoints --namespace &lt;namespace&gt;
+...
+&lt;namespace&gt; &lt;your-app-service&gt;  &lt;none&gt; 21h
+...
+</pre>
+<p>Indeed, our service have no endpoints. That means that a <a class="reference external" href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a>
+deployed to expose your app&#8217;s pods doesn&#8217;t actually have a virtual <span class="caps">IP</span>
+address. There are two cases when a service doesn&#8217;t have an <span class="caps">IP</span>: it&#8217;s
+either <a class="reference external" href="https://kubernetes.io/docs/concepts/services-networking/service/#headless-services">headless</a> or you have messed up with <a class="reference external" href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors">label selectors</a>.
+<strong>Check your label selectors carefully!</strong> You know what you&#8217;re doing
+when using headless services. So most likely it&#8217;s a wrong label name
+or value that doesn&#8217;t match your app&#8217;s pods! So was in my own case, by
+the&nbsp;way.</p>
+<p>Once you fixed your labels reapply your app&#8217;s service and check
+endpoints once&nbsp;again:</p>
+<pre class="literal-block">
+$ kubectl get endpoints --namespace &lt;namespace&gt;
+...
+&lt;namespace&gt;  &lt;your-app-service&gt;  10.244.0.136:8080,10.244.0.144:8080,10.244.0.185:8080  21h
+...
+</pre>
+<p>Now our service exposes three local <span class="caps">IP</span>:port pairs of type
+<tt class="docutils literal">ClusterIP</tt>! <tt class="docutils literal">ClusterIP</tt> is a <a class="reference external" href="https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types">service type</a> that fits best to
+the setup with an Ingress Controller and a Load Balancer routing
+external traffic to&nbsp;it.</p>
+<p>Request to a service now returns 200 <span class="caps">OK</span>.</p>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

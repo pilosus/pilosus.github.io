@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-09-11T15:00:00+02:00</updated><entry><title>GNU Stow repo with git submodules</title><link href="https://blog.pilosus.org/blog/gnu-stow-repo-with-git-submodules/" rel="alternate"></link><published>2023-09-11T15:00:00+02:00</published><updated>2023-09-11T15:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-09-11:/blog/gnu-stow-repo-with-git-submodules/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; &lt;a class="reference external" href="https://www.gnu.org/software/stow/manual/stow.html"&gt;Stow&lt;/a&gt; is a tool to manage symlinks from a single directory. That
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-09-11T15:00:00+02:00</updated><entry><title>GNU Stow repo with git submodules</title><link href="https://blog.pilosus.org/posts/2023/09/11/gnu-stow-repo-with-git-submodules/" rel="alternate"></link><published>2023-09-11T15:00:00+02:00</published><updated>2023-09-11T15:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-09-11:/posts/2023/09/11/gnu-stow-repo-with-git-submodules/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; &lt;a class="reference external" href="https://www.gnu.org/software/stow/manual/stow.html"&gt;Stow&lt;/a&gt; is a tool to manage symlinks from a single directory. That
 makes the tool a perfect candidte to keep configuration files (or
 dotfiles) in a &lt;span class="caps"&gt;VCS&lt;/span&gt; repository, such as a Git repo. This is where &lt;a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;git
 submodules&lt;/a&gt; come in handy: oftentimes people maintain configurations
@@ -91,7 +91,7 @@ other authentication&amp;nbsp;information.&lt;/p&gt;
 checking out a certain commit or tag, pushing changes upstream,
 etc. That makes the package management easy and&amp;nbsp;flexible.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="blog"></category><category term="dotfiles"></category><category term="shell"></category></entry><entry><title>Clojure: decision fatigue</title><link href="https://blog.pilosus.org/blog/clojure-decision-fatigue/" rel="alternate"></link><published>2023-07-16T17:00:00+02:00</published><updated>2023-07-16T17:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-16:/blog/clojure-decision-fatigue/</id><summary type="html">&lt;p&gt;As someone who uses Clojure mostly for solo projects I often find
+</content><category term="blog"></category><category term="dotfiles"></category><category term="shell"></category></entry><entry><title>Clojure: decision fatigue</title><link href="https://blog.pilosus.org/posts/2023/07/16/clojure-decision-fatigue/" rel="alternate"></link><published>2023-07-16T17:00:00+02:00</published><updated>2023-07-16T17:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-16:/posts/2023/07/16/clojure-decision-fatigue/</id><summary type="html">&lt;p&gt;As someone who uses Clojure mostly for solo projects I often find
 myself in a situation when a decision on what libraries to use is
 hard. Clojure and its community seems to follow &amp;#8220;There Is More Than
 One Way To Do It&amp;#8221; path. Possibly often unintentiallally, because the
@@ -158,7 +158,7 @@ can ask questions to some experienced Clojure programmers, but also
 search the Slack&amp;#8217;s&amp;nbsp;history.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="clojure"></category></entry><entry><title>Clojure workflow</title><link href="https://blog.pilosus.org/articles/clojure-workflow/" rel="alternate"></link><published>2023-07-16T17:00:00+02:00</published><updated>2023-07-16T17:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-16:/articles/clojure-workflow/</id><content type="html">&lt;p&gt;This is a&amp;nbsp;draft.&lt;/p&gt;
+</content><category term="Blog"></category><category term="clojure"></category></entry><entry><title>Clojure workflow</title><link href="https://blog.pilosus.org/posts/2023/07/16/clojure-workflow/" rel="alternate"></link><published>2023-07-16T17:00:00+02:00</published><updated>2023-07-16T17:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-16:/posts/2023/07/16/clojure-workflow/</id><content type="html">&lt;p&gt;This is a&amp;nbsp;draft.&lt;/p&gt;
 &lt;p&gt;Topics to be covered&amp;nbsp;here:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;span class="caps"&gt;IDE&lt;/span&gt;: Emacs/&lt;span class="caps"&gt;CIDER&lt;/span&gt;&lt;/li&gt;
@@ -167,7 +167,7 @@ search the Slack&amp;#8217;s&amp;nbsp;history.&lt;/p&gt;
 &lt;li&gt;&lt;span class="caps"&gt;REPL&lt;/span&gt; workflow: &lt;cite&gt;(comment &amp;#8230;)&lt;/cite&gt;&lt;/li&gt;
 &lt;li&gt;Debugging: &lt;cite&gt;tap&amp;gt;&lt;/cite&gt; &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;Portal&lt;/li&gt;
 &lt;/ul&gt;
-</content><category term="Articles"></category><category term="clojure"></category></entry><entry><title>Debugging and patching Clojure code running in production using socket server and REPL</title><link href="https://blog.pilosus.org/blog/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/" rel="alternate"></link><published>2023-07-07T20:00:00+02:00</published><updated>2023-07-07T20:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/blog/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/</id><summary type="html">&lt;p&gt;Common Lisp is well known for its interactivity. The story of &lt;span class="caps"&gt;NASA&lt;/span&gt;
+</content><category term="Articles"></category><category term="clojure"></category></entry><entry><title>Debugging and patching Clojure code running in production using socket server and REPL</title><link href="https://blog.pilosus.org/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/" rel="alternate"></link><published>2023-07-07T20:00:00+02:00</published><updated>2023-07-07T20:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/</id><summary type="html">&lt;p&gt;Common Lisp is well known for its interactivity. The story of &lt;span class="caps"&gt;NASA&lt;/span&gt;
 engineers who used remote &lt;span class="caps"&gt;REPL&lt;/span&gt; to patch Lisp code running 60 million
 miles away inside the interplanetary spacecraft is &lt;a class="reference external" href="https://youtu.be/_gZK0tW8EhQ"&gt;well known&lt;/a&gt;
 too. You can debug and patch Clojure code running in production using
@@ -338,7 +338,7 @@ longer time needed to prepare and deploy the hotfix. You should know
 what you are&amp;nbsp;doing.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="clojure"></category><category term="repl"></category></entry><entry><title>kairos: crontab parsing library for Clojure</title><link href="https://blog.pilosus.org/blog/kairos-crontab-parsing-library-for-clojure/" rel="alternate"></link><published>2023-07-07T12:00:00+02:00</published><updated>2023-07-07T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/blog/kairos-crontab-parsing-library-for-clojure/</id><summary type="html">&lt;p&gt;I have been tinkering with &lt;a class="reference external" href="https://blog.pilosus.org/tag/clojure/"&gt;Clojure&lt;/a&gt; since the late 2020. When I
+</content><category term="Blog"></category><category term="clojure"></category><category term="repl"></category></entry><entry><title>kairos: crontab parsing library for Clojure</title><link href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/" rel="alternate"></link><published>2023-07-07T12:00:00+02:00</published><updated>2023-07-07T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-07:/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/</id><summary type="html">&lt;p&gt;I have been tinkering with &lt;a class="reference external" href="https://blog.pilosus.org/tag/clojure/"&gt;Clojure&lt;/a&gt; since the late 2020. When I
 publish an open-source project in Clojure, it&amp;#8217;s mostly about two
 goals: solving a real-world problem and learning some new concepts or
 tooling in Clojure ecosystem. &lt;a class="reference external" href="https://github.com/pilosus/kairos"&gt;kairos&lt;/a&gt; is a Clojure library for
@@ -377,7 +377,7 @@ Clojure core team &lt;a class="reference external" href="https://github.com/nuba
 &lt;p&gt;Apart from official docs, Sean Corfield&amp;#8217;s &lt;a class="reference external" href="https://github.com/seancorfield/dot-clojure"&gt;dot-clojure&lt;/a&gt; repo and
 Practicalli&amp;#8217;s &lt;a class="reference external" href="https://github.com/practicalli/clojure-cli-config"&gt;clojure-cli-config&lt;/a&gt; are both great sources of&amp;nbsp;inspiration.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="clojure"></category></entry><entry><title>dienstplan: Slack bot for duty rotations</title><link href="https://blog.pilosus.org/blog/dienstplan/" rel="alternate"></link><published>2022-01-16T00:59:00+01:00</published><updated>2022-01-16T00:59:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2022-01-16:/blog/dienstplan/</id><summary type="html">&lt;p class="first last"&gt;A simple bot app for on-call duty rotations in your team&amp;#8217;s Slack&amp;nbsp;channels&lt;/p&gt;
+</content><category term="Blog"></category><category term="clojure"></category></entry><entry><title>dienstplan: Slack bot for duty rotations</title><link href="https://blog.pilosus.org/posts/2022/01/16/dienstplan/" rel="alternate"></link><published>2022-01-16T00:59:00+01:00</published><updated>2022-01-16T00:59:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2022-01-16:/posts/2022/01/16/dienstplan/</id><summary type="html">&lt;p class="first last"&gt;A simple bot app for on-call duty rotations in your team&amp;#8217;s Slack&amp;nbsp;channels&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;dienstplan&lt;/a&gt; is a Slack bot for duty rotations. It&amp;#8217;s dead simple:
 just a few commands to manage on-call duty rotations in your team&amp;#8217;s
 Slack channels. The bot application follows the rule &amp;#8220;Do One Thing and
@@ -431,38 +431,38 @@ reminder to rotate users&amp;nbsp;weekly:&lt;/p&gt;
 &lt;p&gt;Grab &lt;tt class="docutils literal"&gt;dienstplan&lt;/tt&gt; from the &lt;a class="reference external" href="https://github.com/pilosus/dienstplan"&gt;GitHub&lt;/a&gt; repository along with user
 documentation, installation guide and &lt;a class="reference external" href="https://github.com/pilosus/dienstplan-deploy"&gt;deployment scripts&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="foss"></category><category term="slack"></category><category term="clojure"></category></entry><entry><title>pip-license-checker: detect third-party dependencies with “wrong” licenses</title><link href="https://blog.pilosus.org/blog/pip-license-checker/" rel="alternate"></link><published>2021-09-07T09:10:00+02:00</published><updated>2021-09-16T15:54:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2021-09-07:/blog/pip-license-checker/</id><summary type="html">&lt;p class="first last"&gt;Detect license types for your poject&amp;#8217;s third-party&amp;nbsp;dependencies&lt;/p&gt;
+</content><category term="Blog"></category><category term="foss"></category><category term="slack"></category><category term="clojure"></category></entry><entry><title>pip-license-checker: detect third-party dependencies with “wrong” licenses</title><link href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/" rel="alternate"></link><published>2021-09-07T09:10:00+02:00</published><updated>2021-09-16T15:54:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2021-09-07:/posts/2021/09/07/pip-license-checker/</id><summary type="html">&lt;p class="first last"&gt;Detect license types for your poject&amp;#8217;s third-party&amp;nbsp;dependencies&lt;/p&gt;
 </summary><content type="html">&lt;div class="contents topic" id="table-of-contents"&gt;
 &lt;p class="topic-title"&gt;Table of&amp;nbsp;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id1" id="id11"&gt;Intro&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id12"&gt;What is &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#why-license-checks-are-needed" id="id13"&gt;Why license checks are&amp;nbsp;needed?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#why-automating-license-compliance-checks-is-needed" id="id14"&gt;Why automating license compliance checks is&amp;nbsp;needed?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#who-needs-to-check-licenses" id="id15"&gt;Who needs to check&amp;nbsp;licenses?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#why-pip-license-checker" id="id16"&gt;Why &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#what-are-license-types" id="id17"&gt;What are license types?&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#copyright-or-end-user-license-agreement" id="id18"&gt;Copyright or End-user license&amp;nbsp;agreement&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id3" id="id19"&gt;Public-domain-like&amp;nbsp;licenses&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#permissive-licenses-requiring-attribution" id="id20"&gt;Permissive licenses requiring&amp;nbsp;attribution&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#copyleft" id="id21"&gt;Copyleft&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id4" id="id22"&gt;Weak&amp;nbsp;copyleft&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id5" id="id23"&gt;Strong&amp;nbsp;copyleft&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#copyleft-over-a-network" id="id24"&gt;Copyleft over a&amp;nbsp;network&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#intro-1" id="toc-entry-1"&gt;Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-is-pip-license-checker-1" id="toc-entry-2"&gt;What is &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-license-checks-are-needed" id="toc-entry-3"&gt;Why license checks are&amp;nbsp;needed?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-automating-license-compliance-checks-is-needed" id="toc-entry-4"&gt;Why automating license compliance checks is&amp;nbsp;needed?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#who-needs-to-check-licenses" id="toc-entry-5"&gt;Who needs to check&amp;nbsp;licenses?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-pip-license-checker" id="toc-entry-6"&gt;Why &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-are-license-types" id="toc-entry-7"&gt;What are license types?&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#copyright-or-end-user-license-agreement" id="toc-entry-8"&gt;Copyright or End-user license&amp;nbsp;agreement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#public-domain-like-licenses-1" id="toc-entry-9"&gt;Public-domain-like&amp;nbsp;licenses&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#permissive-licenses-requiring-attribution" id="toc-entry-10"&gt;Permissive licenses requiring&amp;nbsp;attribution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#copyleft" id="toc-entry-11"&gt;Copyleft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#weak-copyleft-1" id="toc-entry-12"&gt;Weak&amp;nbsp;copyleft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#strong-copyleft-1" id="toc-entry-13"&gt;Strong&amp;nbsp;copyleft&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#copyleft-over-a-network" id="toc-entry-14"&gt;Copyleft over a&amp;nbsp;network&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id6" id="id25"&gt;License&amp;nbsp;categorisation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#technical-facts" id="id26"&gt;Technical&amp;nbsp;facts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id7" id="id27"&gt;Outro&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id8" id="id28"&gt;Disclaimer&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id9" id="id29"&gt;Addendum&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#interview-2021-09-15" id="id30"&gt;Interview&amp;nbsp;2021-09-15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#license-categorisation-1" id="toc-entry-15"&gt;License&amp;nbsp;categorisation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#technical-facts" id="toc-entry-16"&gt;Technical&amp;nbsp;facts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#outro-1" id="toc-entry-17"&gt;Outro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#disclaimer-1" id="toc-entry-18"&gt;Disclaimer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#addendum-1" id="toc-entry-19"&gt;Addendum&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#interview-2021-09-15" id="toc-entry-20"&gt;Interview&amp;nbsp;2021-09-15&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;span id="intro"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id11"&gt;Intro&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="intro-1"&gt;
+&lt;span id="intro"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-1"&gt;Intro&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A software project may have hundreds of third-party dependencies. Even
 when available freely over the Internet, these dependencies may be
 distributed under licenses with some conditions, more or less
@@ -478,8 +478,8 @@ important. Once you know what are you looking for, check your
 dependencies regularly. &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; is a tool for
 automating license type checks that may&amp;nbsp;help.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;span id="what-is-pip-license-checker"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id12"&gt;What is &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="what-is-pip-license-checker-1"&gt;
+&lt;span id="what-is-pip-license-checker"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-2"&gt;What is &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; is a license compliance tool. It detects
 &lt;a class="reference internal" href="#license-types"&gt;license types&lt;/a&gt; for your project&amp;#8217;s third-party dependencies. The tool
 covers the majority of popular free/libre and open-source (&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Free_and_open-source_software"&gt;&lt;span class="caps"&gt;FLOSS&lt;/span&gt;&lt;/a&gt;)
@@ -519,7 +519,7 @@ plugins. You can easily incorporate the tool into &lt;span class="caps"&gt;CI&lt
 automate license compliance checks.&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;div class="section" id="why-license-checks-are-needed"&gt;
-&lt;span id="why-check-license"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id13"&gt;Why license checks are&amp;nbsp;needed?&lt;/a&gt;&lt;/h2&gt;
+&lt;span id="why-check-license"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-3"&gt;Why license checks are&amp;nbsp;needed?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Nobody develops software from scratch today. Software development has
 evolved from an artisan shop&amp;#8217;s craft to a heavy industry assembly
 line. We, software developers, &lt;em&gt;rely heavily on third-party code&lt;/em&gt;:
@@ -566,7 +566,7 @@ checks are&amp;nbsp;needed.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;div class="section" id="why-automating-license-compliance-checks-is-needed"&gt;
-&lt;span id="why-automate"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id14"&gt;Why automating license compliance checks is&amp;nbsp;needed?&lt;/a&gt;&lt;/h2&gt;
+&lt;span id="why-automate"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-4"&gt;Why automating license compliance checks is&amp;nbsp;needed?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The number of third-party dependencies (deps) in a project may be
 high: from tens in a tiny personal pet project to hundreds in a big
 one, to even thousands in the enterprise settings. As the project
@@ -601,7 +601,7 @@ lifetime&amp;nbsp;too.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;div class="section" id="who-needs-to-check-licenses"&gt;
-&lt;span id="who-needs-checks"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;Who needs to check&amp;nbsp;licenses?&lt;/a&gt;&lt;/h2&gt;
+&lt;span id="who-needs-checks"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-5"&gt;Who needs to check&amp;nbsp;licenses?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Anyone&amp;nbsp;who:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;develops a proprietary project based on other &lt;span class="caps"&gt;FLOSS&lt;/span&gt;&amp;nbsp;code&lt;/li&gt;
@@ -619,7 +619,7 @@ have license compliance in place before an investment round, valuation
 or&amp;nbsp;acquisition.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="why-pip-license-checker"&gt;
-&lt;span id="who-pip-license-checker"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;Why &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/h2&gt;
+&lt;span id="who-pip-license-checker"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-6"&gt;Why &lt;cite&gt;pip-license-checker&lt;/cite&gt;?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;There are dozens of tools and plugins to detect &lt;strong&gt;license names&lt;/strong&gt;
 for the third-party dependencies used in your project. But as it has
 been said above, for a large number of dependencies and an
@@ -631,11 +631,11 @@ unacceptable in her/his project and get alerted whenever the licenses
 of &amp;#8220;wrong&amp;#8221; types are found among the project&amp;#8217;s third-party&amp;nbsp;dependencies.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="what-are-license-types"&gt;
-&lt;span id="license-types"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id17"&gt;What are license&amp;nbsp;types?&lt;/a&gt;&lt;/h2&gt;
+&lt;span id="license-types"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-7"&gt;What are license&amp;nbsp;types?&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Despite a large number of licenses used by third-party dependencies,
 all of them can be split into a relatively small number of&amp;nbsp;categories.&lt;/p&gt;
 &lt;div class="section" id="copyright-or-end-user-license-agreement"&gt;
-&lt;span id="copyright"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id18"&gt;Copyright or End-user license&amp;nbsp;agreement&lt;/a&gt;&lt;/h3&gt;
+&lt;span id="copyright"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-8"&gt;Copyright or End-user license&amp;nbsp;agreement&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;At the highest level, we may divide all the licenses into proprietary
 end-user license agreements (&lt;a class="reference external" href="https://en.wikipedia.org/wiki/End-user_license_agreement"&gt;&lt;span class="caps"&gt;EULA&lt;/span&gt;&lt;/a&gt;) and free/libre and open-source
 (&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Free_and_open-source_software"&gt;&lt;span class="caps"&gt;FLOSS&lt;/span&gt;&lt;/a&gt;) licenses. &lt;span class="caps"&gt;EULA&lt;/span&gt; dependencies may be freely available over
@@ -653,15 +653,15 @@ software or its derivative&amp;nbsp;works.&lt;/p&gt;
 agreement, it&amp;#8217;s worth reading it as some unexpected conditions may
 apply even if the dependency is freely available over the&amp;nbsp;network.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id3"&gt;
-&lt;span id="public-domain-like-licenses"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id19"&gt;Public-domain-like&amp;nbsp;licenses&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="public-domain-like-licenses-1"&gt;
+&lt;span id="public-domain-like-licenses"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-9"&gt;Public-domain-like&amp;nbsp;licenses&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The most permissive type of &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses is &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Public-domain-equivalent_license"&gt;public domain&lt;/a&gt;
 equivalent licenses. &lt;a class="reference external" href="https://opensource.org/licenses/0BSD"&gt;Zero-Clause &lt;span class="caps"&gt;BSD&lt;/span&gt;&lt;/a&gt; is a great example of
 public-domain-like licenses. This license type has &lt;strong&gt;no conditions&lt;/strong&gt;,
 but may have a &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Liability_waiver"&gt;liability waiver&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="permissive-licenses-requiring-attribution"&gt;
-&lt;span id="permissive-with-notice"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id20"&gt;Permissive licenses requiring&amp;nbsp;attribution&lt;/a&gt;&lt;/h3&gt;
+&lt;span id="permissive-with-notice"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-10"&gt;Permissive licenses requiring&amp;nbsp;attribution&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Permissive licenses with attribution clause usually allow modification
 and redistribution under the license of choice with the only condition
 of preserving original copyright notice. Some licenses are
@@ -676,7 +676,7 @@ into a proprietary close-sourced code base or incorporated into a
 &lt;span class="caps"&gt;FLOSS&lt;/span&gt; project with no&amp;nbsp;relicensing.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="copyleft"&gt;
-&lt;span id="copyleft-licenses"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id21"&gt;Copyleft&lt;/a&gt;&lt;/h3&gt;
+&lt;span id="copyleft-licenses"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-11"&gt;Copyleft&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://en.wikipedia.org/wiki/Copyleft"&gt;Copyleft&lt;/a&gt; is the next big category of licenses. The licenses of this
 type may also be called &lt;strong&gt;reciprocal&lt;/strong&gt; as they require that
 modification and distribution of derivative works are done under the
@@ -685,8 +685,8 @@ same or compatible license with the source code made&amp;nbsp;available.&lt;/p&g
 scale as well and can be broken down into the following fine-grained
 copyleft license&amp;nbsp;types.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;span id="weak-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id22"&gt;Weak&amp;nbsp;copyleft&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="weak-copyleft-1"&gt;
+&lt;span id="weak-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-12"&gt;Weak&amp;nbsp;copyleft&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Weak copyleft licenses trigger the copyleft (reciprocal share-alike
 mechanism requiring to disclose the derivative work&amp;#8217;s source code and
 to use the same or compatible license) when an original file or a
@@ -703,8 +703,8 @@ care about sharing the improvements made to the original work. Weak
 copyleft licenses may be unacceptable in some cases but very welcome
 in&amp;nbsp;others.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;span id="strong-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id23"&gt;Strong&amp;nbsp;copyleft&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="strong-copyleft-1"&gt;
+&lt;span id="strong-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-13"&gt;Strong&amp;nbsp;copyleft&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The strong copyleft license type tries to go even further in its
 conditions that require to disclose the source code of the derivative
 works and require to use the same strong copyleft license. Combining
@@ -728,7 +728,7 @@ customers (e.g. on your computer only, or on your company&amp;#8217;s server
 only) is not considered a distribution and does not trigger the&amp;nbsp;copyleft.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="copyleft-over-a-network"&gt;
-&lt;span id="network-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#id24"&gt;Copyleft over a&amp;nbsp;network&lt;/a&gt;&lt;/h3&gt;
+&lt;span id="network-copyleft"&gt;&lt;/span&gt;&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-14"&gt;Copyleft over a&amp;nbsp;network&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The most restrictive license category of all copyleft
 licenses. Network copyleft license type picks up where the strong
 copyleft has left, i.e. it expands what distribution is and amends
@@ -746,8 +746,8 @@ running there.&lt;/blockquote&gt;
 cases so that detecting it in your project&amp;#8217;s dependencies is&amp;nbsp;important.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;span id="license-categorisation"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id25"&gt;License&amp;nbsp;categorisation&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="license-categorisation-1"&gt;
+&lt;span id="license-categorisation"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-15"&gt;License&amp;nbsp;categorisation&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Categorisation of popular &lt;span class="caps"&gt;FLOSS&lt;/span&gt; licenses into a few above-mentioned
 license types is the primary value of the &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt;
 tool. Technically speaking, it&amp;#8217;s just a mapping between regular
@@ -763,15 +763,15 @@ have also resulted in some inaccuracies. Please, &lt;a class="reference external
 regarding the license&amp;nbsp;types.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="technical-facts"&gt;
-&lt;span id="tech-facts"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id26"&gt;Technical&amp;nbsp;facts&lt;/a&gt;&lt;/h2&gt;
+&lt;span id="tech-facts"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-16"&gt;Technical&amp;nbsp;facts&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; is a program written in &lt;a class="reference external" href="https://clojure.org/"&gt;Clojure&lt;/a&gt;. With
 quality in mind, the code has high &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Code_coverage"&gt;test coverage&lt;/a&gt; and uses
 generative property-based testing. The tool&amp;#8217;s own &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; pipeline
 includes a step for checking 3rd-party dependencies&amp;#8217; licenses with
 &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;span id="outro"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id27"&gt;Outro&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="outro-1"&gt;
+&lt;span id="outro"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-17"&gt;Outro&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Make use you know what license types are safe/desirable for your
 project&amp;#8217;s 3rd-party dependencies. Is your project an open-source
 library for others to dynamically link in their software? Or a
@@ -791,18 +791,18 @@ not safe to use. The &lt;a class="reference external" href="https://github.com/p
 repository and the correspondent &lt;a class="reference external" href="https://github.com/pilosus/action-pip-license-checker"&gt;GitHub Action&lt;/a&gt;. Your feedback is
 welcome via &lt;a class="reference external" href="https://blog.pilosus.org/pages/contact/"&gt;email&lt;/a&gt; or &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker/issues"&gt;GitHub Issues&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id8"&gt;
-&lt;span id="disclaimer"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id28"&gt;Disclaimer&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="disclaimer-1"&gt;
+&lt;span id="disclaimer"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-18"&gt;Disclaimer&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; and this blog post are provided on an &amp;#8220;as-is&amp;#8221;
 basis and make no warranties regarding any information provided
 through them and disclaim liability for damages resulting from using
 them. Using &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt; and this blog post does not
 constitute legal advice nor does it create an attorney-client&amp;nbsp;relationship.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id9"&gt;
-&lt;span id="addendum"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#id29"&gt;Addendum&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="addendum-1"&gt;
+&lt;span id="addendum"&gt;&lt;/span&gt;&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-19"&gt;Addendum&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="interview-2021-09-15"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id30"&gt;Interview&amp;nbsp;2021-09-15&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-20"&gt;Interview&amp;nbsp;2021-09-15&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;I&amp;#8217;ve been &lt;a class="reference external" href="https://youtu.be/OMT2uouK__8"&gt;interviewed&lt;/a&gt; by &lt;a class="reference external" href="https://www.yegor256.com/"&gt;Yegor Bugayenko&lt;/a&gt; recently. We&amp;#8217;ve talked
 about the &lt;a class="reference external" href="https://github.com/pilosus/pip-license-checker"&gt;pip-license-checker&lt;/a&gt;. As my very first public presentation
 of the project, the interview isn&amp;#8217;t a perfect one. I&amp;#8217;ve updated and
@@ -813,7 +813,7 @@ for further&amp;nbsp;development.&lt;/p&gt;
 &lt;!-- Links --&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="license"></category><category term="dependencies"></category><category term="license-management"></category><category term="compliance"></category><category term="foss"></category><category term="clojure"></category></entry><entry><title>Book review: The Clean Coder by Robert C. Martin</title><link href="https://blog.pilosus.org/blog/the-clean-coder-book-review/" rel="alternate"></link><published>2020-06-14T22:30:00+02:00</published><updated>2020-06-14T22:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-06-14:/blog/the-clean-coder-book-review/</id><summary type="html">&lt;p class="first last"&gt;A Code Of Conduct For Professional&amp;nbsp;Programmers&lt;/p&gt;
+</content><category term="Blog"></category><category term="license"></category><category term="dependencies"></category><category term="license-management"></category><category term="compliance"></category><category term="foss"></category><category term="clojure"></category></entry><entry><title>Book review: The Clean Coder by Robert C. Martin</title><link href="https://blog.pilosus.org/posts/2020/06/14/the-clean-coder-book-review/" rel="alternate"></link><published>2020-06-14T22:30:00+02:00</published><updated>2020-06-14T22:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-06-14:/posts/2020/06/14/the-clean-coder-book-review/</id><summary type="html">&lt;p class="first last"&gt;A Code Of Conduct For Professional&amp;nbsp;Programmers&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;em&gt;A Code Of Conduct For Professional Programmers&lt;/em&gt;, a subtitle of the
 book, says it all. Robert C. Martin answers the question: what does it
 mean to be a professional&amp;nbsp;programmer.&lt;/p&gt;
@@ -885,7 +885,7 @@ book will become a revelation for a reader in 2020. Yet it certainly
 encourages you to think about what does it mean exactly to be a
 professional and master your&amp;nbsp;skills.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="book"></category><category term="review"></category></entry><entry><title>PostgreSQL: find sequences of same-parameter values within ordered groups</title><link href="https://blog.pilosus.org/blog/postgresql-consecutive-occurrences-within-ordered-groups/" rel="alternate"></link><published>2020-04-18T18:00:00+02:00</published><updated>2020-04-18T18:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-18:/blog/postgresql-consecutive-occurrences-within-ordered-groups/</id><summary type="html">&lt;p class="first last"&gt;Using a window function find and group consecutive
+</content><category term="Blog"></category><category term="book"></category><category term="review"></category></entry><entry><title>PostgreSQL: find sequences of same-parameter values within ordered groups</title><link href="https://blog.pilosus.org/posts/2020/04/18/postgresql-consecutive-occurrences-within-ordered-groups/" rel="alternate"></link><published>2020-04-18T18:00:00+02:00</published><updated>2020-04-18T18:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-18:/posts/2020/04/18/postgresql-consecutive-occurrences-within-ordered-groups/</id><summary type="html">&lt;p class="first last"&gt;Using a window function find and group consecutive
 occurences of the values with the same&amp;nbsp;paratemer&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve been solving a problem of finding database items that
 have to be grouped by one parameter (let&amp;#8217;s say a name), then ordered
@@ -1015,7 +1015,7 @@ and partitioning by a name and a&amp;nbsp;flag&lt;/li&gt;
 &lt;p&gt;Summing up the post I would say that &lt;span class="caps"&gt;SQL&lt;/span&gt; and PostgreSQL specifically
 is a powerfull tool worth learning. Window functions allow doing some
 sophisticated analytics with a single &lt;span class="caps"&gt;SQL&lt;/span&gt;&amp;nbsp;query.&lt;/p&gt;
-</content><category term="Blog"></category><category term="sql"></category><category term="postgres"></category></entry><entry><title>workflow-tools: start using GitHub Actions at scale</title><link href="https://blog.pilosus.org/blog/workflow-tools-start-using-github-actions-at-scale/" rel="alternate"></link><published>2020-04-01T18:10:00+02:00</published><updated>2020-04-01T18:10:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-01:/blog/workflow-tools-start-using-github-actions-at-scale/</id><summary type="html">&lt;p&gt;Microservice architecture may have dozens or even hundreds of
+</content><category term="Blog"></category><category term="sql"></category><category term="postgres"></category></entry><entry><title>workflow-tools: start using GitHub Actions at scale</title><link href="https://blog.pilosus.org/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/" rel="alternate"></link><published>2020-04-01T18:10:00+02:00</published><updated>2020-04-01T18:10:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-04-01:/posts/2020/04/01/workflow-tools-start-using-github-actions-at-scale/</id><summary type="html">&lt;p&gt;Microservice architecture may have dozens or even hundreds of
 lookalikes services that require similar &lt;span class="caps"&gt;CI&lt;/span&gt;/&lt;span class="caps"&gt;CD&lt;/span&gt; workflows. With
 infrastructure as code approach taken by the GitHub Actions, why not
 using code generation? Provisioning a repository for a new
@@ -1136,7 +1136,7 @@ multiple repositories, then &lt;a class="reference external" href="https://githu
 &lt;li&gt;&lt;a class="reference external" href="https://pypi.org/project/workflow-tools/"&gt;PyPI&amp;nbsp;Package&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="opensource"></category><category term="automation"></category><category term="microservice"></category></entry><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/blog/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+01:00</published><updated>2020-01-25T13:45:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/blog/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
+</content><category term="Blog"></category><category term="opensource"></category><category term="automation"></category><category term="microservice"></category></entry><entry><title>Python logging: why printf-style string formatting may be better than f-strings</title><link href="https://blog.pilosus.org/posts/2020/01/24/python-f-strings-in-logging/" rel="alternate"></link><published>2020-01-24T09:10:00+01:00</published><updated>2020-01-25T13:45:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2020-01-24:/posts/2020/01/24/python-f-strings-in-logging/</id><summary type="html">&lt;p class="first last"&gt;Python logging module provides optimizations when %-formatting is&amp;nbsp;used&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides more than one way to format strings: &lt;a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting"&gt;%-formatting&lt;/a&gt;,
 &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;str.format()&lt;/a&gt;, &lt;a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"&gt;string.Template&lt;/a&gt; and &lt;a class="reference external" href="https://www.python.org/dev/peps/pep-0498/"&gt;f-strings&lt;/a&gt;.  What format
 developers use is the matter of personal aesthetic reasons rather than
@@ -1234,7 +1234,7 @@ you when &lt;tt class="docutils literal"&gt;str.format&lt;/tt&gt; is used in log
 rule W1201 too, which is triggered for the cases like in step 5 (see
 the code snippet&amp;nbsp;above).&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="logging"></category><category term="f-string"></category></entry><entry><title>Python third-party tools configuration: pyproject.toml vs setup.cfg</title><link href="https://blog.pilosus.org/blog/python-third-party-tools-configuration/" rel="alternate"></link><published>2019-12-26T12:10:00+01:00</published><updated>2019-12-26T12:10:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-26:/blog/python-third-party-tools-configuration/</id><summary type="html">&lt;p class="first last"&gt;Universal config file for Python third-party tools in 2020? It&amp;#8217;s a&amp;nbsp;myth&lt;/p&gt;
+</content><category term="Blog"></category><category term="python"></category><category term="logging"></category><category term="f-string"></category></entry><entry><title>Python third-party tools configuration: pyproject.toml vs setup.cfg</title><link href="https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/" rel="alternate"></link><published>2019-12-26T12:10:00+01:00</published><updated>2019-12-26T12:10:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-26:/posts/2019/12/26/python-third-party-tools-configuration/</id><summary type="html">&lt;p class="first last"&gt;Universal config file for Python third-party tools in 2020? It&amp;#8217;s a&amp;nbsp;myth&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;A couple of years ago two PEPs have been proposed to fix some package
 building interface problems. Basically, in order to build a Python
 package we need to checkout source of the project, then install a
@@ -1364,7 +1364,7 @@ how-standards-proliferate situation. Until consensus is finally set,
 it&amp;#8217;s better off either use &lt;tt class="docutils literal"&gt;setup.cfg&lt;/tt&gt; with an annoying exception
 for &lt;tt class="docutils literal"&gt;black&lt;/tt&gt;, or stick to the tools custom config formats and&amp;nbsp;files.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="tool"></category><category term="standard"></category></entry><entry><title>Python interview questions and answers</title><link href="https://blog.pilosus.org/blog/python-interview-questions/" rel="alternate"></link><published>2019-12-15T14:00:00+01:00</published><updated>2019-12-15T14:00:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-15:/blog/python-interview-questions/</id><summary type="html">&lt;p class="first last"&gt;Python questions and answers for a technical&amp;nbsp;interview&lt;/p&gt;
+</content><category term="Blog"></category><category term="python"></category><category term="tool"></category><category term="standard"></category></entry><entry><title>Python interview questions and answers</title><link href="https://blog.pilosus.org/posts/2019/12/15/python-interview-questions/" rel="alternate"></link><published>2019-12-15T14:00:00+01:00</published><updated>2019-12-15T14:00:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-15:/posts/2019/12/15/python-interview-questions/</id><summary type="html">&lt;p class="first last"&gt;Python questions and answers for a technical&amp;nbsp;interview&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Although the questions you find in this blog post are universal, they
 are crafted for a technical interview for a web developer&amp;nbsp;position.&lt;/p&gt;
 &lt;p&gt;The questions have been tested in real life: I used them in more
@@ -1384,79 +1384,79 @@ use them to prepare for an interview as an&amp;nbsp;interviewee.&lt;/p&gt;
 &lt;div class="contents topic" id="table-of-contents"&gt;
 &lt;p class="topic-title"&gt;Table of&amp;nbsp;Contents&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#introduction" id="id2"&gt;Introduction&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#premises" id="id3"&gt;Premises&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#candidates-cvs" id="id4"&gt;Candidates &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;CVs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#non-technical-questions" id="id5"&gt;Non-technical&amp;nbsp;questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#introduction" id="toc-entry-1"&gt;Introduction&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#premises" id="toc-entry-2"&gt;Premises&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#candidates-cvs" id="toc-entry-3"&gt;Candidates &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;CVs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#non-technical-questions" id="toc-entry-4"&gt;Non-technical&amp;nbsp;questions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#python-questions" id="id6"&gt;Python questions&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#how-language-evolves" id="id7"&gt;How language&amp;nbsp;evolves&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#basic-types-and-data-structures-in-python" id="id8"&gt;Basic types and data structures in&amp;nbsp;Python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#function-default-arguments" id="id9"&gt;Function default&amp;nbsp;arguments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#what-s-decorator" id="id10"&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#decorator-that-prints-function-execution-time" id="id11"&gt;Decorator that prints function execution&amp;nbsp;time&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#using-decorator" id="id12"&gt;Using&amp;nbsp;decorator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#decorated-function-s-name" id="id13"&gt;Decorated function&amp;#8217;s&amp;nbsp;name&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#decorators-for-generators" id="id14"&gt;Decorators for&amp;nbsp;generators&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#decorator-with-arguments" id="id15"&gt;Decorator with&amp;nbsp;arguments&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#class-variables" id="id16"&gt;Class&amp;nbsp;variables&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#list-slices" id="id17"&gt;List&amp;nbsp;slices&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#what-s-list-dict-comprehension" id="id18"&gt;What&amp;#8217;s list/dict&amp;nbsp;comprehension?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#generator-expressions" id="id19"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#what-useful-functions-from-functools-do-you-know" id="id20"&gt;What useful functions from functools do you&amp;nbsp;know?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#asyncio-multithreading-multiprocessing" id="id21"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#python-ecosystem" id="id22"&gt;Python&amp;nbsp;ecosystem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#python-questions" id="toc-entry-5"&gt;Python questions&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-language-evolves" id="toc-entry-6"&gt;How language&amp;nbsp;evolves&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#basic-types-and-data-structures-in-python" id="toc-entry-7"&gt;Basic types and data structures in&amp;nbsp;Python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#function-default-arguments" id="toc-entry-8"&gt;Function default&amp;nbsp;arguments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-s-decorator" id="toc-entry-9"&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorator-that-prints-function-execution-time" id="toc-entry-10"&gt;Decorator that prints function execution&amp;nbsp;time&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#using-decorator" id="toc-entry-11"&gt;Using&amp;nbsp;decorator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorated-function-s-name" id="toc-entry-12"&gt;Decorated function&amp;#8217;s&amp;nbsp;name&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorators-for-generators" id="toc-entry-13"&gt;Decorators for&amp;nbsp;generators&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#decorator-with-arguments" id="toc-entry-14"&gt;Decorator with&amp;nbsp;arguments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#class-variables" id="toc-entry-15"&gt;Class&amp;nbsp;variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#list-slices" id="toc-entry-16"&gt;List&amp;nbsp;slices&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-s-list-dict-comprehension" id="toc-entry-17"&gt;What&amp;#8217;s list/dict&amp;nbsp;comprehension?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#generator-expressions" id="toc-entry-18"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#what-useful-functions-from-functools-do-you-know" id="toc-entry-19"&gt;What useful functions from functools do you&amp;nbsp;know?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#asyncio-multithreading-multiprocessing" id="toc-entry-20"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#python-ecosystem" id="toc-entry-21"&gt;Python&amp;nbsp;ecosystem&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#computer-science-questions" id="id23"&gt;Computer science questions&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#time-complexity" id="id24"&gt;Time&amp;nbsp;complexity&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#balanced-brackets-in-a-lisp-program-problem" id="id25"&gt;Balanced brackets in a Lisp-program&amp;nbsp;problem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#computer-science-questions" id="toc-entry-22"&gt;Computer science questions&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#time-complexity" id="toc-entry-23"&gt;Time&amp;nbsp;complexity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#balanced-brackets-in-a-lisp-program-problem" id="toc-entry-24"&gt;Balanced brackets in a Lisp-program&amp;nbsp;problem&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#databases" id="id26"&gt;Databases&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#why-rdbms" id="id27"&gt;Why &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#mysql-postgresql-queries" id="id28"&gt;MySQL/PostgreSQL&amp;nbsp;queries&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#nosql-overview" id="id29"&gt;NoSQL&amp;nbsp;Overview&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#redis-overview" id="id30"&gt;Redis&amp;nbsp;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#databases" id="toc-entry-25"&gt;Databases&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#why-rdbms" id="toc-entry-26"&gt;Why &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mysql-postgresql-queries" id="toc-entry-27"&gt;MySQL/PostgreSQL&amp;nbsp;queries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#nosql-overview" id="toc-entry-28"&gt;NoSQL&amp;nbsp;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#redis-overview" id="toc-entry-29"&gt;Redis&amp;nbsp;Overview&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#testing" id="id31"&gt;Testing&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#unit-testing-overview" id="id32"&gt;Unit-testing&amp;nbsp;overview&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#how-do-you-test-a-function-that-changes-data-in-mysql" id="id33"&gt;How do you test a function that changes data in&amp;nbsp;MySQL?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#testing" id="toc-entry-30"&gt;Testing&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unit-testing-overview" id="toc-entry-31"&gt;Unit-testing&amp;nbsp;overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#how-do-you-test-a-function-that-changes-data-in-mysql" id="toc-entry-32"&gt;How do you test a function that changes data in&amp;nbsp;MySQL?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#devops-sysadmin-skills" id="id34"&gt;DevOps/SysAdmin skills&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#broken-response-from-google-com" id="id35"&gt;Broken response from&amp;nbsp;google.com&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#ip-addresses-top-from-nginx-log" id="id36"&gt;&lt;span class="caps"&gt;IP&lt;/span&gt; addresses top from Nginx&amp;nbsp;log&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#docker" id="id37"&gt;Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#devops-sysadmin-skills" id="toc-entry-33"&gt;DevOps/SysAdmin skills&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#broken-response-from-google-com" id="toc-entry-34"&gt;Broken response from&amp;nbsp;google.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#ip-addresses-top-from-nginx-log" id="toc-entry-35"&gt;&lt;span class="caps"&gt;IP&lt;/span&gt; addresses top from Nginx&amp;nbsp;log&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#docker" id="toc-entry-36"&gt;Docker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#system-design-and-architecture" id="id38"&gt;System Design and Architecture&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#system-design-of-pastebin-like-service" id="id39"&gt;System design of pastebin-like service&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#user-story-business-description" id="id40"&gt;User story (business&amp;nbsp;description)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#assume" id="id41"&gt;Assume&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#hints" id="id42"&gt;Hints&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#capacity-planning-for-3-years" id="id43"&gt;Capacity planning for 3&amp;nbsp;years&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#service-architecture" id="id44"&gt;Service&amp;nbsp;architecture&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#write-api" id="id45"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#unique-url-path-generation" id="id46"&gt;Unique &lt;span class="caps"&gt;URL&lt;/span&gt; path&amp;nbsp;generation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#request-write-api" id="id47"&gt;Request Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#write-api-response" id="id48"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Response&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#request-read-api" id="id49"&gt;Request Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#read-api-reponse" id="id50"&gt;Read &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Reponse&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#statistics" id="id51"&gt;Statistics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#system-design-and-architecture" id="toc-entry-37"&gt;System Design and Architecture&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#system-design-of-pastebin-like-service" id="toc-entry-38"&gt;System design of pastebin-like service&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#user-story-business-description" id="toc-entry-39"&gt;User story (business&amp;nbsp;description)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#assume" id="toc-entry-40"&gt;Assume&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#hints" id="toc-entry-41"&gt;Hints&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#capacity-planning-for-3-years" id="toc-entry-42"&gt;Capacity planning for 3&amp;nbsp;years&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#service-architecture" id="toc-entry-43"&gt;Service&amp;nbsp;architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api" id="toc-entry-44"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unique-url-path-generation" id="toc-entry-45"&gt;Unique &lt;span class="caps"&gt;URL&lt;/span&gt; path&amp;nbsp;generation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#request-write-api" id="toc-entry-46"&gt;Request Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api-response" id="toc-entry-47"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Response&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#request-read-api" id="toc-entry-48"&gt;Request Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#read-api-reponse" id="toc-entry-49"&gt;Read &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Reponse&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#statistics" id="toc-entry-50"&gt;Statistics&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#sources-and-useful-links" id="id52"&gt;Sources and useful&amp;nbsp;links&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#sources-and-useful-links" id="toc-entry-51"&gt;Sources and useful&amp;nbsp;links&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="introduction"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id2"&gt;Introduction&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-1"&gt;Introduction&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="premises"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id3"&gt;Premises&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-2"&gt;Premises&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Software development is no longer an art, nor a lifelong quest, but
 rather an everyday office job, though highly-skilled one. That&amp;#8217;s why
@@ -1504,7 +1504,7 @@ weaknesses in a short period of&amp;nbsp;time.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="candidates-cvs"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id4"&gt;Candidates &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;CVs&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-3"&gt;Candidates &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt;&amp;nbsp;CVs&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Not everybody is a &lt;span class="caps"&gt;CV&lt;/span&gt;-ninja.&amp;nbsp;Really&lt;/li&gt;
 &lt;li&gt;Too high salary expectations isn&amp;#8217;t a reason to reject a
@@ -1544,7 +1544,7 @@ programming&amp;nbsp;questions!&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="non-technical-questions"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id5"&gt;Non-technical&amp;nbsp;questions&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-4"&gt;Non-technical&amp;nbsp;questions&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What have you done in your previous/current&amp;nbsp;project?&lt;/li&gt;
 &lt;li&gt;Describe your team line-up (frontend/backend developers, &lt;span class="caps"&gt;QA&lt;/span&gt;
@@ -1557,9 +1557,9 @@ you liked and disliked about&amp;nbsp;it?&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="python-questions"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id6"&gt;Python&amp;nbsp;questions&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-5"&gt;Python&amp;nbsp;questions&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="how-language-evolves"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id7"&gt;How language&amp;nbsp;evolves&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-6"&gt;How language&amp;nbsp;evolves&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s new in the latest Python version? (&lt;a class="reference external" href="https://docs.python.org/3/whatsnew/3.8.html"&gt;Python 3.8&lt;/a&gt; at the moment of&amp;nbsp;writing)&lt;/li&gt;
 &lt;li&gt;How Python 3+ differs from Python 2.7? (&lt;a class="reference external" href="https://docs.python.org/3.0/whatsnew/3.0.html"&gt;What&amp;#8217;s new in Python 3&lt;/a&gt;)&lt;/li&gt;
@@ -1567,7 +1567,7 @@ you liked and disliked about&amp;nbsp;it?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="basic-types-and-data-structures-in-python"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id8"&gt;Basic types and data structures in&amp;nbsp;Python&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-7"&gt;Basic types and data structures in&amp;nbsp;Python&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What are the basic types in&amp;nbsp;Python?&lt;/li&gt;
 &lt;li&gt;What are the basic data structures in&amp;nbsp;Python?&lt;/li&gt;
@@ -1582,7 +1582,7 @@ you liked and disliked about&amp;nbsp;it?&lt;/li&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="function-default-arguments"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id9"&gt;Function default&amp;nbsp;arguments&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-8"&gt;Function default&amp;nbsp;arguments&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. We have got a&amp;nbsp;function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1605,7 +1605,7 @@ you liked and disliked about&amp;nbsp;it?&lt;/li&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="what-s-decorator"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id10"&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-9"&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s&amp;nbsp;decorator?&lt;/li&gt;
 &lt;li&gt;What decorators from the standard library you&amp;nbsp;know?&lt;/li&gt;
@@ -1613,7 +1613,7 @@ you liked and disliked about&amp;nbsp;it?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="decorator-that-prints-function-execution-time"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id11"&gt;Decorator that prints function execution&amp;nbsp;time&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-10"&gt;Decorator that prints function execution&amp;nbsp;time&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;We have got a function that queries a database. We want each function
 call to print time of its execution. Implement it with a decorator.
 Assume: decorated function may have any number of positional or
@@ -1632,7 +1632,7 @@ keyword&amp;nbsp;arguments.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="using-decorator"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id12"&gt;Using&amp;nbsp;decorator&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-11"&gt;Using&amp;nbsp;decorator&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;How do you apply your decorator to a function &lt;cite&gt;fun&lt;/cite&gt; using syntactic
 sugar and without&amp;nbsp;it?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# with syntactic sugar&lt;/span&gt;
@@ -1646,7 +1646,7 @@ sugar and without&amp;nbsp;it?&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="decorated-function-s-name"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id13"&gt;Decorated function&amp;#8217;s&amp;nbsp;name&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-12"&gt;Decorated function&amp;#8217;s&amp;nbsp;name&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;What is function &lt;cite&gt;docstring&lt;/cite&gt; and &lt;cite&gt;name&lt;/cite&gt; after decorator is&amp;nbsp;applied?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;wrapper&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;Wrapper function&amp;#39;&lt;/span&gt;
@@ -1691,7 +1691,7 @@ sugar and without&amp;nbsp;it?&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="decorators-for-generators"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id14"&gt;Decorators for&amp;nbsp;generators&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-13"&gt;Decorators for&amp;nbsp;generators&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;What time do we get if we decorate a generator function like the&amp;nbsp;following?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Any&lt;/span&gt;
 
@@ -1720,7 +1720,7 @@ iteration over the whole&amp;nbsp;generator?&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="decorator-with-arguments"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id15"&gt;Decorator with&amp;nbsp;arguments&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-14"&gt;Decorator with&amp;nbsp;arguments&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Rewrite the decorator from the previous question so that it could take
 in an argument for a limit. Execution time is printed if it exceeds
 the&amp;nbsp;limit.&lt;/p&gt;
@@ -1752,7 +1752,7 @@ the&amp;nbsp;limit.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="class-variables"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id16"&gt;Class&amp;nbsp;variables&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-15"&gt;Class&amp;nbsp;variables&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;What&amp;#8217;s a class&amp;nbsp;variable?&lt;/p&gt;
 &lt;p&gt;Problem.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1778,7 +1778,7 @@ the&amp;nbsp;limit.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="list-slices"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id17"&gt;List&amp;nbsp;slices&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-16"&gt;List&amp;nbsp;slices&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. What are the results of this code block&amp;nbsp;execution?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
@@ -1789,7 +1789,7 @@ the&amp;nbsp;limit.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="what-s-list-dict-comprehension"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id18"&gt;What&amp;#8217;s list/dict&amp;nbsp;comprehension?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-17"&gt;What&amp;#8217;s list/dict&amp;nbsp;comprehension?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Implement a list of even numbers in a range [0, 10) to the power 2
 using list&amp;nbsp;comprehension.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -1799,21 +1799,21 @@ using list&amp;nbsp;comprehension.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="generator-expressions"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id19"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-18"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;What&amp;#8217;s the easiest way to turn the above list comprehension into a
 generator (generator&amp;nbsp;expression)?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="what-useful-functions-from-functools-do-you-know"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id20"&gt;What useful functions from functools do you&amp;nbsp;know?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-19"&gt;What useful functions from functools do you&amp;nbsp;know?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;The question may be a follow-up for decorator questions and
 &lt;cite&gt;functools.wraps&lt;/cite&gt;. functools is a great module with loads of useful
 things. What would be great to hear from the candidate is something
 like &lt;cite&gt;reduce&lt;/cite&gt; and &lt;cite&gt;partial&lt;/cite&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="asyncio-multithreading-multiprocessing"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id21"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-20"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s the difference between a process and a&amp;nbsp;thread?&lt;/li&gt;
 &lt;li&gt;Problem. We have got a list of 1000 URLs, we have to iterate over it
@@ -1827,7 +1827,7 @@ covered in &lt;a class="reference external" href="https://trio.readthedocs.io/en
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="python-ecosystem"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id22"&gt;Python&amp;nbsp;ecosystem&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-21"&gt;Python&amp;nbsp;ecosystem&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What do you use for background tasks in a Python project? (&lt;cite&gt;celery&lt;/cite&gt;)&lt;/li&gt;
 &lt;li&gt;How do you pack your Python code? (&lt;cite&gt;wheels&lt;/cite&gt;, &lt;cite&gt;eggs&lt;/cite&gt;, what&amp;#8217;s the&amp;nbsp;difference?)&lt;/li&gt;
@@ -1844,9 +1844,9 @@ covered in &lt;a class="reference external" href="https://trio.readthedocs.io/en
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="computer-science-questions"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id23"&gt;Computer science&amp;nbsp;questions&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-22"&gt;Computer science&amp;nbsp;questions&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="time-complexity"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id24"&gt;Time&amp;nbsp;complexity&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-23"&gt;Time&amp;nbsp;complexity&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s time&amp;nbsp;complexity?&lt;/li&gt;
 &lt;li&gt;What&amp;#8217;s Big&amp;nbsp;O?&lt;/li&gt;
@@ -1868,7 +1868,7 @@ covered in &lt;a class="reference external" href="https://trio.readthedocs.io/en
 &lt;p&gt;Check out other data structures &lt;a class="reference external" href="https://wiki.python.org/moin/TimeComplexity"&gt;time complexity&lt;/a&gt; if&amp;nbsp;needed.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="balanced-brackets-in-a-lisp-program-problem"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id25"&gt;Balanced brackets in a Lisp-program&amp;nbsp;problem&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-24"&gt;Balanced brackets in a Lisp-program&amp;nbsp;problem&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. I like to code in Racket, which is a Lisp dialect that uses a
 &lt;a class="reference external" href="https://blog.pilosus.org/images/git-the-princess.png"&gt;lot of brackets&lt;/a&gt;.  Implement a Python function that takes in text
 and returns &lt;cite&gt;True&lt;/cite&gt; if brackets in the text are balanced, and returns
@@ -1918,9 +1918,9 @@ and returns &lt;cite&gt;True&lt;/cite&gt; if brackets in the text are balanced, 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="databases"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id26"&gt;Databases&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-25"&gt;Databases&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="why-rdbms"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id27"&gt;Why &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-26"&gt;Why &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. We are a startup with &lt;span class="caps"&gt;CTO&lt;/span&gt;, &lt;span class="caps"&gt;CEO&lt;/span&gt; and a couple of devs. We have
 no admins yet. We are developing authentication service (users
 registration, access rights, etc) in Python. Why do we need a
@@ -1950,7 +1950,7 @@ using composite&amp;nbsp;index?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mysql-postgresql-queries"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id28"&gt;MySQL/PostgreSQL&amp;nbsp;queries&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-27"&gt;MySQL/PostgreSQL&amp;nbsp;queries&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. We have got service like iTunes where users can buy or rent a
 video. This is a PostgreSQL database schema for the&amp;nbsp;service:&lt;/p&gt;
 &lt;div class="figure"&gt;
@@ -1991,7 +1991,7 @@ less than 100. The query also&amp;nbsp;selects:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="nosql-overview"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id29"&gt;NoSQL&amp;nbsp;Overview&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-28"&gt;NoSQL&amp;nbsp;Overview&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s&amp;nbsp;NoSQL?&lt;/li&gt;
 &lt;li&gt;What types of NoSQL do you&amp;nbsp;know?&lt;/li&gt;
@@ -2010,7 +2010,7 @@ values:&amp;nbsp;MongoDB)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="redis-overview"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id30"&gt;Redis&amp;nbsp;Overview&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-29"&gt;Redis&amp;nbsp;Overview&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s Redis is used&amp;nbsp;for?&lt;/li&gt;
 &lt;li&gt;Why it&amp;#8217;s so popular for caching&amp;nbsp;layer?&lt;/li&gt;
@@ -2024,9 +2024,9 @@ Sentinel is a mechanism for high&amp;nbsp;availability.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="testing"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id31"&gt;Testing&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-30"&gt;Testing&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="unit-testing-overview"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id32"&gt;Unit-testing&amp;nbsp;overview&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-31"&gt;Unit-testing&amp;nbsp;overview&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s&amp;nbsp;unit-testing?&lt;/li&gt;
 &lt;li&gt;How it&amp;#8217;s different from integration or functional&amp;nbsp;testing?&lt;/li&gt;
@@ -2037,7 +2037,7 @@ project, when fixing a bug, when implementing a new&amp;nbsp;feature)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="how-do-you-test-a-function-that-changes-data-in-mysql"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id33"&gt;How do you test a function that changes data in&amp;nbsp;MySQL?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-32"&gt;How do you test a function that changes data in&amp;nbsp;MySQL?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. We&amp;#8217;ve got a function that executes a &lt;cite&gt;&lt;span class="caps"&gt;INSERT&lt;/span&gt;&lt;/cite&gt; &lt;span class="caps"&gt;SQL&lt;/span&gt; query in
 the test database. Other developers in your team use the same
 database. We need to write a unittest for the function. But we don&amp;#8217;t
@@ -2049,9 +2049,9 @@ want to change test &lt;span class="caps"&gt;DB&lt;/span&gt; on each test run. H
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="devops-sysadmin-skills"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id34"&gt;DevOps/SysAdmin&amp;nbsp;skills&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-33"&gt;DevOps/SysAdmin&amp;nbsp;skills&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="broken-response-from-google-com"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id35"&gt;Broken response from&amp;nbsp;google.com&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-34"&gt;Broken response from&amp;nbsp;google.com&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. When I open a browser, go to &lt;cite&gt;https://www.google.com&lt;/cite&gt; and see
 the raw response, it&amp;#8217;s normal&amp;nbsp;text.&lt;/p&gt;
 &lt;p&gt;Here I do a &lt;span class="caps"&gt;GET&lt;/span&gt; request using &lt;cite&gt;curl&lt;/cite&gt;, but a response seems to be&amp;nbsp;broken.&lt;/p&gt;
@@ -2072,7 +2072,7 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ip-addresses-top-from-nginx-log"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id36"&gt;&lt;span class="caps"&gt;IP&lt;/span&gt; addresses top from Nginx&amp;nbsp;log&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-35"&gt;&lt;span class="caps"&gt;IP&lt;/span&gt; addresses top from Nginx&amp;nbsp;log&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Problem. Our service is under high load because of DDoS-attack. It
 makes hard for our legitimate customers to get a response from the
 service. We want to ban &lt;span class="caps"&gt;IP&lt;/span&gt; addresses bots get used of. To do so we
@@ -2085,7 +2085,7 @@ in the log, columns are separated by &lt;cite&gt;t&lt;/cite&gt;.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="docker"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id37"&gt;Docker&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-36"&gt;Docker&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;What&amp;#8217;s a docker&amp;nbsp;container?&lt;/li&gt;
 &lt;li&gt;What&amp;#8217;s the difference between docker and virtualbox or other virtual&amp;nbsp;machines?&lt;/li&gt;
@@ -2095,12 +2095,12 @@ in the log, columns are separated by &lt;cite&gt;t&lt;/cite&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="system-design-and-architecture"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id38"&gt;System Design and&amp;nbsp;Architecture&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-37"&gt;System Design and&amp;nbsp;Architecture&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Parental advisory: highly opinionated content&amp;nbsp;(35+)&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="section" id="system-design-of-pastebin-like-service"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id39"&gt;System design of pastebin-like&amp;nbsp;service&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-38"&gt;System design of pastebin-like&amp;nbsp;service&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="section" id="user-story-business-description"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id40"&gt;User story (business&amp;nbsp;description)&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-39"&gt;User story (business&amp;nbsp;description)&lt;/a&gt;&lt;/h4&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;A user submits text&amp;nbsp;(copypasta)&lt;/li&gt;
 &lt;li&gt;Text is saved, the user gets a unique &lt;span class="caps"&gt;URL&lt;/span&gt; (base serive &lt;span class="caps"&gt;URL&lt;/span&gt; + short&amp;nbsp;path)&lt;/li&gt;
@@ -2113,7 +2113,7 @@ in the log, columns are separated by &lt;cite&gt;t&lt;/cite&gt;.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="assume"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id41"&gt;Assume&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-40"&gt;Assume&lt;/a&gt;&lt;/h4&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Copypasta can be in text format&amp;nbsp;only&lt;/li&gt;
 &lt;li&gt;The product owner doesn&amp;#8217;t need realtime&amp;nbsp;statistics&lt;/li&gt;
@@ -2123,7 +2123,7 @@ in the log, columns are separated by &lt;cite&gt;t&lt;/cite&gt;.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="hints"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id42"&gt;Hints&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-41"&gt;Hints&lt;/a&gt;&lt;/h4&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Average text size is&amp;nbsp;1Kb&lt;/li&gt;
 &lt;li&gt;Short &lt;span class="caps"&gt;URL&lt;/span&gt; path takes 7 bytes in &lt;span class="caps"&gt;DB&lt;/span&gt;&lt;/li&gt;
@@ -2134,14 +2134,14 @@ in the log, columns are separated by &lt;cite&gt;t&lt;/cite&gt;.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="capacity-planning-for-3-years"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id43"&gt;Capacity planning for 3&amp;nbsp;years&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-42"&gt;Capacity planning for 3&amp;nbsp;years&lt;/a&gt;&lt;/h4&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;36 * 12.7 = 457 Gb of&amp;nbsp;copypasta&lt;/li&gt;
 &lt;li&gt;36 * 10 = 360 million&amp;nbsp;URLs&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="service-architecture"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id44"&gt;Service&amp;nbsp;architecture&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-43"&gt;Service&amp;nbsp;architecture&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Client
     |
     V
@@ -2170,7 +2170,7 @@ Periodic Task
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="write-api"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id45"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-44"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;Generate a &lt;span class="caps"&gt;URL&lt;/span&gt;, check for unique constraint in &lt;span class="caps"&gt;SQL&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;If the &lt;span class="caps"&gt;URL&lt;/span&gt; is unique, make an &lt;span class="caps"&gt;INSERT&lt;/span&gt; into &lt;span class="caps"&gt;DB&lt;/span&gt; table, otherwise go to&amp;nbsp;1.&lt;/li&gt;
@@ -2185,7 +2185,7 @@ Periodic Task
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="unique-url-path-generation"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id46"&gt;Unique &lt;span class="caps"&gt;URL&lt;/span&gt; path&amp;nbsp;generation&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-45"&gt;Unique &lt;span class="caps"&gt;URL&lt;/span&gt; path&amp;nbsp;generation&lt;/a&gt;&lt;/h4&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;Generate a random string md5(&amp;#8220;user &lt;span class="caps"&gt;IP&lt;/span&gt; address string&amp;#8221; + &amp;#8220;timestamp&amp;nbsp;string&amp;#8221;)&lt;/li&gt;
 &lt;li&gt;Encode string from 1 with &lt;cite&gt;Base 62&lt;/cite&gt; (like Base 64 but without escape&amp;nbsp;characters)&lt;/li&gt;
@@ -2207,25 +2207,25 @@ i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="request-write-api"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id47"&gt;Request Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-46"&gt;Request Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-X&lt;span class="w"&gt; &lt;/span&gt;POST&lt;span class="w"&gt; &lt;/span&gt;https://pastebin.com/api/v1.0/paste&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
 &lt;span class="w"&gt;       &lt;/span&gt;--data&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{ &amp;quot;expiration_in_minutes&amp;quot;: &amp;quot;60&amp;quot;, &amp;quot;paste_contents&amp;quot;: &amp;quot;My paste&amp;quot; }&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="write-api-response"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id48"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Response&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-47"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Response&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;shortlink&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;xJlsmeT&amp;quot;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="request-read-api"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id49"&gt;Request Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-48"&gt;Request Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;https://pastebin.com/api/v1.0/paste?shortlink&lt;span class="o"&gt;=&lt;/span&gt;xJlsmeT
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="read-api-reponse"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id50"&gt;Read &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Reponse&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-49"&gt;Read &lt;span class="caps"&gt;API&lt;/span&gt;&amp;nbsp;Reponse&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;paste&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;My paste&amp;quot;&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YYYY-MM-DD HH:MM:SS&amp;quot;&lt;/span&gt;
@@ -2234,7 +2234,7 @@ i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="statistics"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id51"&gt;Statistics&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-50"&gt;Statistics&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;Since we don&amp;#8217;t need realtime analytics, let&amp;#8217;s use Nginx logs and process them in&amp;nbsp;MapReduce&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;HitCounts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MRJob&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
@@ -2271,7 +2271,7 @@ i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="sources-and-useful-links"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id52"&gt;Sources and useful&amp;nbsp;links&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-51"&gt;Sources and useful&amp;nbsp;links&lt;/a&gt;&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://www.toptal.com/python/interview-questions"&gt;Toptal Python Interview&amp;nbsp;Questions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Python Interview Questions (&lt;a class="reference external" href="https://luminousmen.com/post/6"&gt;junior&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/7"&gt;middle&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/8"&gt;senior&lt;/a&gt;)&lt;/li&gt;
@@ -2280,7 +2280,7 @@ i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://www.postgresqltutorial.com/"&gt;PostgreSQL&amp;nbsp;Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="interview"></category></entry><entry><title>Вопросы и ответы для собеседования веб-разработчика на Python</title><link href="https://blog.pilosus.org/blog/python-interview-questions-ru/" rel="alternate"></link><published>2019-12-08T14:57:00+01:00</published><updated>2020-04-18T15:45:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-08:/blog/python-interview-questions-ru/</id><summary type="html">&lt;p class="first last"&gt;Вопросы и ответы для технического собеседования&amp;nbsp;Python-разработчика&lt;/p&gt;
+</content><category term="Blog"></category><category term="python"></category><category term="interview"></category></entry><entry><title>Вопросы и ответы для собеседования веб-разработчика на Python</title><link href="https://blog.pilosus.org/posts/2019/12/08/python-interview-questions-ru/" rel="alternate"></link><published>2019-12-08T14:57:00+01:00</published><updated>2020-04-18T15:45:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-08:/posts/2019/12/08/python-interview-questions-ru/</id><summary type="html">&lt;p class="first last"&gt;Вопросы и ответы для технического собеседования&amp;nbsp;Python-разработчика&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Ниже вы найдете принципы проведения и вопросы для технического
 собеседования на позицию Python-разработчика. Хотя вопросы довольно
 универсальны, больше всего они подойдут для области&amp;nbsp;веб-разработки.&lt;/p&gt;
@@ -2296,82 +2296,82 @@ i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
 вопросов &amp;#8212; их система и принципы. На их основе можно составлять свои
 интересные и полезные вопросы для проведения собеседования, скроенные
 для ваших нужд. Или готовиться к техническому интервью в качестве&amp;nbsp;кандидата.&lt;/p&gt;
-&lt;div class="contents topic" id="id1"&gt;
+&lt;div class="contents topic" id="topic-1"&gt;
 &lt;p class="topic-title"&gt;Содержание&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id2" id="id36"&gt;Введение&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id3" id="id37"&gt;Предпосылки&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id4" id="id38"&gt;Отбор&amp;nbsp;кандидатов&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id5" id="id39"&gt;Гуманитарные&amp;nbsp;вопросы&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-1" id="toc-entry-1"&gt;Введение&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-2" id="toc-entry-2"&gt;Предпосылки&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-3" id="toc-entry-3"&gt;Отбор&amp;nbsp;кандидатов&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-4" id="toc-entry-4"&gt;Гуманитарные&amp;nbsp;вопросы&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id6" id="id40"&gt;Python&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id7" id="id41"&gt;Проверка знаний, как развивается&amp;nbsp;язык&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id8" id="id42"&gt;Основные типы и структуры данных в&amp;nbsp;Python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id9" id="id43"&gt;Порядок вычисления дефолтных аргументов&amp;nbsp;функций&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id10" id="id44"&gt;Что такое&amp;nbsp;декоратор?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#stdout" id="id45"&gt;Декоратор, выводящий в stdout время выполнения&amp;nbsp;функции&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id11" id="id46"&gt;Применение&amp;nbsp;декоратора&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id12" id="id47"&gt;Имя декорированной&amp;nbsp;функции&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id13" id="id48"&gt;Декоратор для&amp;nbsp;генераторов&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id14" id="id49"&gt;Декоратор с&amp;nbsp;аргументами&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id15" id="id50"&gt;Переменные&amp;nbsp;класса&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id16" id="id51"&gt;Слайсы в&amp;nbsp;списках&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#list-dict-comprehensions" id="id52"&gt;Что такое list/dict&amp;nbsp;comprehensions?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#generator-expressions" id="id53"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#functools" id="id54"&gt;Какие полезные функции из модуля functools ты&amp;nbsp;знаешь?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#asyncio-multithreading-multiprocessing" id="id55"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id17" id="id56"&gt;Экосистема&amp;nbsp;языка&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#python-1" id="toc-entry-5"&gt;Python&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-5" id="toc-entry-6"&gt;Проверка знаний, как развивается&amp;nbsp;язык&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#python-2" id="toc-entry-7"&gt;Основные типы и структуры данных в&amp;nbsp;Python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-6" id="toc-entry-8"&gt;Порядок вычисления дефолтных аргументов&amp;nbsp;функций&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-7" id="toc-entry-9"&gt;Что такое&amp;nbsp;декоратор?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#stdout" id="toc-entry-10"&gt;Декоратор, выводящий в stdout время выполнения&amp;nbsp;функции&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-8" id="toc-entry-11"&gt;Применение&amp;nbsp;декоратора&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-9" id="toc-entry-12"&gt;Имя декорированной&amp;nbsp;функции&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-10" id="toc-entry-13"&gt;Декоратор для&amp;nbsp;генераторов&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-11" id="toc-entry-14"&gt;Декоратор с&amp;nbsp;аргументами&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-12" id="toc-entry-15"&gt;Переменные&amp;nbsp;класса&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-13" id="toc-entry-16"&gt;Слайсы в&amp;nbsp;списках&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#list-dict-comprehensions" id="toc-entry-17"&gt;Что такое list/dict&amp;nbsp;comprehensions?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#generator-expressions" id="toc-entry-18"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#functools" id="toc-entry-19"&gt;Какие полезные функции из модуля functools ты&amp;nbsp;знаешь?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#asyncio-multithreading-multiprocessing" id="toc-entry-20"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-14" id="toc-entry-21"&gt;Экосистема&amp;nbsp;языка&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id18" id="id57"&gt;Алгоритмы&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id19" id="id58"&gt;Временная&amp;nbsp;сложность&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#lisp" id="id59"&gt;Проверка сбалансированности скобок в&amp;nbsp;Lisp-программе&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-15" id="toc-entry-22"&gt;Алгоритмы&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-16" id="toc-entry-23"&gt;Временная&amp;nbsp;сложность&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#lisp" id="toc-entry-24"&gt;Проверка сбалансированности скобок в&amp;nbsp;Lisp-программе&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id20" id="id60"&gt;Базы данных&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#rdbms" id="id61"&gt;Зачем нужна &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#mysql-postgresql" id="id62"&gt;Запросы в&amp;nbsp;MySQL/PostgreSQL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#nosql" id="id63"&gt;Общие представления о&amp;nbsp;NoSQL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#redis" id="id64"&gt;Общие представления о&amp;nbsp;Redis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-17" id="toc-entry-25"&gt;Базы данных&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#rdbms" id="toc-entry-26"&gt;Зачем нужна &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mysql-postgresql" id="toc-entry-27"&gt;Запросы в&amp;nbsp;MySQL/PostgreSQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#nosql" id="toc-entry-28"&gt;Общие представления о&amp;nbsp;NoSQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#redis" id="toc-entry-29"&gt;Общие представления о&amp;nbsp;Redis&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id21" id="id65"&gt;Тестирование&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#unit" id="id66"&gt;Общие представления о&amp;nbsp;unit-тестировании&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#mysql" id="id67"&gt;Как протестировать функцию, которая изменяет запись в&amp;nbsp;MySQL?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-18" id="toc-entry-30"&gt;Тестирование&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#unit" id="toc-entry-31"&gt;Общие представления о&amp;nbsp;unit-тестировании&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#mysql" id="toc-entry-32"&gt;Как протестировать функцию, которая изменяет запись в&amp;nbsp;MySQL?&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#devops" id="id68"&gt;DevOps/Администрирование&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#google-com" id="id69"&gt;Проблема с нечитаемым ответом&amp;nbsp;google.com&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#ip-nginx" id="id70"&gt;Топ &lt;span class="caps"&gt;IP&lt;/span&gt; адресов из лога &lt;span class="caps"&gt;NGINX&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#docker" id="id71"&gt;Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#devops" id="toc-entry-33"&gt;DevOps/Администрирование&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#google-com" id="toc-entry-34"&gt;Проблема с нечитаемым ответом&amp;nbsp;google.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#ip-nginx" id="toc-entry-35"&gt;Топ &lt;span class="caps"&gt;IP&lt;/span&gt; адресов из лога &lt;span class="caps"&gt;NGINX&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#docker" id="toc-entry-36"&gt;Docker&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id22" id="id72"&gt;Архитектура&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#pastebin" id="id73"&gt;Проектирование сервиса копипасты pastebin&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id23" id="id74"&gt;Бизнес-описание&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id24" id="id75"&gt;Ограничения и&amp;nbsp;допущения&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id25" id="id76"&gt;Ответить соискателю, если&amp;nbsp;спросит&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id26" id="id77"&gt;Крупноблочная схема&amp;nbsp;архитектуры&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#write-api" id="id78"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id27" id="id79"&gt;Создание уникального&amp;nbsp;урла&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id28" id="id80"&gt;Запрос к Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id29" id="id81"&gt;Ответ Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#read-api" id="id82"&gt;Запрос к Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id30" id="id83"&gt;Ответ Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id31" id="id84"&gt;Аналитика&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-19" id="toc-entry-37"&gt;Архитектура&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#pastebin" id="toc-entry-38"&gt;Проектирование сервиса копипасты pastebin&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-20" id="toc-entry-39"&gt;Бизнес-описание&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-21" id="toc-entry-40"&gt;Ограничения и&amp;nbsp;допущения&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-22" id="toc-entry-41"&gt;Ответить соискателю, если&amp;nbsp;спросит&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-23" id="toc-entry-42"&gt;Крупноблочная схема&amp;nbsp;архитектуры&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api" id="toc-entry-43"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-24" id="toc-entry-44"&gt;Создание уникального&amp;nbsp;урла&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api-1" id="toc-entry-45"&gt;Запрос к Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#write-api-2" id="toc-entry-46"&gt;Ответ Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#read-api" id="toc-entry-47"&gt;Запрос к Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#read-api-1" id="toc-entry-48"&gt;Ответ Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-25" id="toc-entry-49"&gt;Аналитика&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#id32" id="id85"&gt;Полезные&amp;nbsp;ссылки&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="#errata" id="id86"&gt;Errata&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#section-26" id="toc-entry-50"&gt;Полезные&amp;nbsp;ссылки&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="#errata" id="toc-entry-51"&gt;Errata&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id36"&gt;Введение&lt;/a&gt;&lt;/h2&gt;
-&lt;div class="section" id="id3"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id37"&gt;Предпосылки&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-1"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-1"&gt;Введение&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="section-2"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-2"&gt;Предпосылки&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Разработка софта больше не искусство, не дело жизни, а обычная, хотя
 и высококвалифицированная офисная работа. Поэтому особенно ценно в
@@ -2417,8 +2417,8 @@ i.e. 360 million&amp;nbsp;URLs)&lt;/li&gt;
 промежуток&amp;nbsp;времени.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id38"&gt;Отбор&amp;nbsp;кандидатов&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-3"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-3"&gt;Отбор&amp;nbsp;кандидатов&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Не все люди умеют составлять&amp;nbsp;резюме.&lt;/li&gt;
 &lt;li&gt;Слишком высокие зарплатные ожидания у интересного кандидата – не
@@ -2459,8 +2459,8 @@ HRы), смешными формулировками с проявлениями
 обмануть, обязательно давайте&amp;nbsp;задачки.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id39"&gt;Гуманитарные&amp;nbsp;вопросы&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-4"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-4"&gt;Гуманитарные&amp;nbsp;вопросы&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Что кандидат делал на прошлых местах работы. Какую позицию&amp;nbsp;занимал?&lt;/li&gt;
 &lt;li&gt;Какой состав команды был на прошлых проектах (фронт, бэк, &lt;span class="caps"&gt;QA&lt;/span&gt;,
@@ -2472,10 +2472,10 @@ HRы), смешными формулировками с проявлениями
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id40"&gt;Python&lt;/a&gt;&lt;/h2&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id41"&gt;Проверка знаний, как развивается&amp;nbsp;язык&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="python-1"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-5"&gt;Python&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="section-5"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-6"&gt;Проверка знаний, как развивается&amp;nbsp;язык&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Расскажи, что появилось в последней версии Python? (&lt;a class="reference external" href="https://docs.python.org/3/whatsnew/3.8.html"&gt;Python 3.8&lt;/a&gt; на момент создания&amp;nbsp;статьи)&lt;/li&gt;
 &lt;li&gt;В чем состоят &lt;a class="reference external" href="https://docs.python.org/3.0/whatsnew/3.0.html"&gt;основные различия&lt;/a&gt; между Python 2.7 и&amp;nbsp;3.0&lt;/li&gt;
@@ -2483,8 +2483,8 @@ HRы), смешными формулировками с проявлениями
 (хочется услышать как минимум об asyncio и type&amp;nbsp;hinting)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id8"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id42"&gt;Основные типы и структуры данных в&amp;nbsp;Python&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="python-2"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-7"&gt;Основные типы и структуры данных в&amp;nbsp;Python&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Назови основные типы данных в&amp;nbsp;Python&lt;/li&gt;
 &lt;li&gt;Расскажи, какие структуры данных есть в&amp;nbsp;Python&lt;/li&gt;
@@ -2499,8 +2499,8 @@ HRы), смешными формулировками с проявлениями
 &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="c1"&gt;# TypeError: unhashable type: &amp;#39;list&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id9"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id43"&gt;Порядок вычисления дефолтных аргументов&amp;nbsp;функций&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-6"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-8"&gt;Порядок вычисления дефолтных аргументов&amp;nbsp;функций&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;У нас есть&amp;nbsp;функция:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun_default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -2522,8 +2522,8 @@ HRы), смешными формулировками с проявлениями
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id10"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id44"&gt;Что такое&amp;nbsp;декоратор?&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-7"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-9"&gt;Что такое&amp;nbsp;декоратор?&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Что такое&amp;nbsp;декоратор?&lt;/li&gt;
 &lt;li&gt;Какие декораторы из коробки&amp;nbsp;знаешь?&lt;/li&gt;
@@ -2531,7 +2531,7 @@ HRы), смешными формулировками с проявлениями
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="stdout"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id45"&gt;Декоратор, выводящий в stdout время выполнения&amp;nbsp;функции&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-10"&gt;Декоратор, выводящий в stdout время выполнения&amp;nbsp;функции&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;У нас есть функция, которая обращается в БД. Хочется, чтобы каждый
 вызов этой функции показывал в консоли время ее выполнения. Реализуй
 этот функционал с помощью декоратора. Допущение: декорируемая функция
@@ -2549,8 +2549,8 @@ HRы), смешными формулировками с проявлениями
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id11"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id46"&gt;Применение&amp;nbsp;декоратора&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-8"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-11"&gt;Применение&amp;nbsp;декоратора&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Как можно применить декоратор к функции &lt;cite&gt;fun&lt;/cite&gt;, используя синтаксический сахар и без&amp;nbsp;него?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# with syntactic sugar&lt;/span&gt;
 &lt;span class="nd"&gt;@measure&lt;/span&gt;
@@ -2562,8 +2562,8 @@ HRы), смешными формулировками с проявлениями
 &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# function&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id12"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id47"&gt;Имя декорированной&amp;nbsp;функции&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-9"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-12"&gt;Имя декорированной&amp;nbsp;функции&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Какое имя и &lt;cite&gt;docstring&lt;/cite&gt; будут у функции после применения к ней&amp;nbsp;декоратора?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;wrapper&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;#39;Wrapper function&amp;#39;&lt;/span&gt;
@@ -2607,8 +2607,8 @@ HRы), смешными формулировками с проявлениями
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id13"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id48"&gt;Декоратор для&amp;nbsp;генераторов&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-10"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-13"&gt;Декоратор для&amp;nbsp;генераторов&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Какое время будет выводиться, если применить декоратор к&amp;nbsp;генератору?&lt;/p&gt;
 &lt;p&gt;Допустим, мы применим написанный выше декоратор к такой&amp;nbsp;функции:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Generator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Any&lt;/span&gt;
@@ -2638,8 +2638,8 @@ HRы), смешными формулировками с проявлениями
         &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id14"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id49"&gt;Декоратор с&amp;nbsp;аргументами&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-11"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-14"&gt;Декоратор с&amp;nbsp;аргументами&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Перепиши декоратор из задачи выше так, чтобы в него можно было
 передать аргумент, который будет устанавливать пороговое значение,
 начиная с которого будет выводиться время исполнения декорируемой&amp;nbsp;функции:&lt;/p&gt;
@@ -2671,8 +2671,8 @@ HRы), смешными формулировками с проявлениями
 &lt;span class="n"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id15"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id50"&gt;Переменные&amp;nbsp;класса&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-12"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-15"&gt;Переменные&amp;nbsp;класса&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Что такое переменная&amp;nbsp;класса?&lt;/p&gt;
 &lt;p&gt;Даны следующие&amp;nbsp;классы:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Parent&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -2697,8 +2697,8 @@ HRы), смешными формулировками с проявлениями
 &lt;span class="c1"&gt;# 3 2 3&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id16"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id51"&gt;Слайсы в&amp;nbsp;списках&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-13"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-16"&gt;Слайсы в&amp;nbsp;списках&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Как исполнятся следующие&amp;nbsp;строки?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
@@ -2709,7 +2709,7 @@ HRы), смешными формулировками с проявлениями
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="list-dict-comprehensions"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id52"&gt;Что такое list/dict&amp;nbsp;comprehensions?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-17"&gt;Что такое list/dict&amp;nbsp;comprehensions?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Создай список квадрат четных чисел от [0, 10), используя list&amp;nbsp;comprehension&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -2718,19 +2718,19 @@ HRы), смешными формулировками с проявлениями
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="generator-expressions"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id53"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-18"&gt;Generator&amp;nbsp;expressions&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Как превратить первый пример в generator (generator&amp;nbsp;expression)?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="functools"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id54"&gt;Какие полезные функции из модуля functools ты&amp;nbsp;знаешь?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-19"&gt;Какие полезные функции из модуля functools ты&amp;nbsp;знаешь?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Этот вопрос можно задавать после вопроса про декораторы и
 functools.wraps. В functools много всякого интересного.  Хотелось бы
 услышать про reduce и особенно про&amp;nbsp;partial.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="asyncio-multithreading-multiprocessing"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id55"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-20"&gt;Asyncio, multithreading,&amp;nbsp;multiprocessing&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;В чем разница между процессом и&amp;nbsp;трэдом?&lt;/li&gt;
 &lt;li&gt;Есть лист из 1к урлов, по каждому из них нужно сделать &lt;span class="caps"&gt;GET&lt;/span&gt;
@@ -2745,8 +2745,8 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;a class="reference external" href="https://trio.readthedocs.io/en/latest/tutorial.html"&gt;туториала Trio&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id17"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id56"&gt;Экосистема&amp;nbsp;языка&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-14"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-21"&gt;Экосистема&amp;nbsp;языка&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Какие решения существуют для выполнения фоновых отложенных задач? (&lt;cite&gt;celery&lt;/cite&gt;)&lt;/li&gt;
 &lt;li&gt;Как сделать package из Python-кода? (wheels, eggs, в чем&amp;nbsp;отличия?)&lt;/li&gt;
@@ -2759,10 +2759,10 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id18"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id57"&gt;Алгоритмы&lt;/a&gt;&lt;/h2&gt;
-&lt;div class="section" id="id19"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id58"&gt;Временная&amp;nbsp;сложность&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-15"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-22"&gt;Алгоритмы&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="section-16"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-23"&gt;Временная&amp;nbsp;сложность&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Что такое временная сложность (time&amp;nbsp;complexity)?&lt;/li&gt;
 &lt;li&gt;Что такое большая&amp;nbsp;O?&lt;/li&gt;
@@ -2785,7 +2785,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 структурами данных&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="lisp"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id59"&gt;Проверка сбалансированности скобок в&amp;nbsp;Lisp-программе&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-24"&gt;Проверка сбалансированности скобок в&amp;nbsp;Lisp-программе&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Я обожаю программировать на Racket – это диалект Lisp, который
 славится большим &lt;a class="reference external" href="https://blog.pilosus.org/images/git-the-princess.png"&gt;количеством скобочек&lt;/a&gt;. Напиши функцию на Python,
 которая будет получать на вход текст (строку) и возвращать &lt;cite&gt;True&lt;/cite&gt;,
@@ -2835,10 +2835,10 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 можно упростить задание до поверки, например, только круглых&amp;nbsp;скобочек.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id20"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id60"&gt;Базы&amp;nbsp;данных&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="section-17"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-25"&gt;Базы&amp;nbsp;данных&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="rdbms"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id61"&gt;Зачем нужна &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-26"&gt;Зачем нужна &lt;span class="caps"&gt;RDBMS&lt;/span&gt;?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;У нас стартап из &lt;span class="caps"&gt;CTO&lt;/span&gt;, &lt;span class="caps"&gt;CEO&lt;/span&gt; и одного разработчика. Админов нету. Мы
 пишем сервис аутентификации – регистрация пользотелей, проверка прав –
 на Python. Зачем нам нужна БД? Почему бы не использовать текстовый
@@ -2866,7 +2866,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mysql-postgresql"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id62"&gt;Запросы в&amp;nbsp;MySQL/PostgreSQL&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-27"&gt;Запросы в&amp;nbsp;MySQL/PostgreSQL&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;У нас есть сервис по типу iTunes, где можно арендовать/покупать
 видео. Вот схема таблиц реляционной базы, положим, в&amp;nbsp;PostgreSQL&lt;/p&gt;
 &lt;div class="figure"&gt;
@@ -2906,7 +2906,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="nosql"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id63"&gt;Общие представления о&amp;nbsp;NoSQL&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-28"&gt;Общие представления о&amp;nbsp;NoSQL&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Что такое NoSQL БД? Какие типы NoSQL БД выделяют?&amp;nbsp;Примеры&lt;/p&gt;
 &lt;p&gt;Хочется услышать хотя бы самые общие вещи: NoSQL БД &amp;#8212; коллекция
 данных в одном из форматов (см. типы ниже). Данные денормализованы,
@@ -2920,7 +2920,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="redis"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id64"&gt;Общие представления о&amp;nbsp;Redis&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-29"&gt;Общие представления о&amp;nbsp;Redis&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Что такое Redis? Почему его так любят использовать для хранения кэшей?
 Чем, с точки зрения хранения данных, он принципиально отличается от,
 например, MySQL? Что произойдет с данными в Redis, если прозойдет
@@ -2930,10 +2930,10 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 например, Redis&amp;nbsp;Sentinel&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id21"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id65"&gt;Тестирование&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="section-18"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-30"&gt;Тестирование&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="unit"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id66"&gt;Общие представления о&amp;nbsp;unit-тестировании&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-31"&gt;Общие представления о&amp;nbsp;unit-тестировании&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Что это&amp;nbsp;такое?&lt;/li&gt;
 &lt;li&gt;Чем отличается от интеграционного, функционального&amp;nbsp;тестирования?&lt;/li&gt;
@@ -2944,7 +2944,7 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mysql"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id67"&gt;Как протестировать функцию, которая изменяет запись в&amp;nbsp;MySQL?&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-32"&gt;Как протестировать функцию, которая изменяет запись в&amp;nbsp;MySQL?&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Есть функция, которая выполняет &lt;cite&gt;&lt;span class="caps"&gt;INSERT&lt;/span&gt;&lt;/cite&gt; в тестовой базе данных MySQL,
 которой пользуются все разработчики команды. Нужно написать тест на
 эту функцию. Но не хочется вносить изменения в общую базу. Как можно
@@ -2956,9 +2956,9 @@ tasks -&amp;gt;&amp;nbsp;multiprocessing)&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="devops"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id68"&gt;DevOps/Администрирование&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-33"&gt;DevOps/Администрирование&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="google-com"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id69"&gt;Проблема с нечитаемым ответом&amp;nbsp;google.com&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-34"&gt;Проблема с нечитаемым ответом&amp;nbsp;google.com&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Я захожу на &lt;cite&gt;https://www.google.com&lt;/cite&gt; в браузере, открываю исходный код
 и вижу вполне читаемый&amp;nbsp;текст.&lt;/p&gt;
 &lt;p&gt;Но если я делаю такой запрос через &lt;cite&gt;curl&lt;/cite&gt; то вижу нечто нечитаемое,
@@ -2981,7 +2981,7 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ip-nginx"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id70"&gt;Топ &lt;span class="caps"&gt;IP&lt;/span&gt; адресов из лога &lt;span class="caps"&gt;NGINX&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-35"&gt;Топ &lt;span class="caps"&gt;IP&lt;/span&gt; адресов из лога &lt;span class="caps"&gt;NGINX&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Наш сервис парсят боты. Это создает большую нагрузку, мешающую
 нормальным пользователям. Мы решаем забанить ботов по &lt;span class="caps"&gt;IP&lt;/span&gt;-адресам. Для
 этого мы хотим составить топ &lt;span class="caps"&gt;IP&lt;/span&gt;-адресов, с которых приходили
@@ -2993,7 +2993,7 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="docker"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id71"&gt;Docker&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-36"&gt;Docker&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Что такое докер&amp;nbsp;контейнер?&lt;/li&gt;
 &lt;li&gt;В чем отличие от virtualbox и других виртуальных&amp;nbsp;машин?&lt;/li&gt;
@@ -3002,13 +3002,13 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id22"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id72"&gt;Архитектура&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="section-19"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-37"&gt;Архитектура&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Parental advisory: highly opinionated content&amp;nbsp;(35+)&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="section" id="pastebin"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id73"&gt;Проектирование сервиса копипасты&amp;nbsp;pastebin&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="section" id="id23"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id74"&gt;Бизнес-описание&lt;/a&gt;&lt;/h4&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#toc-entry-38"&gt;Проектирование сервиса копипасты&amp;nbsp;pastebin&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="section-20"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-39"&gt;Бизнес-описание&lt;/a&gt;&lt;/h4&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Пользователь сабмитит&amp;nbsp;текст&lt;/li&gt;
 &lt;li&gt;Текст сохраняется, ему присваивается уникальный &lt;span class="caps"&gt;URL&lt;/span&gt;&lt;/li&gt;
@@ -3019,8 +3019,8 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
 &lt;li&gt;Нужна статистика для посещения различных урлов по&amp;nbsp;месяцам&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id24"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id75"&gt;Ограничения и&amp;nbsp;допущения&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="section-21"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-40"&gt;Ограничения и&amp;nbsp;допущения&lt;/a&gt;&lt;/h4&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Пасты только&amp;nbsp;текстовые&lt;/li&gt;
 &lt;li&gt;Аналитика может быть не&amp;nbsp;реалтаймовой&lt;/li&gt;
@@ -3031,8 +3031,8 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
 &lt;li&gt;Железо планируем на 3 года&amp;nbsp;вперед&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id25"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id76"&gt;Ответить соискателю, если&amp;nbsp;спросит&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="section-22"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-41"&gt;Ответить соискателю, если&amp;nbsp;спросит&lt;/a&gt;&lt;/h4&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Средний размер пасты&amp;nbsp;1Kb&lt;/li&gt;
 &lt;li&gt;Короткая ссылка длиной 7 байт в&amp;nbsp;БД&lt;/li&gt;
@@ -3046,8 +3046,8 @@ j���k&lt;span class="s2"&gt;&amp;quot;�fe�=�`�J4�I/��m6{�E
 - 36 * 12.7 = 457 Гб пасты
 - 36 * 10 = 360 млн&amp;nbsp;урлов&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id26"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id77"&gt;Крупноблочная схема&amp;nbsp;архитектуры&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="section-23"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-42"&gt;Крупноблочная схема&amp;nbsp;архитектуры&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  Client
     |
     V
@@ -3076,7 +3076,7 @@ Periodic Task
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="write-api"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id78"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-43"&gt;Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;Генерит &lt;span class="caps"&gt;URL&lt;/span&gt;, проверяет уникальность в &lt;span class="caps"&gt;SQL&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;Если уникальное, делает &lt;span class="caps"&gt;INSERT&lt;/span&gt; в таблицу, иначе идет в п.&amp;nbsp;1&lt;/li&gt;
@@ -3090,8 +3090,8 @@ Periodic Task
 &lt;span class="k"&gt;CREATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;INDEX&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;created_at_idx&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;ON&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pastes&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;created_at&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;USING&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;BTREE&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id27"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id79"&gt;Создание уникального&amp;nbsp;урла&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="section-24"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-44"&gt;Создание уникального&amp;nbsp;урла&lt;/a&gt;&lt;/h4&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;Берем рандомную строку (или &lt;span class="caps"&gt;IP&lt;/span&gt; address юзера + timestamp) и вычисляем &lt;span class="caps"&gt;MD5&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;Кодируем &lt;cite&gt;Base 62&lt;/cite&gt; (как Base 64 но без&amp;nbsp;escape-символов)&lt;/li&gt;
@@ -3110,26 +3110,26 @@ Periodic Task
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base_encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;md5&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ip_address&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;timestamp&lt;/span&gt;&lt;span class="p"&gt;))[:&lt;/span&gt;&lt;span class="n"&gt;URL_LENGTH&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id28"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id80"&gt;Запрос к Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="write-api-1"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-45"&gt;Запрос к Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-X&lt;span class="w"&gt; &lt;/span&gt;POST&lt;span class="w"&gt; &lt;/span&gt;https://pastebin.com/api/v1.0/paste&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
 &lt;span class="w"&gt;       &lt;/span&gt;--data&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{ &amp;quot;expiration_in_minutes&amp;quot;: &amp;quot;60&amp;quot;, &amp;quot;paste_contents&amp;quot;: &amp;quot;My paste&amp;quot; }&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id29"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id81"&gt;Ответ Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="write-api-2"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-46"&gt;Ответ Write &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;shortlink&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;xJlsmeT&amp;quot;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="read-api"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id82"&gt;Запрос к Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-47"&gt;Запрос к Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;https://pastebin.com/api/v1.0/paste?shortlink&lt;span class="o"&gt;=&lt;/span&gt;xJlsmeT
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id30"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id83"&gt;Ответ Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="read-api-1"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-48"&gt;Ответ Read &lt;span class="caps"&gt;API&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;paste&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;My paste&amp;quot;&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YYYY-MM-DD HH:MM:SS&amp;quot;&lt;/span&gt;
@@ -3137,8 +3137,8 @@ Periodic Task
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id31"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id84"&gt;Аналитика&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="section" id="section-25"&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#toc-entry-49"&gt;Аналитика&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;Поскольку не нужен реалтайм, будем брать логи с реверс прокси и
 скартимливать их в&amp;nbsp;MapReduce&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;HitCounts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MRJob&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -3175,8 +3175,8 @@ Periodic Task
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id32"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id85"&gt;Полезные&amp;nbsp;ссылки&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="section-26"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-50"&gt;Полезные&amp;nbsp;ссылки&lt;/a&gt;&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://www.toptal.com/python/interview-questions"&gt;Toptal Python Interview&amp;nbsp;Questions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Python Interview Questions (&lt;a class="reference external" href="https://luminousmen.com/post/6"&gt;junior&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/7"&gt;middle&lt;/a&gt;, &lt;a class="reference external" href="https://luminousmen.com/post/8"&gt;senior&lt;/a&gt;)&lt;/li&gt;
@@ -3186,13 +3186,13 @@ Periodic Task
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="errata"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id86"&gt;Errata&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#toc-entry-51"&gt;Errata&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;2020-04-18. В функции проверки сбалансированности скобок исправлена
 ошибка в маппинге. Для хранения ключей и значений использовались
 структуры типа &lt;cite&gt;set&lt;/cite&gt; (не гарантируют сохранения порядка вставки
 элементов). Исправлено на &lt;cite&gt;tuple&lt;/cite&gt;. Нашел ошибку Егор&amp;nbsp;Моренко.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="interview"></category><category term="ru"></category></entry><entry><title>PostgreSQL: update by spliting result set into evenly sized chunks using window function</title><link href="https://blog.pilosus.org/blog/postgresql-update-rows-in-chunks/" rel="alternate"></link><published>2019-12-07T14:58:00+01:00</published><updated>2019-12-07T14:58:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-07:/blog/postgresql-update-rows-in-chunks/</id><summary type="html">&lt;p class="first last"&gt;How do you update result set by spliting it into evenly
+</content><category term="Blog"></category><category term="python"></category><category term="interview"></category><category term="ru"></category></entry><entry><title>PostgreSQL: update by spliting result set into evenly sized chunks using window function</title><link href="https://blog.pilosus.org/posts/2019/12/07/postgresql-update-rows-in-chunks/" rel="alternate"></link><published>2019-12-07T14:58:00+01:00</published><updated>2019-12-07T14:58:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-12-07:/posts/2019/12/07/postgresql-update-rows-in-chunks/</id><summary type="html">&lt;p class="first last"&gt;How do you update result set by spliting it into evenly
 sized chunks using window function&amp;nbsp;row_number()&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Sometimes you need to process your database data in batches. It may be
 absolutely necessary to retrieve the rows from the database in your
@@ -3325,7 +3325,7 @@ great help&amp;nbsp;here.&lt;/p&gt;
 &lt;li&gt;Can easily take advantage of PostgreSQL transaction and &lt;a class="reference external" href="https://www.2ndquadrant.com/en/blog/postgresql-anti-patterns-read-modify-write-cycles/"&gt;atomic&amp;nbsp;updates&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="sql"></category><category term="postgres"></category><category term="python"></category></entry><entry><title>Switching between Kubernetes clusters and namespaces: kubectx and kubens</title><link href="https://blog.pilosus.org/blog/kubernetes-context-switch/" rel="alternate"></link><published>2019-09-28T14:12:00+02:00</published><updated>2019-09-28T14:12:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-09-28:/blog/kubernetes-context-switch/</id><summary type="html">&lt;p class="first last"&gt;Save your time by using command line tools kubectx and
+</content><category term="Blog"></category><category term="sql"></category><category term="postgres"></category><category term="python"></category></entry><entry><title>Switching between Kubernetes clusters and namespaces: kubectx and kubens</title><link href="https://blog.pilosus.org/posts/2019/09/28/kubernetes-context-switch/" rel="alternate"></link><published>2019-09-28T14:12:00+02:00</published><updated>2019-09-28T14:12:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-09-28:/posts/2019/09/28/kubernetes-context-switch/</id><summary type="html">&lt;p class="first last"&gt;Save your time by using command line tools kubectx and
 kubens in multi-cluster environment with more than one
 default namespace&amp;nbsp;each.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Having more than one Kubernetes cluster is a common pattern. You may
@@ -3424,7 +3424,7 @@ $ kubectl get po   # the same as invoking with --namespace test2
 and really come in handy when you switch over multiple Kubernetes
 clusters with more than one default&amp;nbsp;namespace.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="kubectx"></category><category term="kubens"></category></entry><entry><title>Application configs: files or environment variables? Actually both!</title><link href="https://blog.pilosus.org/blog/application-configs-files-or-environment-variables-actually-both/" rel="alternate"></link><published>2019-06-07T20:30:00+02:00</published><updated>2019-06-07T20:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-07:/blog/application-configs-files-or-environment-variables-actually-both/</id><summary type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
+</content><category term="Blog"></category><category term="k8s"></category><category term="kubectx"></category><category term="kubens"></category></entry><entry><title>Application configs: files or environment variables? Actually both!</title><link href="https://blog.pilosus.org/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/" rel="alternate"></link><published>2019-06-07T20:30:00+02:00</published><updated>2019-06-07T20:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-07:/posts/2019/06/07/application-configs-files-or-environment-variables-actually-both/</id><summary type="html">&lt;p&gt;App configuration is highly opinionated topic. It&amp;#8217;s technology stack-
 and infrastructure-dependent. When it comes to configs there are a few
 parties with a possible conflict of interests. Software developers
 want an easy access to app&amp;#8217;s configuration, versioning, readability,
@@ -3642,7 +3642,7 @@ it easy to keep envs secure (see &lt;a class="reference external" href="https://
 also a name for &lt;span class="caps"&gt;YAML&lt;/span&gt; marked up with environment&amp;nbsp;variables.&lt;/p&gt;
 &lt;p&gt;You can download Piny at &lt;a class="reference external" href="https://pypi.org/project/piny/"&gt;PyPi&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="architecture"></category><category term="config"></category><category term="k8s"></category></entry><entry><title>Helm stable/prometheus-operator: adding new scraping targets and troubleshooting</title><link href="https://blog.pilosus.org/blog/prometheus-operator-no-active-targets/" rel="alternate"></link><published>2019-06-01T14:12:00+02:00</published><updated>2019-06-01T14:12:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/blog/prometheus-operator-no-active-targets/</id><summary type="html">&lt;p class="first last"&gt;How to add new services for Prometheus to scrape and what to
+</content><category term="Blog"></category><category term="architecture"></category><category term="config"></category><category term="k8s"></category></entry><entry><title>Helm stable/prometheus-operator: adding new scraping targets and troubleshooting</title><link href="https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/" rel="alternate"></link><published>2019-06-01T14:12:00+02:00</published><updated>2019-06-01T14:12:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/prometheus-operator-no-active-targets/</id><summary type="html">&lt;p class="first last"&gt;How to add new services for Prometheus to scrape and what to
 do if no active targets found. Post covers Prometheus
 deployed in Kubernetes cluster using Helm
 stable/prometheus-operator&amp;nbsp;chart.&lt;/p&gt;
@@ -3759,7 +3759,7 @@ target port&amp;#8217;s name. &lt;tt class="docutils literal"&gt;ServiceMonitor&
 named &lt;tt class="docutils literal"&gt;Service&lt;/tt&gt; ports, although other entities, e.g. an &lt;tt class="docutils literal"&gt;Ingress&lt;/tt&gt;,
 work well without explicit naming.&amp;nbsp;Beware!&lt;/p&gt;
 &lt;p&gt;&lt;span class="caps"&gt;P.S.&lt;/span&gt; At the time of writing I used &lt;tt class="docutils literal"&gt;kubectl v1.14.2&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;helm v2.14.0&lt;/tt&gt;.&lt;/p&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category><category term="prometheus"></category><category term="kubernetes-operator"></category><category term="til"></category></entry><entry><title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title><link href="https://blog.pilosus.org/blog/grafana-dashboard-flask-app/" rel="alternate"></link><published>2019-06-01T11:00:00+02:00</published><updated>2019-06-01T20:50:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/blog/grafana-dashboard-flask-app/</id><summary type="html">&lt;p class="first last"&gt;A dashboard with 12 panels showing &lt;span class="caps"&gt;RPS&lt;/span&gt;, latency, errors for
+</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category><category term="prometheus"></category><category term="kubernetes-operator"></category><category term="til"></category></entry><entry><title>Grafana Dashboard for Prometheus official Python client with Flask App metrics</title><link href="https://blog.pilosus.org/posts/2019/06/01/grafana-dashboard-flask-app/" rel="alternate"></link><published>2019-06-01T11:00:00+02:00</published><updated>2019-06-01T20:50:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-06-01:/posts/2019/06/01/grafana-dashboard-flask-app/</id><summary type="html">&lt;p class="first last"&gt;A dashboard with 12 panels showing &lt;span class="caps"&gt;RPS&lt;/span&gt;, latency, errors for
 web app&amp;#8217;s endpoints as well as host and app&amp;#8217;s resource usage
 and some extra&amp;nbsp;details.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I&amp;#8217;ve just &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard"&gt;open-sourced&lt;/a&gt; my Grafana dashboard. The dashboard designed
@@ -3811,7 +3811,7 @@ labels&amp;nbsp;selection.&lt;/p&gt;
 &lt;a class="reference external" href="https://github.com/pilosus/prometheus-client-python-app-grafana-dashboard/blob/master/flask-web-app.json"&gt;flask-web-app.json&lt;/a&gt; &lt;tt class="docutils literal"&gt;pod&lt;/tt&gt; labels to meet your needs. Instead of
 &lt;tt class="docutils literal"&gt;pod&lt;/tt&gt; you may use &lt;tt class="docutils literal"&gt;instance&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;hostname&lt;/tt&gt; or other label name
 depending on how your Prometheus handle your app&amp;#8217;s&amp;nbsp;hostname.&lt;/p&gt;
-</content><category term="Blog"></category><category term="prometheus"></category><category term="grafana"></category><category term="visualization"></category><category term="metrics"></category></entry><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/blog/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+02:00</published><updated>2019-05-28T12:03:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/blog/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
+</content><category term="Blog"></category><category term="prometheus"></category><category term="grafana"></category><category term="visualization"></category><category term="metrics"></category></entry><entry><title>Pelican plugin: word count and reading time statistics</title><link href="https://blog.pilosus.org/posts/2019/05/28/pelican-plugin-word-count/" rel="alternate"></link><published>2019-05-28T12:03:00+02:00</published><updated>2019-05-28T12:03:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-28:/posts/2019/05/28/pelican-plugin-word-count/</id><summary type="html">&lt;p class="first last"&gt;An open-source plugin for Python Pelican blog platform. It
 extends blog posts with reading statistics: number of words
 and reading time in&amp;nbsp;minutes.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I&amp;#8217;ve just released a tiny library for &lt;a class="reference external" href="https://docs.getpelican.com/en/stable/index.html"&gt;Pelican&lt;/a&gt; blog platform called
@@ -3832,10 +3832,10 @@ statistics I need for my blog. And that&amp;#8217;s&amp;nbsp;it.&lt;/p&gt;
 easier to &lt;tt class="docutils literal"&gt;git clone&lt;/tt&gt; the entire blog with all its themes and
 plugins on the new machine. It&amp;#8217;s also make it easier to version
 plugins and themes you use. Just check out your submodule to the
-version needed. Check out my article &lt;a class="reference external" href="https://blog.pilosus.org/blog/pelican-blog-up-and-running/"&gt;Pelican blog: up and running&lt;/a&gt; for more&amp;nbsp;details.&lt;/p&gt;
+version needed. Check out my article &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/"&gt;Pelican blog: up and running&lt;/a&gt; for more&amp;nbsp;details.&lt;/p&gt;
 &lt;p&gt;You can donwload (or better &lt;tt class="docutils literal"&gt;git clone&lt;/tt&gt;) &lt;tt class="docutils literal"&gt;word_count&lt;/tt&gt; plugin on
 the &lt;a class="reference external" href="https://github.com/pilosus/pilosus_pelican_word_count/"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</content><category term="Blog"></category><category term="pelican"></category><category term="blog"></category><category term="python"></category><category term="plugin"></category></entry><entry><title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title><link href="https://blog.pilosus.org/blog/k8s-ingress-troubleshooting/" rel="alternate"></link><published>2019-05-26T12:00:00+02:00</published><updated>2019-05-26T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-26:/blog/k8s-ingress-troubleshooting/</id><summary type="html">&lt;p class="first last"&gt;Kubernetes introduces a bunch of abstractions. It&amp;#8217;s easy to
+</content><category term="Blog"></category><category term="pelican"></category><category term="blog"></category><category term="python"></category><category term="plugin"></category></entry><entry><title>Kubernetes Ingress Troubleshooting: Error Obtaining Endpoints for Service</title><link href="https://blog.pilosus.org/posts/2019/05/26/k8s-ingress-troubleshooting/" rel="alternate"></link><published>2019-05-26T12:00:00+02:00</published><updated>2019-05-26T12:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-26:/posts/2019/05/26/k8s-ingress-troubleshooting/</id><summary type="html">&lt;p class="first last"&gt;Kubernetes introduces a bunch of abstractions. It&amp;#8217;s easy to
 mess up with them in your manifest files. Yet Kubernetes
 provides great tools for troubleshooting. Here is how you
 can tackle problems with Ingress and Service&amp;nbsp;resources.&lt;/p&gt;
@@ -3908,7 +3908,7 @@ the setup with an Ingress Controller and a Load Balancer routing
 external traffic to&amp;nbsp;it.&lt;/p&gt;
 &lt;p&gt;Request to a service now returns 200 &lt;span class="caps"&gt;OK&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="ingress"></category><category term="digitalocean"></category></entry><entry><title>Kubernetes Persistent Volumes: How to List and Copy Files and Directories</title><link href="https://blog.pilosus.org/blog/k8s-volumes-list-copy/" rel="alternate"></link><published>2019-05-24T20:15:00+02:00</published><updated>2019-05-24T20:15:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-24:/blog/k8s-volumes-list-copy/</id><summary type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
+</content><category term="Blog"></category><category term="k8s"></category><category term="ingress"></category><category term="digitalocean"></category></entry><entry><title>Kubernetes Persistent Volumes: How to List and Copy Files and Directories</title><link href="https://blog.pilosus.org/posts/2019/05/24/k8s-volumes-list-copy/" rel="alternate"></link><published>2019-05-24T20:15:00+02:00</published><updated>2019-05-24T20:15:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-24:/posts/2019/05/24/k8s-volumes-list-copy/</id><summary type="html">&lt;p&gt;You have created a Kubernetes workload, e.g. &lt;tt class="docutils literal"&gt;Deployment&lt;/tt&gt;, that uses
 a &lt;tt class="docutils literal"&gt;PersistentVolume&lt;/tt&gt; and a &lt;tt class="docutils literal"&gt;PersistentVolumeClaim&lt;/tt&gt;. It&amp;#8217;s
 provisioned by your cloud platform, say, DigitalOcean. You want to
 know what space is available to you, you want to browse files and
@@ -3952,7 +3952,7 @@ drwxrws---&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&g
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;kubectl&lt;span class="w"&gt; &lt;/span&gt;cp&lt;span class="w"&gt; &lt;/span&gt;default/redis-master-0:/data/dump.rdb&lt;span class="w"&gt; &lt;/span&gt;/home/vitaly/Downloads/dump.rdb
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;See &lt;tt class="docutils literal"&gt;kubectl cp &lt;span class="pre"&gt;--help&lt;/span&gt;&lt;/tt&gt; for more&amp;nbsp;details.&lt;/p&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="kubectl"></category><category term="digitalocean"></category></entry><entry><title>Helm stable/redis chart: slave unable to connect to master</title><link href="https://blog.pilosus.org/blog/helm-stable-redis-slave-crashloopbackoff/" rel="alternate"></link><published>2019-05-20T19:20:00+02:00</published><updated>2019-05-20T19:20:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/blog/helm-stable-redis-slave-crashloopbackoff/</id><summary type="html">&lt;p class="first last"&gt;Things to take care of when installing Helm&amp;#8217;s stable/redis
+</content><category term="Blog"></category><category term="k8s"></category><category term="kubectl"></category><category term="digitalocean"></category></entry><entry><title>Helm stable/redis chart: slave unable to connect to master</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/" rel="alternate"></link><published>2019-05-20T19:20:00+02:00</published><updated>2019-05-20T19:20:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-stable-redis-slave-crashloopbackoff/</id><summary type="html">&lt;p class="first last"&gt;Things to take care of when installing Helm&amp;#8217;s stable/redis
 chart with master-slave topology&amp;nbsp;enabled&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve tried to install &lt;a class="reference external" href="https://github.com/helm/charts/tree/master/stable/redis"&gt;stable/redis&lt;/a&gt; Helm chart version
 8.0.1. I used production-ready values taken from the &lt;a class="reference external" href="https://github.com/helm/charts/blob/master/stable/redis/values-production.yaml"&gt;repo&lt;/a&gt; and
@@ -3996,7 +3996,7 @@ probably be consistent. For example,
 &lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;enabled&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
 &lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;#allowExternal: true&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category><category term="chart"></category><category term="redis"></category></entry><entry><title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title><link href="https://blog.pilosus.org/blog/helm-cheat-sheet-little-known-commands/" rel="alternate"></link><published>2019-05-20T11:12:00+02:00</published><updated>2019-05-20T15:50:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/blog/helm-cheat-sheet-little-known-commands/</id><summary type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
+</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category><category term="chart"></category><category term="redis"></category></entry><entry><title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title><link href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" rel="alternate"></link><published>2019-05-20T11:12:00+02:00</published><updated>2019-05-20T15:50:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-20:/posts/2019/05/20/helm-cheat-sheet-little-known-commands/</id><summary type="html">&lt;p&gt;Helm is a package manager for Kubernetes. It&amp;#8217;s got an outstanding
 &lt;a class="reference external" href="https://helm.sh/"&gt;official documentation&lt;/a&gt; and tons of tutorials on the
 internet. Nonetheless Helm has some helpful commands and features that
 are easily overlooked when reading the documentation. I won&amp;#8217;t even try
@@ -4009,7 +4009,7 @@ to cover them all, as it&amp;#8217;s quite subjective what to count as
 to find such features by&amp;nbsp;yourself.&lt;/p&gt;
 &lt;div class="section" id="cli-help"&gt;
 &lt;h2&gt;&lt;span class="caps"&gt;CLI&lt;/span&gt;&amp;nbsp;Help&lt;/h2&gt;
-&lt;p&gt;Just like &lt;tt class="docutils literal"&gt;kubectl&lt;/tt&gt; and &lt;a class="reference external" href="https://blog.pilosus.org/blog/minikube-cheat-sheet/"&gt;minikube&lt;/a&gt; Helm&amp;#8217;s &lt;span class="caps"&gt;CLI&lt;/span&gt; tool follows
+&lt;p&gt;Just like &lt;tt class="docutils literal"&gt;kubectl&lt;/tt&gt; and &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/"&gt;minikube&lt;/a&gt; Helm&amp;#8217;s &lt;span class="caps"&gt;CLI&lt;/span&gt; tool follows
 the same help patterns for commands and&amp;nbsp;subcommands:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ helm --help
@@ -4105,9 +4105,9 @@ try to cover everything here. I just scratched the surface with less
 known things that you actually could found out by exploring the&amp;nbsp;help.&lt;/p&gt;
 &lt;p&gt;I&amp;#8217;m going to update this post as I find new features worth&amp;nbsp;sharing.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category></entry><entry><title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title><link href="https://blog.pilosus.org/blog/minikube-cheat-sheet/" rel="alternate"></link><published>2019-05-18T19:00:00+02:00</published><updated>2019-05-18T19:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/blog/minikube-cheat-sheet/</id><summary type="html">&lt;p class="first last"&gt;My personal top of Minikube&amp;#8217;s features that can save you&amp;nbsp;time&lt;/p&gt;
+</content><category term="Blog"></category><category term="k8s"></category><category term="helm"></category></entry><entry><title>Minikube Cheat Sheet: most helpful commands and features I wish I knew from the start</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/" rel="alternate"></link><published>2019-05-18T19:00:00+02:00</published><updated>2019-05-18T19:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-cheat-sheet/</id><summary type="html">&lt;p class="first last"&gt;My personal top of Minikube&amp;#8217;s features that can save you&amp;nbsp;time&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Minikube is a tool for running Kubernetes cluster on your local
-machine. Recently I&amp;#8217;ve posted about Minikube&amp;#8217;s &lt;a class="reference external" href="https://blog.pilosus.org/blog/minikube-hight-cpu-usage-linux/"&gt;ugly parts&lt;/a&gt;. Now
+machine. Recently I&amp;#8217;ve posted about Minikube&amp;#8217;s &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/"&gt;ugly parts&lt;/a&gt;. Now
 it&amp;#8217;s time for the good&amp;nbsp;parts!&lt;/p&gt;
 &lt;div class="section" id="disclaimer"&gt;
 &lt;h2&gt;Disclaimer&lt;/h2&gt;
@@ -4230,12 +4230,12 @@ $ scp -i $(minikube ssh-key) -r docker&amp;#64;$(minikube ip):/mnt/data/ .
 &lt;div class="section" id="afterword"&gt;
 &lt;h2&gt;Afterword&lt;/h2&gt;
 &lt;p&gt;As with every complex piece of software in active development
-Minikube&amp;#8217;s experience may be &lt;a class="reference external" href="https://blog.pilosus.org/blog/minikube-hight-cpu-usage-linux/"&gt;frustrating&lt;/a&gt;. Still
+Minikube&amp;#8217;s experience may be &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/"&gt;frustrating&lt;/a&gt;. Still
 Minikube is a great tool with a bunch of cool features. I wish I&amp;#8217;d
 read an overview like this one when I first launched Minikube. Hope it
 will help&amp;nbsp;someone.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Minikube high CPU usage even with no workload on Linux machine</title><link href="https://blog.pilosus.org/blog/minikube-hight-cpu-usage-linux/" rel="alternate"></link><published>2019-05-18T11:00:00+02:00</published><updated>2019-05-18T11:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/blog/minikube-hight-cpu-usage-linux/</id><summary type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
+</content><category term="Blog"></category><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Minikube high CPU usage even with no workload on Linux machine</title><link href="https://blog.pilosus.org/posts/2019/05/18/minikube-hight-cpu-usage-linux/" rel="alternate"></link><published>2019-05-18T11:00:00+02:00</published><updated>2019-05-18T11:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-18:/posts/2019/05/18/minikube-hight-cpu-usage-linux/</id><summary type="html">&lt;p&gt;Minikube is a tool that allows you to run Kubernetes for local
 development. It&amp;#8217;s adviced to run all over the &lt;a class="reference external" href="https://kubernetes.io/docs/setup/minikube/"&gt;k8s documentation&lt;/a&gt;, in
 the tech blogs. Still Minikube looks like a piece of software that is
 not quite ready for a smooth development experience. At the time of
@@ -4343,7 +4343,7 @@ that earn their owners piles of money. So let&amp;#8217;s hope that magic I&amp;
 posted here will work out for you too. I also hope the issue with high
 &lt;span class="caps"&gt;CPU&lt;/span&gt; usage will be fixed by someone with proper&amp;nbsp;skills.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Python MRO and Mixin Classes</title><link href="https://blog.pilosus.org/blog/python-mixin/" rel="alternate"></link><published>2019-05-02T13:50:00+02:00</published><updated>2019-05-02T13:50:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/blog/python-mixin/</id><summary type="html">&lt;p class="first last"&gt;Understanding Python&amp;#8217;s Method Resolution Order may be
+</content><category term="Blog"></category><category term="k8s"></category><category term="minikube"></category></entry><entry><title>Python MRO and Mixin Classes</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mixin/" rel="alternate"></link><published>2019-05-02T13:50:00+02:00</published><updated>2019-05-02T13:50:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mixin/</id><summary type="html">&lt;p class="first last"&gt;Understanding Python&amp;#8217;s Method Resolution Order may be
 helpful when using mixin&amp;nbsp;classes&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;In practice we don&amp;#8217;t usually think about how Python&amp;#8217;s &lt;span class="caps"&gt;MRO&lt;/span&gt;
 works. Complex multiple inheritance legitemately considered to be a
@@ -4486,9 +4486,9 @@ AssertionError                            Traceback (most recent call last)
 
 AssertionError: Right.do expected positive numbers only
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;See more about the inner workings of the &lt;span class="caps"&gt;MRO&lt;/span&gt; in my article about &lt;a class="reference external" href="https://blog.pilosus.org/blog/python-mro/"&gt;C3
+&lt;p&gt;See more about the inner workings of the &lt;span class="caps"&gt;MRO&lt;/span&gt; in my article about &lt;a class="reference external" href="https://blog.pilosus.org/posts/2019/05/02/python-mro/"&gt;C3
 linearisation algorithm&lt;/a&gt;.&lt;/p&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="mro"></category><category term="mixin"></category></entry><entry><title>Python Method Resolution Order and C3 linearization algorithm</title><link href="https://blog.pilosus.org/blog/python-mro/" rel="alternate"></link><published>2019-05-02T12:10:00+02:00</published><updated>2019-05-02T12:10:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/blog/python-mro/</id><summary type="html">&lt;p class="first last"&gt;A naïve implementation of C3 linearization algorithm that
+</content><category term="Blog"></category><category term="python"></category><category term="mro"></category><category term="mixin"></category></entry><entry><title>Python Method Resolution Order and C3 linearization algorithm</title><link href="https://blog.pilosus.org/posts/2019/05/02/python-mro/" rel="alternate"></link><published>2019-05-02T12:10:00+02:00</published><updated>2019-05-02T12:10:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-02:/posts/2019/05/02/python-mro/</id><summary type="html">&lt;p class="first last"&gt;A naïve implementation of C3 linearization algorithm that
 lies under the hood of Python&amp;#8217;s Method Resolution Order
 (&lt;span class="caps"&gt;MRO&lt;/span&gt;)&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Method Resolution Order (&lt;span class="caps"&gt;MRO&lt;/span&gt;) is a order in which methods should be
@@ -4660,7 +4660,7 @@ pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&g
 &lt;span class="n"&gt;mro&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mro&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Take a look at the &lt;a class="reference external" href="https://github.com/pilosus/c3linear/blob/master/tests/test_mro.py"&gt;tests&lt;/a&gt; to dive into more complex multiple inheritance&amp;nbsp;examples.&lt;/p&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="cpython"></category><category term="mro"></category><category term="algorithms"></category></entry><entry><title>Pelican blog: up and running</title><link href="https://blog.pilosus.org/blog/pelican-blog-up-and-running/" rel="alternate"></link><published>2019-05-01T11:30:00+02:00</published><updated>2019-05-01T11:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-01:/blog/pelican-blog-up-and-running/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; is a static site generator written in Python. I use it for
+</content><category term="Blog"></category><category term="python"></category><category term="cpython"></category><category term="mro"></category><category term="algorithms"></category></entry><entry><title>Pelican blog: up and running</title><link href="https://blog.pilosus.org/posts/2019/05/01/pelican-blog-up-and-running/" rel="alternate"></link><published>2019-05-01T11:30:00+02:00</published><updated>2019-05-01T11:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-05-01:/posts/2019/05/01/pelican-blog-up-and-running/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; is a static site generator written in Python. I use it for
 &lt;a class="reference external" href="https://blog.pilosus.org"&gt;my personal blog&lt;/a&gt;. Pelican is easy to install, configure and
 customize with themes and plugins. I was able to set up the blog with
 my own &lt;a class="reference external" href="https://github.com/pilosus/pilosus-pelican-theme"&gt;custom theme&lt;/a&gt; and an &lt;a class="reference external" href="https://github.com/pilosus/pilosus_pelican_og"&gt;Open Graph plugin&lt;/a&gt; in a few&amp;nbsp;hours …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://docs.getpelican.com/en/stable/"&gt;Pelican&lt;/a&gt; is a static site generator written in Python. I use it for
@@ -4863,7 +4863,7 @@ or &lt;a class="reference external" href="https://circleci.com/"&gt;Circle &lt;s
 repository. &lt;span class="caps"&gt;CI&lt;/span&gt; pipeline should be triggered on each push to the remote
 blog&amp;nbsp;repository.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="pelican"></category><category term="blog"></category><category term="python"></category></entry><entry><title>Method vs. Class Method Quirks in Python 3</title><link href="https://blog.pilosus.org/blog/bound-class-method/" rel="alternate"></link><published>2019-04-29T17:30:00+02:00</published><updated>2019-04-29T17:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-29:/blog/bound-class-method/</id><summary type="html">&lt;p class="first last"&gt;A little example of how bound/unbound methods behave in Python&amp;nbsp;3&lt;/p&gt;
+</content><category term="Blog"></category><category term="pelican"></category><category term="blog"></category><category term="python"></category></entry><entry><title>Method vs. Class Method Quirks in Python 3</title><link href="https://blog.pilosus.org/posts/2019/04/29/bound-class-method/" rel="alternate"></link><published>2019-04-29T17:30:00+02:00</published><updated>2019-04-29T17:30:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-29:/posts/2019/04/29/bound-class-method/</id><summary type="html">&lt;p class="first last"&gt;A little example of how bound/unbound methods behave in Python&amp;nbsp;3&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;A code snippet in Python 3 below has been discussed recently on the&amp;nbsp;internet:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;In [1]: class A:
    ...:     def method(self):
@@ -4951,7 +4951,7 @@ Out[26]: False
 &lt;p&gt;The example above doesn&amp;#8217;t apply to Python 2.7 though. It seems that
 Python 2.7 had different implementation, so that &lt;tt class="docutils literal"&gt;A.method&lt;/tt&gt; would
 return different objects every time it&amp;#8217;s&amp;nbsp;called.&lt;/p&gt;
-</content><category term="Blog"></category><category term="python"></category><category term="cpython"></category></entry><entry><title>Let’s get started!</title><link href="https://blog.pilosus.org/blog/intro/" rel="alternate"></link><published>2019-04-28T16:30:00+02:00</published><updated>2019-04-28T16:45:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-28:/blog/intro/</id><summary type="html">&lt;p&gt;My name is Vitaly R. Samigullin. I&amp;#8217;m a software developer, a team
+</content><category term="Blog"></category><category term="python"></category><category term="cpython"></category></entry><entry><title>Let’s get started!</title><link href="https://blog.pilosus.org/posts/2019/04/28/intro/" rel="alternate"></link><published>2019-04-28T16:30:00+02:00</published><updated>2019-04-28T16:45:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2019-04-28:/posts/2019/04/28/intro/</id><summary type="html">&lt;p&gt;My name is Vitaly R. Samigullin. I&amp;#8217;m a software developer, a team
 leader, and a person who enjoys thinking about how and why things work
 the way they work. Having lived in Austria and Spain, I got some
 interesting immigration experience. I&amp;#8217;ve also started a small

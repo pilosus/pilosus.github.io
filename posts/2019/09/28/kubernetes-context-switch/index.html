@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Switching between Kubernetes clusters and namespaces: kubectx and kubens</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Switching between Kubernetes clusters and namespaces: kubectx and kubens" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2019/09/28/kubernetes-context-switch/" />
+    <meta property="og:description" content="Save your time by using command line tools kubectx and kubens in multi-cluster environment with more than one default namespace each." />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2019-09-28" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="k8s" />
+    <meta property="article:tag" content="kubectx" />
+    <meta property="article:tag" content="kubens" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/articles/">Articles</a></li>
+
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/09/28/kubernetes-context-switch/" rel="bookmark"
+                   title="Permalink to Switching between Kubernetes clusters and namespaces: kubectx and kubens">Switching between Kubernetes clusters and namespaces: kubectx and&nbsp;kubens</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-09-28T14:12:00+02:00">
+                  28-09-2019 14:12
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">439 words</span>
+		|
+		<span class="word-count">2 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/k8s/">k8s</a> <a href="https://blog.pilosus.org/tag/kubectx/">kubectx</a> <a href="https://blog.pilosus.org/tag/kubens/">kubens</a> </span>                
+              </div><!-- /.post-info -->              <p>Having more than one Kubernetes cluster is a common pattern. You may
+have one cluster dedicated to production environment, another one for
+staging and the third one for testing&nbsp;environment.</p>
+<p>The same thing with Kubernetes namespaces: it&#8217;s great abstraction
+allowing you to separate workloads by their purpose. You may have
+multiple namespaces for different test environments or a dedicated
+namespace for app-related pods and another namespace for logging and
+monitoring&nbsp;services.</p>
+<p>Configuring access to multiple Kubernetes clusters is well documented
+in official <a class="reference external" href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">k8s documentation</a>. Still switching context and
+specifying namespace for each <tt class="docutils literal">kubectl</tt> invocation is tedious. This
+is where <a class="reference external" href="https://github.com/ahmetb/kubectx/">kubectx and kubens</a> come into play. But let&#8217;s configure
+multiple clusters&nbsp;first.</p>
+<div class="section" id="kubernetes-configuration-file-multiple-clusters">
+<h2>Kubernetes configuration file: multiple&nbsp;clusters</h2>
+<p>You find an extensive guide in the <a class="reference external" href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">k8s documentation</a>. All in all,
+your <tt class="docutils literal"><span class="pre">~/.kube/config</span></tt> should include three&nbsp;lists:</p>
+<ul class="simple">
+<li>Clusters</li>
+<li>Users</li>
+<li>Contexts</li>
+</ul>
+<p>Context defines a cluster, it&#8217;s namespace and a user. When the user
+switches to the context, he or she is working with the cluster and the
+namespaces of the&nbsp;context.</p>
+<p>Each cluster may define master node&#8217;s server hostname and optionaly
+other entities like base64-encoded&nbsp;certificates.</p>
+<p>Users may also be defined by autherntication options that covered in
+<a class="reference external" href="https://kubernetes.io/docs/reference/access-authn-authz/authentication/">Kubernetes authentication guide</a>.</p>
+<p>An example configuration file for two Kubernetes clusters and two
+users with different authentication types may look like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">clusters</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cluster</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">certificate-authority-data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YOUR-CERT-AUTHORITY-DATA-CLUSTER-1</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://YOUR-SERVER-ADDRESS-1</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster1</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cluster</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">certificate-authority-data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YOUR-CERT-AUTHORITY-DATA-CLUSTER-2</span>
+<span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://YOUR-SERVER-ADDRESS-2</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster2</span>
+<span class="nt">contexts</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">context</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster1</span>
+<span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user1</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context1</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">context</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster2</span>
+<span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user2</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context2</span>
+<span class="nt">current-context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Config</span>
+<span class="nt">preferences</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="nt">users</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user1</span>
+<span class="w">  </span><span class="nt">user</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">client-certificate-data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YOUR-CLIENT-CERT-DATA-1</span>
+<span class="w">    </span><span class="nt">client-key-data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YOUR-CLIENT-KEY-DATA-1</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">user2</span>
+<span class="w">  </span><span class="nt">user</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">auth-provider</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">access-token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">YOUR-ACCESS-TOKEN</span>
+<span class="w">        </span><span class="nt">cmd-args</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config config-helper --format=json</span>
+<span class="w">        </span><span class="nt">cmd-path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/PATH/TO/google-cloud-sdk/bin/gcloud</span>
+<span class="w">        </span><span class="nt">expiry</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2019-09-28T00:00:00Z&quot;</span>
+<span class="w">        </span><span class="nt">expiry-key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{.credential.token_expiry}&#39;</span>
+<span class="w">        </span><span class="nt">token-key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{.credential.access_token}&#39;</span>
+<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcp</span>
+</pre></div>
+</div>
+<div class="section" id="kubectx-and-kubens">
+<h2>kubectx and&nbsp;kubens</h2>
+<p>Although switching context is easy with <tt class="docutils literal">kubectl config <span class="pre">use-context</span></tt>,
+working with both contexts and namespaces require way too many key strokes!
+<a class="reference external" href="https://github.com/ahmetb/kubectx/">kubectx and kubens</a> command line tools allow you to switch context this&nbsp;easy:</p>
+<pre class="literal-block">
+$ kubectx context2  # the same as kubectl config use-context context2
+</pre>
+<p>Chaning context with <tt class="docutils literal">kubectx</tt> changes your config file&#8217;s
+<tt class="docutils literal"><span class="pre">current-context</span></tt> field the same way the <tt class="docutils literal">kubectl config
+<span class="pre">use-context</span></tt> does.</p>
+<p>Now, instead of typing <tt class="docutils literal"><span class="pre">--namespace</span> <span class="pre">your-namespace</span></tt> or <tt class="docutils literal"><span class="pre">-n</span>
+<span class="pre">your-namespace</span></tt> in every <tt class="docutils literal">kubectl</tt> invokation, change namespace
+once with <tt class="docutils literal">kubens</tt>:</p>
+<pre class="literal-block">
+$ kubens test2     # your current k8s namespace is test2 now
+$ kubectl get po   # the same as invoking with --namespace test2
+# kubens test1     # your current k8s namespace is test1 now
+</pre>
+<p>Using <tt class="docutils literal">kubectx</tt> and <tt class="docutils literal">kubens</tt> allow you to save some key strokes
+and really come in handy when you switch over multiple Kubernetes
+clusters with more than one default&nbsp;namespace.</p>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

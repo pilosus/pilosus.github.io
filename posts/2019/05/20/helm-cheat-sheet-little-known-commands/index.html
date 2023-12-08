@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Helm Cheat Sheet: Personal Top of the Little Known Commands and Features</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Helm Cheat Sheet: Personal Top of the Little Known Commands and Features" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" />
+    <meta property="og:description" content="Helm is a package manager for Kubernetes. It’s got an outstanding official documentation and tons of tutorials on the internet. Nonetheless Helm has some helpful commands and features that are easily overlooked when reading the documentation. I won’t even try to cover them all, as it’s quite …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2019-05-20" />
+    <meta property="article:modified_time" content="2019-05-20" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="k8s" />
+    <meta property="article:tag" content="helm" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/articles/">Articles</a></li>
+
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/05/20/helm-cheat-sheet-little-known-commands/" rel="bookmark"
+                   title="Permalink to Helm Cheat Sheet: Personal Top of the Little Known Commands and Features">Helm Cheat Sheet: Personal Top of the Little Known Commands and&nbsp;Features</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-05-20T11:12:00+02:00">
+                  20-05-2019 11:12
+                </span>
+                | upd. <span class="modified" title="2019-05-20T15:50:00+02:00">20-05-2019 15:50</span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">553 words</span>
+		|
+		<span class="word-count">3 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/k8s/">k8s</a> <a href="https://blog.pilosus.org/tag/helm/">helm</a> </span>                
+              </div><!-- /.post-info -->              <p>Helm is a package manager for Kubernetes. It&#8217;s got an outstanding
+<a class="reference external" href="https://helm.sh/">official documentation</a> and tons of tutorials on the
+internet. Nonetheless Helm has some helpful commands and features that
+are easily overlooked when reading the documentation. I won&#8217;t even try
+to cover them all, as it&#8217;s quite subjective what to count as
+&#8220;helpful&#8221;. What I will try to do though is to give a direction on how
+to find such features by&nbsp;yourself.</p>
+<div class="section" id="cli-help">
+<h2><span class="caps">CLI</span>&nbsp;Help</h2>
+<p>Just like <tt class="docutils literal">kubectl</tt> and <a class="reference external" href="https://blog.pilosus.org/posts/2019/05/18/minikube-cheat-sheet/">minikube</a> Helm&#8217;s <span class="caps">CLI</span> tool follows
+the same help patterns for commands and&nbsp;subcommands:</p>
+<pre class="literal-block">
+$ helm --help
+$ helm get --help
+$ helm get values --help
+</pre>
+</div>
+<div class="section" id="shell-completion">
+<h2>Shell&nbsp;Completion</h2>
+<p>Again, just like <tt class="docutils literal">kubectl</tt> and <tt class="docutils literal">minikube</tt> Helm provides shell
+commands completion for <tt class="docutils literal">bash</tt> and <tt class="docutils literal">zsh</tt>. See more in&nbsp;help:</p>
+<pre class="literal-block">
+$ helm completion --help
+</pre>
+<p>Completion helps a lot both everyday interaction with Helm and its <span class="caps">CLI</span>&nbsp;exploration.</p>
+</div>
+<div class="section" id="commands-aliases">
+<h2>Commands&nbsp;Aliases</h2>
+<p>Some Helm commands have aliases. You can see then in the corresponding
+section in help. As an example these two commands are the&nbsp;same:</p>
+<pre class="literal-block">
+$ helm list
+$ helm ls
+</pre>
+</div>
+<div class="section" id="chart-values">
+<h2>Chart&nbsp;Values</h2>
+<p>Helm charts usually get initialized with some default values. It&#8217;s
+worth inspect them before&nbsp;installation:</p>
+<pre class="literal-block">
+$ helm inspect values stable/postgresql
+</pre>
+<p>Sometimes it&#8217;s also very helpful to get values from the deployed
+release, both explicitly set by user and taken from the&nbsp;defaults:</p>
+<pre class="literal-block">
+$ helm get values --all &lt;your-release-name&gt;
+</pre>
+</div>
+<div class="section" id="chart-versions">
+<h2>Chart&nbsp;Versions</h2>
+<p>Every chart must have a <a class="reference external" href="https://helm.sh/docs/charts/#charts-and-versioning">version number</a>. Charts are versioned under
+version control systems (<span class="caps">VSC</span>) and installed from the <a class="reference external" href="https://helm.sh/docs/chart_repository/#the-chart-repository-guide">chart
+repositories</a>. You can list existing repos&nbsp;with:</p>
+<pre class="literal-block">
+$ helm repo list
+</pre>
+<p>Don&#8217;t forget to update packages information for your repos&nbsp;with:</p>
+<pre class="literal-block">
+$ helm repo update
+</pre>
+<p>Sometimes you may want to install specific version of chart. List versions&nbsp;first:</p>
+<pre class="literal-block">
+$ helm search --versions stable/postgresql
+</pre>
+<p>Now install the chart with a <tt class="docutils literal"><span class="pre">--version</span></tt> argument:</p>
+<pre class="literal-block">
+$ helm intall --version 3.17.0 stable/postgresql
+</pre>
+</div>
+<div class="section" id="chart-deletion">
+<h2>Chart&nbsp;deletion</h2>
+<p>If you ommit <tt class="docutils literal"><span class="pre">--name</span> <span class="pre">&lt;your-release-name&gt;</span></tt> argument when doing <tt class="docutils literal">helm
+install</tt> you get a random release name. Release names are reserved
+even after your release is deleted, so that you can do a&nbsp;rollback.</p>
+<p>If you are using a your own release name you can get into trouble when
+reinstalling chart with the same name. In order to avoid name clash
+delete your release like&nbsp;so:</p>
+<pre class="literal-block">
+$ helm delete --purge &lt;your-release-name&gt;
+</pre>
+<p>In this case you won&#8217;t be able to do a rollback&nbsp;though.</p>
+</div>
+<div class="section" id="emulate-installation">
+<h2>Emulate&nbsp;Installation</h2>
+<p>We&#8217;ve already covered <tt class="docutils literal">inspect</tt> a little bit. It allows you to see
+chart&#8217;s info, values and a <span class="caps">README</span> file. But sometimes you may want to
+get dirty in chart&#8217;s guts (actually, I always do as I don&#8217;t really
+like the idea of installing something I don&#8217;t understand in my k8s
+cluster). In this case you may want to emulate installation with
+verbose&nbsp;output:</p>
+<pre class="literal-block">
+$ helm install --dry-run --debug --version 3.17.0 stable/postgresql
+</pre>
+<p>Having chart manifests at your fingertips is a great way to save time
+and effort browsing for the source&nbsp;code.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>Helm&#8217;s got almost everything needed to start working with it in its
+help. It&#8217;s consistent and mimics other k8s <span class="caps">CLI</span> tools like <tt class="docutils literal">kubectl</tt>
+and <tt class="docutils literal">minikube</tt>. Take your time to explore the help! I didn&#8217;t really
+try to cover everything here. I just scratched the surface with less
+known things that you actually could found out by exploring the&nbsp;help.</p>
+<p>I&#8217;m going to update this post as I find new features worth&nbsp;sharing.</p>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

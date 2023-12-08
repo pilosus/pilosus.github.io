@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Helm stable/prometheus-operator: adding new scraping targets and troubleshooting</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Helm stable/prometheus-operator: adding new scraping targets and troubleshooting" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/" />
+    <meta property="og:description" content="How to add new services for Prometheus to scrape and what to do if no active targets found. Post covers Prometheus deployed in Kubernetes cluster using Helm stable/prometheus-operator chart." />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2019-06-01" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="k8s" />
+    <meta property="article:tag" content="helm" />
+    <meta property="article:tag" content="prometheus" />
+    <meta property="article:tag" content="kubernetes-operator" />
+    <meta property="article:tag" content="til" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+
+            <li class="navbar-item"><a  class="navbar-link hl" href="https://blog.pilosus.org/category/blog/">blog</a></li>
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/articles/">Articles</a></li>
+
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2019/06/01/prometheus-operator-no-active-targets/" rel="bookmark"
+                   title="Permalink to Helm stable/prometheus-operator: adding new scraping targets and troubleshooting">Helm stable/prometheus-operator: adding new scraping targets and&nbsp;troubleshooting</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2019-06-01T14:12:00+02:00">
+                  01-06-2019 14:12
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">477 words</span>
+		|
+		<span class="word-count">2 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/k8s/">k8s</a> <a href="https://blog.pilosus.org/tag/helm/">helm</a> <a href="https://blog.pilosus.org/tag/prometheus/">prometheus</a> <a href="https://blog.pilosus.org/tag/kubernetes-operator/">kubernetes-operator</a> <a href="https://blog.pilosus.org/tag/til/">til</a> </span>                
+              </div><!-- /.post-info -->              <p>Today I Learned (<span class="caps">TIL</span>) that Kubernetes named ports usage may be quite&nbsp;frustrating.</p>
+<p>Recently I&#8217;ve deployed monitoring stack (Prometheus, Grafana) in
+Kubernetes using Helm <a class="reference external" href="https://github.com/helm/charts/tree/master/stable/prometheus-operator">stable/prometheus-operator</a>. Setting up
+monitoring for Kubernetes cluster itself is covered by <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-digitalocean-kubernetes-cluster-monitoring-with-helm-and-prometheus-operator">this</a>
+wonderful guide. But for setting up monitoring for other services one
+need to learn what <a class="reference external" href="https://cloud.google.com/blog/products/containers-kubernetes/best-practices-for-building-kubernetes-operators-and-stateful-apps">Kubernetes Operator</a> is, and create his/her own
+<tt class="docutils literal">ServiceMonitor</tt> for <tt class="docutils literal"><span class="pre">Prometheus-Operator</span></tt> (see
+<a class="reference external" href="https://github.com/helm/charts/tree/master/stable/prometheus-operator">stable/prometheus-operator</a>).</p>
+<p><tt class="docutils literal">ServiceMotitor</tt> is a custom resource. It tells Prometheus what k8s
+<tt class="docutils literal">Service</tt> exposes metrics and where: service label selectors, its
+namespace, path, port, etc. Say, we&#8217;ve got a web application
+<tt class="docutils literal">Service</tt> in the <tt class="docutils literal">default</tt> namespace with label <tt class="docutils literal">app: pili</tt> that
+exposes <tt class="docutils literal">/metrics</tt> endpoint on the named port called <tt class="docutils literal">uwsgi</tt> . We
+are going to deploy <tt class="docutils literal">ServiceMonitor</tt> for Prometheus to scrape the
+metrics every 15 seconds in <tt class="docutils literal">monitoring</tt> namespace and with certain
+labels. Then we apply a&nbsp;manifest:</p>
+<div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring.coreos.com/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ServiceMonitor</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring-pili</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">monitoring</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili-service-monitor</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Target app service</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili</span>
+<span class="w">  </span><span class="nt">endpoints</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15s</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/metrics</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uwsgi</span>
+<span class="w">  </span><span class="nt">namespaceSelector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchNames</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</pre></div>
+<p>Following this steps I&#8217;m sucessfully deployed a few service monitors:
+for a PostgreSQL cluster, RabbitMQ, ElasticSearch, etc. All of them
+allowed Prometheus to scrape metrics just as expected. But my own
+application still showed 0 active targets in Prometheus. I could
+manually <tt class="docutils literal">curl</tt> my app service&#8217;s <tt class="docutils literal">/metrics</tt> endpoint and see that
+all the metrics are exposed correctly. Still Prometheus was unable to
+scrape&nbsp;it.</p>
+<p>I doublechecked label selectors as they often happen to be a culrpit
+(see this <a class="reference external" href="https://stackoverflow.com/questions/52991038/how-to-create-a-servicemonitor-for-prometheus-operator">StackOverflow</a> question). Everything was fine. I could see
+that my app&#8217;s <tt class="docutils literal">Service</tt> exposed Kubernetes endpoints&nbsp;correctly:</p>
+<pre class="literal-block">
+$ kubectl get endpoint --namespace default
+...
+pili  10.244.0.136:8080,10.244.0.144:8080,10.244.0.185:8080  6d16h
+...
+</pre>
+<p>Eventually, it turned out that <tt class="docutils literal">ServiceMonitor</tt> didn&#8217;t see my app
+service&#8217;s <strong>named port</strong>!</p>
+<p>My <tt class="docutils literal">Service</tt> manifest look like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uwsgi</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili-web</span>
+<span class="w">    </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+</pre></div>
+<p>In that case <tt class="docutils literal">Service</tt> targeted named port <tt class="docutils literal">uwsgi</tt> from app&#8217;s
+<tt class="docutils literal">Deployment</tt>. The port was also used in <tt class="docutils literal">Ingress</tt> sucessfully:</p>
+<pre class="literal-block">
+...
+- backend:
+    serviceName: pili
+    servicePort: uwsgi
+...
+</pre>
+<p>It wasn&#8217;t untill I <em>explicitly</em> named the port (with the same name) in
+<tt class="docutils literal">Service</tt> that <tt class="docutils literal">ServiceMonitor</tt> could discover my target. So I
+rewrote my <tt class="docutils literal">Service</tt> manifest:</p>
+<div class="highlight"><pre><span></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterIP</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uwsgi</span>
+<span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
+<span class="w">    </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uwsgi</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pili-web</span>
+<span class="w">    </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+</pre></div>
+<p>So the only change that really helped was this&nbsp;one:</p>
+<div class="highlight"><pre><span></span><span class="w"> </span>  ports:
+<span class="gd">-  - protocol: TCP</span>
+<span class="gi">+  - name: uwsgi</span>
+<span class="gi">+    protocol: TCP</span>
+<span class="w"> </span>    port: 8080
+<span class="w"> </span>    targetPort: uwsgi
+</pre></div>
+<p>Service&#8217;s port should be explicitly named even if has the same name as
+target port&#8217;s name. <tt class="docutils literal">ServiceMonitor</tt> understands only explicitly
+named <tt class="docutils literal">Service</tt> ports, although other entities, e.g. an <tt class="docutils literal">Ingress</tt>,
+work well without explicit naming.&nbsp;Beware!</p>
+<p><span class="caps">P.S.</span> At the time of writing I used <tt class="docutils literal">kubectl v1.14.2</tt> and <tt class="docutils literal">helm v2.14.0</tt>.</p>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>
