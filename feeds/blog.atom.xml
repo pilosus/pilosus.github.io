@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-09-11T15:00:00+02:00</updated><entry><title>GNU Stow repo with git submodules</title><link href="https://blog.pilosus.org/posts/2023/09/11/gnu-stow-repo-with-git-submodules/" rel="alternate"></link><published>2023-09-11T15:00:00+02:00</published><updated>2023-09-11T15:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-09-11:/posts/2023/09/11/gnu-stow-repo-with-git-submodules/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; &lt;a class="reference external" href="https://www.gnu.org/software/stow/manual/stow.html"&gt;Stow&lt;/a&gt; is a tool to manage symlinks from a single directory. That
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-12-10T13:13:00+01:00</updated><entry><title>My Linux journey so far: status update 2023</title><link href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/" rel="alternate"></link><published>2023-12-10T13:13:00+01:00</published><updated>2023-12-10T13:13:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-10:/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/</id><summary type="html">&lt;p&gt;I started using Linux at the high school in 2002. 16 years old at that
+time, I didn&amp;#8217;t have any contacts with the other Linux users in the
+town where I lived. I did have a slow occassional dial-up internet
+connection, a few books available in the local book …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started using Linux at the high school in 2002. 16 years old at that
+time, I didn&amp;#8217;t have any contacts with the other Linux users in the
+town where I lived. I did have a slow occassional dial-up internet
+connection, a few books available in the local book store and a mail
+order shop to purchase CDs with various Linux or &lt;span class="caps"&gt;BSD&lt;/span&gt; distributions. It
+all started with the &lt;em&gt;Red Hat Linux 7.3 Valhalla&lt;/em&gt; back then. I also
+tried Slackware, Debian, FreeBSD 4.5 and whatnot on my&amp;nbsp;desktop.&lt;/p&gt;
+&lt;p&gt;During my time at the university (2003-2008), Linux was a no-go: the
+whole education process was Windows-centric. After trying some
+workarounds with Wine, I realised I was wasting more time on the
+&amp;#8220;motorcycle maintenance&amp;#8221; than on the ride itself, so I gave&amp;nbsp;up.&lt;/p&gt;
+&lt;p&gt;In 2011 I got Arch Linux distro installed on my pretty low-performant
+machine I used for pet projects and other non-work-related things. It
+was all the way the hacker machine, for sure! Tiling windows manager
+(&lt;a class="reference external" href="https://wiki.archlinux.org/title/i3"&gt;i3-wm&lt;/a&gt; and even &lt;a class="reference external" href="https://wiki.archlinux.org/title/Ratpoison"&gt;ratpoison&lt;/a&gt;), even more never-ending &amp;#8220;motorcycle
+maintenance&amp;#8221; with Emacs and &lt;span class="caps"&gt;OS&lt;/span&gt;&amp;nbsp;customizing!&lt;/p&gt;
+&lt;p&gt;I also had Gentoo Linux on my second, even less performant &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Sony_Vaio_P_series"&gt;tiny
+machine&lt;/a&gt;. You can imaging building the Firefox browser on it from the
+source code, let alone upgrading the whole system with &lt;tt class="docutils literal"&gt;emerge
+world&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;In early 2017 I realised that my current job leaves me almost no spare
+time for a home-grown zoo of Linux distros. So I switched to Ubuntu
+(16.04 Xenial back then) and had been using Ubuntu until July 2023. In
+the lighthning talks session during the the &lt;a class="reference external" href="https://ep2023.europython.eu/"&gt;EuroPython 2023&lt;/a&gt;
+conferece I attended this year, someone mentioned Fedora as a nice
+alternative to Ubuntu for Python developers who need simplicity with
+the up-to-date versions of the upstream software. Given that I wasn&amp;#8217;t
+happy with how Ubuntu upgrade to 22.04 went, the mess with snap
+packages, and ocassional performance issues I didn&amp;#8217;t have time to
+troubleshoot properly, I decided to give Fedora 38 a&amp;nbsp;try.&lt;/p&gt;
+&lt;p&gt;Now, 6 months and 1 system upgrade later, I can say that I am pretty
+happy with what Fedora Desktop provides. It&amp;#8217;s simple, with the sound
+defaults like &lt;span class="caps"&gt;GNOME&lt;/span&gt; Desktop and Firefox browser. &lt;span class="caps"&gt;DNF&lt;/span&gt; package manager
+feels like at home without even looking up the man pages/help. The
+software is not the bleeding edge, but pretty up to date. &lt;a class="reference external" href="https://developer.fedoraproject.org/tech/languages/python/multiple-pythons.html"&gt;Python
+support&lt;/a&gt; is excellent indeed: you get the latest interpeter version
+by default, but can install all the predecessors with ease, without
+even bothering with &lt;a class="reference external" href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt;. Same with &lt;a class="reference external" href="https://docs.fedoraproject.org/en-US/quick-docs/installing-java/"&gt;Java&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Fedora release cycle is 13 month. I have to admit, that my &lt;a class="reference external" href="https://docs.fedoraproject.org/en-US/quick-docs/upgrading-fedora-offline/"&gt;upgrade&lt;/a&gt;
+from Fedora 38 to 39 wasn&amp;#8217;t fully seamless. I had to switch SELinux
+temporarily to the permissive mode to let the upgrade process update
+the boot loader image on my &lt;span class="caps"&gt;UEFI&lt;/span&gt; machine. But Fedora&amp;#8217;s &lt;a class="reference external" href="https://discussion.fedoraproject.org/t/no-upgrade-executed-when-doing-system-upgrade-reboot/78163/4"&gt;discussion
+forums&lt;/a&gt; are helpful and allowed me to fix the issue&amp;nbsp;quickly.&lt;/p&gt;
+&lt;p&gt;All in all, Fedora feels like a right balance between the extremes:
+the very stable distributions with outdated software like Debian and
+the bleeding edge systems that are likely to break something during
+the upgrades like Arch Linux; between the blows-and-whistles-heavy
+popular distributions that seem to neglect the quality like late
+Ubuntu and the spartan, distros with survivalist-flavor like&amp;nbsp;Gentoo.&lt;/p&gt;
+&lt;p&gt;So far so good! Let&amp;#8217;s see how the upgrade to Fedora 40 will&amp;nbsp;go.&lt;/p&gt;
+</content><category term="Blog"></category><category term="linux"></category></entry><entry><title>GNU Stow repo with git submodules</title><link href="https://blog.pilosus.org/posts/2023/09/11/gnu-stow-repo-with-git-submodules/" rel="alternate"></link><published>2023-09-11T15:00:00+02:00</published><updated>2023-09-11T15:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-09-11:/posts/2023/09/11/gnu-stow-repo-with-git-submodules/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;GNU&lt;/span&gt; &lt;a class="reference external" href="https://www.gnu.org/software/stow/manual/stow.html"&gt;Stow&lt;/a&gt; is a tool to manage symlinks from a single directory. That
 makes the tool a perfect candidte to keep configuration files (or
 dotfiles) in a &lt;span class="caps"&gt;VCS&lt;/span&gt; repository, such as a Git repo. This is where &lt;a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;git
 submodules&lt;/a&gt; come in handy: oftentimes people maintain configurations

@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2023-12-08T19:44:12-00:00</lastmod>
+<lastmod>2023-12-10T13:13:32-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -18,6 +18,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/</loc>
+<lastmod>2023-12-10T13:13:00+01:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
+</url>
+
+<url>
 <loc>https://blog.pilosus.org/posts/2023/09/11/gnu-stow-repo-with-git-submodules/</loc>
 <lastmod>2023-09-11T15:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
@@ -26,13 +33,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/posts/2023/07/16/clojure-decision-fatigue/</loc>
-<lastmod>2023-07-16T17:00:00+02:00</lastmod>
-<changefreq>weekly</changefreq>
-<priority>1.0</priority>
-</url>
-
-<url>
-<loc>https://blog.pilosus.org/posts/2023/07/16/clojure-workflow/</loc>
 <lastmod>2023-07-16T17:00:00+02:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1.0</priority>
@@ -236,14 +236,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2023-09-11T15:00:00+01:05</lastmod>
+<lastmod>2023-12-10T13:13:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://blog.pilosus.org/category/articles/</loc>
-<lastmod>2023-07-16T17:00:00+01:05</lastmod>
+<loc>https://blog.pilosus.org/tag/linux/</loc>
+<lastmod>2023-12-10T13:13:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
