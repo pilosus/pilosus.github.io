@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Vitaly Samigullin's blog - dependencies</title>
+    <title>Vitaly Samigullin's blog - screencast</title>
 
     <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,28 +68,36 @@
       <div class="content">
         <section class="body">
           <article class="post-entry">
-            <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/">pip-license-checker: detect third-party dependencies with &#8220;wrong&#8221;&nbsp;licenses</a></h2>
+            <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/">Recording a screencast on&nbsp;Linux</a></h2>
               <div class="post-info">
-                <span class="published" title="2021-09-07T09:10:00+02:00">
-                  07-09-2021 09:10
+                <span class="published" title="2023-12-21T23:55:00+01:00">
+                  21-12-2023 23:55
                 </span>
-                | upd. <span class="modified" title="2021-09-16T15:54:00+02:00">16-09-2021 15:54</span>
                 |
                 <span class="vcard author">
                   by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
                 </span>
                 |
-                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+                <span>in <a href="https://blog.pilosus.org/category/til/">TIL</a></span>
 		|
-		<span class="word-count">2629 words</span>
+		<span class="word-count">57 words</span>
 		|
-		<span class="word-count">11 min to read</span>
-<br/><span>tags: <a href="https://blog.pilosus.org/tag/license/">license</a> <a href="https://blog.pilosus.org/tag/dependencies/">dependencies</a> <a href="https://blog.pilosus.org/tag/license-management/">license-management</a> <a href="https://blog.pilosus.org/tag/compliance/">compliance</a> <a href="https://blog.pilosus.org/tag/foss/">foss</a> <a href="https://blog.pilosus.org/tag/clojure/">clojure</a> </span>                
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/linux/">linux</a> <a href="https://blog.pilosus.org/tag/screencast/">screencast</a> </span>                
               </div><!-- /.post-info -->            <div class="post-summary">
-              <p class="first last">Detect license types for your poject&#8217;s third-party&nbsp;dependencies</p>
-
+              <p><span class="caps">TIL</span> I can record a screencast using <span class="caps">GNOME</span>&#8217;s <a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en">tool</a>,
+trim it with <tt class="docutils literal">ffmpeg</tt> like&nbsp;this:</p>
+<pre class="literal-block">
+cd ~/Screencasts
+ffmpeg -i screencast.webm -ss 00:00:03.120 -t 00:00:11.500 output.webm
+</pre>
+<p>then resize with&nbsp;ImageMagick:</p>
+<pre class="literal-block">
+magick output.webm -resize 50% -layers coalesce output.webp
+</pre>
+<p>and simply use …</p>
             </div>
-            <a class="post-readmore" href="https://blog.pilosus.org/posts/2021/09/07/pip-license-checker/">Read more</a>
+            <a class="post-readmore" href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/">Read more</a>
           </article>
         </section>
       </div>

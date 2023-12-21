@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - TIL</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/til.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-12-21T23:55:00+01:00</updated><entry><title>Recording a screencast on Linux</title><link href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/" rel="alternate"></link><published>2023-12-21T23:55:00+01:00</published><updated>2023-12-21T23:55:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-21:/posts/2023/12/21/recording-a-screencast-on-linux/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can record a screencast using &lt;span class="caps"&gt;GNOME&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en"&gt;tool&lt;/a&gt;,
+trim it with &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; like&amp;nbsp;this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+cd ~/Screencasts
+ffmpeg -i screencast.webm -ss 00:00:03.120 -t 00:00:11.500 output.webm
+&lt;/pre&gt;
+&lt;p&gt;then resize with&amp;nbsp;ImageMagick:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+magick output.webm -resize 50% -layers coalesce output.webp
+&lt;/pre&gt;
+&lt;p&gt;and simply use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can record a screencast using &lt;span class="caps"&gt;GNOME&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en"&gt;tool&lt;/a&gt;,
+trim it with &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; like&amp;nbsp;this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+cd ~/Screencasts
+ffmpeg -i screencast.webm -ss 00:00:03.120 -t 00:00:11.500 output.webm
+&lt;/pre&gt;
+&lt;p&gt;then resize with&amp;nbsp;ImageMagick:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+magick output.webm -resize 50% -layers coalesce output.webp
+&lt;/pre&gt;
+&lt;p&gt;and simply use &lt;a class="reference external" href="https://en.wikipedia.org/wiki/WebP"&gt;webp&lt;/a&gt; as is instead of converting it to &lt;tt class="docutils literal"&gt;gif&lt;/tt&gt;, as
+&lt;a class="reference external" href="https://caniuse.com/webp"&gt;browser support&lt;/a&gt; for &lt;tt class="docutils literal"&gt;webp&lt;/tt&gt; is pretty decent&amp;nbsp;nowadays.&lt;/p&gt;
+</content><category term="TIL"></category><category term="linux"></category><category term="screencast"></category></entry></feed>

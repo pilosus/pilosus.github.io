@@ -43,6 +43,7 @@
 	<div class="container">
           <ul class="navbar-list">
 
+            <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/til/">TIL</a></li>
             <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/category/blog/">Blog</a></li>
 
             <li class="navbar-item"><a  class="navbar-link" href="https://blog.pilosus.org/pages/contact/">Contact</a></li>
@@ -66,6 +67,38 @@
       
       <div class="content">
         <section class="body">
+          <article class="post-entry">
+            <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/">Recording a screencast on&nbsp;Linux</a></h2>
+              <div class="post-info">
+                <span class="published" title="2023-12-21T23:55:00+01:00">
+                  21-12-2023 23:55
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/til/">TIL</a></span>
+		|
+		<span class="word-count">57 words</span>
+		|
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/linux/">linux</a> <a href="https://blog.pilosus.org/tag/screencast/">screencast</a> </span>                
+              </div><!-- /.post-info -->            <div class="post-summary">
+              <p><span class="caps">TIL</span> I can record a screencast using <span class="caps">GNOME</span>&#8217;s <a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en">tool</a>,
+trim it with <tt class="docutils literal">ffmpeg</tt> like&nbsp;this:</p>
+<pre class="literal-block">
+cd ~/Screencasts
+ffmpeg -i screencast.webm -ss 00:00:03.120 -t 00:00:11.500 output.webm
+</pre>
+<p>then resize with&nbsp;ImageMagick:</p>
+<pre class="literal-block">
+magick output.webm -resize 50% -layers coalesce output.webp
+</pre>
+<p>and simply use …</p>
+            </div>
+            <a class="post-readmore" href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/">Read more</a>
+          </article>
           <article class="post-entry">
             <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/">My Linux journey so far: status update&nbsp;2023</a></h2>
               <div class="post-info">
