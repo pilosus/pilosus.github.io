@@ -119,28 +119,28 @@ be avoided</strong>. That means the final message is not evaluated if its log
 level is below the logger&#8217;s log level. On the other hand, f-string is
 really an expression that evaluated at runtime and it lacks logging&#8217;s
 optimizations. Let&#8217;s see an&nbsp;example:</p>
-<div class="highlight"><pre><span></span>In [1]: import logging
-   ...: logging.basicConfig(level=logging.INFO)
-   ...: logger = logging.getLogger(&#39;TestLogger&#39;)
+<div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">logging</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;TestLogger&#39;</span><span class="p">)</span>
 
-In [2]: class A:
-   ...:     def __str__(self):
-   ...:         print(&#39;Unnecessary slow computations are done here!&#39;)
-   ...:         return self.__class__.__name__
-   ...:
-   ...: obj = A()
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unnecessary slow computations are done here!&#39;</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+   <span class="o">...</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
 
-In [3]: logger.debug(&quot;log level below INFO with args: %s&quot;, obj)
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;log level below INFO with args: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
 
-In [4]: logger.debug(f&quot;log level below INFO with f-string: {obj}&quot;)
-Unnecessary slow computations are done here!
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;log level below INFO with f-string: </span><span class="si">{</span><span class="n">obj</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">Unnecessary</span> <span class="n">slow</span> <span class="n">computations</span> <span class="n">are</span> <span class="n">done</span> <span class="n">here</span><span class="err">!</span>
 
-In [5]: logger.debug(&quot;log level below INFO with args: %s&quot; % obj)
-Unnecessary slow computations are done here!
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;log level below INFO with args: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="p">)</span>
+<span class="n">Unnecessary</span> <span class="n">slow</span> <span class="n">computations</span> <span class="n">are</span> <span class="n">done</span> <span class="n">here</span><span class="err">!</span>
 
-In [6]: logger.info(&quot;log level INFO with args: %s&quot;, obj)
-Unnecessary slow computations are done here!
-INFO:TestLogger:log level INFO with args: A
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;log level INFO with args: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+<span class="n">Unnecessary</span> <span class="n">slow</span> <span class="n">computations</span> <span class="n">are</span> <span class="n">done</span> <span class="n">here</span><span class="err">!</span>
+<span class="n">INFO</span><span class="p">:</span><span class="n">TestLogger</span><span class="p">:</span><span class="n">log</span> <span class="n">level</span> <span class="n">INFO</span> <span class="k">with</span> <span class="n">args</span><span class="p">:</span> <span class="n">A</span>
 </pre></div>
 <p>As you can see in <strong>step 3</strong> a message doesn&#8217;t get logged as the root
 logger&#8217;s level is higher than <tt class="docutils literal">debug</tt>. Logging module&#8217;s inner
