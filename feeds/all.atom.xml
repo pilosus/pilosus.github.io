@@ -166,6 +166,11 @@ other authentication&amp;nbsp;information.&lt;/p&gt;
 checking out a certain commit or tag, pushing changes upstream,
 etc. That makes the package management easy and&amp;nbsp;flexible.&lt;/p&gt;
 &lt;/div&gt;
+&lt;div class="section" id="my-personal-dotfiles"&gt;
+&lt;h2&gt;My personal&amp;nbsp;dotfiles&lt;/h2&gt;
+&lt;p&gt;Here&amp;#8217;s &lt;a class="reference external" href="https://github.com/pilosus/dotfiles"&gt;dotfiles&lt;/a&gt;, a repo with my personal config files organised
+with &lt;span class="caps"&gt;GNU&lt;/span&gt;/Stow.&lt;/p&gt;
+&lt;/div&gt;
 </content><category term="blog"></category><category term="dotfiles"></category><category term="shell"></category></entry><entry><title>Clojure: decision fatigue</title><link href="https://blog.pilosus.org/posts/2023/07/16/clojure-decision-fatigue/" rel="alternate"></link><published>2023-07-16T17:00:00+02:00</published><updated>2023-07-16T17:00:00+02:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-07-16:/posts/2023/07/16/clojure-decision-fatigue/</id><summary type="html">&lt;p&gt;As someone who uses Clojure mostly for solo projects I often find
 myself in a situation when a decision on what libraries to use is
 hard. Clojure and its community seems to follow &amp;#8220;There Is More Than
