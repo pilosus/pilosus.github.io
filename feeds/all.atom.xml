@@ -1,5 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-12-21T23:55:00+01:00</updated><entry><title>Recording a screencast on Linux</title><link href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/" rel="alternate"></link><published>2023-12-21T23:55:00+01:00</published><updated>2023-12-21T23:55:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-21:/posts/2023/12/21/recording-a-screencast-on-linux/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can record a screencast using &lt;span class="caps"&gt;GNOME&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en"&gt;tool&lt;/a&gt;,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-12-29T20:00:00+01:00</updated><entry><title>dnseen: simple DNS queries analyzer</title><link href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/" rel="alternate"></link><published>2023-12-29T20:00:00+01:00</published><updated>2023-12-29T20:00:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-29:/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny project to ease collection of the &lt;span class="caps"&gt;DNS&lt;/span&gt;
+requests coming from my machine and aggregating statistics over the
+given period of time. It&amp;#8217;s written with the following goals in&amp;nbsp;mind:&lt;/p&gt;
+&lt;div class="section" id="goals"&gt;
+&lt;h2&gt;Goals&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Get a top-list of websites that I visit&amp;nbsp;intentionally&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is mostly to reduce …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny project to ease collection of the &lt;span class="caps"&gt;DNS&lt;/span&gt;
+requests coming from my machine and aggregating statistics over the
+given period of time. It&amp;#8217;s written with the following goals in&amp;nbsp;mind:&lt;/p&gt;
+&lt;div class="section" id="goals"&gt;
+&lt;h2&gt;Goals&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Get a top-list of websites that I visit&amp;nbsp;intentionally&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is mostly to reduce media consumption and remove distracting
+websites that make you a dophamine addict and bring so little (yes,
+HackerNews is one of them!). For now I simply add domains I want to
+block to my &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; like&amp;nbsp;this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+0.0.0.0 domain
+&lt;/pre&gt;
+&lt;p&gt;But as my next step I&amp;#8217;d like to use &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; and maintain an
+extended collection of &lt;tt class="docutils literal"&gt;hosts&lt;/tt&gt; files, possibly using Steven Blacks
+&lt;a class="reference external" href="https://github.com/StevenBlack/hosts"&gt;hosts files collection&lt;/a&gt;.&lt;/p&gt;
+&lt;ol class="arabic simple" start="2"&gt;
+&lt;li&gt;Find anomalies related to tracking&amp;nbsp;activities&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Even the software that claims to protect user&amp;#8217;s privacy, may track
+&lt;a class="reference external" href="https://www.kuketz-blog.de/mozilla-firefox-datensendeverhalten-desktop-version-browser-check-teil20/"&gt;too much&lt;/a&gt;. So, I want to collect &lt;span class="caps"&gt;DNS&lt;/span&gt; requests over longer period of
+time to see if I can find any suspicious&amp;nbsp;activity.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="alternatives"&gt;
+&lt;h2&gt;Alternatives&lt;/h2&gt;
+&lt;p&gt;Sure enough, one can use &lt;a class="reference external" href="https://www.tcpdump.org/"&gt;tcpdump&lt;/a&gt;, &lt;a class="reference external" href="https://www.wireshark.org/"&gt;wireshark&lt;/a&gt; or other packet
+analyzer to do the job. But they are relatively complex and designed
+for troubleshooting rather than long-term analytics based on
+aggregated&amp;nbsp;data.&lt;/p&gt;
+&lt;p&gt;Or one can use tools developed to track &lt;span class="caps"&gt;DNS&lt;/span&gt; queries specifically, like
+&lt;a class="reference external" href="https://github.com/measurement-factory/dnstop"&gt;dnstop&lt;/a&gt; does. It&amp;#8217;s nice, but again, works more like &lt;tt class="docutils literal"&gt;top&lt;/tt&gt; tool
+showing queries happening at the moment rather than&amp;nbsp;trends.&lt;/p&gt;
+&lt;p&gt;I needed something that allows me to collect data over longer time
+windows, apply filters and get some analysis done on the aggregated&amp;nbsp;results.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dnseen"&gt;
+&lt;h2&gt;dnseen&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is a simple &lt;span class="caps"&gt;DNS&lt;/span&gt; queries analyzer that works on top of the
+&lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; logs. For now it works on Linux only (tested with Fedora
+39), and get use of &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt;. Under the hood it&amp;#8217;s just a
+&lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; service running &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; and writing simple log to the
+file system. The analyzer program is a simple Clojure script (or
+&lt;a class="reference external" href="https://babashka.org/"&gt;babashka&lt;/a&gt; script to be precise) that parses the logs, apply filters
+from the command-line options, and prints the statistics report to the
+terminal. Reports can be printer for humans (in pretty tabular format)
+or as a plain text to be further used in the Unix pipelines. The
+program also comes with the installer script to make the installation
+quick and&amp;nbsp;easy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="findings"&gt;
+&lt;h2&gt;Findings&lt;/h2&gt;
+&lt;p&gt;So far &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; turns out to be handy. When it comes to finding
+sources of excessive media consumption, it allowed me to block a few
+websites like YouTube, LinkedIn and Telegram, to name a&amp;nbsp;few.&lt;/p&gt;
+&lt;p&gt;Regarding detecting tracking activities, Fedora&amp;#8217;s NetworkManager
+turned out to send regular requests to help with the &lt;a class="reference external" href="https://www.reddit.com/r/Fedora/comments/15a0m2y/question_how_to_stop_periodic_dns_queries_for/"&gt;captive portal
+detection&lt;/a&gt; that I don&amp;#8217;t need on my laptop at all. I also blocked
+quite a few Mozilla&amp;#8217;s domains related to the services I never allowed
+Firefox to use, like Mozilla Location&amp;nbsp;Service.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;All in all, the project seems to be useful! &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; logs that
+&lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; service collecting can also be used for further analysis
+with other tools, e.g. to determine &lt;span class="caps"&gt;DNS&lt;/span&gt; queries per domain with the
+breakdown by&amp;nbsp;hours.&lt;/p&gt;
+&lt;p&gt;Also, doing data analysis with Clojure is such a pleasure! &lt;a class="reference external" href="https://clojure.org/guides/threading_macros"&gt;Threading
+macros&lt;/a&gt; is a game changer as it brings the power of Unix pipelines to
+the functional programming&amp;nbsp;language.&lt;/p&gt;
+&lt;p&gt;Using &lt;a class="reference external" href="https://babashka.org/"&gt;babashka&lt;/a&gt; feels good too. It&amp;#8217;s not my first babashka project,
+but the first one using &lt;a class="reference external" href="https://github.com/babashka/cli"&gt;babashka.cli&lt;/a&gt; for command-line options
+parsing. It&amp;#8217;s simple, yet&amp;nbsp;powerful!&lt;/p&gt;
+&lt;p&gt;Developing with Clojure and Babashka allow me to work in a flow, with
+almost no distractions to external world, as the language and its
+ecosystem are very well designed, self-sufficient, and come with nice
+tooling like &lt;a class="reference external" href="https://docs.cider.mx/cider/index.html"&gt;Emacs &lt;span class="caps"&gt;CIDER&lt;/span&gt;&lt;/a&gt; that require no online lookups for the
+documentation. It feels like tinkering in the garage in my&amp;nbsp;childhood!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="clojure"></category><category term="foss"></category><category term="security"></category></entry><entry><title>Recording a screencast on Linux</title><link href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/" rel="alternate"></link><published>2023-12-21T23:55:00+01:00</published><updated>2023-12-21T23:55:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-21:/posts/2023/12/21/recording-a-screencast-on-linux/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can record a screencast using &lt;span class="caps"&gt;GNOME&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en"&gt;tool&lt;/a&gt;,
 trim it with &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; like&amp;nbsp;this:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 cd ~/Screencasts
