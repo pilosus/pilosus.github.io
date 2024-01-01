@@ -12,7 +12,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
     <meta property="og:url" content="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/" />
-    <meta property="og:description" content="dnseen is my new tiny project to ease collection of the DNS requests coming from my machine and aggregating statistics over the given period of time. It’s written with the following goals in mind: Goals Get a top-list of websites that I visit intentionally This is mostly to reduce …" />
+    <meta property="og:description" content="dnseen is my new tiny open source project to ease collection of the DNS requests coming from my machine and aggregating statistics over the given period of time. dnseen is written in Clojure programming language (with babashka) and works as a wrapper over tcpdump. It’s written with the following …" />
     <meta property="og:locale" content="" />
     <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
     <meta property="article:published_time" content="2023-12-29" />
@@ -100,13 +100,15 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">596 words</span>
+		<span class="word-count">601 words</span>
 		|
 		<span class="word-count">3 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/clojure/">clojure</a> <a href="https://blog.pilosus.org/tag/foss/">foss</a> <a href="https://blog.pilosus.org/tag/security/">security</a> </span>                
-              </div><!-- /.post-info -->              <p><a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is my new tiny project to ease collection of the <span class="caps">DNS</span>
-requests coming from my machine and aggregating statistics over the
-given period of time. It&#8217;s written with the following goals in&nbsp;mind:</p>
+              </div><!-- /.post-info -->              <p><a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is my new tiny open source project to ease collection of the
+<span class="caps">DNS</span> requests coming from my machine and aggregating statistics over
+the given period of time. <a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is written in Clojure programming
+language (with <a class="reference external" href="https://babashka.org/">babashka</a>) and works as a wrapper over <a class="reference external" href="https://www.tcpdump.org/">tcpdump</a>.</p>
+<p>It&#8217;s written with the following goals in&nbsp;mind:</p>
 <div class="section" id="goals">
 <h2>Goals</h2>
 <ol class="arabic simple">
@@ -147,20 +149,19 @@ windows, apply filters and get some analysis done on the aggregated&nbsp;results
 <tt class="docutils literal">tcpdump</tt> logs. For now it works on Linux only (tested with Fedora
 39), and get use of <tt class="docutils literal">systemd</tt>. Under the hood it&#8217;s just a
 <tt class="docutils literal">systemd</tt> service running <tt class="docutils literal">tcpdump</tt> and writing simple log to the
-file system. The analyzer program is a simple Clojure script (or
-<a class="reference external" href="https://babashka.org/">babashka</a> script to be precise) that parses the logs, apply filters
+file system. The analyzer program parses the logs, applies filters
 from the command-line options, and prints the statistics report to the
-terminal. Reports can be printer for humans (in pretty tabular format)
+terminal. Reports can be printed for humans (in pretty tabular format)
 or as a plain text to be further used in the Unix pipelines. The
 program also comes with the installer script to make the installation
 quick and&nbsp;easy.</p>
 </div>
 <div class="section" id="findings">
 <h2>Findings</h2>
-<p>So far <a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> turns out to be handy. When it comes to finding
-sources of excessive media consumption, it allowed me to block a few
-websites like YouTube, LinkedIn and Telegram, to name a&nbsp;few.</p>
-<p>Regarding detecting tracking activities, Fedora&#8217;s NetworkManager
+<p>So far <a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> seems to be handy. When it comes to finding sources
+of excessive media consumption, it allowed me to block a few websites
+like YouTube, LinkedIn and Telegram, to name a&nbsp;few.</p>
+<p>Regarding detecting tracking activities, Fedora&#8217;s <tt class="docutils literal">NetworkManager</tt>
 turned out to send regular requests to help with the <a class="reference external" href="https://www.reddit.com/r/Fedora/comments/15a0m2y/question_how_to_stop_periodic_dns_queries_for/">captive portal
 detection</a> that I don&#8217;t need on my laptop at all. I also blocked
 quite a few Mozilla&#8217;s domains related to the services I never allowed

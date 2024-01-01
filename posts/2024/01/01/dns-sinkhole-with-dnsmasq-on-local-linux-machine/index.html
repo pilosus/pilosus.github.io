@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DNS sinkhole with dnsmasq on local Linux machine</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="DNS sinkhole with dnsmasq on local Linux machine" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" />
+    <meta property="og:description" content="Recently I’ve posted a wrap-up on my new tiny open source tool called dnseen. One of the goals for developing it was generating a top-list of websites that I visit, so that I can blacklist websites that I think I spend too much time on without long-term benefits. These …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2024-01-01" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="linux" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+	    <li class="navbar-item"><a class="navbar-link" href="/category/blog/">Blog</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/category/til/">TIL</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/archives">Archives</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/tags">Tags</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/pages/contact/">Contact</a></li>
+
+
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" rel="bookmark"
+                   title="Permalink to DNS sinkhole with dnsmasq on local Linux machine"><span class="caps">DNS</span> sinkhole with <cite>dnsmasq</cite> on local Linux&nbsp;machine</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2024-01-01T21:38:00+01:00">
+                  01-01-2024 21:38
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">989 words</span>
+		|
+		<span class="word-count">4 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/linux/">linux</a> </span>                
+              </div><!-- /.post-info -->              <p>Recently I&#8217;ve posted a wrap-up on my new tiny open source tool called
+<a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/">dnseen</a>. One of the goals for developing it was generating a
+top-list of websites that I visit, so that I can blacklist websites
+that I think I spend too much time on without long-term
+benefits. These are mostly news and social media that use manipulative
+algorithms to make you make you a &#8220;dophamine addict&#8221;. Another thing
+that I wanted to implement is blacklisting for ads/tracking services
+that works on the <span class="caps">DNS</span> level, so that I don&#8217;t need to worry about
+browser extensions in case I want to try a new&nbsp;browser.</p>
+<p>I used to have a list of blacklisted domains in my <tt class="docutils literal">/etc/hosts</tt> file
+for a while. One obvious drawback for me is the need to lump
+everything in one file. Instead, in a perfect solution, I&#8217;d like to
+split blacklisted hostnames into multiple files, so that I can easily
+break them down by topic and/or automate some hosts file from
+third-party curated lists, like hosts files from <a class="reference external" href="https://github.com/StevenBlack/hosts">Steven Black</a>.</p>
+<p>One of the popular options is to set up a <a class="reference external" href="https://pi-hole.net/">Pi-hole</a> on the local
+network and use it as the local <span class="caps">DNS</span> server. I do like this option too,
+but before picking up ready to use products, I&#8217;d like to build by own
+prototype first. This is how I came up with the idea of building my
+own <a class="reference external" href="https://en.wikipedia.org/wiki/DNS_sinkhole"><span class="caps">DNS</span> sinkhole</a> with the help of <a class="reference external" href="https://dnsmasq.org/">dnsmasq</a> as a <span class="caps">DNS</span> server on my
+local <a class="reference external" href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/">Linux</a>&nbsp;machine.</p>
+<div class="section" id="local-dns-dnsmasq-on-fedora-39-machine-with-networkmanager">
+<h2>Local <span class="caps">DNS</span> <cite>dnsmasq</cite> on Fedora 39 machine with <cite>NetworkManager</cite></h2>
+<p>After installing <a class="reference external" href="https://dnsmasq.org/">dnsmasq</a> on Fedora&nbsp;39:</p>
+<pre class="literal-block">
+sudo dnf -y install dnsmasq
+</pre>
+<p>we need to make sure it&#8217;s configured as a <a class="reference external" href="https://networkmanager.dev/docs/admins/">NetworkManager</a> plugin
+rather than <tt class="docutils literal">systemd</tt>, so that <tt class="docutils literal">dnsmasq</tt> daemon is run correctly
+and redefined the <tt class="docutils literal">/etc/resolv.conf</tt>, resolver configuration file
+used for <span class="caps">DNS</span>&nbsp;lookups.</p>
+<p>First of all, we need to activate the <tt class="docutils literal">NetworkManager</tt> plugin:</p>
+<pre class="literal-block">
+$ cat /etc/NetworkManager/conf.d/00-use-dnsmasq.conf
+[main]
+dns=dnsmasq
+</pre>
+<p>Now, we can config the <tt class="docutils literal">dnsmasq</tt> itself:</p>
+<pre class="literal-block">
+$ cat /etc/NetworkManager/dnsmasq.d/00-addn-hosts.conf
+# NB! When making changes, don't forget restart dnsmasq &amp; NetworkManager.service:
+# $ killall dnsmasq
+# $ systemctl restart NetworkManager
+
+# No need to read /etc/resolv.conf as it contains the localhost
+# addresses of dnsmasq itself
+no-resolv
+
+# Upstream DNS servers
+# My router, Google, CloudFlare
+server=192.168.0.1
+server=8.8.8.8
+server=1.1.1.1
+
+# Add debug logging
+# $ journalctl --follow -u NetworkManager
+log-queries
+
+# Ignore /etc/hosts
+no-hosts
+
+# Add custom hosts files;
+# If path is a directory, all files from it are loaded
+addn-hosts=/etc/hosts.d
+</pre>
+<p>So, basically we want to keep our multiple <tt class="docutils literal">hosts</tt> files under
+<tt class="docutils literal"><span class="pre">addn-hosts=/etc/hosts.d</span></tt> directory and make sure that if a hostname
+cannot be resolved using these files we fallback to the upstream <span class="caps">DNS</span>
+servers that are the one my local network&#8217;s router provides, as well
+as public ones from Google and&nbsp;cloudFlare.</p>
+<p>Now, given that my Fedora machine also runs <tt class="docutils literal"><span class="pre">systemd-resolved</span></tt>, a
+system service that provides network name resolution to local
+applications, we want to prevent both <tt class="docutils literal">dnsmasq</tt> and
+<tt class="docutils literal"><span class="pre">systemd-resolved</span></tt> to mess up with <tt class="docutils literal">/etc/resolv.conf</tt> file. So we
+stop and disable <tt class="docutils literal"><span class="pre">systemd-resolved</span></tt>:</p>
+<pre class="literal-block">
+$ sudo systemctl stop systemd-resolved.service
+$ sudo systemctl disable systemd-resolved.service
+</pre>
+<p>We can add a hosts file for testing&nbsp;purposes:</p>
+<pre class="literal-block">
+$ cat /etc/hosts.d/news
+0.0.0.0 example.com
+0.0.0.0 news.ycombinator.com
+</pre>
+<p>Next, let&#8217;s validate <tt class="docutils literal">dnqmasq</tt> config and restart the relevant&nbsp;services:</p>
+<pre class="literal-block">
+$ dnsmasq --test
+$ sudo killall dnsmasq
+$ sudo systemctl restart NetworkManager
+</pre>
+</div>
+<div class="section" id="check-if-local-dns-works-as-expected">
+<h2>Check if local <span class="caps">DNS</span> works as&nbsp;expected</h2>
+<p>First of all, let&#8217;s look at the <tt class="docutils literal">dnsmasq</tt> logs:</p>
+<pre class="literal-block">
+$ journalctl --follow -u NetworkManager
+...
+Jan 01 21:03:16 fedora dnsmasq[16321]: using nameserver 192.168.0.1#53
+Jan 01 21:03:16 fedora dnsmasq[16321]: using nameserver 8.8.8.8#53
+Jan 01 21:03:16 fedora dnsmasq[16321]: using nameserver 1.1.1.1#53
+Jan 01 21:03:16 fedora dnsmasq[16321]: read /etc/hosts.d/news - 2 names
+</pre>
+<p>Let&#8217;s also make sure <tt class="docutils literal">/etc/resolv.conf</tt> is controlled by
+<tt class="docutils literal">NetworkManager</tt>:</p>
+<pre class="literal-block">
+$ cat /etc/resolv.conf
+# Generated by NetworkManager
+nameserver 127.0.0.1
+options edns0 trust-ad
+</pre>
+<p>Now, let&#8217;s see if <span class="caps">DNS</span> lookups work&nbsp;properly:</p>
+<pre class="literal-block">
+$ dig news.ycombinator.com
+
+; &lt;&lt;&gt;&gt; DiG 9.18.20 &lt;&lt;&gt;&gt; news.ycombinator.com
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 15461
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;news.ycombinator.com.                IN      A
+
+;; ANSWER SECTION:
+news.ycombinator.com. 0       IN      A       0.0.0.0
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1) (UDP)
+;; WHEN: Mon Jan 01 21:18:57 CET 2024
+;; MSG SIZE  rcvd: 65
+</pre>
+<p>So, yes, <tt class="docutils literal"><span class="caps">SERVER</span>: 127.0.0.1#53(127.0.0.1) (<span class="caps">UDP</span>)</tt> is telling us a
+localhost <span class="caps">DNS</span> is being used, and <tt class="docutils literal">A 0.0.0.0</tt> from the <tt class="docutils literal"><span class="caps">ANSWER</span>
+<span class="caps">SECTION</span></tt> shows us it&#8217;s resolved to the <tt class="docutils literal">0.0.0.0</tt> <span class="caps">IP</span> address from
+out hosts&nbsp;file.</p>
+<p>One the same time, if you try to access the same domain in a web
+browser or using <tt class="docutils literal">curl</tt>, you will see it&#8217;s still accessible. The
+thing is <tt class="docutils literal">dig</tt> tool is using <tt class="docutils literal">/etc/resolv.conf</tt> settings for <span class="caps">DNS</span>,
+while other applications rely on the <span class="caps">DNS</span> settings from the network
+connection. Let&#8217;s see what are these <span class="caps">DNS</span> setings using
+<tt class="docutils literal">NetworkManager</tt> <span class="caps">CLI</span>&nbsp;tool:</p>
+<pre class="literal-block">
+$ nmcli device show | grep -i dns
+IP4.DNS[1]:                             192.168.0.1
+IP6.DNS[1]:                             2a02:8383:d:c::1000
+IP6.DNS[2]:                             2a02:8383:d:c::1
+</pre>
+<p>These are actually <span class="caps">DNS</span> addresses from my WiFi router. Given that my
+machine receives <span class="caps">IP</span>-address from the router&#8217;s <span class="caps">DHCP</span> server, it also
+get&#8217;s the <span class="caps">DNS</span>&nbsp;settings.</p>
+</div>
+<div class="section" id="configuring-connection-s-settings">
+<h2>Configuring connection&#8217;s&nbsp;settings</h2>
+<p>We can override the settings in <tt class="docutils literal">NetworkManager</tt> <span class="caps">GUI</span>. Open up
+<tt class="docutils literal"><span class="pre">nm-connection-editor</span></tt> (or Settings -&gt; WiFi -&gt; Network you&#8217;re
+connected to Settings), then&nbsp;IPv4:</p>
+<ul class="simple">
+<li>Method -&gt; Automatic (<span class="caps">DHCP</span>) addresses&nbsp;only</li>
+<li><span class="caps">DNS</span> Server -&gt; 127.0.0.1 (instead of automatic&nbsp;one)</li>
+</ul>
+<p>then for&nbsp;IPv6:</p>
+<ul class="simple">
+<li>Method -&gt; Automatic, <span class="caps">DHCP</span> only (watch out, it&#8217;s different than for&nbsp;IPv4)</li>
+</ul>
+<p>This corresponds to the changes in
+<tt class="docutils literal"><span class="pre">/etc/NetworkManager/system-connections/<span class="caps">YOUR</span>-<span class="caps">CONNECTION</span>-<span class="caps">NAME</span>.nmconnection</span></tt>:</p>
+<pre class="literal-block">
+[ipv4]
+dns=127.0.0.1;
+ignore-auto-dns=true
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns=::1;
+ignore-auto-dns=true
+method=dhcp
+</pre>
+<p>Now restart the <tt class="docutils literal">NetworkManager</tt> and check <span class="caps">DNS</span>&nbsp;settings:</p>
+<pre class="literal-block">
+$ sudo systemctl restart NetworkManager
+$ nmcli device show | grep -i dns
+IP4.DNS[1]:                             127.0.0.1
+IP6.DNS[1]:                             ::1
+</pre>
+<p>All good! Local <span class="caps">DNS</span> sinkhole works. Now hosts files under
+<tt class="docutils literal">/etc/hosts.d</tt> can be orginized easily and will be used for domains
+resolution in all the requests coming from the configured&nbsp;connection.</p>
+<p><span class="caps">P.S.</span> I&#8217;m deeply grateful to the Stackexchange community for the help
+with dnsmasq config <a class="reference external" href="https://serverfault.com/questions/1150701/dnsmasq-reads-addn-hosts-config-but-ignores-it-falls-back-to-systems-etc-host">troubleshooting</a>.</p>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

@@ -1,15 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-12-29T20:00:00+01:00</updated><entry><title>dnseen: simple DNS queries analyzer</title><link href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/" rel="alternate"></link><published>2023-12-29T20:00:00+01:00</published><updated>2023-12-29T20:00:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-29:/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny project to ease collection of the &lt;span class="caps"&gt;DNS&lt;/span&gt;
-requests coming from my machine and aggregating statistics over the
-given period of time. It&amp;#8217;s written with the following goals in&amp;nbsp;mind:&lt;/p&gt;
-&lt;div class="section" id="goals"&gt;
-&lt;h2&gt;Goals&lt;/h2&gt;
-&lt;ol class="arabic simple"&gt;
-&lt;li&gt;Get a top-list of websites that I visit&amp;nbsp;intentionally&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;This is mostly to reduce …&lt;/p&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny project to ease collection of the &lt;span class="caps"&gt;DNS&lt;/span&gt;
-requests coming from my machine and aggregating statistics over the
-given period of time. It&amp;#8217;s written with the following goals in&amp;nbsp;mind:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-01T21:38:00+01:00</updated><entry><title>DNS sinkhole with dnsmasq on local Linux machine</title><link href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" rel="alternate"></link><published>2024-01-01T21:38:00+01:00</published><updated>2024-01-01T21:38:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-01:/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/</id><summary type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny open source tool called
+&lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/"&gt;dnseen&lt;/a&gt;. One of the goals for developing it was generating a
+top-list of websites that I visit, so that I can blacklist websites
+that I think I spend too much time on without long-term
+benefits. These …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny open source tool called
+&lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/"&gt;dnseen&lt;/a&gt;. One of the goals for developing it was generating a
+top-list of websites that I visit, so that I can blacklist websites
+that I think I spend too much time on without long-term
+benefits. These are mostly news and social media that use manipulative
+algorithms to make you make you a &amp;#8220;dophamine addict&amp;#8221;. Another thing
+that I wanted to implement is blacklisting for ads/tracking services
+that works on the &lt;span class="caps"&gt;DNS&lt;/span&gt; level, so that I don&amp;#8217;t need to worry about
+browser extensions in case I want to try a new&amp;nbsp;browser.&lt;/p&gt;
+&lt;p&gt;I used to have a list of blacklisted domains in my &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; file
+for a while. One obvious drawback for me is the need to lump
+everything in one file. Instead, in a perfect solution, I&amp;#8217;d like to
+split blacklisted hostnames into multiple files, so that I can easily
+break them down by topic and/or automate some hosts file from
+third-party curated lists, like hosts files from &lt;a class="reference external" href="https://github.com/StevenBlack/hosts"&gt;Steven Black&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;One of the popular options is to set up a &lt;a class="reference external" href="https://pi-hole.net/"&gt;Pi-hole&lt;/a&gt; on the local
+network and use it as the local &lt;span class="caps"&gt;DNS&lt;/span&gt; server. I do like this option too,
+but before picking up ready to use products, I&amp;#8217;d like to build by own
+prototype first. This is how I came up with the idea of building my
+own &lt;a class="reference external" href="https://en.wikipedia.org/wiki/DNS_sinkhole"&gt;&lt;span class="caps"&gt;DNS&lt;/span&gt; sinkhole&lt;/a&gt; with the help of &lt;a class="reference external" href="https://dnsmasq.org/"&gt;dnsmasq&lt;/a&gt; as a &lt;span class="caps"&gt;DNS&lt;/span&gt; server on my
+local &lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/"&gt;Linux&lt;/a&gt;&amp;nbsp;machine.&lt;/p&gt;
+&lt;div class="section" id="local-dns-dnsmasq-on-fedora-39-machine-with-networkmanager"&gt;
+&lt;h2&gt;Local &lt;span class="caps"&gt;DNS&lt;/span&gt; &lt;cite&gt;dnsmasq&lt;/cite&gt; on Fedora 39 machine with &lt;cite&gt;NetworkManager&lt;/cite&gt;&lt;/h2&gt;
+&lt;p&gt;After installing &lt;a class="reference external" href="https://dnsmasq.org/"&gt;dnsmasq&lt;/a&gt; on Fedora&amp;nbsp;39:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo dnf -y install dnsmasq
+&lt;/pre&gt;
+&lt;p&gt;we need to make sure it&amp;#8217;s configured as a &lt;a class="reference external" href="https://networkmanager.dev/docs/admins/"&gt;NetworkManager&lt;/a&gt; plugin
+rather than &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt;, so that &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; daemon is run correctly
+and redefined the &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt;, resolver configuration file
+used for &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;lookups.&lt;/p&gt;
+&lt;p&gt;First of all, we need to activate the &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; plugin:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ cat /etc/NetworkManager/conf.d/00-use-dnsmasq.conf
+[main]
+dns=dnsmasq
+&lt;/pre&gt;
+&lt;p&gt;Now, we can config the &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; itself:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ cat /etc/NetworkManager/dnsmasq.d/00-addn-hosts.conf
+# NB! When making changes, don't forget restart dnsmasq &amp;amp; NetworkManager.service:
+# $ killall dnsmasq
+# $ systemctl restart NetworkManager
+
+# No need to read /etc/resolv.conf as it contains the localhost
+# addresses of dnsmasq itself
+no-resolv
+
+# Upstream DNS servers
+# My router, Google, CloudFlare
+server=192.168.0.1
+server=8.8.8.8
+server=1.1.1.1
+
+# Add debug logging
+# $ journalctl --follow -u NetworkManager
+log-queries
+
+# Ignore /etc/hosts
+no-hosts
+
+# Add custom hosts files;
+# If path is a directory, all files from it are loaded
+addn-hosts=/etc/hosts.d
+&lt;/pre&gt;
+&lt;p&gt;So, basically we want to keep our multiple &lt;tt class="docutils literal"&gt;hosts&lt;/tt&gt; files under
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;addn-hosts=/etc/hosts.d&lt;/span&gt;&lt;/tt&gt; directory and make sure that if a hostname
+cannot be resolved using these files we fallback to the upstream &lt;span class="caps"&gt;DNS&lt;/span&gt;
+servers that are the one my local network&amp;#8217;s router provides, as well
+as public ones from Google and&amp;nbsp;cloudFlare.&lt;/p&gt;
+&lt;p&gt;Now, given that my Fedora machine also runs &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt;, a
+system service that provides network name resolution to local
+applications, we want to prevent both &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; and
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt; to mess up with &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt; file. So we
+stop and disable &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ sudo systemctl stop systemd-resolved.service
+$ sudo systemctl disable systemd-resolved.service
+&lt;/pre&gt;
+&lt;p&gt;We can add a hosts file for testing&amp;nbsp;purposes:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ cat /etc/hosts.d/news
+0.0.0.0 example.com
+0.0.0.0 news.ycombinator.com
+&lt;/pre&gt;
+&lt;p&gt;Next, let&amp;#8217;s validate &lt;tt class="docutils literal"&gt;dnqmasq&lt;/tt&gt; config and restart the relevant&amp;nbsp;services:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ dnsmasq --test
+$ sudo killall dnsmasq
+$ sudo systemctl restart NetworkManager
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="check-if-local-dns-works-as-expected"&gt;
+&lt;h2&gt;Check if local &lt;span class="caps"&gt;DNS&lt;/span&gt; works as&amp;nbsp;expected&lt;/h2&gt;
+&lt;p&gt;First of all, let&amp;#8217;s look at the &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; logs:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ journalctl --follow -u NetworkManager
+...
+Jan 01 21:03:16 fedora dnsmasq[16321]: using nameserver 192.168.0.1#53
+Jan 01 21:03:16 fedora dnsmasq[16321]: using nameserver 8.8.8.8#53
+Jan 01 21:03:16 fedora dnsmasq[16321]: using nameserver 1.1.1.1#53
+Jan 01 21:03:16 fedora dnsmasq[16321]: read /etc/hosts.d/news - 2 names
+&lt;/pre&gt;
+&lt;p&gt;Let&amp;#8217;s also make sure &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt; is controlled by
+&lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ cat /etc/resolv.conf
+# Generated by NetworkManager
+nameserver 127.0.0.1
+options edns0 trust-ad
+&lt;/pre&gt;
+&lt;p&gt;Now, let&amp;#8217;s see if &lt;span class="caps"&gt;DNS&lt;/span&gt; lookups work&amp;nbsp;properly:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ dig news.ycombinator.com
+
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.20 &amp;lt;&amp;lt;&amp;gt;&amp;gt; news.ycombinator.com
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 15461
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;news.ycombinator.com.                IN      A
+
+;; ANSWER SECTION:
+news.ycombinator.com. 0       IN      A       0.0.0.0
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1) (UDP)
+;; WHEN: Mon Jan 01 21:18:57 CET 2024
+;; MSG SIZE  rcvd: 65
+&lt;/pre&gt;
+&lt;p&gt;So, yes, &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;SERVER&lt;/span&gt;: 127.0.0.1#53(127.0.0.1) (&lt;span class="caps"&gt;UDP&lt;/span&gt;)&lt;/tt&gt; is telling us a
+localhost &lt;span class="caps"&gt;DNS&lt;/span&gt; is being used, and &lt;tt class="docutils literal"&gt;A 0.0.0.0&lt;/tt&gt; from the &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;ANSWER&lt;/span&gt;
+&lt;span class="caps"&gt;SECTION&lt;/span&gt;&lt;/tt&gt; shows us it&amp;#8217;s resolved to the &lt;tt class="docutils literal"&gt;0.0.0.0&lt;/tt&gt; &lt;span class="caps"&gt;IP&lt;/span&gt; address from
+out hosts&amp;nbsp;file.&lt;/p&gt;
+&lt;p&gt;One the same time, if you try to access the same domain in a web
+browser or using &lt;tt class="docutils literal"&gt;curl&lt;/tt&gt;, you will see it&amp;#8217;s still accessible. The
+thing is &lt;tt class="docutils literal"&gt;dig&lt;/tt&gt; tool is using &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt; settings for &lt;span class="caps"&gt;DNS&lt;/span&gt;,
+while other applications rely on the &lt;span class="caps"&gt;DNS&lt;/span&gt; settings from the network
+connection. Let&amp;#8217;s see what are these &lt;span class="caps"&gt;DNS&lt;/span&gt; setings using
+&lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; &lt;span class="caps"&gt;CLI&lt;/span&gt;&amp;nbsp;tool:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ nmcli device show | grep -i dns
+IP4.DNS[1]:                             192.168.0.1
+IP6.DNS[1]:                             2a02:8383:d:c::1000
+IP6.DNS[2]:                             2a02:8383:d:c::1
+&lt;/pre&gt;
+&lt;p&gt;These are actually &lt;span class="caps"&gt;DNS&lt;/span&gt; addresses from my WiFi router. Given that my
+machine receives &lt;span class="caps"&gt;IP&lt;/span&gt;-address from the router&amp;#8217;s &lt;span class="caps"&gt;DHCP&lt;/span&gt; server, it also
+get&amp;#8217;s the &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;settings.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configuring-connection-s-settings"&gt;
+&lt;h2&gt;Configuring connection&amp;#8217;s&amp;nbsp;settings&lt;/h2&gt;
+&lt;p&gt;We can override the settings in &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; &lt;span class="caps"&gt;GUI&lt;/span&gt;. Open up
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-connection-editor&lt;/span&gt;&lt;/tt&gt; (or Settings -&amp;gt; WiFi -&amp;gt; Network you&amp;#8217;re
+connected to Settings), then&amp;nbsp;IPv4:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Method -&amp;gt; Automatic (&lt;span class="caps"&gt;DHCP&lt;/span&gt;) addresses&amp;nbsp;only&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;DNS&lt;/span&gt; Server -&amp;gt; 127.0.0.1 (instead of automatic&amp;nbsp;one)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;then for&amp;nbsp;IPv6:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Method -&amp;gt; Automatic, &lt;span class="caps"&gt;DHCP&lt;/span&gt; only (watch out, it&amp;#8217;s different than for&amp;nbsp;IPv4)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This corresponds to the changes in
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;/etc/NetworkManager/system-connections/&lt;span class="caps"&gt;YOUR&lt;/span&gt;-&lt;span class="caps"&gt;CONNECTION&lt;/span&gt;-&lt;span class="caps"&gt;NAME&lt;/span&gt;.nmconnection&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+[ipv4]
+dns=127.0.0.1;
+ignore-auto-dns=true
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns=::1;
+ignore-auto-dns=true
+method=dhcp
+&lt;/pre&gt;
+&lt;p&gt;Now restart the &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; and check &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;settings:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ sudo systemctl restart NetworkManager
+$ nmcli device show | grep -i dns
+IP4.DNS[1]:                             127.0.0.1
+IP6.DNS[1]:                             ::1
+&lt;/pre&gt;
+&lt;p&gt;All good! Local &lt;span class="caps"&gt;DNS&lt;/span&gt; sinkhole works. Now hosts files under
+&lt;tt class="docutils literal"&gt;/etc/hosts.d&lt;/tt&gt; can be orginized easily and will be used for domains
+resolution in all the requests coming from the configured&amp;nbsp;connection.&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;P.S.&lt;/span&gt; I&amp;#8217;m deeply grateful to the Stackexchange community for the help
+with dnsmasq config &lt;a class="reference external" href="https://serverfault.com/questions/1150701/dnsmasq-reads-addn-hosts-config-but-ignores-it-falls-back-to-systems-etc-host"&gt;troubleshooting&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="linux"></category></entry><entry><title>dnseen: simple DNS queries analyzer</title><link href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/" rel="alternate"></link><published>2023-12-29T20:00:00+01:00</published><updated>2023-12-29T20:00:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-29:/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny open source project to ease collection of the
+&lt;span class="caps"&gt;DNS&lt;/span&gt; requests coming from my machine and aggregating statistics over
+the given period of time. &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is written in Clojure programming
+language (with &lt;a class="reference external" href="https://babashka.org/"&gt;babashka&lt;/a&gt;) and works as a wrapper over &lt;a class="reference external" href="https://www.tcpdump.org/"&gt;tcpdump&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It&amp;#8217;s written with the following …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny open source project to ease collection of the
+&lt;span class="caps"&gt;DNS&lt;/span&gt; requests coming from my machine and aggregating statistics over
+the given period of time. &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is written in Clojure programming
+language (with &lt;a class="reference external" href="https://babashka.org/"&gt;babashka&lt;/a&gt;) and works as a wrapper over &lt;a class="reference external" href="https://www.tcpdump.org/"&gt;tcpdump&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It&amp;#8217;s written with the following goals in&amp;nbsp;mind:&lt;/p&gt;
 &lt;div class="section" id="goals"&gt;
 &lt;h2&gt;Goals&lt;/h2&gt;
 &lt;ol class="arabic simple"&gt;
@@ -50,20 +246,19 @@ windows, apply filters and get some analysis done on the aggregated&amp;nbsp;res
 &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; logs. For now it works on Linux only (tested with Fedora
 39), and get use of &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt;. Under the hood it&amp;#8217;s just a
 &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; service running &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; and writing simple log to the
-file system. The analyzer program is a simple Clojure script (or
-&lt;a class="reference external" href="https://babashka.org/"&gt;babashka&lt;/a&gt; script to be precise) that parses the logs, apply filters
+file system. The analyzer program parses the logs, applies filters
 from the command-line options, and prints the statistics report to the
-terminal. Reports can be printer for humans (in pretty tabular format)
+terminal. Reports can be printed for humans (in pretty tabular format)
 or as a plain text to be further used in the Unix pipelines. The
 program also comes with the installer script to make the installation
 quick and&amp;nbsp;easy.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="findings"&gt;
 &lt;h2&gt;Findings&lt;/h2&gt;
-&lt;p&gt;So far &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; turns out to be handy. When it comes to finding
-sources of excessive media consumption, it allowed me to block a few
-websites like YouTube, LinkedIn and Telegram, to name a&amp;nbsp;few.&lt;/p&gt;
-&lt;p&gt;Regarding detecting tracking activities, Fedora&amp;#8217;s NetworkManager
+&lt;p&gt;So far &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; seems to be handy. When it comes to finding sources
+of excessive media consumption, it allowed me to block a few websites
+like YouTube, LinkedIn and Telegram, to name a&amp;nbsp;few.&lt;/p&gt;
+&lt;p&gt;Regarding detecting tracking activities, Fedora&amp;#8217;s &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt;
 turned out to send regular requests to help with the &lt;a class="reference external" href="https://www.reddit.com/r/Fedora/comments/15a0m2y/question_how_to_stop_periodic_dns_queries_for/"&gt;captive portal
 detection&lt;/a&gt; that I don&amp;#8217;t need on my laptop at all. I also blocked
 quite a few Mozilla&amp;#8217;s domains related to the services I never allowed
