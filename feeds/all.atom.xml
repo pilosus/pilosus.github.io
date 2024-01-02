@@ -220,7 +220,7 @@ block to my &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; like&amp;nb
 &lt;/pre&gt;
 &lt;p&gt;But as my next step I&amp;#8217;d like to use &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; and maintain an
 extended collection of &lt;tt class="docutils literal"&gt;hosts&lt;/tt&gt; files, possibly using Steven Blacks
-&lt;a class="reference external" href="https://github.com/StevenBlack/hosts"&gt;hosts files collection&lt;/a&gt;.&lt;/p&gt;
+&lt;a class="reference external" href="https://github.com/StevenBlack/hosts"&gt;hosts files collection&lt;/a&gt; (upd. see my &lt;a class="reference external" href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/"&gt;dnsmasq guide&lt;/a&gt;).&lt;/p&gt;
 &lt;ol class="arabic simple" start="2"&gt;
 &lt;li&gt;Find anomalies related to tracking&amp;nbsp;activities&lt;/li&gt;
 &lt;/ol&gt;
