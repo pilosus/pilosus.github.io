@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multiple WiFi network connections on Rapspberry Pi 5</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Multiple WiFi network connections on Rapspberry Pi 5" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/" />
+    <meta property="og:description" content="This post was intended to be an answer to this question. But given that I’m a new Raspberry Pi’s StackExchange user and I don’t have enough karma, I cannot post my answers yet, hence a post in my own blog. Problem statement: I want to have multiple …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2024-01-06" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="raspberrypi" />
+    <meta property="article:tag" content="linux" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+	    <li class="navbar-item"><a class="navbar-link" href="/category/blog/">Blog</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/category/til/">TIL</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/archives">Archives</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/tags">Tags</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/pages/contact/">Contact</a></li>
+
+
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/" rel="bookmark"
+                   title="Permalink to Multiple WiFi network connections on Rapspberry Pi 5">Multiple WiFi network connections on Rapspberry Pi&nbsp;5</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2024-01-06T16:10:00+01:00">
+                  06-01-2024 16:10
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">387 words</span>
+		|
+		<span class="word-count">2 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/raspberrypi/">raspberrypi</a> <a href="https://blog.pilosus.org/tag/linux/">linux</a> </span>                
+              </div><!-- /.post-info -->              <p>This post was intended to be an answer to <a class="reference external" href="https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks">this question</a>. But given
+that I&#8217;m a new Raspberry Pi&#8217;s StackExchange user and I don&#8217;t have
+enough karma, I cannot post my answers yet, hence a post in my own&nbsp;blog.</p>
+<p>Problem statement: I want to have multiple networks to connect my
+Raspberry Pi 5 device to, e.g. a WiFi connection at home and another
+WiFi connection at work. Previously, all the WiFI network
+configuration used to be done with the <tt class="docutils literal">wpa_applicant</tt> alongs with
+many other network-related tools. Now, it seems, <tt class="docutils literal">NetworkManager</tt>
+and its plugins took over many Linux distributions, including
+Raspberry Pi <span class="caps">OS</span>.</p>
+<p>According to the <a class="reference external" href="https://downloads.raspberrypi.com/raspios_full_armhf/release_notes.txt">changelog</a>, in September 2022 and later in December
+2023 <tt class="docutils literal">NetworkManager</tt> started to be used as a high-level interface
+for all the network configuration on Raspberry Pi <span class="caps">OS</span>. So, as of
+January 2024 for Raspberry Pi 5 under Debian 12.4 Bookwork (Raspberry
+Pi <span class="caps">OS</span>) this is how one can have multiple WiFi connection profiles set&nbsp;up.</p>
+<div class="section" id="headless-set-up">
+<h2>Headless&nbsp;set-up</h2>
+<ol class="arabic simple">
+<li>Connect to your device and become a <tt class="docutils literal">root</tt> user</li>
+</ol>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>ssh<span class="w"> </span>user@raspberrypi.local
+$<span class="w"> </span>sudo<span class="w"> </span>-s
+</pre></div>
+<ol class="arabic simple" start="2">
+<li>Find all the WiFi networks available and network&nbsp;devices</li>
+</ol>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>nmcli<span class="w"> </span>dev<span class="w"> </span>wifi
+$<span class="w"> </span>nmcli<span class="w"> </span>dev
+</pre></div>
+<p>note the <tt class="docutils literal"><span class="caps">SSID</span></tt> (your network <span class="caps">ID</span>) and the <tt class="docutils literal">Device</tt> name
+(e.g. <tt class="docutils literal">wlan0</tt> of type <tt class="docutils literal">wifi</tt>).</p>
+<ol class="arabic simple" start="3">
+<li>Run a <tt class="docutils literal">NetworkManager</tt> config tool with the text-based&nbsp;interface</li>
+</ol>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>nmtui
+</pre></div>
+<p>Edit connection -&gt; Add -&gt;&nbsp;WiFi.</p>
+<ol class="arabic simple" start="4">
+<li>Add a new connection&nbsp;profile:</li>
+</ol>
+<ul class="simple">
+<li>profile&nbsp;name</li>
+<li><tt class="docutils literal"><span class="caps">SSID</span></tt> from the step&nbsp;2</li>
+<li>Security (usually <tt class="docutils literal"><span class="caps">WPA</span> <span class="amp">&amp;</span> <span class="caps">WPA2</span> Personal</tt> for the home WiFi routers +&nbsp;password)</li>
+<li>Other settings if needed (e.g. if no <tt class="docutils literal"><span class="caps">DHCP</span></tt> is&nbsp;used)</li>
+<li><tt class="docutils literal">&lt;<span class="caps">OK</span>&gt;</tt></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li>Restart the <tt class="docutils literal">NetworkManager</tt> service</li>
+</ol>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>NetworkManager
+</pre></div>
+<ol class="arabic simple" start="7">
+<li>To switch between the connection profiles&nbsp;manually</li>
+</ol>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>nmtui
+</pre></div>
+<p>Activate a connection -&gt; Choose a profile&nbsp;needed</p>
+<p>The same can be done via the <span class="caps">CLI</span>&nbsp;tool</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>down<span class="w"> </span><span class="s1">&#39;profile1&#39;</span>
+$<span class="w"> </span>nmcli<span class="w"> </span>connection<span class="w"> </span>up<span class="w"> </span><span class="s1">&#39;profile2&#39;</span>
+</pre></div>
+<p>Beware not to deactivate your only active connection! Otherwise you
+may found your <cite>ssh</cite> session hang. You&#8217;ll need to restart the device
+(if no other connections exist) and reconnect in this&nbsp;case.</p>
+</div>
+<div class="section" id="desktop">
+<h2>Desktop</h2>
+<p>I haven&#8217;t used Debian Bookworm with the <span class="caps">GNOME</span> desktop environment, but
+I guess it uses <tt class="docutils literal"><span class="pre">nm-connection-manager</span></tt> as a <span class="caps">GUI</span> alternative to
+<tt class="docutils literal">nmcli</tt> and <tt class="docutils literal">nmtui</tt> and is a part of the <tt class="docutils literal"><span class="pre">network-manager-gnome</span></tt>
+package.</p>
+<p>More details on&nbsp;NetworkManager:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://wiki.debian.org/WiFi/HowToUse#NetworkManager">WiFi on Debian&nbsp;Wiki</a></li>
+<li><a class="reference external" href="https://wiki.debian.org/NetworkManager">NetworkManager on Debian&nbsp;Wiki</a></li>
+<li><a class="reference external" href="https://wiki.archlinux.org/title/NetworkManager">NetworkManager on ArchLinux&nbsp;Wiki</a></li>
+</ul>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>

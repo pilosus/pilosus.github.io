@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2024-01-03T12:27:54-00:00</lastmod>
+<lastmod>2024-01-06T16:16:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -15,6 +15,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2023-01-01T13:10:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/</loc>
+<lastmod>2024-01-06T16:10:00+01:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -264,14 +271,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
-<lastmod>2024-01-01T21:38:00+01:05</lastmod>
+<lastmod>2024-01-06T16:10:00+01:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/raspberrypi/</loc>
+<lastmod>2024-01-06T16:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.pilosus.org/tag/linux/</loc>
-<lastmod>2024-01-01T21:38:00+01:05</lastmod>
+<lastmod>2024-01-06T16:10:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

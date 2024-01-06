@@ -1,5 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-01T21:38:00+01:00</updated><entry><title>DNS sinkhole with dnsmasq on local Linux machine</title><link href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" rel="alternate"></link><published>2024-01-01T21:38:00+01:00</published><updated>2024-01-01T21:38:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-01:/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/</id><summary type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny open source tool called
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-06T16:10:00+01:00</updated><entry><title>Multiple WiFi network connections on Rapspberry Pi 5</title><link href="https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/" rel="alternate"></link><published>2024-01-06T16:10:00+01:00</published><updated>2024-01-06T16:10:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-06:/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/</id><summary type="html">&lt;p&gt;This post was intended to be an answer to &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks"&gt;this question&lt;/a&gt;. But given
+that I&amp;#8217;m a new Raspberry Pi&amp;#8217;s StackExchange user and I don&amp;#8217;t have
+enough karma, I cannot post my answers yet, hence a post in my own&amp;nbsp;blog.&lt;/p&gt;
+&lt;p&gt;Problem statement: I want to have multiple …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post was intended to be an answer to &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks"&gt;this question&lt;/a&gt;. But given
+that I&amp;#8217;m a new Raspberry Pi&amp;#8217;s StackExchange user and I don&amp;#8217;t have
+enough karma, I cannot post my answers yet, hence a post in my own&amp;nbsp;blog.&lt;/p&gt;
+&lt;p&gt;Problem statement: I want to have multiple networks to connect my
+Raspberry Pi 5 device to, e.g. a WiFi connection at home and another
+WiFi connection at work. Previously, all the WiFI network
+configuration used to be done with the &lt;tt class="docutils literal"&gt;wpa_applicant&lt;/tt&gt; alongs with
+many other network-related tools. Now, it seems, &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt;
+and its plugins took over many Linux distributions, including
+Raspberry Pi &lt;span class="caps"&gt;OS&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;According to the &lt;a class="reference external" href="https://downloads.raspberrypi.com/raspios_full_armhf/release_notes.txt"&gt;changelog&lt;/a&gt;, in September 2022 and later in December
+2023 &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; started to be used as a high-level interface
+for all the network configuration on Raspberry Pi &lt;span class="caps"&gt;OS&lt;/span&gt;. So, as of
+January 2024 for Raspberry Pi 5 under Debian 12.4 Bookwork (Raspberry
+Pi &lt;span class="caps"&gt;OS&lt;/span&gt;) this is how one can have multiple WiFi connection profiles set&amp;nbsp;up.&lt;/p&gt;
+&lt;div class="section" id="headless-set-up"&gt;
+&lt;h2&gt;Headless&amp;nbsp;set-up&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Connect to your device and become a &lt;tt class="docutils literal"&gt;root&lt;/tt&gt; user&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;user@raspberrypi.local
+$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;-s
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ol class="arabic simple" start="2"&gt;
+&lt;li&gt;Find all the WiFi networks available and network&amp;nbsp;devices&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;nmcli&lt;span class="w"&gt; &lt;/span&gt;dev&lt;span class="w"&gt; &lt;/span&gt;wifi
+$&lt;span class="w"&gt; &lt;/span&gt;nmcli&lt;span class="w"&gt; &lt;/span&gt;dev
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;note the &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;SSID&lt;/span&gt;&lt;/tt&gt; (your network &lt;span class="caps"&gt;ID&lt;/span&gt;) and the &lt;tt class="docutils literal"&gt;Device&lt;/tt&gt; name
+(e.g. &lt;tt class="docutils literal"&gt;wlan0&lt;/tt&gt; of type &lt;tt class="docutils literal"&gt;wifi&lt;/tt&gt;).&lt;/p&gt;
+&lt;ol class="arabic simple" start="3"&gt;
+&lt;li&gt;Run a &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; config tool with the text-based&amp;nbsp;interface&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;nmtui
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Edit connection -&amp;gt; Add -&amp;gt;&amp;nbsp;WiFi.&lt;/p&gt;
+&lt;ol class="arabic simple" start="4"&gt;
+&lt;li&gt;Add a new connection&amp;nbsp;profile:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;profile&amp;nbsp;name&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;SSID&lt;/span&gt;&lt;/tt&gt; from the step&amp;nbsp;2&lt;/li&gt;
+&lt;li&gt;Security (usually &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;WPA&lt;/span&gt; &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; &lt;span class="caps"&gt;WPA2&lt;/span&gt; Personal&lt;/tt&gt; for the home WiFi routers +&amp;nbsp;password)&lt;/li&gt;
+&lt;li&gt;Other settings if needed (e.g. if no &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;DHCP&lt;/span&gt;&lt;/tt&gt; is&amp;nbsp;used)&lt;/li&gt;
+&lt;li&gt;&lt;tt class="docutils literal"&gt;&amp;lt;&lt;span class="caps"&gt;OK&lt;/span&gt;&amp;gt;&lt;/tt&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol class="arabic simple" start="6"&gt;
+&lt;li&gt;Restart the &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; service&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;systemctl&lt;span class="w"&gt; &lt;/span&gt;restart&lt;span class="w"&gt; &lt;/span&gt;NetworkManager
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ol class="arabic simple" start="7"&gt;
+&lt;li&gt;To switch between the connection profiles&amp;nbsp;manually&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;nmtui
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Activate a connection -&amp;gt; Choose a profile&amp;nbsp;needed&lt;/p&gt;
+&lt;p&gt;The same can be done via the &lt;span class="caps"&gt;CLI&lt;/span&gt;&amp;nbsp;tool&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;nmcli&lt;span class="w"&gt; &lt;/span&gt;connection&lt;span class="w"&gt; &lt;/span&gt;down&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;profile1&amp;#39;&lt;/span&gt;
+$&lt;span class="w"&gt; &lt;/span&gt;nmcli&lt;span class="w"&gt; &lt;/span&gt;connection&lt;span class="w"&gt; &lt;/span&gt;up&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;profile2&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Beware not to deactivate your only active connection! Otherwise you
+may found your &lt;cite&gt;ssh&lt;/cite&gt; session hang. You&amp;#8217;ll need to restart the device
+(if no other connections exist) and reconnect in this&amp;nbsp;case.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="desktop"&gt;
+&lt;h2&gt;Desktop&lt;/h2&gt;
+&lt;p&gt;I haven&amp;#8217;t used Debian Bookworm with the &lt;span class="caps"&gt;GNOME&lt;/span&gt; desktop environment, but
+I guess it uses &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;nm-connection-manager&lt;/span&gt;&lt;/tt&gt; as a &lt;span class="caps"&gt;GUI&lt;/span&gt; alternative to
+&lt;tt class="docutils literal"&gt;nmcli&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;nmtui&lt;/tt&gt; and is a part of the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;network-manager-gnome&lt;/span&gt;&lt;/tt&gt;
+package.&lt;/p&gt;
+&lt;p&gt;More details on&amp;nbsp;NetworkManager:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://wiki.debian.org/WiFi/HowToUse#NetworkManager"&gt;WiFi on Debian&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://wiki.debian.org/NetworkManager"&gt;NetworkManager on Debian&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="https://wiki.archlinux.org/title/NetworkManager"&gt;NetworkManager on ArchLinux&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="raspberrypi"></category><category term="linux"></category></entry><entry><title>DNS sinkhole with dnsmasq on local Linux machine</title><link href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" rel="alternate"></link><published>2024-01-01T21:38:00+01:00</published><updated>2024-01-01T21:38:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-01:/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/</id><summary type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny open source tool called
 &lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/"&gt;dnseen&lt;/a&gt;. One of the goals for developing it was generating a
 top-list of websites that I visit, so that I can blacklist websites
 that I think I spend too much time on without long-term
