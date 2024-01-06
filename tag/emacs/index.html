@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Vitaly Samigullin's blog</title>
+    <title>Vitaly Samigullin's blog - emacs</title>
 
     <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,20 +68,39 @@
       </div>
       
       <div class="content">
-<section id="content" class="body">
-<h1>Archives for 2024</h1>
-
-<dl>
-    <dt>06-01-2024 18:58</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/">emacs tramp: ssh +&nbsp;sudo</a></dd>
-    <dt>06-01-2024 18:04</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/06/unmaintained-technical-documentation/">Unmaintained technical&nbsp;documentation</a></dd>
-    <dt>06-01-2024 16:10</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/">Multiple WiFi network connections on Rapspberry Pi&nbsp;5</a></dd>
-    <dt>01-01-2024 21:38</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/"><span class="caps">DNS</span> sinkhole with <cite>dnsmasq</cite> on local Linux&nbsp;machine</a></dd>
-</dl>
-</section>
+        <section class="body">
+          <article class="post-entry">
+            <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/">emacs tramp: ssh +&nbsp;sudo</a></h2>
+              <div class="post-info">
+                <span class="published" title="2024-01-06T18:58:00+01:00">
+                  06-01-2024 18:58
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/til/">TIL</a></span>
+		|
+		<span class="word-count">57 words</span>
+		|
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/emacs/">emacs</a> </span>                
+              </div><!-- /.post-info -->            <div class="post-summary">
+              <p><span class="caps">TIL</span> I can use <a class="reference external" href="https://www.gnu.org/software/tramp/#Combining-ssh-or-plink-with-su_002c-sudo-or-doas">Emacs Tramp</a> not only to use <tt class="docutils literal">sudo</tt> on localhost
+with the Emacs running under unprivilidged&nbsp;user:</p>
+<pre class="literal-block">
+C-x C-f /sudo:localhost:/path/to/file RET
+</pre>
+<p>or that I can <tt class="docutils literal">ssh</tt> with&nbsp;Emacs:</p>
+<pre class="literal-block">
+C-x C-f /ssh:pilosus&#64;raspberrypi:/path/to/file RET
+</pre>
+<p>but I also can pipeline <tt class="docutils literal">ssh …</tt></p>
+            </div>
+            <a class="post-readmore" href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/">Read more</a>
+          </article>
+        </section>
       </div>
 
       <div class="navbar-spacer"></div>

@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - TIL</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/til.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2023-12-21T23:55:00+01:00</updated><entry><title>Recording a screencast on Linux</title><link href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/" rel="alternate"></link><published>2023-12-21T23:55:00+01:00</published><updated>2023-12-21T23:55:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-21:/posts/2023/12/21/recording-a-screencast-on-linux/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can record a screencast using &lt;span class="caps"&gt;GNOME&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en"&gt;tool&lt;/a&gt;,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - TIL</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/til.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-06T18:58:00+01:00</updated><entry><title>emacs tramp: ssh + sudo</title><link href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/" rel="alternate"></link><published>2024-01-06T18:58:00+01:00</published><updated>2024-01-06T18:58:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-06:/posts/2024/01/06/emacs-tramp-ssh-sudo/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can use &lt;a class="reference external" href="https://www.gnu.org/software/tramp/#Combining-ssh-or-plink-with-su_002c-sudo-or-doas"&gt;Emacs Tramp&lt;/a&gt; not only to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; on localhost
+with the Emacs running under unprivilidged&amp;nbsp;user:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+C-x C-f /sudo:localhost:/path/to/file RET
+&lt;/pre&gt;
+&lt;p&gt;or that I can &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; with&amp;nbsp;Emacs:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+C-x C-f /ssh:pilosus&amp;#64;raspberrypi:/path/to/file RET
+&lt;/pre&gt;
+&lt;p&gt;but I also can pipeline &lt;tt class="docutils literal"&gt;ssh …&lt;/tt&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can use &lt;a class="reference external" href="https://www.gnu.org/software/tramp/#Combining-ssh-or-plink-with-su_002c-sudo-or-doas"&gt;Emacs Tramp&lt;/a&gt; not only to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; on localhost
+with the Emacs running under unprivilidged&amp;nbsp;user:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+C-x C-f /sudo:localhost:/path/to/file RET
+&lt;/pre&gt;
+&lt;p&gt;or that I can &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; with&amp;nbsp;Emacs:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+C-x C-f /ssh:pilosus&amp;#64;raspberrypi:/path/to/file RET
+&lt;/pre&gt;
+&lt;p&gt;but I also can pipeline &lt;tt class="docutils literal"&gt;ssh&lt;/tt&gt; session with &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+C-x C-f /ssh:pilosus&amp;#64;raspberrypi|sudo:raspberrypi:/path/to/file RET
+&lt;/pre&gt;
+&lt;p&gt;which is a shortcut&amp;nbsp;for:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+C-x C-f /ssh:pilosus&amp;#64;raspberrypi|sudo:root&amp;#64;raspberrypi:/path/to/file RET
+&lt;/pre&gt;
+</content><category term="TIL"></category><category term="emacs"></category></entry><entry><title>Recording a screencast on Linux</title><link href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/" rel="alternate"></link><published>2023-12-21T23:55:00+01:00</published><updated>2023-12-21T23:55:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-21:/posts/2023/12/21/recording-a-screencast-on-linux/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can record a screencast using &lt;span class="caps"&gt;GNOME&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en"&gt;tool&lt;/a&gt;,
 trim it with &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; like&amp;nbsp;this:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 cd ~/Screencasts

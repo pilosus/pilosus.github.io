@@ -70,6 +70,37 @@
       <div class="content">
         <section class="body">
           <article class="post-entry">
+            <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/">emacs tramp: ssh +&nbsp;sudo</a></h2>
+              <div class="post-info">
+                <span class="published" title="2024-01-06T18:58:00+01:00">
+                  06-01-2024 18:58
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/til/">TIL</a></span>
+		|
+		<span class="word-count">57 words</span>
+		|
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/emacs/">emacs</a> </span>                
+              </div><!-- /.post-info -->            <div class="post-summary">
+              <p><span class="caps">TIL</span> I can use <a class="reference external" href="https://www.gnu.org/software/tramp/#Combining-ssh-or-plink-with-su_002c-sudo-or-doas">Emacs Tramp</a> not only to use <tt class="docutils literal">sudo</tt> on localhost
+with the Emacs running under unprivilidged&nbsp;user:</p>
+<pre class="literal-block">
+C-x C-f /sudo:localhost:/path/to/file RET
+</pre>
+<p>or that I can <tt class="docutils literal">ssh</tt> with&nbsp;Emacs:</p>
+<pre class="literal-block">
+C-x C-f /ssh:pilosus&#64;raspberrypi:/path/to/file RET
+</pre>
+<p>but I also can pipeline <tt class="docutils literal">ssh …</tt></p>
+            </div>
+            <a class="post-readmore" href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/">Read more</a>
+          </article>
+          <article class="post-entry">
             <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2024/01/06/unmaintained-technical-documentation/">Unmaintained technical&nbsp;documentation</a></h2>
               <div class="post-info">
                 <span class="published" title="2024-01-06T18:04:00+01:00">
@@ -306,32 +337,6 @@ too. You can debug and patch Clojure code running in production using
 <span class="caps">REPL</span> too. This is where …</p>
             </div>
             <a class="post-readmore" href="https://blog.pilosus.org/posts/2023/07/07/debugging-and-patching-clojure-code-running-in-production-using-socket-server-and-repl/">Read more</a>
-          </article>
-          <article class="post-entry">
-            <h2 class="entry-title"><a href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/">kairos: crontab parsing library for&nbsp;Clojure</a></h2>
-              <div class="post-info">
-                <span class="published" title="2023-07-07T12:00:00+02:00">
-                  07-07-2023 12:00
-                </span>
-                |
-                <span class="vcard author">
-                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
-                </span>
-                |
-                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
-		|
-		<span class="word-count">282 words</span>
-		|
-		<span class="word-count">2 min to read</span>
-<br/><span>tags: <a href="https://blog.pilosus.org/tag/clojure/">clojure</a> </span>                
-              </div><!-- /.post-info -->            <div class="post-summary">
-              <p>I have been tinkering with <a class="reference external" href="https://blog.pilosus.org/tag/clojure/">Clojure</a> since the late 2020. When I
-publish an open-source project in Clojure, it&#8217;s mostly about two
-goals: solving a real-world problem and learning some new concepts or
-tooling in Clojure ecosystem. <a class="reference external" href="https://github.com/pilosus/kairos">kairos</a> is a Clojure library for
-parsing crontab is no exception of …</p>
-            </div>
-            <a class="post-readmore" href="https://blog.pilosus.org/posts/2023/07/07/kairos-crontab-parsing-library-for-clojure/">Read more</a>
           </article>
         </section>
 	<section class="pagination">

@@ -2,12 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Vitaly Samigullin's blog</title>
+    <title>emacs tramp: ssh + sudo</title>
 
     <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="emacs tramp: ssh + sudo" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/" />
+    <meta property="og:description" content="TIL I can use Emacs Tramp not only to use sudo on localhost with the Emacs running under unprivilidged user: C-x C-f /sudo:localhost:/path/to/file RET or that I can ssh with Emacs: C-x C-f /ssh:pilosus@raspberrypi:/path/to/file RET but I also can pipeline ssh …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2024-01-06" />
+    <meta property="article:section" content="TIL" />
+    <meta property="article:tag" content="emacs" />
 
 
     <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -68,20 +78,52 @@
       </div>
       
       <div class="content">
-<section id="content" class="body">
-<h1>Archives for 2024</h1>
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/" rel="bookmark"
+                   title="Permalink to emacs tramp: ssh + sudo">emacs tramp: ssh +&nbsp;sudo</a></h2>
+            </header>
 
-<dl>
-    <dt>06-01-2024 18:58</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/">emacs tramp: ssh +&nbsp;sudo</a></dd>
-    <dt>06-01-2024 18:04</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/06/unmaintained-technical-documentation/">Unmaintained technical&nbsp;documentation</a></dd>
-    <dt>06-01-2024 16:10</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/">Multiple WiFi network connections on Rapspberry Pi&nbsp;5</a></dd>
-    <dt>01-01-2024 21:38</dt>
-    <dd><a href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/"><span class="caps">DNS</span> sinkhole with <cite>dnsmasq</cite> on local Linux&nbsp;machine</a></dd>
-</dl>
-</section>
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2024-01-06T18:58:00+01:00">
+                  06-01-2024 18:58
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/til/">TIL</a></span>
+		|
+		<span class="word-count">57 words</span>
+		|
+		<span class="word-count">1 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/emacs/">emacs</a> </span>                
+              </div><!-- /.post-info -->              <p><span class="caps">TIL</span> I can use <a class="reference external" href="https://www.gnu.org/software/tramp/#Combining-ssh-or-plink-with-su_002c-sudo-or-doas">Emacs Tramp</a> not only to use <tt class="docutils literal">sudo</tt> on localhost
+with the Emacs running under unprivilidged&nbsp;user:</p>
+<pre class="literal-block">
+C-x C-f /sudo:localhost:/path/to/file RET
+</pre>
+<p>or that I can <tt class="docutils literal">ssh</tt> with&nbsp;Emacs:</p>
+<pre class="literal-block">
+C-x C-f /ssh:pilosus&#64;raspberrypi:/path/to/file RET
+</pre>
+<p>but I also can pipeline <tt class="docutils literal">ssh</tt> session with <tt class="docutils literal">sudo</tt>:</p>
+<pre class="literal-block">
+C-x C-f /ssh:pilosus&#64;raspberrypi|sudo:raspberrypi:/path/to/file RET
+</pre>
+<p>which is a shortcut&nbsp;for:</p>
+<pre class="literal-block">
+C-x C-f /ssh:pilosus&#64;raspberrypi|sudo:root&#64;raspberrypi:/path/to/file RET
+</pre>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
       </div>
 
       <div class="navbar-spacer"></div>

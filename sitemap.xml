@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/</loc>
-<lastmod>2024-01-06T18:11:58-00:00</lastmod>
+<lastmod>2024-01-06T19:07:51-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -15,6 +15,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2023-01-01T13:10:00+01:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/</loc>
+<lastmod>2024-01-06T18:58:00+01:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
 </url>
 
 <url>
@@ -271,7 +278,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.pilosus.org/category/til/</loc>
-<lastmod>2023-12-21T23:55:00+01:05</lastmod>
+<lastmod>2024-01-06T18:58:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -279,6 +286,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://blog.pilosus.org/category/blog/</loc>
 <lastmod>2024-01-06T18:04:00+01:05</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://blog.pilosus.org/tag/emacs/</loc>
+<lastmod>2024-01-06T18:58:00+01:05</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
