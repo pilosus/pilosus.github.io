@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-06T16:10:00+01:00</updated><entry><title>Multiple WiFi network connections on Rapspberry Pi 5</title><link href="https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/" rel="alternate"></link><published>2024-01-06T16:10:00+01:00</published><updated>2024-01-06T16:10:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-06:/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/</id><summary type="html">&lt;p&gt;This post was intended to be an answer to &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks"&gt;this question&lt;/a&gt;. But given
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog - Blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/blog.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-06T18:04:00+01:00</updated><entry><title>Unmaintained technical documentation</title><link href="https://blog.pilosus.org/posts/2024/01/06/unmaintained-technical-documentation/" rel="alternate"></link><published>2024-01-06T18:04:00+01:00</published><updated>2024-01-06T18:04:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-06:/posts/2024/01/06/unmaintained-technical-documentation/</id><summary type="html">&lt;p&gt;I think that the problem of unmaintained technical documentation has
+nothing to do with the &amp;#8220;wrong&amp;#8221; tools. It&amp;#8217;s not about what&amp;#8217;s better:
+Notion, Wiki or a bunch of version-controlled Markdown files. Rather,
+the problem boils down to the following&amp;nbsp;problems:&lt;/p&gt;
+&lt;p&gt;1. Wrong ownership of the documentation (who really …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I think that the problem of unmaintained technical documentation has
+nothing to do with the &amp;#8220;wrong&amp;#8221; tools. It&amp;#8217;s not about what&amp;#8217;s better:
+Notion, Wiki or a bunch of version-controlled Markdown files. Rather,
+the problem boils down to the following&amp;nbsp;problems:&lt;/p&gt;
+&lt;p&gt;1. Wrong ownership of the documentation (who really cares: a
+developer, a tech lead, a product manager,&amp;nbsp;etc.)&lt;/p&gt;
+&lt;p&gt;2. Wrong documentation form (&lt;a class="reference external" href="https://diataxis.fr/"&gt;Diátaxis&lt;/a&gt; approach with tutorial,
+how-to, reference, explanation formats of&amp;nbsp;docs)&lt;/p&gt;
+&lt;p&gt;3. An attempt to solve a problem with the docs where code or
+automation can be written or a work process&amp;nbsp;introduced&lt;/p&gt;
+&lt;div class="section" id="ownership-docs-form"&gt;
+&lt;h2&gt;Ownership &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; docs&amp;nbsp;form&lt;/h2&gt;
+&lt;p&gt;These two points are better explained with the&amp;nbsp;examples.&lt;/p&gt;
+&lt;p&gt;Example 1: as a developer of a closed-source piece of software with no
+public APIs, I probably don&amp;#8217;t care about writing the docs in the
+format of reference. This is because I am responsible for the code, I
+work with the code on a daily basis and hence I try to write my code
+to be self-documenting. On the other hand, if today I am an on-duty
+engineer, I would thank my colleagues for writing a short how-to guide
+that will help me to quickly fix a rare problem that occurs, say, once
+a month or a quarter. I&amp;#8217;ll likely to write or update such a how-to
+guide myself until we have capacities or increased problem occurrence
+to automate the how-to guide, so that it&amp;#8217;s the code again and docs are
+no longer needed. I don&amp;#8217;t expect that how-to guides are written by a
+team lead or a technical writer; it&amp;#8217;s developers who need&amp;nbsp;them.&lt;/p&gt;
+&lt;p&gt;Example 2: as a team lead or a product owner, it&amp;#8217;s very likely that I
+want to have some higher-level understanding-oriented form of docs
+maintained. So that it&amp;#8217;s easier for me to onboard a new developer or
+explain a a complex concept with its context to someone, etc. I don&amp;#8217;t
+expect devs to write these docs for me, it&amp;#8217;s my responsibility and
+ownership. I am interested in maintaining it and I&amp;#8217;ll suffer if the
+docs are unmaintained when I need to answer the same questions over
+and over&amp;nbsp;again.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="docs-instead-of-automation-or-a-process"&gt;
+&lt;h2&gt;Docs instead of automation or a&amp;nbsp;process&lt;/h2&gt;
+&lt;p&gt;It&amp;#8217;s nice to come up with a checklist document for a new employee&amp;nbsp;onboarding:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;add the GitHub account to the&amp;nbsp;organisation&lt;/li&gt;
+&lt;li&gt;add relevant permissions on &lt;span class="caps"&gt;GCP&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;send a &lt;span class="caps"&gt;VPN&lt;/span&gt;&amp;nbsp;certificate&lt;/li&gt;
+&lt;li&gt;&amp;#8230;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It&amp;#8217;s much better than not having it at all. But it&amp;#8217;s even better if
+you implement the checklist as a automated process with your
+Infrastructure-as-a-Code approach. It will take more time to implement
+first, but once done it&amp;#8217;s guaranteed to be&amp;nbsp;maintained.&lt;/p&gt;
+&lt;p&gt;Same with the managerial work processes. It&amp;#8217;s nice to outline it with
+a document first, but once implemented, keep only relevant forms of
+the docs maintained by the people who are interested to have these
+docs updated. They still may need help organising the process of the
+docs maintenance: e.g. every time when someone disturbs a colleague
+asking how to do something, they are instructed, but also asked to
+update the docs with the answer they just got. They can also have a
+task to update the docs during their on-duty&amp;nbsp;rotation.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="Blog"></category><category term="docs"></category></entry><entry><title>Multiple WiFi network connections on Rapspberry Pi 5</title><link href="https://blog.pilosus.org/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/" rel="alternate"></link><published>2024-01-06T16:10:00+01:00</published><updated>2024-01-06T16:10:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-06:/posts/2024/01/06/multiple-wifi-network-connections-on-rapspberry-pi-5/</id><summary type="html">&lt;p&gt;This post was intended to be an answer to &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks"&gt;this question&lt;/a&gt;. But given
 that I&amp;#8217;m a new Raspberry Pi&amp;#8217;s StackExchange user and I don&amp;#8217;t have
 enough karma, I cannot post my answers yet, hence a post in my own&amp;nbsp;blog.&lt;/p&gt;
 &lt;p&gt;Problem statement: I want to have multiple …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post was intended to be an answer to &lt;a class="reference external" href="https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks"&gt;this question&lt;/a&gt;. But given

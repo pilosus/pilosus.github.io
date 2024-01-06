@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Unmaintained technical documentation</title>
+
+    <!-- Mobile Specific Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Open Graph Metas –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta property="og:title" content="Unmaintained technical documentation" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
+    <meta property="og:url" content="https://blog.pilosus.org/posts/2024/01/06/unmaintained-technical-documentation/" />
+    <meta property="og:description" content="I think that the problem of unmaintained technical documentation has nothing to do with the “wrong” tools. It’s not about what’s better: Notion, Wiki or a bunch of version-controlled Markdown files. Rather, the problem boils down to the following problems: 1. Wrong ownership of the documentation (who really …" />
+    <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
+    <meta property="article:published_time" content="2024-01-06" />
+    <meta property="article:section" content="Blog" />
+    <meta property="article:tag" content="docs" />
+
+
+    <!-- CSS –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/normalize.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/skeleton.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/custom.css" />
+    <link rel="stylesheet" href="https://blog.pilosus.org/theme/css/pygment.css" />
+
+    <!-- Favicon –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="https://blog.pilosus.org/theme/images/favicon.png">
+
+    <!-- Feeds –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Vitaly Samigullin's blog Atom Feed" />
+  </head>
+
+  <!-- Primary Page Layout  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <body id="index" class="home">
+    <div class="container">
+
+      <section class="header">
+	<div class="row">
+	  <div class="two columns">
+	    <img class="header-img u-full-width" alt="Vitaly Samigullin" src="/images/avatar.jpg">
+	  </div>
+	  <div class="ten columns">
+	    <h2 class="title"><a class="header-link" href="https://blog.pilosus.org/">Vitaly Samigullin's blog </a></h2>
+	  </div>
+	</div>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+	<div class="container">
+          <ul class="navbar-list">
+	    <li class="navbar-item"><a class="navbar-link" href="/category/blog/">Blog</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/category/til/">TIL</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/archives">Archives</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/tags">Tags</a></li>
+	    <li class="navbar-item"><a class="navbar-link" href="/pages/contact/">Contact</a></li>
+
+
+          </ul>
+	</div>
+      </nav>
+
+      <div class="search">
+        <form id="search-google" name="searchForm" action="https://google.com/search">
+          <div class="row">
+            <div class="ten columns">
+	      <input class="u-full-width" name="q" type="text" placeholder="Keyword..." maxlength="200" />
+	      <input name="q" type="hidden" value="site:https://blog.pilosus.org"/>
+            </div>
+            <div class="two columns">
+	      <input class="button u-full-width" name="submit" type="submit" value="Search" />
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="content">
+        <section id="content" class="body">
+          <article class="post-entry">
+            <header class="post-header">
+              <h2 class="post-title">
+                <a href="https://blog.pilosus.org/posts/2024/01/06/unmaintained-technical-documentation/" rel="bookmark"
+                   title="Permalink to Unmaintained technical documentation">Unmaintained technical&nbsp;documentation</a></h2>
+            </header>
+
+            <div class="entry-content">
+              <div class="post-info">
+                <span class="published" title="2024-01-06T18:04:00+01:00">
+                  06-01-2024 18:04
+                </span>
+                |
+                <span class="vcard author">
+                  by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
+                </span>
+                |
+                <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
+		|
+		<span class="word-count">523 words</span>
+		|
+		<span class="word-count">3 min to read</span>
+<br/><span>tags: <a href="https://blog.pilosus.org/tag/docs/">docs</a> </span>                
+              </div><!-- /.post-info -->              <p>I think that the problem of unmaintained technical documentation has
+nothing to do with the &#8220;wrong&#8221; tools. It&#8217;s not about what&#8217;s better:
+Notion, Wiki or a bunch of version-controlled Markdown files. Rather,
+the problem boils down to the following&nbsp;problems:</p>
+<p>1. Wrong ownership of the documentation (who really cares: a
+developer, a tech lead, a product manager,&nbsp;etc.)</p>
+<p>2. Wrong documentation form (<a class="reference external" href="https://diataxis.fr/">Diátaxis</a> approach with tutorial,
+how-to, reference, explanation formats of&nbsp;docs)</p>
+<p>3. An attempt to solve a problem with the docs where code or
+automation can be written or a work process&nbsp;introduced</p>
+<div class="section" id="ownership-docs-form">
+<h2>Ownership <span class="amp">&amp;</span> docs&nbsp;form</h2>
+<p>These two points are better explained with the&nbsp;examples.</p>
+<p>Example 1: as a developer of a closed-source piece of software with no
+public APIs, I probably don&#8217;t care about writing the docs in the
+format of reference. This is because I am responsible for the code, I
+work with the code on a daily basis and hence I try to write my code
+to be self-documenting. On the other hand, if today I am an on-duty
+engineer, I would thank my colleagues for writing a short how-to guide
+that will help me to quickly fix a rare problem that occurs, say, once
+a month or a quarter. I&#8217;ll likely to write or update such a how-to
+guide myself until we have capacities or increased problem occurrence
+to automate the how-to guide, so that it&#8217;s the code again and docs are
+no longer needed. I don&#8217;t expect that how-to guides are written by a
+team lead or a technical writer; it&#8217;s developers who need&nbsp;them.</p>
+<p>Example 2: as a team lead or a product owner, it&#8217;s very likely that I
+want to have some higher-level understanding-oriented form of docs
+maintained. So that it&#8217;s easier for me to onboard a new developer or
+explain a a complex concept with its context to someone, etc. I don&#8217;t
+expect devs to write these docs for me, it&#8217;s my responsibility and
+ownership. I am interested in maintaining it and I&#8217;ll suffer if the
+docs are unmaintained when I need to answer the same questions over
+and over&nbsp;again.</p>
+</div>
+<div class="section" id="docs-instead-of-automation-or-a-process">
+<h2>Docs instead of automation or a&nbsp;process</h2>
+<p>It&#8217;s nice to come up with a checklist document for a new employee&nbsp;onboarding:</p>
+<ul class="simple">
+<li>add the GitHub account to the&nbsp;organisation</li>
+<li>add relevant permissions on <span class="caps">GCP</span></li>
+<li>send a <span class="caps">VPN</span>&nbsp;certificate</li>
+<li>&#8230;</li>
+</ul>
+<p>It&#8217;s much better than not having it at all. But it&#8217;s even better if
+you implement the checklist as a automated process with your
+Infrastructure-as-a-Code approach. It will take more time to implement
+first, but once done it&#8217;s guaranteed to be&nbsp;maintained.</p>
+<p>Same with the managerial work processes. It&#8217;s nice to outline it with
+a document first, but once implemented, keep only relevant forms of
+the docs maintained by the people who are interested to have these
+docs updated. They still may need help organising the process of the
+docs maintenance: e.g. every time when someone disturbs a colleague
+asking how to do something, they are instructed, but also asked to
+update the docs with the answer they just got. They can also have a
+task to update the docs during their on-duty&nbsp;rotation.</p>
+</div>
+
+            </div><!-- /.entry-content -->
+
+          </article>
+        </section>
+      </div>
+
+      <div class="navbar-spacer"></div>
+      <section class="extras">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://pilosus.org/">Home Page</a></li>
+        </ul>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="https://blog.pilosus.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+          <li class="navbar-item"><a class="navbar-link" href="https://github.com/pilosus">GitHub</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="https://www.linkedin.com/in/vitaly-samigullin">LinkedIn</a></li>
+        </ul>
+      </section><!-- /#extras -->
+
+      <footer class="footer-pelican">
+        <address id="about" class="vcard body">
+          Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. Theme: <a href="http://github.com/pilosus/pilosus-pelican-theme/">Pilosus Pelican</a>
+        </address><!-- /#about -->
+      </footer><!-- /#contentinfo -->
+
+    </div>
+  </body>
+</html>
