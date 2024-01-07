@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-06T18:58:00+01:00</updated><entry><title>emacs tramp: ssh + sudo</title><link href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/" rel="alternate"></link><published>2024-01-06T18:58:00+01:00</published><updated>2024-01-06T18:58:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-06:/posts/2024/01/06/emacs-tramp-ssh-sudo/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can use &lt;a class="reference external" href="https://www.gnu.org/software/tramp/#Combining-ssh-or-plink-with-su_002c-sudo-or-doas"&gt;Emacs Tramp&lt;/a&gt; not only to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; on localhost
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Vitaly Samigullin's blog</title><link href="https://blog.pilosus.org/" rel="alternate"></link><link href="https://blog.pilosus.org/feeds/all.atom.xml" rel="self"></link><id>https://blog.pilosus.org/</id><updated>2024-01-07T17:39:00+01:00</updated><entry><title>emacs tramp: ssh + sudo</title><link href="https://blog.pilosus.org/posts/2024/01/06/emacs-tramp-ssh-sudo/" rel="alternate"></link><published>2024-01-06T18:58:00+01:00</published><updated>2024-01-06T18:58:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-06:/posts/2024/01/06/emacs-tramp-ssh-sudo/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can use &lt;a class="reference external" href="https://www.gnu.org/software/tramp/#Combining-ssh-or-plink-with-su_002c-sudo-or-doas"&gt;Emacs Tramp&lt;/a&gt; not only to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; on localhost
 with the Emacs running under unprivilidged&amp;nbsp;user:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 C-x C-f /sudo:localhost:/path/to/file RET
@@ -167,48 +167,48 @@ package.&lt;/p&gt;
 &lt;li&gt;&lt;a class="reference external" href="https://wiki.archlinux.org/title/NetworkManager"&gt;NetworkManager on ArchLinux&amp;nbsp;Wiki&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="raspberrypi"></category><category term="linux"></category></entry><entry><title>DNS sinkhole with dnsmasq on local Linux machine</title><link href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" rel="alternate"></link><published>2024-01-01T21:38:00+01:00</published><updated>2024-01-01T21:38:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-01:/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/</id><summary type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny open source tool called
-&lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/"&gt;dnseen&lt;/a&gt;. One of the goals for developing it was generating a
-top-list of websites that I visit, so that I can blacklist websites
-that I think I spend too much time on without long-term
-benefits. These …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny open source tool called
-&lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/"&gt;dnseen&lt;/a&gt;. One of the goals for developing it was generating a
-top-list of websites that I visit, so that I can blacklist websites
-that I think I spend too much time on without long-term
-benefits. These are mostly news and social media that use manipulative
-algorithms to make you make you a &amp;#8220;dophamine addict&amp;#8221;. Another thing
-that I wanted to implement is blacklisting for ads/tracking services
-that works on the &lt;span class="caps"&gt;DNS&lt;/span&gt; level, so that I don&amp;#8217;t need to worry about
-browser extensions in case I want to try a new&amp;nbsp;browser.&lt;/p&gt;
+</content><category term="Blog"></category><category term="raspberrypi"></category><category term="linux"></category></entry><entry><title>DNS sinkhole with dnsmasq on local Linux machine</title><link href="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" rel="alternate"></link><published>2024-01-01T21:38:00+01:00</published><updated>2024-01-01T21:38:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2024-01-01:/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/</id><summary type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny &lt;span class="caps"&gt;DNS&lt;/span&gt; analyzer tool called
+&lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/"&gt;dnseen&lt;/a&gt;. One of the development goals was generating a top-list of
+websites that I visit along with the frequencies, so that I can
+blacklist websites that I think I spend too much time on without
+long-term …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Recently I&amp;#8217;ve posted a wrap-up on my new tiny &lt;span class="caps"&gt;DNS&lt;/span&gt; analyzer tool called
+&lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/"&gt;dnseen&lt;/a&gt;. One of the development goals was generating a top-list of
+websites that I visit along with the frequencies, so that I can
+blacklist websites that I think I spend too much time on without
+long-term benefits. These are mostly news and social media that use
+manipulative algorithms to make you a &amp;#8220;dophamine addict&amp;#8221;. Another
+thing that I wanted to implement is blacklisting for ads/tracking
+services that works on the &lt;span class="caps"&gt;DNS&lt;/span&gt; level, so that I don&amp;#8217;t need to worry
+about browser extensions in case I want to try a new&amp;nbsp;browser.&lt;/p&gt;
 &lt;p&gt;I used to have a list of blacklisted domains in my &lt;tt class="docutils literal"&gt;/etc/hosts&lt;/tt&gt; file
 for a while. One obvious drawback for me is the need to lump
 everything in one file. Instead, in a perfect solution, I&amp;#8217;d like to
-split blacklisted hostnames into multiple files, so that I can easily
-break them down by topic and/or automate some hosts file from
-third-party curated lists, like hosts files from &lt;a class="reference external" href="https://github.com/StevenBlack/hosts"&gt;Steven Black&lt;/a&gt;.&lt;/p&gt;
+split blacklisted domain into multiple files, so that I can easily
+break them down by topic and/or automate some hosts file generation
+from third-party curated lists, like hosts files from &lt;a class="reference external" href="https://github.com/StevenBlack/hosts"&gt;Steven Black&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;One of the popular options is to set up a &lt;a class="reference external" href="https://pi-hole.net/"&gt;Pi-hole&lt;/a&gt; on the local
 network and use it as the local &lt;span class="caps"&gt;DNS&lt;/span&gt; server. I do like this option too,
-but before picking up ready to use products, I&amp;#8217;d like to build by own
-prototype first. This is how I came up with the idea of building my
-own &lt;a class="reference external" href="https://en.wikipedia.org/wiki/DNS_sinkhole"&gt;&lt;span class="caps"&gt;DNS&lt;/span&gt; sinkhole&lt;/a&gt; with the help of &lt;a class="reference external" href="https://dnsmasq.org/"&gt;dnsmasq&lt;/a&gt; as a &lt;span class="caps"&gt;DNS&lt;/span&gt; server on my
-local &lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/"&gt;Linux&lt;/a&gt;&amp;nbsp;machine.&lt;/p&gt;
-&lt;div class="section" id="local-dns-dnsmasq-on-fedora-39-machine-with-networkmanager"&gt;
-&lt;h2&gt;Local &lt;span class="caps"&gt;DNS&lt;/span&gt; &lt;cite&gt;dnsmasq&lt;/cite&gt; on Fedora 39 machine with &lt;cite&gt;NetworkManager&lt;/cite&gt;&lt;/h2&gt;
-&lt;p&gt;After installing &lt;a class="reference external" href="https://dnsmasq.org/"&gt;dnsmasq&lt;/a&gt; on Fedora&amp;nbsp;39:&lt;/p&gt;
+but before picking up ready to use products, I&amp;#8217;d like to &amp;#8220;reinvent the
+wheel&amp;#8221; and build by own prototype first. This is how I came up with
+the idea of building my own &lt;a class="reference external" href="https://en.wikipedia.org/wiki/DNS_sinkhole"&gt;&lt;span class="caps"&gt;DNS&lt;/span&gt; sinkhole&lt;/a&gt; with the help of
+&lt;a class="reference external" href="https://dnsmasq.org/"&gt;dnsmasq&lt;/a&gt; as a &lt;span class="caps"&gt;DNS&lt;/span&gt; server on my local &lt;a class="reference external" href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/"&gt;Linux&lt;/a&gt;&amp;nbsp;machine.&lt;/p&gt;
+&lt;div class="section" id="linux-networkmanager-dnsmasq"&gt;
+&lt;h2&gt;Linux + NetworkManager +&amp;nbsp;dnsmasq&lt;/h2&gt;
+&lt;p&gt;After installing &lt;a class="reference external" href="https://dnsmasq.org/"&gt;dnsmasq&lt;/a&gt; on the Fedora 39 Linux&amp;nbsp;machine:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo dnf -y install dnsmasq
 &lt;/pre&gt;
 &lt;p&gt;we need to make sure it&amp;#8217;s configured as a &lt;a class="reference external" href="https://networkmanager.dev/docs/admins/"&gt;NetworkManager&lt;/a&gt; plugin
 rather than &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt;, so that &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; daemon is run correctly
-and redefined the &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt;, resolver configuration file
-used for &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;lookups.&lt;/p&gt;
+and redefined the &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt;, the resolver configuration
+file used for &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;lookups.&lt;/p&gt;
 &lt;p&gt;First of all, we need to activate the &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt; plugin:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ cat /etc/NetworkManager/conf.d/00-use-dnsmasq.conf
 [main]
 dns=dnsmasq
 &lt;/pre&gt;
-&lt;p&gt;Now, we can config the &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; itself:&lt;/p&gt;
+&lt;p&gt;Now, we can configure the &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; itself:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ cat /etc/NetworkManager/dnsmasq.d/00-addn-hosts.conf
 # NB! When making changes, don't forget restart dnsmasq &amp;amp; NetworkManager.service:
@@ -240,12 +240,12 @@ addn-hosts=/etc/hosts.d
 &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;addn-hosts=/etc/hosts.d&lt;/span&gt;&lt;/tt&gt; directory and make sure that if a hostname
 cannot be resolved using these files we fallback to the upstream &lt;span class="caps"&gt;DNS&lt;/span&gt;
 servers that are the one my local network&amp;#8217;s router provides, as well
-as public ones from Google and&amp;nbsp;cloudFlare.&lt;/p&gt;
+as public ones from Google and&amp;nbsp;CloudFlare.&lt;/p&gt;
 &lt;p&gt;Now, given that my Fedora machine also runs &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt;, a
 system service that provides network name resolution to local
 applications, we want to prevent both &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; and
-&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt; to mess up with &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt; file. So we
-stop and disable &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt; to mess up with the &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt; file. So
+we stop and disable &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;systemd-resolved&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ sudo systemctl stop systemd-resolved.service
 $ sudo systemctl disable systemd-resolved.service
@@ -308,7 +308,7 @@ news.ycombinator.com. 0       IN      A       0.0.0.0
 &lt;p&gt;So, yes, &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;SERVER&lt;/span&gt;: 127.0.0.1#53(127.0.0.1) (&lt;span class="caps"&gt;UDP&lt;/span&gt;)&lt;/tt&gt; is telling us a
 localhost &lt;span class="caps"&gt;DNS&lt;/span&gt; is being used, and &lt;tt class="docutils literal"&gt;A 0.0.0.0&lt;/tt&gt; from the &lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;ANSWER&lt;/span&gt;
 &lt;span class="caps"&gt;SECTION&lt;/span&gt;&lt;/tt&gt; shows us it&amp;#8217;s resolved to the &lt;tt class="docutils literal"&gt;0.0.0.0&lt;/tt&gt; &lt;span class="caps"&gt;IP&lt;/span&gt; address from
-out hosts&amp;nbsp;file.&lt;/p&gt;
+our hosts&amp;nbsp;file.&lt;/p&gt;
 &lt;p&gt;One the same time, if you try to access the same domain in a web
 browser or using &lt;tt class="docutils literal"&gt;curl&lt;/tt&gt;, you will see it&amp;#8217;s still accessible. The
 thing is &lt;tt class="docutils literal"&gt;dig&lt;/tt&gt; tool is using &lt;tt class="docutils literal"&gt;/etc/resolv.conf&lt;/tt&gt; settings for &lt;span class="caps"&gt;DNS&lt;/span&gt;,
@@ -323,7 +323,7 @@ IP6.DNS[2]:                             2a02:8383:d:c::1
 &lt;/pre&gt;
 &lt;p&gt;These are actually &lt;span class="caps"&gt;DNS&lt;/span&gt; addresses from my WiFi router. Given that my
 machine receives &lt;span class="caps"&gt;IP&lt;/span&gt;-address from the router&amp;#8217;s &lt;span class="caps"&gt;DHCP&lt;/span&gt; server, it also
-get&amp;#8217;s the &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;settings.&lt;/p&gt;
+gets the &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;settings.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="configuring-connection-s-settings"&gt;
 &lt;h2&gt;Configuring connection&amp;#8217;s&amp;nbsp;settings&lt;/h2&gt;
@@ -363,15 +363,15 @@ IP6.DNS[1]:                             ::1
 &lt;tt class="docutils literal"&gt;/etc/hosts.d&lt;/tt&gt; can be orginized easily and will be used for domains
 resolution in all the requests coming from the configured&amp;nbsp;connection.&lt;/p&gt;
 &lt;p&gt;&lt;span class="caps"&gt;P.S.&lt;/span&gt; I&amp;#8217;m deeply grateful to the Stackexchange community for the help
-with dnsmasq config &lt;a class="reference external" href="https://serverfault.com/questions/1150701/dnsmasq-reads-addn-hosts-config-but-ignores-it-falls-back-to-systems-etc-host"&gt;troubleshooting&lt;/a&gt;.&lt;/p&gt;
+with the &lt;tt class="docutils literal"&gt;dnsmasq&lt;/tt&gt; config &lt;a class="reference external" href="https://serverfault.com/questions/1150701/dnsmasq-reads-addn-hosts-config-but-ignores-it-falls-back-to-systems-etc-host"&gt;troubleshooting&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="Blog"></category><category term="linux"></category></entry><entry><title>dnseen: simple DNS queries analyzer</title><link href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/" rel="alternate"></link><published>2023-12-29T20:00:00+01:00</published><updated>2023-12-29T20:00:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-29:/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny open source project to ease collection of the
-&lt;span class="caps"&gt;DNS&lt;/span&gt; requests coming from my machine and aggregating statistics over
-the given period of time. &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is written in Clojure programming
+</content><category term="Blog"></category><category term="linux"></category></entry><entry><title>dnseen: simple DNS queries analyzer</title><link href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/" rel="alternate"></link><published>2023-12-29T20:00:00+01:00</published><updated>2024-01-07T17:39:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-29:/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny open source project to ease collection of &lt;span class="caps"&gt;DNS&lt;/span&gt;
+requests coming from the local machine and aggregating statistics over
+given period of time. &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is written in Clojure programming
 language (with &lt;a class="reference external" href="https://babashka.org/"&gt;babashka&lt;/a&gt;) and works as a wrapper over &lt;a class="reference external" href="https://www.tcpdump.org/"&gt;tcpdump&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;It&amp;#8217;s written with the following …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny open source project to ease collection of the
-&lt;span class="caps"&gt;DNS&lt;/span&gt; requests coming from my machine and aggregating statistics over
-the given period of time. &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is written in Clojure programming
+&lt;p&gt;It&amp;#8217;s written with the following goals …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is my new tiny open source project to ease collection of &lt;span class="caps"&gt;DNS&lt;/span&gt;
+requests coming from the local machine and aggregating statistics over
+given period of time. &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is written in Clojure programming
 language (with &lt;a class="reference external" href="https://babashka.org/"&gt;babashka&lt;/a&gt;) and works as a wrapper over &lt;a class="reference external" href="https://www.tcpdump.org/"&gt;tcpdump&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;It&amp;#8217;s written with the following goals in&amp;nbsp;mind:&lt;/p&gt;
 &lt;div class="section" id="goals"&gt;
@@ -392,9 +392,9 @@ extended collection of &lt;tt class="docutils literal"&gt;hosts&lt;/tt&gt; files
 &lt;ol class="arabic simple" start="2"&gt;
 &lt;li&gt;Find anomalies related to tracking&amp;nbsp;activities&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Even the software that claims to protect user&amp;#8217;s privacy, may track
-&lt;a class="reference external" href="https://www.kuketz-blog.de/mozilla-firefox-datensendeverhalten-desktop-version-browser-check-teil20/"&gt;too much&lt;/a&gt;. So, I want to collect &lt;span class="caps"&gt;DNS&lt;/span&gt; requests over longer period of
-time to see if I can find any suspicious&amp;nbsp;activity.&lt;/p&gt;
+&lt;p&gt;Even the software that claims to protect user&amp;#8217;s privacy may track &lt;a class="reference external" href="https://www.kuketz-blog.de/mozilla-firefox-datensendeverhalten-desktop-version-browser-check-teil20/"&gt;too
+much&lt;/a&gt;. So I want to collect &lt;span class="caps"&gt;DNS&lt;/span&gt; requests over longer period of time
+to see if I can find any suspicious&amp;nbsp;activity.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="alternatives"&gt;
 &lt;h2&gt;Alternatives&lt;/h2&gt;
@@ -407,35 +407,41 @@ aggregated&amp;nbsp;data.&lt;/p&gt;
 showing queries happening at the moment rather than&amp;nbsp;trends.&lt;/p&gt;
 &lt;p&gt;I needed something that allows me to collect data over longer time
 windows, apply filters and get some analysis done on the aggregated&amp;nbsp;results.&lt;/p&gt;
+&lt;p&gt;Update 2024-01-07: the closest alternative is probably
+&lt;a class="reference external" href="https://pi-hole.net/"&gt;Pi-hole&lt;/a&gt;. It&amp;#8217;s rich in features and visualisations, but probably a
+bit too &amp;#8220;intrusive&amp;#8221; to be run on my local machine: too much code that
+I don&amp;#8217;t have time to investigate, webserver with php website for the
+stats dashboard. I&amp;#8217;d prefer to use it on a dedicated machine (like a
+RaspberryPi device) if&amp;nbsp;needed.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="dnseen"&gt;
 &lt;h2&gt;dnseen&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; is a simple &lt;span class="caps"&gt;DNS&lt;/span&gt; queries analyzer that works on top of the
 &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; logs. For now it works on Linux only (tested with Fedora
-39), and get use of &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt;. Under the hood it&amp;#8217;s just a
-&lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; service running &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; and writing simple log to the
-file system. The analyzer program parses the logs, applies filters
-from the command-line options, and prints the statistics report to the
-terminal. Reports can be printed for humans (in pretty tabular format)
-or as a plain text to be further used in the Unix pipelines. The
-program also comes with the installer script to make the installation
-quick and&amp;nbsp;easy.&lt;/p&gt;
+39), and get use of the &lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt;. Under the hood it&amp;#8217;s just a
+&lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; service running &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; and writing simple plain-text
+log to the file system. The analyzer program parses logs, applies
+filters from command line options, and prints the statistics report to
+the terminal. Reports can be printed for humans in pretty tabular
+format or as a plain text to be further used in the Unix
+pipelines. The program also comes with the installer script to make
+the installation quick and&amp;nbsp;easy.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="findings"&gt;
 &lt;h2&gt;Findings&lt;/h2&gt;
 &lt;p&gt;So far &lt;a class="reference external" href="https://github.com/pilosus/dnseen/"&gt;dnseen&lt;/a&gt; seems to be handy. When it comes to finding sources
-of excessive media consumption, it allowed me to block a few websites
-like YouTube, LinkedIn and Telegram, to name a&amp;nbsp;few.&lt;/p&gt;
+of excessive media consumption, it allowed me to block some news and
+social websites that I don&amp;#8217;t really want to spend my time&amp;nbsp;with.&lt;/p&gt;
 &lt;p&gt;Regarding detecting tracking activities, Fedora&amp;#8217;s &lt;tt class="docutils literal"&gt;NetworkManager&lt;/tt&gt;
 turned out to send regular requests to help with the &lt;a class="reference external" href="https://www.reddit.com/r/Fedora/comments/15a0m2y/question_how_to_stop_periodic_dns_queries_for/"&gt;captive portal
-detection&lt;/a&gt; that I don&amp;#8217;t need on my laptop at all. I also blocked
-quite a few Mozilla&amp;#8217;s domains related to the services I never allowed
-Firefox to use, like Mozilla Location&amp;nbsp;Service.&lt;/p&gt;
+detection&lt;/a&gt; that I don&amp;#8217;t need on my home desktop at all. I also
+blocked quite a few Mozilla&amp;#8217;s domains related to the services I never
+allowed Firefox to use, like Mozilla Location&amp;nbsp;Service.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="conclusion"&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;All in all, the project seems to be useful! &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; logs that
-&lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; service collecting can also be used for further analysis
+&lt;p&gt;All in all, the project seems to be useful. &lt;tt class="docutils literal"&gt;tcpdump&lt;/tt&gt; logs that
+&lt;tt class="docutils literal"&gt;systemd&lt;/tt&gt; service&amp;#8217;s collecting can also be used for further analysis
 with other tools, e.g. to determine &lt;span class="caps"&gt;DNS&lt;/span&gt; queries per domain with the
 breakdown by&amp;nbsp;hours.&lt;/p&gt;
 &lt;p&gt;Also, doing data analysis with Clojure is such a pleasure! &lt;a class="reference external" href="https://clojure.org/guides/threading_macros"&gt;Threading
@@ -447,8 +453,8 @@ parsing. It&amp;#8217;s simple, yet&amp;nbsp;powerful!&lt;/p&gt;
 &lt;p&gt;Developing with Clojure and Babashka allow me to work in a flow, with
 almost no distractions to external world, as the language and its
 ecosystem are very well designed, self-sufficient, and come with nice
-tooling like &lt;a class="reference external" href="https://docs.cider.mx/cider/index.html"&gt;Emacs &lt;span class="caps"&gt;CIDER&lt;/span&gt;&lt;/a&gt; that require no online lookups for the
-documentation. It feels like tinkering in the garage in my&amp;nbsp;childhood!&lt;/p&gt;
+tooling like &lt;a class="reference external" href="https://docs.cider.mx/cider/index.html"&gt;Emacs &lt;span class="caps"&gt;CIDER&lt;/span&gt;&lt;/a&gt;. It feels like tinkering in the garage in
+my&amp;nbsp;childhood!&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="Blog"></category><category term="clojure"></category><category term="foss"></category><category term="security"></category></entry><entry><title>Recording a screencast on Linux</title><link href="https://blog.pilosus.org/posts/2023/12/21/recording-a-screencast-on-linux/" rel="alternate"></link><published>2023-12-21T23:55:00+01:00</published><updated>2023-12-21T23:55:00+01:00</updated><author><name>Vitaly Samigullin</name></author><id>tag:blog.pilosus.org,2023-12-21:/posts/2023/12/21/recording-a-screencast-on-linux/</id><summary type="html">&lt;p&gt;&lt;span class="caps"&gt;TIL&lt;/span&gt; I can record a screencast using &lt;span class="caps"&gt;GNOME&lt;/span&gt;&amp;#8217;s &lt;a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en"&gt;tool&lt;/a&gt;,
 trim it with &lt;tt class="docutils literal"&gt;ffmpeg&lt;/tt&gt; like&amp;nbsp;this:&lt;/p&gt;

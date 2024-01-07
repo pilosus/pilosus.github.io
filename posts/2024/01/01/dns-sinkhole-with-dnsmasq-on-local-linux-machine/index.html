@@ -12,7 +12,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
     <meta property="og:url" content="https://blog.pilosus.org/posts/2024/01/01/dns-sinkhole-with-dnsmasq-on-local-linux-machine/" />
-    <meta property="og:description" content="Recently I’ve posted a wrap-up on my new tiny open source tool called dnseen. One of the goals for developing it was generating a top-list of websites that I visit, so that I can blacklist websites that I think I spend too much time on without long-term benefits. These …" />
+    <meta property="og:description" content="Recently I’ve posted a wrap-up on my new tiny DNS analyzer tool called dnseen. One of the development goals was generating a top-list of websites that I visit along with the frequencies, so that I can blacklist websites that I think I spend too much time on without long-term …" />
     <meta property="og:locale" content="" />
     <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
     <meta property="article:published_time" content="2024-01-01" />
@@ -98,48 +98,48 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">989 words</span>
+		<span class="word-count">996 words</span>
 		|
 		<span class="word-count">4 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/linux/">linux</a> </span>                
-              </div><!-- /.post-info -->              <p>Recently I&#8217;ve posted a wrap-up on my new tiny open source tool called
-<a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/">dnseen</a>. One of the goals for developing it was generating a
-top-list of websites that I visit, so that I can blacklist websites
-that I think I spend too much time on without long-term
-benefits. These are mostly news and social media that use manipulative
-algorithms to make you make you a &#8220;dophamine addict&#8221;. Another thing
-that I wanted to implement is blacklisting for ads/tracking services
-that works on the <span class="caps">DNS</span> level, so that I don&#8217;t need to worry about
-browser extensions in case I want to try a new&nbsp;browser.</p>
+              </div><!-- /.post-info -->              <p>Recently I&#8217;ve posted a wrap-up on my new tiny <span class="caps">DNS</span> analyzer tool called
+<a class="reference external" href="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/">dnseen</a>. One of the development goals was generating a top-list of
+websites that I visit along with the frequencies, so that I can
+blacklist websites that I think I spend too much time on without
+long-term benefits. These are mostly news and social media that use
+manipulative algorithms to make you a &#8220;dophamine addict&#8221;. Another
+thing that I wanted to implement is blacklisting for ads/tracking
+services that works on the <span class="caps">DNS</span> level, so that I don&#8217;t need to worry
+about browser extensions in case I want to try a new&nbsp;browser.</p>
 <p>I used to have a list of blacklisted domains in my <tt class="docutils literal">/etc/hosts</tt> file
 for a while. One obvious drawback for me is the need to lump
 everything in one file. Instead, in a perfect solution, I&#8217;d like to
-split blacklisted hostnames into multiple files, so that I can easily
-break them down by topic and/or automate some hosts file from
-third-party curated lists, like hosts files from <a class="reference external" href="https://github.com/StevenBlack/hosts">Steven Black</a>.</p>
+split blacklisted domain into multiple files, so that I can easily
+break them down by topic and/or automate some hosts file generation
+from third-party curated lists, like hosts files from <a class="reference external" href="https://github.com/StevenBlack/hosts">Steven Black</a>.</p>
 <p>One of the popular options is to set up a <a class="reference external" href="https://pi-hole.net/">Pi-hole</a> on the local
 network and use it as the local <span class="caps">DNS</span> server. I do like this option too,
-but before picking up ready to use products, I&#8217;d like to build by own
-prototype first. This is how I came up with the idea of building my
-own <a class="reference external" href="https://en.wikipedia.org/wiki/DNS_sinkhole"><span class="caps">DNS</span> sinkhole</a> with the help of <a class="reference external" href="https://dnsmasq.org/">dnsmasq</a> as a <span class="caps">DNS</span> server on my
-local <a class="reference external" href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/">Linux</a>&nbsp;machine.</p>
-<div class="section" id="local-dns-dnsmasq-on-fedora-39-machine-with-networkmanager">
-<h2>Local <span class="caps">DNS</span> <cite>dnsmasq</cite> on Fedora 39 machine with <cite>NetworkManager</cite></h2>
-<p>After installing <a class="reference external" href="https://dnsmasq.org/">dnsmasq</a> on Fedora&nbsp;39:</p>
+but before picking up ready to use products, I&#8217;d like to &#8220;reinvent the
+wheel&#8221; and build by own prototype first. This is how I came up with
+the idea of building my own <a class="reference external" href="https://en.wikipedia.org/wiki/DNS_sinkhole"><span class="caps">DNS</span> sinkhole</a> with the help of
+<a class="reference external" href="https://dnsmasq.org/">dnsmasq</a> as a <span class="caps">DNS</span> server on my local <a class="reference external" href="https://blog.pilosus.org/posts/2023/12/10/my-linux-journey-so-far-status-update-2023/">Linux</a>&nbsp;machine.</p>
+<div class="section" id="linux-networkmanager-dnsmasq">
+<h2>Linux + NetworkManager +&nbsp;dnsmasq</h2>
+<p>After installing <a class="reference external" href="https://dnsmasq.org/">dnsmasq</a> on the Fedora 39 Linux&nbsp;machine:</p>
 <pre class="literal-block">
 sudo dnf -y install dnsmasq
 </pre>
 <p>we need to make sure it&#8217;s configured as a <a class="reference external" href="https://networkmanager.dev/docs/admins/">NetworkManager</a> plugin
 rather than <tt class="docutils literal">systemd</tt>, so that <tt class="docutils literal">dnsmasq</tt> daemon is run correctly
-and redefined the <tt class="docutils literal">/etc/resolv.conf</tt>, resolver configuration file
-used for <span class="caps">DNS</span>&nbsp;lookups.</p>
+and redefined the <tt class="docutils literal">/etc/resolv.conf</tt>, the resolver configuration
+file used for <span class="caps">DNS</span>&nbsp;lookups.</p>
 <p>First of all, we need to activate the <tt class="docutils literal">NetworkManager</tt> plugin:</p>
 <pre class="literal-block">
 $ cat /etc/NetworkManager/conf.d/00-use-dnsmasq.conf
 [main]
 dns=dnsmasq
 </pre>
-<p>Now, we can config the <tt class="docutils literal">dnsmasq</tt> itself:</p>
+<p>Now, we can configure the <tt class="docutils literal">dnsmasq</tt> itself:</p>
 <pre class="literal-block">
 $ cat /etc/NetworkManager/dnsmasq.d/00-addn-hosts.conf
 # NB! When making changes, don't forget restart dnsmasq &amp; NetworkManager.service:
@@ -171,12 +171,12 @@ addn-hosts=/etc/hosts.d
 <tt class="docutils literal"><span class="pre">addn-hosts=/etc/hosts.d</span></tt> directory and make sure that if a hostname
 cannot be resolved using these files we fallback to the upstream <span class="caps">DNS</span>
 servers that are the one my local network&#8217;s router provides, as well
-as public ones from Google and&nbsp;cloudFlare.</p>
+as public ones from Google and&nbsp;CloudFlare.</p>
 <p>Now, given that my Fedora machine also runs <tt class="docutils literal"><span class="pre">systemd-resolved</span></tt>, a
 system service that provides network name resolution to local
 applications, we want to prevent both <tt class="docutils literal">dnsmasq</tt> and
-<tt class="docutils literal"><span class="pre">systemd-resolved</span></tt> to mess up with <tt class="docutils literal">/etc/resolv.conf</tt> file. So we
-stop and disable <tt class="docutils literal"><span class="pre">systemd-resolved</span></tt>:</p>
+<tt class="docutils literal"><span class="pre">systemd-resolved</span></tt> to mess up with the <tt class="docutils literal">/etc/resolv.conf</tt> file. So
+we stop and disable <tt class="docutils literal"><span class="pre">systemd-resolved</span></tt>:</p>
 <pre class="literal-block">
 $ sudo systemctl stop systemd-resolved.service
 $ sudo systemctl disable systemd-resolved.service
@@ -239,7 +239,7 @@ news.ycombinator.com. 0       IN      A       0.0.0.0
 <p>So, yes, <tt class="docutils literal"><span class="caps">SERVER</span>: 127.0.0.1#53(127.0.0.1) (<span class="caps">UDP</span>)</tt> is telling us a
 localhost <span class="caps">DNS</span> is being used, and <tt class="docutils literal">A 0.0.0.0</tt> from the <tt class="docutils literal"><span class="caps">ANSWER</span>
 <span class="caps">SECTION</span></tt> shows us it&#8217;s resolved to the <tt class="docutils literal">0.0.0.0</tt> <span class="caps">IP</span> address from
-out hosts&nbsp;file.</p>
+our hosts&nbsp;file.</p>
 <p>One the same time, if you try to access the same domain in a web
 browser or using <tt class="docutils literal">curl</tt>, you will see it&#8217;s still accessible. The
 thing is <tt class="docutils literal">dig</tt> tool is using <tt class="docutils literal">/etc/resolv.conf</tt> settings for <span class="caps">DNS</span>,
@@ -254,7 +254,7 @@ IP6.DNS[2]:                             2a02:8383:d:c::1
 </pre>
 <p>These are actually <span class="caps">DNS</span> addresses from my WiFi router. Given that my
 machine receives <span class="caps">IP</span>-address from the router&#8217;s <span class="caps">DHCP</span> server, it also
-get&#8217;s the <span class="caps">DNS</span>&nbsp;settings.</p>
+gets the <span class="caps">DNS</span>&nbsp;settings.</p>
 </div>
 <div class="section" id="configuring-connection-s-settings">
 <h2>Configuring connection&#8217;s&nbsp;settings</h2>
@@ -294,7 +294,7 @@ IP6.DNS[1]:                             ::1
 <tt class="docutils literal">/etc/hosts.d</tt> can be orginized easily and will be used for domains
 resolution in all the requests coming from the configured&nbsp;connection.</p>
 <p><span class="caps">P.S.</span> I&#8217;m deeply grateful to the Stackexchange community for the help
-with dnsmasq config <a class="reference external" href="https://serverfault.com/questions/1150701/dnsmasq-reads-addn-hosts-config-but-ignores-it-falls-back-to-systems-etc-host">troubleshooting</a>.</p>
+with the <tt class="docutils literal">dnsmasq</tt> config <a class="reference external" href="https://serverfault.com/questions/1150701/dnsmasq-reads-addn-hosts-config-but-ignores-it-falls-back-to-systems-etc-host">troubleshooting</a>.</p>
 </div>
 
             </div><!-- /.entry-content -->

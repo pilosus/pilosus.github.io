@@ -12,10 +12,11 @@
     <meta property="og:type" content="article" />
     <meta property="og:image" content="https://blog.pilosus.org/theme/images/og_image_default.png" />
     <meta property="og:url" content="https://blog.pilosus.org/posts/2023/12/29/dnseen-simple-dns-queries-analyzer/" />
-    <meta property="og:description" content="dnseen is my new tiny open source project to ease collection of the DNS requests coming from my machine and aggregating statistics over the given period of time. dnseen is written in Clojure programming language (with babashka) and works as a wrapper over tcpdump. It’s written with the following …" />
+    <meta property="og:description" content="dnseen is my new tiny open source project to ease collection of DNS requests coming from the local machine and aggregating statistics over given period of time. dnseen is written in Clojure programming language (with babashka) and works as a wrapper over tcpdump. It’s written with the following goals …" />
     <meta property="og:locale" content="" />
     <meta property="og:site_name" content="Vitaly Samigullin&#39;s blog" />
     <meta property="article:published_time" content="2023-12-29" />
+    <meta property="article:modified_time" content="2024-01-07" />
     <meta property="article:section" content="Blog" />
     <meta property="article:tag" content="clojure" />
     <meta property="article:tag" content="foss" />
@@ -93,6 +94,7 @@
                 <span class="published" title="2023-12-29T20:00:00+01:00">
                   29-12-2023 20:00
                 </span>
+                | upd. <span class="modified" title="2024-01-07T17:39:00+01:00">07-01-2024 17:39</span>
                 |
                 <span class="vcard author">
                   by                   <a class="url fn" href="https://blog.pilosus.org/">Vitaly Samigullin</a>
@@ -100,13 +102,13 @@
                 |
                 <span>in <a href="https://blog.pilosus.org/category/blog/">Blog</a></span>
 		|
-		<span class="word-count">606 words</span>
+		<span class="word-count">662 words</span>
 		|
 		<span class="word-count">3 min to read</span>
 <br/><span>tags: <a href="https://blog.pilosus.org/tag/clojure/">clojure</a> <a href="https://blog.pilosus.org/tag/foss/">foss</a> <a href="https://blog.pilosus.org/tag/security/">security</a> </span>                
-              </div><!-- /.post-info -->              <p><a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is my new tiny open source project to ease collection of the
-<span class="caps">DNS</span> requests coming from my machine and aggregating statistics over
-the given period of time. <a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is written in Clojure programming
+              </div><!-- /.post-info -->              <p><a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is my new tiny open source project to ease collection of <span class="caps">DNS</span>
+requests coming from the local machine and aggregating statistics over
+given period of time. <a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is written in Clojure programming
 language (with <a class="reference external" href="https://babashka.org/">babashka</a>) and works as a wrapper over <a class="reference external" href="https://www.tcpdump.org/">tcpdump</a>.</p>
 <p>It&#8217;s written with the following goals in&nbsp;mind:</p>
 <div class="section" id="goals">
@@ -127,9 +129,9 @@ extended collection of <tt class="docutils literal">hosts</tt> files, possibly u
 <ol class="arabic simple" start="2">
 <li>Find anomalies related to tracking&nbsp;activities</li>
 </ol>
-<p>Even the software that claims to protect user&#8217;s privacy, may track
-<a class="reference external" href="https://www.kuketz-blog.de/mozilla-firefox-datensendeverhalten-desktop-version-browser-check-teil20/">too much</a>. So, I want to collect <span class="caps">DNS</span> requests over longer period of
-time to see if I can find any suspicious&nbsp;activity.</p>
+<p>Even the software that claims to protect user&#8217;s privacy may track <a class="reference external" href="https://www.kuketz-blog.de/mozilla-firefox-datensendeverhalten-desktop-version-browser-check-teil20/">too
+much</a>. So I want to collect <span class="caps">DNS</span> requests over longer period of time
+to see if I can find any suspicious&nbsp;activity.</p>
 </div>
 <div class="section" id="alternatives">
 <h2>Alternatives</h2>
@@ -142,35 +144,41 @@ aggregated&nbsp;data.</p>
 showing queries happening at the moment rather than&nbsp;trends.</p>
 <p>I needed something that allows me to collect data over longer time
 windows, apply filters and get some analysis done on the aggregated&nbsp;results.</p>
+<p>Update 2024-01-07: the closest alternative is probably
+<a class="reference external" href="https://pi-hole.net/">Pi-hole</a>. It&#8217;s rich in features and visualisations, but probably a
+bit too &#8220;intrusive&#8221; to be run on my local machine: too much code that
+I don&#8217;t have time to investigate, webserver with php website for the
+stats dashboard. I&#8217;d prefer to use it on a dedicated machine (like a
+RaspberryPi device) if&nbsp;needed.</p>
 </div>
 <div class="section" id="dnseen">
 <h2>dnseen</h2>
 <p><a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> is a simple <span class="caps">DNS</span> queries analyzer that works on top of the
 <tt class="docutils literal">tcpdump</tt> logs. For now it works on Linux only (tested with Fedora
-39), and get use of <tt class="docutils literal">systemd</tt>. Under the hood it&#8217;s just a
-<tt class="docutils literal">systemd</tt> service running <tt class="docutils literal">tcpdump</tt> and writing simple log to the
-file system. The analyzer program parses the logs, applies filters
-from the command-line options, and prints the statistics report to the
-terminal. Reports can be printed for humans (in pretty tabular format)
-or as a plain text to be further used in the Unix pipelines. The
-program also comes with the installer script to make the installation
-quick and&nbsp;easy.</p>
+39), and get use of the <tt class="docutils literal">systemd</tt>. Under the hood it&#8217;s just a
+<tt class="docutils literal">systemd</tt> service running <tt class="docutils literal">tcpdump</tt> and writing simple plain-text
+log to the file system. The analyzer program parses logs, applies
+filters from command line options, and prints the statistics report to
+the terminal. Reports can be printed for humans in pretty tabular
+format or as a plain text to be further used in the Unix
+pipelines. The program also comes with the installer script to make
+the installation quick and&nbsp;easy.</p>
 </div>
 <div class="section" id="findings">
 <h2>Findings</h2>
 <p>So far <a class="reference external" href="https://github.com/pilosus/dnseen/">dnseen</a> seems to be handy. When it comes to finding sources
-of excessive media consumption, it allowed me to block a few websites
-like YouTube, LinkedIn and Telegram, to name a&nbsp;few.</p>
+of excessive media consumption, it allowed me to block some news and
+social websites that I don&#8217;t really want to spend my time&nbsp;with.</p>
 <p>Regarding detecting tracking activities, Fedora&#8217;s <tt class="docutils literal">NetworkManager</tt>
 turned out to send regular requests to help with the <a class="reference external" href="https://www.reddit.com/r/Fedora/comments/15a0m2y/question_how_to_stop_periodic_dns_queries_for/">captive portal
-detection</a> that I don&#8217;t need on my laptop at all. I also blocked
-quite a few Mozilla&#8217;s domains related to the services I never allowed
-Firefox to use, like Mozilla Location&nbsp;Service.</p>
+detection</a> that I don&#8217;t need on my home desktop at all. I also
+blocked quite a few Mozilla&#8217;s domains related to the services I never
+allowed Firefox to use, like Mozilla Location&nbsp;Service.</p>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion</h2>
-<p>All in all, the project seems to be useful! <tt class="docutils literal">tcpdump</tt> logs that
-<tt class="docutils literal">systemd</tt> service collecting can also be used for further analysis
+<p>All in all, the project seems to be useful. <tt class="docutils literal">tcpdump</tt> logs that
+<tt class="docutils literal">systemd</tt> service&#8217;s collecting can also be used for further analysis
 with other tools, e.g. to determine <span class="caps">DNS</span> queries per domain with the
 breakdown by&nbsp;hours.</p>
 <p>Also, doing data analysis with Clojure is such a pleasure! <a class="reference external" href="https://clojure.org/guides/threading_macros">Threading
@@ -182,8 +190,8 @@ parsing. It&#8217;s simple, yet&nbsp;powerful!</p>
 <p>Developing with Clojure and Babashka allow me to work in a flow, with
 almost no distractions to external world, as the language and its
 ecosystem are very well designed, self-sufficient, and come with nice
-tooling like <a class="reference external" href="https://docs.cider.mx/cider/index.html">Emacs <span class="caps">CIDER</span></a> that require no online lookups for the
-documentation. It feels like tinkering in the garage in my&nbsp;childhood!</p>
+tooling like <a class="reference external" href="https://docs.cider.mx/cider/index.html">Emacs <span class="caps">CIDER</span></a>. It feels like tinkering in the garage in
+my&nbsp;childhood!</p>
 </div>
 
             </div><!-- /.entry-content -->
